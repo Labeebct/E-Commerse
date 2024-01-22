@@ -5,7 +5,7 @@ const controller = require('../controllers/admin')
 
 
 
-router.get('/signup')
+router.get('/signup',controller.getSignup)
 router.post('/signup')
 
 
@@ -13,7 +13,7 @@ router.get('/key_verification')
 router.post('/key_verification')
 
 
-router.get('/home')
+router.get('/home',controller.getHome)
 
 router.get('/orders_list')
 
