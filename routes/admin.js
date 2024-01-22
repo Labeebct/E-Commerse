@@ -5,8 +5,6 @@ const controller = require('../controllers/admin')
 
 
 
-
-
 router.get('/signup')
 router.post('/signup')
 

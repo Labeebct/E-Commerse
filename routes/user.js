@@ -11,7 +11,7 @@ router.post('/signup')
 router.get('/otp_registration')
 router.post('/otp_registration')
 
-router.get('/login')
+router.get('/login',controller.getLogin)
 router.post('/login')
 
 router.get('/number_registration')
