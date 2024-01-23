@@ -1,0 +1,55 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper category_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content category_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+            <div class="product_frame">
+                <div class="pro_top">
+                    <h3>Category Details</h3>
+                    <button>Add Category</button>
+                </div>
+                <div class="pro_center">
+                    <Table>
+                        <thead>
+                            <tr class="th_tr">
+                            <th style="width: 3%;">SI</th>
+                            <th style="width: 20%;">CATEGORY _ID</th>
+                            <th style="width: 14%;">CATEGORY NAME</th>
+                            <th style="width: 10%;">PRODUCT COUNT</th>
+                            <th style="width: 7%;">EDIT</th>
+                            <th style="width: 7%;">DELETE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>87432458723883459</td>
+                                <td>mens</td>
+                                <td>6</td>
+                                <td><button><i class="bi bi-pencil-square"></i></button></td>
+                                <td><button><i class="bi bi-trash"></i></button></td>
+                            </tr>
+                        </tbody>
+                      </Table>
+                </div>
+                <div class="pro_bottom">
+                    <div class="link_pagination">
+                        <button>Prev</button>
+                        <div class="links">
+                        <a href="#" value="1">1</a>
+                        <a href="#" value="2">2</a>
+                        <a href="#" value="3">3</a>
+                        <a href="#" value="4">4</a>
+                        <a href="#" value="5">5</a>
+                        <a href="#" value="6">6</a>
+                        <a href="#" value="7">7</a>
+                        </div>
+                        <button>Next</button>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+<%- include('../../common/end.ejs') %>

@@ -1,0 +1,58 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper users_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content users_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+            <div class="product_frame">
+                <div class="pro_top">
+                    <h3>User Details</h3>
+                </div>
+                <div class="pro_center">
+                    <Table>
+                        <thead>
+                            <tr class="th_tr">
+                            <th style="width: 3%;">SI</th>
+                            <th style="width: 15%;">USER _ID</th>
+                            <th style="width: 10%;">REG_DATE</th>
+                            <th style="width: 14%;">NAME</th>
+                            <th style="width: 17%;">EMAIL</th>
+                            <th style="width: 12%;">MOBILE</th>
+                            <th style="width: 7%;">ORDERS</th>
+                            <th style="width: 7%;">DELETE</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>87432458723883459</td>
+                                <td>12-03-2024</td>
+                                <td>labeeb ct</td>
+                                <td>ctlabeebthaliyil@gmail.com</td>
+                                <td>8590471530</td>
+                                <td>1</td>
+                                <td><i class="bi bi-trash"></i></td>
+                            </tr>
+                        </tbody>
+                      </Table>
+                </div>
+                <div class="pro_bottom">
+                    <div class="link_pagination">
+                        <button>Prev</button>
+                        <div class="links">
+                        <a href="#" value="1">1</a>
+                        <a href="#" value="2">2</a>
+                        <a href="#" value="3">3</a>
+                        <a href="#" value="4">4</a>
+                        <a href="#" value="5">5</a>
+                        <a href="#" value="6">6</a>
+                        <a href="#" value="7">7</a>
+                        </div>
+                        <button>Next</button>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </div>
+</div>
+<%- include('../../common/end.ejs') %>

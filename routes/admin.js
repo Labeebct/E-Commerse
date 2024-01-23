@@ -17,13 +17,13 @@ router.get('/home',controller.getHome)
 
 router.get('/orders_list')
 
-router.get('/custumers')
+router.get('/custumers',controller.getUsers)
 router.get('/custumer/:id')
 router.delete('/custumer/remove/:id')
 
 router.get('/customer/order_list/:id')
 
-router.get('/products')
+router.get('/products',controller.getProducts)
 
 router.get('/product/add_product')
 router.post('/product/addproduct')
@@ -34,7 +34,7 @@ router.get('/product/editproduct')
 router.put('/product/editproduct')
 
 
-router.get('/category')
+router.get('/category',controller.getCategory)
 
 router.get('/category/add_category')
 router.post('/category/add_category')
@@ -45,7 +45,7 @@ router.get('/category/edit_category/:id')
 router.put('/category/edit_category/:id')
 
 
-router.get('/coupons')
+router.get('/coupons',controller.getCoupons)
 router.get('/coupons/add_coupon')
 router.post('/coupons/add_coupon')
 
@@ -55,11 +55,11 @@ router.put('/coupons/edit_coupon/:id')
 router.post('/coupons/remove_coupon/:id')
 
 
-router.get('/messages')
+router.get('/messages',controller.getMessages)
 router.get('/messages/user_message/:id')
 
 
-router.get('/banners')
+router.get('/banners',controller.getBanners)
 router.post('/banners/add_banners')
 
 
