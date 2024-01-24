@@ -4,12 +4,10 @@ exports.getSignup = (req, res) => {
 }
 
 
-
 exports.getHome = (req, res) => {
     const state = 'dashboard'
     res.render('admin/pages/dashboard', { state })
 }
-
 
 
 exports.getUsers = (req, res) => {
@@ -46,3 +44,28 @@ exports.getBanners = (req, res) => {
     const state = 'banners'
     res.render('admin/pages/banners', { state })
 }
+
+
+exports.getAddproducts = (req,res) =>{
+    res.render('admin/pages/addproducts',{state:''})
+}
+
+exports.getAddcatogery = (req,res) =>{
+    res.render('admin/pages/addcategory',{state:''})
+}
+
+
+exports.getAddbanner = (req,res) =>{
+    res.render('admin/pages/addbanner',{state:''})
+}
+
+
+exports.getAddcoupons = (req,res) =>{
+    res.render('admin/pages/addcoupons',{state:''})
+}
+
+
+exports.getUsermessage = (req,res) =>{
+    res.render('admin/pages/usermessage',{state:''})
+}
+

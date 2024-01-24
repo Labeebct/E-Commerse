@@ -1,0 +1,46 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper addbanner_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content addbanner_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+            <form action="">
+                <div class="addcatogery_frame">
+                     <img src="" class="category_img" alt="">
+                     <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="categoryimg" class="input_file"></div>
+                     <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 0rem; width: 80%;">
+                        <label for="category name">Banner Product</label>
+                        <input type="text" name="bannerproduct" class="input_text">
+                        
+                        <label for="category name">Banner Heading</label>
+                        <input type="text" name="bannerheading" class="input_text">
+                        
+                        <label for="category name">Banner Discription</label>
+                        <input type="text" name="bannerdiscription" class="input_text">
+
+                        <label for="category name">Button Link</label>
+                        <input type="text" name="buttonlink" class="input_text">
+
+
+                        <div style="display: flex;">
+                            <span style="display: flex; flex-direction: column; gap: .3rem; width: 80%;">
+                               <label for="startdate">Start Date</label>
+                               <input type="date" name="startdate" style="height: 2rem; width: 50%;">
+                            </span>
+                            <span style="display: flex; flex-direction: column; gap: .3rem;">
+                               <label for="enddate">End Date</label>
+                               <input type="date" name="enddate" style="height: 2rem; width: 100%;">
+                            </span>
+                        </div>
+                        
+                        
+                     </div>
+                     <div style="width: 100%; margin-top: 0rem; display: flex; justify-content: center; padding: .9rem;">
+                        <button type="submit" class="add_btn">Add Banner</button>
+                    </div>
+                    </div>
+                </form> 
+        </div>
+    </div>
+</div>
+<%- include('../../common/end.ejs') %>

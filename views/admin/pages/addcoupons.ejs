@@ -1,0 +1,39 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper addcoupon_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content addcoupon_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+            <form action="" spellcheck="false">
+            <div class="addcatogery_frame">
+                <div style="width: 90%; display: flex; flex-direction: column; gap: .6rem; padding: 1rem;">
+                    <label for="couponnname">Coupon Name</label>
+                    <input type="text" name="couponnname">
+
+                    
+                    <label for="discount">Discount</label>
+                    <input type="text" name="discount">
+
+                    <label for="minamount">MinOrder Amount</label>
+                    <input type="text" name="minamount">
+
+                    <label for="maxamount">MaxOrder Amount</label>
+                    <input type="text" name="maxamount">
+
+                    <label for="startdate">Start Date</label>
+                    <input type="date" name="startdate">
+
+                    <label for="enddate">End Date</label>
+                    <input type="date" name="enddate">
+
+                    <div style="width: 100%; margin-top: 2rem; display: flex; justify-content: center; padding: .9rem;">
+                        <button type="submit" class="add_btn">Add Banner</button>
+                    </div>
+
+                </div>   
+            </div>
+            </form> 
+        </div>
+    </div>
+</div>
+<%- include('../../common/end.ejs') %>

@@ -1,0 +1,123 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper add_products_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content add_products_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+            <div class="form_frame">
+                <form action="" spellcheck="false">
+                <div class="top">
+                    <div class="top_left">
+                        <label for="product_name">Product Name</label>
+                        <input type="text" name="productname" >
+
+                        <div style="display: flex; gap: 1rem; width: 100%; padding: .5rem 0;">
+                            <span style="display: flex; flex-direction: column; gap: .2rem;">
+                                <label for="product_name">Old Price</label>
+                                <input type="text" name="productname" style="width: 100%;" >
+                            </span>
+                            <span style="display: flex; flex-direction: column; gap: .2rem;">
+                                <label for="product_name">Discount Price</label>
+                                <input type="text" name="productname" style="width: 110%; padding-left: 0; " >
+                            </span>
+                        </div>
+
+                        <label for="product_name">Category</label>
+                        <input type="text" name="productname" >
+
+                    </div>
+                    <div class="top_right">
+                        <img src="" class="product_img" alt="">
+                        <div class="file_div"><span class="choose_file">Choose File</span><input type="file" class="input_file"></div>
+                    </div>
+                </div>
+                <div class="bottom" style="padding: 0 1rem;">
+
+                    <div style="display: flex; gap: 1rem; width: 100%;">
+                        <span style="display: flex; flex-direction: column; gap: .2rem;">
+                        <label for="size">Size</label>
+                        <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 4.5rem; padding: .4rem;" name="size" id="size">
+                            <option  value="">Sizes</option>
+                            <option value="s">s</option>
+                            <option value="m">m</option>
+                            <option value="l">l</option>
+                            <option value="xs">xs</option>
+                            <option value="xl">xl</option>
+                            <option value="xxl">xxl</option>
+                        </select>
+                    </span>
+                    
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                    <label for="size">Color</label>
+                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 6rem; padding: .4rem;" name="color" id="size">
+                            <option value="">Colors</option>
+                            <option value="black">black</option>
+                            <option value="white">white</option>
+                            <option value="orange">orange</option>
+                            <option value="blue">blue</option>
+                            <option value="green">green</option>
+                            <option value="red">red</option>
+                            <option value="pink">pink</option>
+                        </select>
+                    </span>
+
+
+                    
+                    
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                        <label for="size">Material</label>
+                        <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="color" id="size">
+                            <option value="">Materials</option>
+                            <option value="cotton">cotton</option>
+                            <option value="polyester">polyester</option>
+                            <option value="wool">wool</option>
+                            <option value="silk">silk</option>
+                            <option value="nylon">nylon</option>
+                            <option value="rayon">rayon</option>
+                        </select>
+                    </span>
+
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                    <label for="size">Storage</label>
+                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="storage" id="size">
+                            <option value="">Storage</option>
+                            <option value="32">32</option>
+                            <option value="64">64</option>
+                            <option value="128">128</option>
+                            <option value="256">256</option>
+                            <option value="512">512</option>
+                        </select>
+                    </span>
+
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                        <label for="size">Ram</label>
+                        <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="ram" id="size">
+                                <option value="">Ram</option>
+                                <option value="2">2</option>
+                                <option value="4">4</option>
+                                <option value="6">6</option>
+                                <option value="12">12</option>
+                                <option value="16">16</option>
+                            </select>
+                        </span>
+                    </div>
+
+                    <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
+                        <label for="size">Delivery Date</label>
+                        <input type="date" name="deliverydate" style="width: 94%;">
+                    </span>
+                    
+                    <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
+                        <label for="size">Product Description</label>
+                        <textarea name="description" id="text_area"></textarea>
+                    </span>
+                    <div style="width: 100%; display: flex; justify-content: center; padding: .9rem;">
+                        <button type="submit" class="add_btn">Add Product</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../../common/end.ejs') %>
