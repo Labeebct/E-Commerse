@@ -1,11 +1,24 @@
 <%- include('../components/head.ejs') %>
-<div class="wrapper addcoupon_wrapper">
+<div class="wrapper usermessage_wrapper">
     <%- include('../components/top_nav.ejs') %>
-    <div class="content addcoupon_content">
+    <div class="content usermessage_content">
         <%- include('../components/left_bar.ejs') %>
         <div class="right_content">
             <div class="user_msg_frame">
-                
+                <h3>User Message</h3>
+                <form action="" style="width: 90%; height: 100%;">
+                  <label for="user">Name</label>
+                  <input type="text" >
+
+                  <label for="user">Email</label>
+                  <input type="text" >
+
+                  <label for="user">Subject</label>
+                  <input type="text" >
+
+                  <label for="user">Message</label>
+                  <textarea class="user_msg_textarea"></textarea>
+                </form>
             </div>
         </div>
     </div>

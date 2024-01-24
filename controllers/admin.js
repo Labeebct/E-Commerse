@@ -27,18 +27,20 @@ exports.getCategory = (req, res) => {
     res.render('admin/pages/category', { state })
 }
 
-
-exports.getMessages = (req, res) => {
-    const state = 'messages'
-    res.render('admin/pages/messages', { state })
-}
-
-
 exports.getCoupons = (req, res) => {
     const state = 'coupons'
     res.render('admin/pages/coupons', { state })
 }
 
+exports.getOrders = (req,res) => {
+    const state = 'orders'
+    res.render('admin/pages/orders', { state })
+}
+
+exports.getMessages = (req, res) => {
+    const state = 'messages'
+    res.render('admin/pages/messages', { state })
+}
 
 exports.getBanners = (req, res) => {
     const state = 'banners'
@@ -67,5 +69,10 @@ exports.getAddcoupons = (req,res) =>{
 
 exports.getUsermessage = (req,res) =>{
     res.render('admin/pages/usermessage',{state:''})
+}
+
+
+exports.getCustomer = (req,res) =>{
+    res.render('admin/pages/individualuser',{state:''})
 }
 

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/user')
+const accountController = require('../controllers/account')
 
 
 
@@ -27,7 +28,7 @@ router.post('/forget_password')
 
 
 
-router.get('/home')
+router.get('/home',controller.getHome)
 
 router.get('/products/category/:category')
 
@@ -36,14 +37,14 @@ router.get('/products')
 router.get('/product/:id')
 
 
-router.get('/wishlist')
+router.get('/wishlist',controller.getWishlist)
 
 router.get('/wishist/add/:id')
 
 router.delete('/wishist/remove/:id')
 
 
-router.get('/cart')
+router.get('/cart',controller.getCart)
 
 router.get('/cart/add/:id')
 
@@ -69,7 +70,7 @@ router.get('/confirm_order')
 router.get('/order_success')
 
 
-router.get('/account/address')
+router.get('/account/address',accountController.getAdress)
 router.put('/account/address')
 
 

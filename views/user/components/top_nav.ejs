@@ -2,17 +2,17 @@
   <div class="web_logo">LABIO</div>
   <div class="search_div">
     <div class="search_bar">
-      <input class="search_input" placeholder="Search your Products ...." type="text" />
+      <input class="search_input" type="text" />
       <button class="search_btn">Search</button>
     </div>
   </div>
   <div class="page_links">
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#"><i class="bi bi-heart"></i><span class="product_count">0</span></a></li>
-      <li><a href="#"><i class="bi bi-cart3"></i><span class="product_count">0</span></a></li>
-      <li><a href="#">Accout</a></li>
-      <li><a href="#">Logout<i class="bi bi-box-arrow-right"></i></a></li>
+      <li><a class="page_links <%= state==='home'? 'active' : '' %>" href="/home">Home</a></li>
+      <li><a class="page_links" href="/wishlist"><i class="bi bi-heart <%= state==='wishlist'? 'active' : '' %>"></i><span class="product_count">0</span></a></li>
+      <li><a class="page_links" href="/cart"><i class="bi bi-cart3  <%= state==='cart'? 'active' : '' %>"></i><span class="product_count">0</span></a></li>
+      <li><a class="page_links <%= state==='account'? 'active' : '' %>" href="/account/address">Account</a></li>
+      <li><a class="page_links <%= state===''? 'active' : '' %>" href="/logout">Logout<i class="bi bi-box-arrow-right"></i></a></li>
     </ul>
   </div>
 </div>

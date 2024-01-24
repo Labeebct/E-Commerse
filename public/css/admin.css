@@ -1241,3 +1241,198 @@
         transform: scale(.95);
     }
 }
+
+
+.usermessage_wrapper{
+    .right_content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .user_msg_frame{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-items: center;
+        width: 34rem;
+        height: 38rem;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.222);
+        border: 1px solid rgba(0, 0, 0, 0.256);
+    }
+    .user_msg_frame h3{
+        font-family: 'roboto',sans-serif;
+        text-align: center;
+        margin: 2rem;
+        letter-spacing: .05rem;
+    }
+    .user_msg_frame form{
+        display: flex;
+        flex-direction: column;
+        gap: .8rem;
+    }
+    .user_msg_frame label{
+        font-size: .7rem;
+        font-family: 'Poppins',sans-serif;
+    }
+    .user_msg_frame input{
+        font-size: .9rem;
+        font-family: 'Poppins',sans-serif;
+        height: 2.5rem;
+        width: 100%;
+        padding-left: .9rem;
+        outline: none;
+    }
+    .user_msg_textarea{
+        width: 100%;
+        height: 12rem;
+        padding: 1rem;
+        resize: none;
+        outline: none;
+    }
+
+}
+
+.orders_wrapper{
+    .right_content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+    .product_frame{
+        width: 66rem;
+        height: 42rem;
+        margin-bottom: 1.5rem;
+    }
+    .pro_top{
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 10%;
+    }
+    .pro_top h3{
+        font-family: 'Poppins',sans-serif;
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+    .pro_top button{
+        position: absolute;
+        right: 0;
+        font-family: 'Poppins',sans-serif;
+        font-size: .9rem;
+        text-align: end;
+        border: none;
+        outline: none;
+        color: white;
+        text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.257);
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.349);
+        background-color:red;
+        padding: .6rem .6rem;
+        transition: all .5s;
+        cursor: pointer;
+    }
+    .pro_top button:active{
+        transform: scale(.95);
+    }
+    .pro_center{
+        overflow-y: scroll;
+        padding-top: 1rem;
+        width: 100%;
+        height: 80%;
+    }
+    .pro_center::-webkit-scrollbar {
+        width: 0.5em;
+    }
+    
+    .pro_center::-webkit-scrollbar-track {
+    background-color: transparent;
+    }
+    
+    .pro_center::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    }
+    .pro_bottom{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 10%;
+    }
+    .link_pagination{
+        display: flex;
+        gap: 1rem;
+        align-items: center; 
+    }
+    .links{
+        display: flex;
+    }
+    .link_pagination a{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.2rem;
+        height: 2.2rem;
+        text-decoration: none;
+        color: black;
+        border: 1px solid rgba(0, 0, 0, 0.739);
+        font-family: 'Poppins' , sans-serif;
+    }
+    .link_pagination button{
+        padding: .42rem .7rem;
+        letter-spacing: .05rem;
+        border: none;
+        background-color: black;
+        color: white;
+        transition: all .5s;
+        font-family: 'Poppins',sans-serif;
+    }
+    .link_pagination button:active{
+       transform: scale(.9);
+    }
+    Table{
+        width: 100%;
+    }
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+    th{
+        font-family: 'Poppins',sans-serif;
+        font-size: .9rem;
+        font-weight: 600;
+        padding: .6em;
+    }
+    .bi-trash{
+        font-size: 1.1rem;
+        color: red;
+    }
+    td{
+        text-align: center;
+        padding: .3rem;
+        font-family: 'Poppins',sans-serif;
+        font-size: .8rem;
+    }
+    .bi-pencil-square{
+        font-size: 1.1rem;
+        color: rgb(0, 136, 0);
+    }
+    td button{
+        background: none;
+        border: none;
+        transition: all .5s;
+    }
+    td button:active{
+        transform: scale(.9);
+    }
+}
+
+
+.individiualusers_wrapper{
+    .right_content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+}

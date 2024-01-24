@@ -15,10 +15,10 @@ router.post('/key_verification')
 
 router.get('/home',controller.getHome)
 
-router.get('/orders_list')
+router.get('/orders_list',controller.getOrders)
 
 router.get('/custumers',controller.getUsers)
-router.get('/custumer/:id')
+router.get('/custumer',controller.getCustomer)
 router.delete('/custumer/remove/:id')
 
 router.get('/customer/order_list/:id')
