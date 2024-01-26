@@ -23,8 +23,14 @@
                         </div>
 
                         <label for="product_name">Category</label>
-                        <input type="text" name="productname" >
-
+                        <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;" name="ram" id="size">
+                            <option value="">Category</option>
+                            <option value="mens">Mens</option>
+                            <option value="womens">Womens</option>
+                            <option value="kids">Kids</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="home">Home</option>
+                        </select>
                     </div>
                     <div class="top_right">
                         <img src="" class="product_img" alt="">
@@ -78,27 +84,30 @@
                     </span>
 
                     <span style="display: flex; flex-direction: column; gap: .2rem;">
-                    <label for="size">Storage</label>
+                    <label for="size">Sub Category</label>
                     <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="storage" id="size">
-                            <option value="">Storage</option>
-                            <option value="32">32</option>
-                            <option value="64">64</option>
-                            <option value="128">128</option>
-                            <option value="256">256</option>
-                            <option value="512">512</option>
+                            <option value="">Sub</option>
+                            <option value="mensshirt">Mens shirt</option>
+                            <option value="menspants">Mens Pants</option>
+                            <option value="mensshoes">Mens Shoes</option>
+                            <option value="menswatch">Mens Watch</option>
+                            <option value="womensshirt">Womens shirt</option>
+                            <option value="womenspants">Womens Pants</option>
+                            <option value="womensshoes">Womens Shoes</option>
+                            <option value="womenswatch">Womens Watch</option>
+                            <option value="mobiles">Mobiles</option>
+                            <option value="laptops">Laptops</option>
+                            <option value="bedsheet">Bedsheet</option>
+                            <option value="kidsshirt">Kids Shirt</option>
+                            <option value="kidsshoes">kids Shoes</option>
+                            <option value="kidstrouser">kids Trouser</option>
                         </select>
                     </span>
 
                     <span style="display: flex; flex-direction: column; gap: .2rem;">
-                        <label for="size">Ram</label>
-                        <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="ram" id="size">
-                                <option value="">Ram</option>
-                                <option value="2">2</option>
-                                <option value="4">4</option>
-                                <option value="6">6</option>
-                                <option value="12">12</option>
-                                <option value="16">16</option>
-                            </select>
+                        <label for="size">Return</label>
+                        <input type="checkbox" name="return">
+
                         </span>
                     </div>
 

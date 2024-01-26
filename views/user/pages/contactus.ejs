@@ -1,8 +1,30 @@
 <%- include('../components/head.ejs') %>
-   <div class="wrapper address_wrapper">
+   <div class="wrapper contactus_wrapper">
     <%- include('../components/top_nav.ejs') %>
-         <div class="content address_content">
+         <div class="content contactus_content">
             <%- include('../components/user_left.ejs') %>
+            <div class="right_content">
+               <div class="user_msg_frame">
+                  <h3>CONTACT</h3>
+                  <form action="" style="width: 90%; height: 100%;" spellcheck="false">
+                    <label for="user">Name</label>
+                    <input type="text" >
+  
+                    <label for="user">Email</label>
+                    <input type="text" >
+  
+                    <label for="user">Subject</label>
+                    <input type="text" >
+  
+                    <label for="user">Message</label>
+                    <textarea class="user_msg_textarea"></textarea>
+
+                    
+                    
+                  <button type="button" class="send_msg_btn">SEND MESSAGE</button>
+                  </form>
+              </div>
+            </div>
          </div>
    </div>
 <%- include('../../common/end.ejs') %>

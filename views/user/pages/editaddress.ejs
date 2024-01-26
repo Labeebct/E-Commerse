@@ -1,14 +1,11 @@
 <%- include('../components/head.ejs') %>
-   <div class="wrapper address_wrapper">
+   <div class="wrapper editaddress_wrapper">
     <%- include('../components/top_nav.ejs') %>
-         <div class="content address_content">
+         <div class="content editaddress_content">
             <%- include('../components/user_left.ejs') %>
             <div class="right_content">
                <div class="address_frame">
-                  <div class="pro_top">
-                     <h3>Profile Details</h3>
-                     <button onclick="location.href = '/account/editaddress'">Edit Profile</button>
-                 </div>
+                     <h3 class="edit_text" style="text-align: center;">Edit Profile</h3>
                <div class="form_frame">
                    <form action="" spellcheck="false">
                    <div class="top">
@@ -79,7 +76,9 @@
                        <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
                            <label for="address">Address</label>
                            <textarea name="address" id="text_area"></textarea>
-                       </span>
+                        </span>
+                        <button class="save_btn">SAVE DETAILS</button>
+                       
                    </div>
                </form>
                </div>

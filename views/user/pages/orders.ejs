@@ -1,8 +1,40 @@
 <%- include('../components/head.ejs') %>
-   <div class="wrapper address_wrapper">
+   <div class="wrapper order_wrapper">
     <%- include('../components/top_nav.ejs') %>
-         <div class="content address_content">
+         <div class="content order_content">
             <%- include('../components/user_left.ejs') %>
+            <div class="right_content">
+               <table>
+                  <thead>
+                     <tr>
+                        <th style="width: 30%;">PRODUCT</th>
+                        <th style="width: 15%;">ORDER ID</th>
+                        <th style="width: 10%;">AMOUNT</th>
+                        <th style="width: 10%;">ORDER DATE</th>
+                        <th style="width: 15%;">STATUS</th>
+                     </tr>
+                  </thead>
+               
+                  <tbody>
+                  <tr class="td_tr">
+                     <td class="product_td">
+                        <div class="img_section"><img src="/images/iphone 15.jpg" style="height: 6rem; width: 5rem;" alt=""></div>
+                        <div class="product_details">
+                           <p class="order_product_name">Iphone 15 pro</p>
+                           <p class="order_size">Size : <span style="font-size: 1.1rem;">s</span></p>
+                           <p class="order_color">Color : <span>black</span></p>
+                        </div>
+                     </td>
+                     <td>6345934676874549</td>
+                     <td style="font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(255, 0, 0, 0.748);"><i class="bi bi-currency-rupee"></i>12,432</td>
+                     <td style="font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(0, 0, 0, 0.748);">12-04-2024</td>
+                     <td class="status delivered">DELIVERED</td>
+
+                  </tr>
+                  </tbody>
+
+               </table>
+            </div>
          </div>
    </div>
 <%- include('../../common/end.ejs') %>

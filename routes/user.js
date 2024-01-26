@@ -34,7 +34,7 @@ router.get('/products/category/:category')
 
 router.get('/products')
 
-router.get('/product/:id')
+router.get('/product',controller.getProductopen)
 
 
 router.get('/wishlist',controller.getWishlist)
@@ -70,20 +70,27 @@ router.get('/confirm_order')
 router.get('/order_success')
 
 
+
+// <<<<<<<============= ACCOUNT CONTOLLER ================>>>>>>>
+
+
 router.get('/account/address',accountController.getAdress)
+router.get('/account/editaddress',accountController.getEditaddress)
+
 router.put('/account/address')
 
 
-router.get('/account/update_password')
+router.get('/account/update_password',accountController.getUpdatepassword)
 
 router.put('/account/update_password/:id')
 
-router.get('/account/orders')
+router.get('/account/orders',accountController.getOrder)
 
 
-router.get('/account/aboutus')
+router.get('/account/aboutus',accountController.getAboutus)
 
-router.get('/account/contactus')
+
+router.get('/account/contactus',accountController.getContactus)
 router.post('/account/contactus')
 
 

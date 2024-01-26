@@ -42,6 +42,13 @@
     }
 }
 
+
+
+/* <<<<============ SIGNUP WRAPPER ============>>> */
+
+
+
+
 .signup_wrapper{
     .signup_content{
         overflow: hidden;
@@ -187,6 +194,11 @@
 
 
 
+/* <<<<============ LEFT BAR ============>>> */
+
+
+
+
 .frame{
     display: flex;
     justify-content: end;
@@ -271,6 +283,13 @@
         border-bottom: 1px solid rgba(0, 0, 0, 0.438);
     }
 }
+
+
+
+/* <<<<============ USERS WRAPPER ============>>> */
+
+
+
 
 .users_wrapper{
     .right_content{
@@ -375,6 +394,15 @@
     }
    
 }
+
+
+
+
+/* <<<<============ PRODUCTS WRAPPER ============>>> */
+
+
+
+
 
 .products_wrapper{
     .right_content{
@@ -510,6 +538,13 @@
     }
 }
 
+
+
+/* <<<<============ CATEGORY WRAPPER ============>>> */
+
+
+
+
 .category_wrapper{
     .right_content{
         display: flex;
@@ -643,6 +678,13 @@
         transform: scale(.9);
     }
 }
+
+
+
+/* <<<<============ BANNER WRAPPER ============>>> */
+
+
+
 
 .banner_wrapper{
     .right_content{
@@ -779,6 +821,12 @@
 }
 
 
+
+/* <<<<============ COUPONS WRAPPER ============>>> */
+
+
+
+
 .coupons_wrapper{
     .right_content{
         display: flex;
@@ -913,6 +961,13 @@
     }
 }
 
+
+
+/* <<<<============ MESSAGE WRAPPER ============>>> */
+
+
+
+
 .message_wrapper{
     .right_content{
         padding: 1.2em;
@@ -951,6 +1006,13 @@
         margin-top: 1rem;
     }
 }
+
+
+
+
+/* <<<<============ ADDPRODUCT WRAPPER ============>>> */
+
+
 
 
 .add_products_wrapper{
@@ -1061,6 +1123,11 @@
 }
 
 
+/* <<<<============ ADDCATEGORY WRAPPER ============>>> */
+
+
+
+
 .addcategory_wrapper{
     .right_content{
         display: flex;
@@ -1128,6 +1195,13 @@
     
 }
 
+
+
+/* <<<<============ ADDBANNER WRAPPER ============>>> */
+
+
+
+
 .addbanner_wrapper{
     .right_content{
         display: flex;
@@ -1194,6 +1268,13 @@
     }
 }
 
+
+
+/* <<<<============ ADDCOUPON WRAPPER ============>>> */
+
+
+
+
 .addcoupon_wrapper{
     .right_content{
         display: flex;
@@ -1241,6 +1322,12 @@
         transform: scale(.95);
     }
 }
+
+
+
+/* <<<<============ USERMESSAGE WRAPPER ============>>> */
+
+
 
 
 .usermessage_wrapper{
@@ -1291,6 +1378,12 @@
     }
 
 }
+
+
+
+/* <<<<============ ORDERS WRAPPER ============>>> */
+
+
 
 .orders_wrapper{
     .right_content{
@@ -1426,6 +1519,11 @@
         transform: scale(.9);
     }
 }
+
+
+
+/* <<<<============ INDIVIDUALUSERS WRAPPER ============>>> */
+
 
 
 .individiualusers_wrapper{

@@ -16,7 +16,12 @@ exports.getHome = (req,res) => {
      res.render('user/pages/home',{state})
 }
 
+exports.getProductopen = (req,res) => {
+     res.render('user/pages/productopen',{state:''})
+}
+
 exports.getWishlist = (req,res) => {
      const state = 'wishlist'
      res.render('user/pages/wishlist',{state})
 }
+
