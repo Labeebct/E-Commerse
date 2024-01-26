@@ -1,9 +1,157 @@
 <%- include('../components/head.ejs') %>
    <div class="wrapper productopen_wrapper">
     <%- include('../components/top_nav.ejs') %>
+    <form action="">
          <div class="content productopen_content">
-            <%- include('../components/user_left.ejs') %>
-            
+            <div class="main_frame">
+               <div class="product_frame">
+                  <div class="img_frame">
+                     <i class="bi left_right_icon bi-caret-left"></i>
+                   <div>
+                     <img src="/images/iphone 15.jpg" class="product_image_img" alt="">
+                   </div>
+                   <i class="bi left_right_icon bi-caret-right"></i>
+                  </div>
+                  <div class="img_position" style="display: flex; gap: .4rem; margin-bottom: 1rem;">
+                     <span style="padding: .6rem .6rem; border: 1px solid black; border-radius: 100%;"></span>
+                     <span style="padding: .6rem .6rem; border: 1px solid black; border-radius: 100%;"></span>
+                     <span style="padding: .6rem .6rem; border: 1px solid black; border-radius: 100%;"></span>
+                     <span style="padding: .6rem .6rem; border: 1px solid black; border-radius: 100%;"></span>
+                  </div>
+               </div>
+               <div class="product_detail_frame">
+                  <ul>
+                     <li style="font-size: 2rem; font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(0, 0, 0, 0.821);">Iphone 15 pro</li>
+
+                     <!-- ================================================================= -->
+
+                     <li style="display: flex; gap: .7rem; align-items: center;">
+                        <p class="old_price">120,333</p>
+                        <p class="new_price">143,933</p>
+                        <p class="discount">80%</p>
+                     </li>
+
+                    <!-- ========================================== -->
+
+                    
+                     <li style="display: flex; gap: .7rem; align-items: center; height: 2rem;">
+                        <span style="display: flex; align-items: center; font-family: 'sans-serif'; ">Return <span  style="color: red; padding-top: .3rem; font-size: 1.3rem;"><i class="bi bi-x"></i></span></span>
+                        <span style="display: flex; align-items: center; font-family: 'sans-serif'; ">Availabe<span  style="color: rgb(0, 201, 0); padding-top: .3rem; font-size: 1.4rem;"><i class="bi bi-check"></i></span></span>
+                     </li>
+
+   
+                     <!-- ===================================== -->
+
+                     <li style="font-family: 'Poppins',sans-serif; height: 2.5rem;">
+                        Rating : ⭐⭐⭐⭐⭐
+                     </li>
+
+ 
+                     <!-- =========================================================== -->
+                     <li class="size_li">
+                        <p style="font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(0, 0, 0, 0.832);">SIZE :</p>
+                        <span class="label_span">
+                         <input id="s" value="s" name="size" type="radio" >
+                        <label for="s" >S</label>
+                        </span>
+                        
+                        <span class="label_span">
+                        <input id="m" name="size" type="radio">
+                        <label for="m">M</label>
+                        </span>
+                         
+                        <span class="label_span">
+                        <input id="l" name="size" type="radio">
+                        <label for="l">L</label>
+                     </span>
+
+                     <span class="label_span">
+                        <input id="xl" name="size" type="radio">
+                        <label for="xl">XL</label> 
+                     </span>
+                     </li>
+
+                     <!-- ======================================== -->
+
+                     <li class="color_li">
+                        <p style="font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(0, 0, 0, 0.832);">COLOR :</p>
+                        <span style="background-color:black;" class="label_span_color">
+                        <input  id="black" name="color" value="black" type="radio" >
+                        <label for="black" ></label>
+                        </span>
+                        
+                        <span style="background-color: red;" class="label_span_color">
+                        <input id="red" name="color" value="red" type="radio">
+                        <label for="red"></label>
+                        </span>
+                         
+                        <span style="background-color: green;" class="label_span_color">
+                        <input id="green" name="color" value="green" type="radio">
+                        <label for="green"></label>
+                     </span>
+
+                     <span style="background-color: orange;" class="label_span_color">
+                        <input id="orange" name="color" value="orange" type="radio">
+                        <label for="orange"></label> 
+                     </span>
+
+                     <span style="background-color: blue;" class="label_span_color">
+                        <input id="blue" name="color" value="blue" type="radio">
+                        <label for="blue"></label> 
+                     </span>
+
+                     <span style="background-color: yellow;" class="label_span_color">
+                        <input id="yellow" name="color" value="yellow" type="radio">
+                        <label for="yellow"></label> 
+                     </span>
+                     </li>
+
+                     <!-- =================================================== -->
+
+                     <li>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                           <select  name="quantity" style="outline: none; padding: .3rem;">
+                              <option value="1">Qty:1</option>
+                              <option value="2">Qty:2</option>
+                              <option value="3">Qty:3</option>
+                              <option value="4">Qty:4</option>
+                              <option value="5">Qty:5</option>
+                           </select>
+                           <div class="stock_left">3 Left</div>
+                        </div>
+                     </li>
+
+
+                     <!-- ======================================= -->
+
+
+
+                     <li style="height: 10rem; flex-direction: column; align-items: start; gap: .3rem;">
+                        <p class="disc_p">Description</p>
+                        <div class="discription_frame">
+                           
+                        </div>
+                     </li>
+
+                     <!-- ======================================================= -->
+
+
+
+                     <li style="height: 4rem;">
+                        <p style="font-family:'Times New Roman', Times, serif;">Hurry only <span style="color: red;">2 left</span></p>
+                     </li>
+
+                     <!-- =================================================================== -->
+
+                     <li class="btn_li" style="display: flex; height: 3rem; justify-content: space-between; width: 90%;">
+                        <button type="submit">Buy Now</button>
+                        <button type="submit">Add To Cart</button>
+                     </li>
+
+                  </ul>
+               </div>
+            </form>
+            </div>                  
          </div>
    </div>
 <%- include('../../common/end.ejs') %>
