@@ -1155,6 +1155,11 @@
 
 
 
+/* <<<<<<<=========ADDRESS WRAPPER =================>>>>>> */
+
+
+
+
 .address_wrapper{
     .address_content{
         display: flex;
@@ -1792,7 +1797,7 @@
     overflow: hidden;
     margin-top: 1rem;
     width: 100%;
-    height: 30em;
+    height: 26em;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.33);
    }
    .banner_chevron{
@@ -1813,16 +1818,24 @@
    .banner button:active{
     transform: scale(.95);
    }
+   .category_div p{
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    font-size: .9rem;
+    color: rgba(0, 0, 0, 0.932);
+   }
 
    .category_div{
     display: flex;
     flex-wrap: nowrap;
     width: 100%;
     height: 8rem;
-    margin-top: 3rem;
-    border: 1px solid rgba(0, 0, 0, 0.402);
+    background-color: rgba(233, 233, 233, 0.79);
+    margin-top: 2rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.235);
    }
    .category_frame{
+    cursor: pointer;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -1831,18 +1844,205 @@
     border-radius: 50%;
     overflow: hidden;
    }
+   .cat_img_div{
+      display: flex;
+      justify-content: center;
+       align-items: center;
+       flex-direction: column;
+       width: 10rem;
+       height: 10rem;
+       border-radius: 50%;
+       overflow: hidden;
+   }
    .cat_img{
-     width: 4rem;
-     height: 4rem;
-     border-radius: 50%;
+    width: 40%;
+    height: 50%;
+    border-radius: 100%;
    }
-   .category_div p{
-     
+   .product_frame{
+    width: 100%;
+    margin-top: 1rem;
+    height: auto;
    }
- 
+   .product_top{
+    display: flex;
+    align-items: center;
+    font-family: 'Poppins',sans-serif;
+    width: 100%;
+    font-size: 1.2rem;
+    padding: 1.7rem 0;
+    font-weight: 600;
+   }
+   .product_bottom{
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(auto-fill,minmax(12rem,1fr));
+    grid-template-rows: repeat(auto-fill,minmax(20em,1fr));
+    column-gap: 1.5rem;
+    row-gap: 1.5rem;
+    align-items: center;
+    padding: 1.7rem 1rem;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.078);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.175);
+   }
+   .product_frame_grid{
+    height: 23rem;
+    width: 100%;
+    border: 1px solid rgba(62, 62, 62, 0.287);
+}
+.top{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 60%;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 0;
+    width: 100%;
+    height: 20%;
+    border-bottom:1px solid rgba(151, 151, 151, 0.411);
+}
+.product_name{
+    font-size: 1.2rem;
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 500;
+}
+.price_div{
+    display: flex;
+    align-items: center;
+    gap: .3rem;
+    padding: .5rem 0;
+}
+.old_price{
+    text-decoration: line-through;
+    color: red;
+    font-family: 'Poppins',sans-serif;
+    font-size: .7rem;
+    font-weight: 400;
+}
+.new_price{
+    font-family: 'Poppins',sans-serif;
+    font-size: .9rem;
+    font-weight: 500;
+}
+.bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+.addto_cart_btn{
+    width: 13rem;
+    height: 70%;
+    border: none;
+    background: none;
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.855);
+    cursor: pointer;
+    color: white;
+    font-size: .77rem;
+    border-radius: .2rem;
+    transition: all .4s;
+    background-color:rgb(4, 33, 24);
+}
+.addto_cart_btn:active{
+    transform: scale(.95);
+}
+.brands_frame{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 8rem;
+    margin: 3rem 0 2rem 0;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.196);
+    background-color: #01766821;
+}
+.band_img{
+   width: 6rem;
+   height: 6rem;
+   aspect-ratio: 3/2;
+   object-fit: contain;
+   transition: all.4s ease;
+   cursor: pointer;
+}
+.redmi_png{
+    height: 4rem;
+    width: 4rem;
+}
+.band_img:hover{
+  transform: scale(1.1);
+}
+
+.banner_2{
+    width: 100%;
+    height: 15rem;
+    margin: 2rem 0;
+}
+.promo_div{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 2rem 0;
+    width: 100%;
+    height: 10rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.196);
+    background-color: rgba(226,244,255,255);
+}
+.promo_sec{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.promo_sec img{
+    width: 5.5rem;
+    height: 5.5rem;
+}
+.promo_sec p{
+    font-family: 'Poppins',sans-serif;
+    font-weight: 600;
+    color: #003F62;
 }
 
 
+
+
+
+
+
+
+
+/* -------------------------------- */
+
+@media screen and (max-width:800px) {
+    .band_img{
+        width: 4.5rem !important;
+        height: 4.5rem !important;
+    }
+    .redmi_png{
+        height: 2.7rem;
+        width: 3rem;
+    }
+    .cat_img_div{
+         width: 7rem;
+         height: 7rem;
+    }
+        .cat_img_div p{
+        font-size: .7rem;
+    }
+}
+}
 
 
 
