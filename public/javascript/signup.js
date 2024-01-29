@@ -55,7 +55,6 @@ submitBtn.addEventListener('click', async (e) => {
 
     e.preventDefault()
 
-    const form = new FormData(signupForm)
 
     const usernameInput = document.getElementsByName('username')[0].value
     const emailInput = document.getElementsByName('email')[0].value
@@ -127,6 +126,7 @@ submitBtn.addEventListener('click', async (e) => {
             errorMsg.innerHTML = ''
         }, 3000);
         }
+        
         else{
             errorMsg.style.visibility = 'visible'
             errorMsg.classList.add('success')

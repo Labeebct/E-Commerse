@@ -284,12 +284,18 @@
         border-radius: .2rem;
         cursor: pointer;
         font-family: 'Poppins',sans-serif;
-        margin: 2rem 0;
+        margin-top: 2rem;
+        margin-bottom: .3rem;
         border: none;
         outline: none;
         background-color: #040D12;
         color: white;
         transition: all .4s;
+    }
+    .err_msg{
+        font-size: .9rem;
+        font-family: 'Poppins',sans-serif;
+        color: #F80E0E;
     }
     input[type='submit']:active{
         transform: scale(.95);
@@ -422,6 +428,43 @@ word-wrap: break-word;
 }
 
 
+.success_otp_wrapper{
+    .success_content{
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100vh - 4.5rem);
+    }
+    .success_frame{
+        display: flex;
+        position: relative;
+        width: 50rem;
+        height: 32rem;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.284);
+        background-color: rgba(245,245,245,255);
+    }
+    .succes_img{
+        height: 100%;
+        width: 100%;
+        mix-blend-mode:darken;
+        margin-left: 1rem;
+    }
+    h3{
+        position: absolute;
+        background-color: rgba(245,245,245,255);
+        font-family: 'Poppins',sans-serif;
+        color: rgba(0, 0, 0, 0.84);
+        top: 72%;
+        left: 13%;
+        text-align: center;
+    }
+    .play_btn{
+        position: absolute;
+        padding: 3rem;
+    }
+}
 
 
 
@@ -612,6 +655,14 @@ word-wrap: break-word;
         box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.284);
         background-color: white;
     }
+    .err_msg{
+        color: red;
+        font-family: 'Poppins',sans-serif;
+        font-size: .9rem;
+    }
+    .success{
+        color: rgb(1, 147, 1);
+    }
     .left{
         display: flex;
         flex-direction: column;
@@ -699,6 +750,7 @@ word-wrap: break-word;
         background-color: black;
         outline: none;
         transition: transform .4s;
+        cursor: pointer;
     }
     .submit_btn:active{
         transform: scale(.98);

@@ -10,10 +10,16 @@ router.post('/signup',controller.postSignup)
 
 
 router.get('/otp_verification/:num',controller.getOtpverification)
-router.post('/otp_verification')
+router.post('/otp_verification/:num',controller.postOtpverification)
+
+router.get('/resend_otp/:num',controller.getResendotp)
+
+router.get('/otp_success',controller.getOtpsuccess)
+
 
 router.get('/login',controller.getLogin)
-router.post('/login')
+router.post('/login',controller.postLogin)
+
 
 router.get('/number_registration')
 router.post('/number_registration')

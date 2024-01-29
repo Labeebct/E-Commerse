@@ -2,23 +2,22 @@
    <div class="wrapper otp_wrapper">
       <%- include('../components/signup_topnav.ejs') %>
       <div class="otp_content">
-      <form action="/admin/login" spellcheck="false">
+      <form action="/otp_verification/<%=  number %>" spellcheck="false" method="post">
       <div class="login_frame">
          <div class="left">
             <img class="phone_otp_img" src="/images/preview.jpg" alt="">
             <h3 class="login_text"><span style="font-family: sans-serif; font-weight: 550; color: rgba(0, 0, 0, 0.774);">OTP</span> Verification</h3>
-            <p class="num_show">Please enter the verification code send to +91 8590471530</p>
+            <p class="num_show">Please enter the verification code send to <%= '+91' + number %></p>
             <div class="input_frame">
               <div class="otp_input-div">
-                <input type="number" class="otp_input" maxlength="1">
-                <input type="number" class="otp_input"  maxlength="1">
-                <input type="number" class="otp_input"  maxlength="1">
-                <input type="number" class="otp_input"  maxlength="1">
-                <input type="number" class="otp_input"  maxlength="1">
-                <input type="number" class="otp_input"  maxlength="1">
+                <input type="number" class="otp_input"  name="D1" maxlength="1">
+                <input type="number" class="otp_input"  name="D2" maxlength="1">
+                <input type="number" class="otp_input"  name="D3" maxlength="1">
+                <input type="number" class="otp_input"  name="D4" maxlength="1">
               </div>
               <input type="submit">
-               <p class="accnt_exist">Do not Send OTP?<a href="/admin/signup" class="login_tag">RESEND</a></p>
+               <p class="err_msg"><%= otpFailed %></p>
+               <p class="accnt_exist"><a href="/admin/signup" class="/resend_otp/<%= number %>">RESEND OTP</a></p>
             </div>
          </div>
          <div class="right" style="background-image: none; background-color: white;"><img class="otp_img" src="/images/otp_img.svg" alt=""></div>
@@ -29,7 +28,7 @@
    <script>
     const otpInputs = document.querySelectorAll('.otp_input');
   
-    otpInputs.forEach((input, index) => {
+    otpInputs.forEach((input, index) => { 
       input.addEventListener('input', (event) => {
         if (event.target.value.length === 1) {
           if (index < otpInputs.length - 1) {
