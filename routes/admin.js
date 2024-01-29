@@ -8,8 +8,11 @@ const controller = require('../controllers/admin')
 router.get('/signup',controller.getSignup)
 router.post('/signup')
 
+router.get('/login',controller.getLogin)
+router.post('/login')
 
-router.get('/key_verification')
+
+router.get('/key_verification',controller.getKeyverify)
 router.post('/key_verification')
 
 

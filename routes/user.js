@@ -6,11 +6,11 @@ const accountController = require('../controllers/account')
 
 
 router.get('/signup',controller.getSignup)
-router.post('/signup')
+router.post('/signup',controller.postSignup)
 
 
-router.get('/otp_registration')
-router.post('/otp_registration')
+router.get('/otp_verification/:num',controller.getOtpverification)
+router.post('/otp_verification')
 
 router.get('/login',controller.getLogin)
 router.post('/login')

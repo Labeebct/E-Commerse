@@ -3,6 +3,14 @@ exports.getSignup = (req, res) => {
     res.render('admin/pages/signup')
 }
 
+exports.getLogin = (req, res) => {
+    res.render('admin/pages/login')
+}
+
+exports.getKeyverify = (req, res) => {
+    res.render('admin/pages/key_verify')
+}
+
 
 exports.getHome = (req, res) => {
     const state = 'dashboard'

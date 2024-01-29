@@ -1,20 +1,15 @@
-<%- include('../user/components/head.ejs') %>
+<%- include('../components/head.ejs') %>
    <div class="wrapper login_wrapper">
-    <%- include('../user/components/top_nav.ejs') %>
-    <div class="login_content">
-      <form action="/login" spellcheck="false">
-      <div class="frame">
+      <%- include('../components/signup_topnav.ejs') %>
+      <div class="login_content">
+      <form action="" spellcheck="false">
+      <div class="login_frame">
          <div class="left">
             <h3 class="login_text">Login</h3>
             <div class="input_frame">
                <div class="input_div"><span class="input_icon"><i class="bi bi-input bi-envelope-fill"></i></span><input class="inputs" type="text" maxlength="40" name="email" placeholder="Email"></div>
                <div class="input_div"><span class="input_icon"><i class="bi bi-input bi-key"></i></span><input class="inputs" type="password" minlength="8" maxlength="10" name="password" placeholder="Password"><i class="bi bi-password bi-eye-slash"></i></div>
-               <div class="forget_div">
-                    <div class="remember_me"><input type="checkbox"><label for="">Remember me</label></div>
-                    <div class="forget_password"><a href="#">Forget Password ?</a></div>
-                </div>
                <div class="submit_div"><button class="submit_btn" type="submit">LOGIN</button></div>
-               <p class="accnt_exist">Dont't have an account ?<a href="/signup" class="login_tag">Signup</a></p>
             </div>
          </div>
          <div class="right">LABIO</div>
@@ -22,4 +17,4 @@
    </form>
     </div>
    </div>
-<%- include('./end.ejs') %>
+   <%- include('../../common/end.ejs') %>
