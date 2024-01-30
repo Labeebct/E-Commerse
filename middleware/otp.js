@@ -15,6 +15,7 @@ const sendOtp = (num) => {
 
 }
 
+
 const verifyOtp = async(num,code,res,req) => {
 
   try {
@@ -50,4 +51,5 @@ const verifyOtp = async(num,code,res,req) => {
    
 }
  
+
 module.exports = {sendOtp , verifyOtp}

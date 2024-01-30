@@ -143,9 +143,11 @@ submitBtn.addEventListener('click', async (e) => {
         }
         
         else{
+            if(result.email){
             setTimeout(() => {
-                window.location.href = `/admin/email_verification${result.email}`
+                window.location.href = `/admin/key_verification/${result.email}`
             }, 1000);
+        }
     }
     } catch (error) {
             console.log(error.message);

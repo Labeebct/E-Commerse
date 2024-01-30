@@ -43,6 +43,8 @@ router.get('/resend_email_otp',controller.getResendemailotp)
 
 
 
+
+
 // <<<<<<<============ HOME ===============>>>>>>
 
 
@@ -94,7 +96,12 @@ router.get('/order_success')
 
 
 
+
+
 // <<<<<<<============= ACCOUNT CONTOLLER ================>>>>>>>
+
+
+
 
 
 router.get('/account/address',accountController.getAdress)

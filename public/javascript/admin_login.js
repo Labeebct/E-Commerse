@@ -68,6 +68,8 @@ submitBtn.addEventListener('click',async(e)=>{
             setTimeout(() => {
                 window.location.href = '/admin/home'
             }, 500);
+        }else{
+            window.location.href = `/admin/key_verification/${result.email}`
         }
         }
 

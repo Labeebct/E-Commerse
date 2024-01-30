@@ -1,7 +1,11 @@
 const bcrypt = require('bcrypt')
 const signupModel = require('../models/signup')
+const moment = require('moment')
+
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
+const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,15}$/
+
 
 const {sendOtp , verifyOtp} = require('../middleware/otp')
 const {emailOtp , verify} = require('../middleware/emailotp')
@@ -27,11 +31,11 @@ exports.getSignup = (req,res) => {
 exports.postSignup = async(req,res) => {
 try {
 
-    const { email , mobilenum , password} = req.body
+    const {username, email , mobilenum , password} = req.body
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password , salt)    /* Hashing with Salting */
+    const originalDate = moment().format('DD-MM-YYYY')
 
-    req.body.password = hashedPassword      /* Replacing req body password with hashed password */
 
     const userNumExist = await signupModel.findOne({email})
     const userEmailExist = await signupModel.findOne({mobilenum})
@@ -54,7 +58,15 @@ try {
     }
     else{
      req.session.mobilenum = mobilenum
-     await signupModel.create(req.body)
+     const newSchema = new signupModel({
+          username,
+          email,
+          mobilenum,
+          password:hashedPassword,
+          regdate:originalDate
+       })
+   
+     await newSchema.save()
      sendOtp(mobilenum)    /* Caling twilio Function */
      console.log('OTP has send to the' + mobilenum);
      res.status(200).json({mobilenum})
@@ -228,7 +240,7 @@ exports.postForgetpass = async (req, res) => {
 
             emailOtp(req.body.email)
             return res.redirect('/email_otp') 
-
+    
           }
           
      } catch (error) {
@@ -243,9 +255,17 @@ exports.postForgetpass = async (req, res) => {
 
 
 
-exports.getEmailOtp = (req, res) => {
-     const errMsg =  req.flash('incorrect')
-     res.render('user/pages/emailotp',{state:'',errMsg})
+exports.getEmailOtp = async(req, res) => {
+     try {
+          
+          const mobile = req.body
+          const findUser = await findOne({mobilenum:mobile})
+          const errMsg =  req.flash('incorrect')
+          res.render('user/pages/emailotp',{state:'',errMsg})
+
+     } catch (error) {
+          console.log('Error admin getemail',error.message)
+     }
 }
 
 
@@ -257,7 +277,9 @@ exports.postEmailOtp = (req, res) => {
 
 
 
+
 // <<<<<< =========== RESEND EMAIL OTP ============ >>>>>>
+
 
 
 exports.getResendemailotp = async(req,res) =>{
@@ -295,16 +317,34 @@ exports.postChangepass = async(req, res) => {
 
           const salt = await bcrypt.genSalt(10)
           const hashedPassword = await bcrypt.hash(password,salt)
-          req.body.password = hashedPassword
-          
+
 
           if(!password || !confirmpassword){
-                req.flash('errMsg','Please Fill the Fields')
-               res.redirect('/change_password')
+               req.flash('errMsg','Please Fill the Fields')
+               return res.status(405).redirect('/change_password')
+          }
+          else if(!passwordRegex.test(password)){
+               req.flash('errMsg','Password need one Uppercase and one Number')
+               return res.status(405).redirect('/change_password')
+          }
+          else if(password != confirmpassword){
+               req.flash('errMsg','Password Mismatch')
+               return res.status(405).redirect('/change_password')
+          }else{
+
+               const updatePass = await signupModel.updateOne({mobilenum:req.session.mobilenum},
+               {$set:{password:hashedPassword}})
+
+               if(updatePass){
+                 console.log('Password changed success');
+                 res.status(200).redirect('/login')
+               }else{
+                 res.status(500)
+               }
+
           }
 
 
-          const updatePass = await signupModel.updateOne({mobilenum:req.session.mobilenum})
 
 
      } catch (error) {

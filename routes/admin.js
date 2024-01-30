@@ -5,17 +5,30 @@ const controller = require('../controllers/admin')
 
 
 
+// <<<<< ============== AUTHENTICATION =============== >>>>>
+
+
+
+
 router.get('/signup',controller.getSignup)
 router.post('/signup',controller.postSignup)   
 
 router.get('/login',controller.getLogin)
 router.post('/login',controller.postLogin)
 
-router.get('/email_verification',controller.getEmailverify)
-router.post('/email_verification')
+
 
 router.get('/key_verification/:email',controller.getKeyverify)
-router.post('/key_verification')
+router.post('/key_verification/:email',controller.postKeyverify)
+
+
+
+
+
+// <<<<< ================== HOME ====================== >>>>>
+
+
+
 
 
 router.get('/home',controller.getHome)

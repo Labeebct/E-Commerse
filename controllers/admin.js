@@ -1,4 +1,6 @@
 const bcrypt = require('bcrypt')
+const moment = require('moment')
+
 const adminDatas = require('../models/admin_signup')
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
@@ -22,14 +24,15 @@ exports.getSignup = (req, res) => {
 exports.postSignup = async(req, res) => {
     try {
 
-        const { email , mobilenum , password} = req.body
+        const { username , email , mobilenum , password} = req.body
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password , salt)    /* Hashing with Salting */
-    
-        req.body.password = hashedPassword      /* Replacing req body password with hashed password */
+
+        const originalDate = moment().format('DD-MM-YYYY')
     
         const userNumExist = await adminDatas.findOne({email})
         const userEmailExist = await adminDatas.findOne({mobilenum})
+
 
         if(userNumExist || userEmailExist){    /* Checking whether user exist or not */
 
@@ -42,21 +45,25 @@ exports.postSignup = async(req, res) => {
    
         }
         else{
-        sendOtp(mobilenum)
-        console.log('OTP has send to the' + email);
-        res.status(200).json({email}) /* Passing email for params to get OTP verifypage */
+          return res.status(200).json({email}) /* Passing email for params to get OTP verifypage */
         }
        }
        else{
-        await adminDatas.create(req.body)
-        sendOtp(mobilenum)    /* Caling twilio Function */
-        console.log('OTP has send to the' + email);
+        const newSchema = new adminDatas({
+           username,
+           email,
+           mobilenum,
+           password:hashedPassword,
+           regdate:originalDate
+        })
+    
+        await newSchema.save()
         res.status(200).json({email})
         console.log('Data stored in database')
         }
     
     } catch (error) {
-         console.log(error.message); 
+         console.log('error in admin signup',error.message); 
          res.status(500)
     }
 }
@@ -65,17 +72,53 @@ exports.postSignup = async(req, res) => {
 
 
 
-// <<<< ========== EMAIL VERIFICATION ========== >>>>>
+// <<<< ========== KEY VERIFICATION ========== >>>>>
 
 
 
+exports.getKeyverify = (req, res) => {
 
-
-exports.getEmailverify = (req,res) => {
-    res.render('admin/pages/emailverify.ejs')
+    const email = req.params.email
+    const errMsg = req.flash('wrongkey')
+    res.render('admin/pages/key_verify',{email,errMsg})
 }
 
 
+exports.postKeyverify = async(req,res) => {
+
+    try {
+        console.log('hii');
+        const secretKey = process.env.KEY_VERIFY
+        const {password} = req.body
+        const email = req.params.email
+
+        if(!password){
+            req.flash('wrongkey',"Please Enter the KEY")
+            return res.redirect(`/admin/key_verification/${email}`)
+
+        }else{
+
+
+        if(secretKey==password){
+          const verifyAdmin = await adminDatas.updateOne({email},
+          {$set:{verified:true}}
+          )
+
+          if(verifyAdmin){
+            console.log('Admin verified success');
+            res.redirect('/admin/login')
+          }
+        }
+        else{
+            req.flash('wrongkey',"Incorrect KEY")
+            return res.redirect(`/admin/key_verification/${email}`)
+        }
+      }
+        
+    } catch (error) {
+        console.log('Error in admin keyvrification',error.message);
+    }
+}
 
 
 
@@ -122,7 +165,7 @@ exports.postLogin = async(req,res) => {
 
               }
               else{
-               return res.status(402).json({error:'You need to verify your account first'})         
+                return res.status(200).json({auth:false,email})    
               }
          }
          else{
@@ -143,14 +186,6 @@ exports.postLogin = async(req,res) => {
 
 
 
-
-
-
-
-
-exports.getKeyverify = (req, res) => {
-    res.render('admin/pages/key_verify')
-}
 
 
 exports.getHome = (req, res) => {

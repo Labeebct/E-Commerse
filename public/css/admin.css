@@ -617,6 +617,13 @@
     .bi-input{
         color: rgb(70, 70, 70);
     }
+    .bi-password{padding: .9rem .9rem;
+        position: absolute;
+        right: 0;
+        top: 0;
+        cursor: pointer;
+        
+    }
     .submit_btn{
         padding: .8rem 1.3rem;
         margin-top: 2rem;

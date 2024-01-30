@@ -17,12 +17,12 @@ const SignupDatas = new Schema({
     type: Number,
     required: true
   },
-  registerdate: {
-    type: Date,
-  },
   verified:{
     type:Boolean,
     default:false
+  },
+  regdate:{
+    type:String,
   }
 });
 
