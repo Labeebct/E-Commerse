@@ -71,6 +71,16 @@
         height: 100%;
         width: 50%;
     }
+    .success{
+        color: rgb(4, 183, 4) !important;
+    }
+    .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: .91rem;
+        visibility: hidden;
+    }
     .right{
         display: flex;
         align-items: center;
@@ -193,6 +203,158 @@
 }
 
 
+/* <<<<<< ==================== OTP VERIFICATION ====================>>>> */
+
+.otp_wrapper{
+    .otp_content{
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: calc(100vh - 4.5rem);
+    }
+    .login_frame{
+        display: flex;
+        width: 50rem;
+        height: 32rem;
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.284);
+        background-color: white;
+    }
+    .left{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        width: 50%;
+        background-color: rgba(128, 128, 128, 0.072) !important;
+
+    }
+    .right{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Poppins',sans-serif;
+        font-size: 2rem;
+        border-left: 1px solid rgba(63, 63, 63, 0.195);
+        font-weight: 700;
+        letter-spacing: .4rem;
+        color: rgb(124, 123, 123);
+        height: 100%;
+        width: 50%;
+    }
+    .otp_input-div{
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+    }
+    .num_show{
+        width: 80%;
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        font-size: .9rem;
+        margin: 1rem 0;
+        line-height: 1.8rem;
+        color: rgba(56, 56, 56, 0.884);
+        margin-bottom: 1.5em;
+    }
+    input[type='submit']{
+        padding: .8rem 2.3rem;
+        border-radius: .2rem;
+        cursor: pointer;
+        font-family: 'Poppins',sans-serif;
+        margin-top: 2rem;
+        margin-bottom: .3rem;
+        border: none;
+        outline: none;
+        background-color: #040D12;
+        color: white;
+        transition: all .4s;
+    }
+    .err_msg{
+        font-size: .9rem;
+        font-family: 'Poppins',sans-serif;
+        color: #F80E0E;
+    }
+    input[type='submit']:active{
+        transform: scale(.95);
+    }
+    .otp_input{
+        width: 3rem;
+        height: 3rem;
+        border: none;
+        outline: none;
+        /* box-shadow: 1px 1px 5px rgba(70, 70, 70, 0.534);
+        border-radius: .5rem; */
+        text-align: center;
+        font-size: 2rem;
+        color: rgba(0, 0, 0, 0.699);
+        background: transparent;
+        border-bottom: 3px solid #1f0548;
+
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+    .login_text{
+        text-align: center;
+        padding: .5rem 0;
+        font-size: 1.5rem;
+        font-family: 'Poppins', sans-serif;
+        color: rgba(0, 0, 0, 0.66);
+    }
+    .input_frame{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .6rem;
+        height: 100%;
+        width: 85%;
+    }
+    .otp_img{
+        margin-bottom: 2rem;
+        margin-right: 1rem;
+    }
+    .phone_otp_img{
+        height: 8rem;
+        height: 8rem;
+        mix-blend-mode:darken;
+    }
+    .accnt_exist{
+        font-family: 'Poppins',sans-serif;
+        margin-top: .5rem;
+        font-size: .8rem;
+    }
+    .login_tag{
+        text-decoration: none;
+        font-size: .87rem;
+        padding-left: .3rem;
+    }
+    .submit_btn{
+        padding: .8rem 1.3rem;
+        margin-top: .9rem;
+        color: white;
+        font-size: .7em;
+        font-weight: 500;
+        letter-spacing: .09rem;
+        font-family: 'Poppins',sans-serif;
+        border: none;
+        background-color: black;
+        outline: none;
+        transition: transform .4s;
+    }
+    .submit_btn:active{
+        transform: scale(.98);
+    }
+}
+
+
+
+
+
+
 
 /* <<========= LOGIN WRAPPER ======>> */
 
@@ -215,6 +377,14 @@
         height: 32rem;
         box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.284);
         background-color: white;
+    }
+    .err_msg{
+        color: red;
+        font-family: 'Poppins',sans-serif;
+        font-size: .9rem;
+    }
+    .success{
+        color: rgb(1, 147, 1);
     }
     .left{
         display: flex;
@@ -303,6 +473,7 @@
         background-color: black;
         outline: none;
         transition: transform .4s;
+        cursor: pointer;
     }
     .submit_btn:active{
         transform: scale(.98);
@@ -361,6 +532,7 @@
         }
     }
 }
+
 
 
 /* <<<<<<<<<<<<=======================KEY VERIFY ================================>>>>>>> */

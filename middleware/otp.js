@@ -15,28 +15,39 @@ const sendOtp = (num) => {
 
 }
 
-const verifyOtp = (num,code,res,req) => {
-   const verify = client.verify.v2.services(serviceSid)
-      .verificationChecks
-      .create({to: '+91'+ num , code: code})
-      .then((verification_check) =>{
+const verifyOtp = async(num,code,res,req) => {
+
+  try {
+
+     const verification_check = await client.verify.v2.services(serviceSid)
+        .verificationChecks
+        .create({to: '+91'+ num , code: code})
+
         console.log(verification_check.status)
+
         if(verification_check.status === 'approved'){
-          const verifyUser = signupModel.updateOne({mobilenum:num},
+          
+          const verifyUser = await signupModel.updateOne({mobilenum:num},
             {$set:{verified:true}}
             )
 
+          console.log(verifyUser);
           if(verifyUser){
           res.redirect('/otp_success')
           }
+
         }
-        else{
+        else{ 
             const number = num
             req.flash('otpfailed','Incorrect OTP')
             req.flash('number',number)
             res.redirect(`/otp_verification/${number}`)
         }
-      });
+    
+  } catch (error) {
+    console.log(error.message);
+  }
+   
 }
  
 module.exports = {sendOtp , verifyOtp}

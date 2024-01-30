@@ -2,6 +2,7 @@ const signupForm = document.getElementById('signup_form')
 const submitBtn = document.querySelector('.submit_btn')
 const errorMsg = document.querySelector('.error_msg')
 
+console.log('dfih');
 
 // CLientside regec=xt testing
 
@@ -123,7 +124,7 @@ submitBtn.addEventListener('click', async (e) => {
     else {
         const form = new FormData(signupForm);
     try {
-        const response = await fetch('/signup', {
+        const response = await fetch('/admin/signup', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -143,8 +144,8 @@ submitBtn.addEventListener('click', async (e) => {
         
         else{
             setTimeout(() => {
-                window.location.href = `/otp_verification/${result.mobilenum}`
-            }, 500);
+                window.location.href = `/admin/email_verification${result.email}`
+            }, 1000);
     }
     } catch (error) {
             console.log(error.message);

@@ -5,6 +5,7 @@ const errMsg = document.querySelector('.err_msg')
 
 
 
+
 // Password eye close and Open
 
 
@@ -40,7 +41,7 @@ submitBtn.addEventListener('click',async(e)=>{
 
         const form = new FormData(login_form)
 
-        const response = await fetch('/login',{
+        const response = await fetch('/admin/login',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -51,25 +52,22 @@ submitBtn.addEventListener('click',async(e)=>{
         const result = await response.json()
         
         if(!response.ok){
+
             errMsg.innerHTML = result.error
             setTimeout(() => {
                 errMsg.innerHTML = ''
             }, 2000);
+
+    
         }
         else{
-
 
         if(result.auth){
             errMsg.innerHTML = 'Login Success'
             errMsg.classList.add('success')
             setTimeout(() => {
-                window.location.href = '/home'
+                window.location.href = '/admin/home'
             }, 500);
-        } else{
-            errMsg.innerHTML = 'You need Verify account to Login'
-            setTimeout(() => {
-                window.location.href = `/otp_verification/${result.mobilenum}`
-            }, 1000);
         }
         }
 
@@ -78,4 +76,4 @@ submitBtn.addEventListener('click',async(e)=>{
     }
 
 
-})  
+})

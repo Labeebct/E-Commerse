@@ -1,7 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/user')
-const accountController = require('../controllers/account')
+const controller = require('../controllers/user')             
+const accountController = require('../controllers/account') 
+
+
+
+
+// <<<<<<< ============ AUTHENTICATION ========== >>>>>>>
 
 
 
@@ -12,8 +17,8 @@ router.post('/signup',controller.postSignup)
 router.get('/otp_verification/:num',controller.getOtpverification)
 router.post('/otp_verification/:num',controller.postOtpverification)
 
-router.get('/resend_otp/:num',controller.getResendotp)
 
+router.get('/resend_otp/:num',controller.getResendotp)
 router.get('/otp_success',controller.getOtpsuccess)
 
 
@@ -21,15 +26,26 @@ router.get('/login',controller.getLogin)
 router.post('/login',controller.postLogin)
 
 
-router.get('/number_registration')
-router.post('/number_registration')
-
-router.get('/otp_registration')
-router.post('/otp_registration')
+router.get('/forget_password',controller.getForgetpass)
+router.post('/forget_password',controller.postForgetpass)
 
 
-router.get('/forget_password')
-router.post('/forget_password')
+router.get('/email_otp',controller.getEmailOtp)
+router.post('/email_otp',controller.postEmailOtp)
+
+
+router.get('/change_password',controller.getChangepass)
+router.post('/change_password',controller.postChangepass)
+
+
+
+
+
+
+// <<<<<<<============ HOME ===============>>>>>>
+
+
+
 
 
 
