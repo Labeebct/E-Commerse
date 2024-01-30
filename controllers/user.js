@@ -4,7 +4,7 @@ const signupModel = require('../models/signup')
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 
 const {sendOtp , verifyOtp} = require('../middleware/otp')
-const emailOtp = require('../middleware/emailotp')
+const {emailOtp , verify} = require('../middleware/emailotp')
 
 
 
@@ -175,7 +175,7 @@ exports.postOtpverification = (req,res) => {
 exports.getResendotp = async (req,res) => {
   try {
      const mobilenum = req.params.num
-     sendOtp(mobilenum) /* Appliying OTP sending Function */
+     sendOtp(mobilenum)
           
      } catch (error) {
           console.log(error.message);
@@ -209,8 +209,6 @@ exports.getForgetpass = (req, res) => {
 exports.postForgetpass = async (req, res) => {
      
      try {
-          const email = 'rameest41750@gmail.com'
-   
           if(req.body.email===''){
             req.flash('errMsg',"Please Enter the Email")
             return res.redirect('/forget_password')
@@ -221,16 +219,16 @@ exports.postForgetpass = async (req, res) => {
           }
           
           const userExist = await signupModel.findOne({email:req.body.email})
-          console.log(userExist);
 
           if(!userExist){
                console.log('hi');
                req.flash('errMsg',"Accound with email not Exist")
                return res.redirect('/forget_password')
           }else{
-            console.log(email);
-            emailOtp(email)
+
+            emailOtp(req.body.email)
             return res.redirect('/email_otp') 
+
           }
           
      } catch (error) {
@@ -246,13 +244,36 @@ exports.postForgetpass = async (req, res) => {
 
 
 exports.getEmailOtp = (req, res) => {
-     res.render('user/pages/emailotp',{state:''})
+     const errMsg =  req.flash('incorrect')
+     res.render('user/pages/emailotp',{state:'',errMsg})
 }
 
 
 exports.postEmailOtp = (req, res) => {
-
+     const {D1,D2,D3,D4} = req.body  
+     const code = D1+D2+D3+D4
+     verify(code,res,req)
 }
+
+
+
+// <<<<<< =========== RESEND EMAIL OTP ============ >>>>>>
+
+
+exports.getResendemailotp = async(req,res) =>{
+
+     try {
+          const findUser = await signupModel.findOne({mobilenum:req.session.mobilenum})
+          emailOtp(findUser.email)
+          req.flash('incorrect','Incorrect OTP')
+          res.redirect('/email_otp')
+
+     } catch (error) {
+          
+     }
+}
+
+
 
 
 
@@ -262,11 +283,33 @@ exports.postEmailOtp = (req, res) => {
 
 
 exports.getChangepass = (req, res) => {
-     res.render('user/pages/changepassword',{state:''})
+     const errMsg =  req.flash('errMsg')
+     res.render('user/pages/changepassword',{state:'',errMsg})
 }
 
+  
+exports.postChangepass = async(req, res) => {
+     try {
 
-exports.postChangepass = (req, res) => {
+          const {password , confirmpassword } = req.body
+
+          const salt = await bcrypt.genSalt(10)
+          const hashedPassword = await bcrypt.hash(password,salt)
+          req.body.password = hashedPassword
+          
+
+          if(!password || !confirmpassword){
+                req.flash('errMsg','Please Fill the Fields')
+               res.redirect('/change_password')
+          }
+
+
+          const updatePass = await signupModel.updateOne({mobilenum:req.session.mobilenum})
+
+
+     } catch (error) {
+          console.log('Error in getchange pass',error.message);
+     }
      
 }
 

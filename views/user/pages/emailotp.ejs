@@ -2,7 +2,7 @@
    <div class="wrapper emailotp_wrapper">
       <%- include('../components/signup_topnav.ejs') %>
       <div class="otp_content">
-      <form action="/otp_verification" spellcheck="false" method="post">
+      <form action="/email_otp" spellcheck="false" method="post">
       <div class="login_frame">
          <div class="left">
             <img class="phone_otp_img" src="/images/preview.jpg" alt="">
@@ -16,7 +16,7 @@
                 <input type="number" class="otp_input"  name="D4" maxlength="1">
               </div>
               <input type="submit">
-               <p class="err_msg"></p>
+               <p class="err_msg"><%= errMsg %></p>
                <p class="accnt_exist"><a href="/resend_email_otp">RESEND OTP</a></p>
             </div>
          </div>

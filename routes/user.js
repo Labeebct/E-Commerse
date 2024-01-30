@@ -38,6 +38,7 @@ router.get('/change_password',controller.getChangepass)
 router.post('/change_password',controller.postChangepass)
 
 
+router.get('/resend_email_otp',controller.getResendemailotp)
 
 
 
