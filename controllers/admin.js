@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt')
 const moment = require('moment')
 
+
 const adminDatas = require('../models/admin_signup')
+const productModel = require('../models/products')
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 
@@ -63,13 +65,10 @@ exports.postSignup = async(req, res) => {
         }
     
     } catch (error) {
-         console.log('error in admin signup',error.message); 
+         console.log('Error in admin signup',error.message); 
          res.status(500)
     }
 }
-
-
-
 
 
 
@@ -182,13 +181,19 @@ exports.postLogin = async(req,res) => {
          }
      
     } catch (error) {
-         console.log(error.message);
+         console.log('Error in post Login',error.message);
     }
 }
 
 
 
+
+
+
 // <<<<< ============== EMAIL VERIFY =============== >>>>
+
+
+
 
 
 
@@ -252,8 +257,6 @@ exports.postForgetpassword = async(req,res) => {
 
         }
 
-
-
         if(secretKey==password){
 
             req.session.admin = true
@@ -290,10 +293,92 @@ exports.getUsers = (req, res) => {
 }
 
 
+
+// <<<<<<< ================ PRODUCTS ================ >>>>>>
+
+
+
+
 exports.getProducts = (req, res) => {
     const state = 'products'
     res.render('admin/pages/products', { state })
 }
+
+
+exports.postAddproduct = async(req,res) => {
+  try {
+    
+    if(!req.files || req.files.length > 5){
+        return res.redirect('/admin/product/add_product')
+    }
+    else{
+
+
+    }
+    const imagePath = req.files.map((file) => '/products-img/' + file.filename)
+
+    const {
+        productname,
+        oldprice,
+        newprice,
+        category,
+        size,
+        stock,
+        color,
+        subcategory,
+        deliverywithin,
+        description,
+        returns,
+    } = req.body
+
+    const productExist = await productModel.findOne({productname})
+
+    const newSchema = productModel({
+        productname,
+        oldprice,
+        newprice,
+        category,
+        size,
+        color,
+        stock,
+        productimg:imagePath,
+        subcategory,
+        deliverywithin,
+        description,
+        returns,
+    })
+
+   if(!productExist){
+       const saveData = await newSchema.save()
+       if(saveData){
+           console.log('Succesfully product added');
+           return res.status(200).json({success:true})
+       }
+       else{
+           console.log('Product added Failed');
+           return res.status(206).json({success:false,ERR:'Product Added Failed'})
+    
+       }
+    }
+   else{
+          console.log( 'Product added Failed');
+          return res.status(206).json({success:false,ERR:'Product Already Exist'})
+   }
+      
+ 
+    
+  } catch (error) {
+    console.log('Error in post add product',error.message);
+  }
+}
+
+
+
+
+
+
+
+
 
 
 exports.getCategory = (req, res) => {

@@ -74,7 +74,7 @@ try {
      
 }
 } catch (error) {
-     console.log(error.message); 
+     console.log('Error in post signup',error.message); 
      res.status(500)
 }
 }
@@ -141,7 +141,7 @@ exports.postLogin = async(req,res) => {
      }
      
 } catch (error) {
-     console.log(error.message);
+     console.log('Error in post login',error.message);
 }
 }
 
@@ -157,9 +157,9 @@ exports.postLogin = async(req,res) => {
 exports.getOtpverification = async(req,res) => { 
      try {      
           const number = req.params.num
-     
+
           // Setting error messages while otp incorrect
-     
+
           const otpFailed = req.flash('otpfailed') || ''
           const otpNumber = req.flash('number') || ''
           res.render('user/pages/otp',{state:'',number,otpFailed,otpNumber}) 
@@ -190,7 +190,7 @@ exports.getResendotp = async (req,res) => {
      sendOtp(mobilenum)
           
      } catch (error) {
-          console.log(error.message);
+          console.log('Error in get resend otp',error.message);
      }
 }
 
@@ -291,16 +291,16 @@ exports.getResendemailotp = async(req,res) =>{
           res.redirect('/email_otp')
 
      } catch (error) {
-          
+          console.log('Error in get email resend otp',error.message);
      }
 }
 
 
 
 
-
-
 // <<<<<============== CHANGE PASSWORD ============>>>>
+
+
 
 
 
@@ -312,37 +312,38 @@ exports.getChangepass = (req, res) => {
   
 exports.postChangepass = async(req, res) => {
      try {
+          
 
-          const {password , confirmpassword } = req.body
+     const {password , confirmpassword } = req.body
 
-          const salt = await bcrypt.genSalt(10)
-          const hashedPassword = await bcrypt.hash(password,salt)
+     const salt = await bcrypt.genSalt(10)
+     const hashedPassword = await bcrypt.hash(password,salt)
 
 
-          if(!password || !confirmpassword){
-               req.flash('errMsg','Please Fill the Fields')
-               return res.status(405).redirect('/change_password')
-          }
-          else if(!passwordRegex.test(password)){
-               req.flash('errMsg','Password need one Uppercase and one Number')
-               return res.status(405).redirect('/change_password')
-          }
-          else if(password != confirmpassword){
-               req.flash('errMsg','Password Mismatch')
-               return res.status(405).redirect('/change_password')
+     if(!password || !confirmpassword){
+          req.flash('errMsg','Please Fill the Fields')
+          return res.status(405).redirect('/change_password')
+     }
+     else if(!passwordRegex.test(password)){
+          req.flash('errMsg','Password need one Uppercase and one Number')
+          return res.status(405).redirect('/change_password')
+     }
+     else if(password != confirmpassword){
+          req.flash('errMsg','Password Mismatch')
+          return res.status(405).redirect('/change_password')
+     }else{
+
+          const updatePass = await signupModel.updateOne({mobilenum:req.session.mobilenum},
+          {$set:{password:hashedPassword}})
+
+          if(updatePass){
+               console.log('Password changed success');
+               res.status(200).redirect('/login')
           }else{
-
-               const updatePass = await signupModel.updateOne({mobilenum:req.session.mobilenum},
-               {$set:{password:hashedPassword}})
-
-               if(updatePass){
-                 console.log('Password changed success');
-                 res.status(200).redirect('/login')
-               }else{
-                 res.status(500)
-               }
-
+               res.status(500)
           }
+
+     }
 
 
 

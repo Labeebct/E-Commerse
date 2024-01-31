@@ -1,5 +1,8 @@
 const session = require('express-session')
 
+
+// USER AUTH SESSION
+
 const sessionAuth = (req, res, next) => {
 
     if (req.session.email) {

@@ -5,11 +5,11 @@
         <%- include('../components/left_bar.ejs') %>
         <div class="right_content">
             <div class="form_frame">
-                <form action="/product/add_product" spellcheck="false" method="post">
+                <form spellcheck="false" class="product_form" enctype="multipart/form-data">
                 <div class="top">
                     <div class="top_left">
                         <label for="product_name">Product Name</label>
-                        <input type="text" name="productname" >
+                        <input type="text" name="productname">
 
                         <div style="display: flex; gap: 1rem; width: 100%; padding: .5rem 0;">
                             <span style="display: flex; flex-direction: column; gap: .2rem;">
@@ -23,8 +23,8 @@
                         </div>
 
                         <label for="product_name">Category</label>
-                        <select style="font-family: 'Poppins',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;" name="ram" id="size">
-                            <option value="">Category</option>
+                        <select style="font-family: 'Poppins',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;" name="category" id="size">
+                            <option value="" style="font-size: .8rem;">Category</option>
                             <option value="mens">Mens</option>
                             <option value="womens">Womens</option>
                             <option value="kids">Kids</option>
@@ -33,8 +33,8 @@
                         </select>
                     </div>
                     <div class="top_right">
-                        <img src="" class="product_img" alt="">
-                        <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="productimg" class="input_file"></div>
+                        <img src="" id="imagePreview" class="product_img" alt="">
+                        <div class="file_div"><span class="choose_file">Choose File</span><input onchange="previewImage(this)" type="file" name="productimg" class="input_file"  multiple></div>
                     </div>
                 </div>
                 <div class="bottom" style="padding: 0 1rem;">
@@ -70,7 +70,7 @@
 
                     <span style="display: flex; flex-direction: column; gap: .2rem;">
                     <label for="size">Sub Category</label>
-                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 8rem; padding: .4rem;" name="storage" id="size">
+                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 8rem; padding: .4rem;" name="subcategory" id="size">
                             <option value="">Sub</option>
                             <option value="mensshirt">Mens shirt</option>
                             <option value="menspants">Mens Pants</option>
@@ -84,27 +84,32 @@
                             <option value="laptops">Laptops</option>
                             <option value="bedsheet">Bedsheet</option>
                             <option value="kidsshirt">Kids Shirt</option>
-                            <option value="kidsshoes">kids Shoes</option>
                             <option value="kidstrouser">kids Trouser</option>
                         </select>
                     </span>
 
                     <span style="display: flex; flex-direction: column; gap: .2rem;">
                         <label for="size">Return</label>
-                        <input type="checkbox" name="return">
+                        <input type="checkbox" value='true' name="returns">
+                    </span>
+
+                    <span style="display: flex; flex-direction: column; width: 26%; gap: .2rem;">
+                        <label for="size">Stock</label>
+                        <input type="number" value='true' name="stock">
                     </span>
 
                     </div>
 
                     <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
                         <label for="size">Delivery Within</label>
-                        <input type="number" name="deliverydate" style="width: 94%;">
+                        <input type="number" name="deliverywithin" style="width: 94%;">
                     </span>
                     
                     <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
                         <label for="size">Product Description</label>
                         <textarea name="description" id="text_area"></textarea>
                     </span>
+                    <p class="error_msg"></p>
                     <div style="width: 100%; display: flex; justify-content: center; padding: .9rem;">
                         <button type="submit" class="add_btn">Add Product</button>
                     </div>
@@ -114,4 +119,7 @@
         </div>
     </div>
 </div>
+
+<script src="/javascript/add_products.js"></script>
+
 <%- include('../../common/end.ejs') %>

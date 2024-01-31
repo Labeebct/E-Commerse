@@ -3,6 +3,10 @@ const router = express.Router()
 const controller = require('../controllers/admin')
 
 
+const upload = require('../middleware/multer')
+
+
+
 
 
 // <<<<< ============== AUTHENTICATION =============== >>>>>
@@ -10,20 +14,34 @@ const controller = require('../controllers/admin')
 
 
 
+
+// SIGNUP -----------------------------
+
 router.get('/signup',controller.getSignup)
 router.post('/signup',controller.postSignup)   
+
+
+// LOGIN -------------------------------
 
 router.get('/login',controller.getLogin)
 router.post('/login',controller.postLogin)
 
 
+// KEY VERIFICATION -----------------------------------
 
 router.get('/key_verification/:email',controller.getKeyverify)
 router.post('/key_verification/:email',controller.postKeyverify)
 
 
+
+// EMAIL VERIFICATION --------------------------------
+
 router.get('/email_verify',controller.getEmailverify)
 router.post('/email_verify',controller.postEmailverify)
+
+
+
+// FORGET PASSWORD -----------------------------------
 
 router.get('/forget_password',controller.getForgetpassword)
 router.post('/forget_password',controller.postForgetpassword)
@@ -32,13 +50,31 @@ router.post('/forget_password',controller.postForgetpassword)
 
 
 
+
+
 // <<<<< ================== HOME ====================== >>>>>
+ 
 
 
 
 
+
+
+
+// ADMIN HOME ----------------------------
 
 router.get('/home',controller.getHome)
+
+
+
+//  ADD PRODUCT --------------------------
+
+router.get('/products',controller.getProducts)
+router.get('/product/add_product',controller.getAddproducts)
+router.post('/product/add_product', upload.array('productimg', 5), controller.postAddproduct);
+
+
+
 
 router.get('/orders_list',controller.getOrders)
 
@@ -48,14 +84,10 @@ router.delete('/custumer/remove/:id')
 
 router.get('/customer/order_list/:id')
 
-router.get('/products',controller.getProducts)
-
-router.get('/product/add_product',controller.getAddproducts)
-router.post('/product/addproduct')
 
 router.delete('/product/remove_product/:id')
 
-router.get('/product/editproduct')
+router.get('/product/editproduct') 
 router.put('/product/editproduct')
 
 

@@ -1079,6 +1079,7 @@
         justify-content: center;
         align-items: center;
         overflow: hidden;
+        padding: 0 1rem;
     }
     .product_frame{
         width: 70rem;
@@ -1145,6 +1146,7 @@
    
     Table{
         width: 100%;
+        table-layout: fixed;
     }
     table, th, td {
         border: 1px solid rgba(88, 88, 88, 0.77);
@@ -1598,6 +1600,16 @@
         width: 65%;
         height: 100%;
     }
+    .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: .91rem;
+        margin-top: 1rem;
+    }
+    .success{
+        color: rgb(0, 179, 0);
+    }
     .top_right{
         display: flex;
         flex-direction: column;
@@ -1608,9 +1620,8 @@
     }
     .product_img{
         margin-top: 2.3rem;
-        width: 9rem;
+        width: 8rem;
         height: 9rem;
-        border: 1px solid rgba(0, 0, 0, 0.291);
         background-color: white;
     }
     .file_div{
@@ -1665,7 +1676,7 @@
     }
     #text_area{
         width: 94%;
-        height: 9rem;
+        height: 7rem;
         resize: none;
         outline: none;
         padding: 1rem;
@@ -2067,4 +2078,46 @@
         align-items: center;
     }
     
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* <<<<<<< ==================================== >>>>>>
+<<<<<<< ==================================== >>>>>>
+------------------ MEDIA QUERY --------------------
+<<<<<<< ==================================== >>>>>>
+<<<<<<< ==================================== >>>>>> */
+
+
+
+
+@media screen and (max-width:1000px){
+    .frame{
+        height: 100%;
+        width: 0rem ;
+    }
+    .right_content{
+        width: 100%;
+        height: 100%;
+    }
 }

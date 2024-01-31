@@ -5,7 +5,10 @@ const serviceSid = process.env.TWILIO_SERVICE_SID
 const client = require('twilio')(accountSID, authToken)
 const signupModel = require('../models/signup')
 
-  
+
+// OTP SENDING
+
+
 const sendOtp = (num) => {
  
     client.verify.v2.services(serviceSid)
@@ -14,6 +17,9 @@ const sendOtp = (num) => {
     .then(verification => console.log(verification.status))
 
 }
+
+
+// OTP VERIFYING
 
 
 const verifyOtp = async(num,code,res,req) => {
