@@ -5,7 +5,7 @@
         <%- include('../components/left_bar.ejs') %>
         <div class="right_content">
             <div class="form_frame">
-                <form action="" spellcheck="false">
+                <form action="/product/add_product" spellcheck="false" method="post">
                 <div class="top">
                     <div class="top_left">
                         <label for="product_name">Product Name</label>
@@ -14,16 +14,16 @@
                         <div style="display: flex; gap: 1rem; width: 100%; padding: .5rem 0;">
                             <span style="display: flex; flex-direction: column; gap: .2rem;">
                                 <label for="product_name">Old Price</label>
-                                <input type="text" name="productname" style="width: 100%;" >
+                                <input type="number" name="oldprice" style="width: 100%;" >
                             </span>
                             <span style="display: flex; flex-direction: column; gap: .2rem;">
                                 <label for="product_name">Discount Price</label>
-                                <input type="text" name="productname" style="width: 110%; padding-left: 0; " >
+                                <input type="number" name="newprice" style="padding-left: 1rem; width: 100%; " >
                             </span>
                         </div>
 
                         <label for="product_name">Category</label>
-                        <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;" name="ram" id="size">
+                        <select style="font-family: 'Poppins',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;" name="ram" id="size">
                             <option value="">Category</option>
                             <option value="mens">Mens</option>
                             <option value="womens">Womens</option>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="top_right">
                         <img src="" class="product_img" alt="">
-                        <div class="file_div"><span class="choose_file">Choose File</span><input type="file" class="input_file"></div>
+                        <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="productimg" class="input_file"></div>
                     </div>
                 </div>
                 <div class="bottom" style="padding: 0 1rem;">
@@ -55,7 +55,7 @@
                     
                     <span style="display: flex; flex-direction: column; gap: .2rem;">
                     <label for="size">Color</label>
-                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 6rem; padding: .4rem;" name="color" id="size">
+                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="color" id="size">
                             <option value="">Colors</option>
                             <option value="black">black</option>
                             <option value="white">white</option>
@@ -68,24 +68,9 @@
                     </span>
 
 
-                    
-                    
-                    <span style="display: flex; flex-direction: column; gap: .2rem;">
-                        <label for="size">Material</label>
-                        <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="color" id="size">
-                            <option value="">Materials</option>
-                            <option value="cotton">cotton</option>
-                            <option value="polyester">polyester</option>
-                            <option value="wool">wool</option>
-                            <option value="silk">silk</option>
-                            <option value="nylon">nylon</option>
-                            <option value="rayon">rayon</option>
-                        </select>
-                    </span>
-
                     <span style="display: flex; flex-direction: column; gap: .2rem;">
                     <label for="size">Sub Category</label>
-                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 7rem; padding: .4rem;" name="storage" id="size">
+                    <select style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 8rem; padding: .4rem;" name="storage" id="size">
                             <option value="">Sub</option>
                             <option value="mensshirt">Mens shirt</option>
                             <option value="menspants">Mens Pants</option>
@@ -107,13 +92,13 @@
                     <span style="display: flex; flex-direction: column; gap: .2rem;">
                         <label for="size">Return</label>
                         <input type="checkbox" name="return">
+                    </span>
 
-                        </span>
                     </div>
 
                     <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
-                        <label for="size">Delivery Date</label>
-                        <input type="date" name="deliverydate" style="width: 94%;">
+                        <label for="size">Delivery Within</label>
+                        <input type="number" name="deliverydate" style="width: 94%;">
                     </span>
                     
                     <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">

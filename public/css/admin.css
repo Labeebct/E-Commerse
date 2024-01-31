@@ -398,21 +398,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2.2rem;
-    height: 2.2rem;
+    width: 2.1rem;
+    height: 2.1rem;
+    margin: 0 .15rem;
     text-decoration: none;
+    border-radius: .2rem;
     color: black;
-    border: 1px solid rgba(0, 0, 0, 0.739);
+    border: 1px solid rgba(0, 0, 0, 0.391);
     font-family: 'Poppins' , sans-serif;
 }
 .link_pagination button{
-    padding: .42rem .7rem;
+    padding: .41rem .68em;
     letter-spacing: .05rem;
     border: none;
-    background-color: black;
+    background-color:#1B2430;
     color: white;
     transition: all .5s;
     font-family: 'Poppins',sans-serif;
+    border-radius: .2rem;
 }
 .link_pagination button:active{
    transform: scale(.9);
@@ -502,8 +505,6 @@
         height: 3rem;
         border: none;
         outline: none;
-        /* box-shadow: 1px 1px 5px rgba(70, 70, 70, 0.534);
-        border-radius: .5rem; */
         text-align: center;
         font-size: 2rem;
         color: rgba(0, 0, 0, 0.699);
@@ -1141,43 +1142,7 @@
       .pro_center::-webkit-scrollbar-thumb {
         background-color: transparent;
       }
-    .pro_bottom{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
-    .link_pagination{
-        display: flex;
-        gap: 1rem;
-        align-items: center;    }
-    .links{
-        display: flex;
-    }
-    .link_pagination a{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 2.2rem;
-        height: 2.2rem;
-        text-decoration: none;
-        color: black;
-        border: 1px solid rgba(0, 0, 0, 0.739);
-        font-family: 'Poppins' , sans-serif;
-    }
-    .link_pagination button{
-        padding: .42rem .7rem;
-        letter-spacing: .05rem;
-        border: none;
-        background-color: black;
-        color: white;
-        transition: all .5s;
-        font-family: 'Poppins',sans-serif;
-    }
-    .link_pagination button:active{
-       transform: scale(.9);
-    }
+   
     Table{
         width: 100%;
     }
@@ -1288,43 +1253,7 @@
       .pro_center::-webkit-scrollbar-thumb {
         background-color: transparent;
       }
-    .pro_bottom{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
-    .link_pagination{
-        display: flex;
-        gap: 1rem;
-        align-items: center;    }
-    .links{
-        display: flex;
-    }
-    .link_pagination a{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 2.2rem;
-        height: 2.2rem;
-        text-decoration: none;
-        color: black;
-        border: 1px solid rgba(0, 0, 0, 0.739);
-        font-family: 'Poppins' , sans-serif;
-    }
-    .link_pagination button{
-        padding: .42rem .7rem;
-        letter-spacing: .05rem;
-        border: none;
-        background-color: black;
-        color: white;
-        transition: all .5s;
-        font-family: 'Poppins',sans-serif;
-    }
-    .link_pagination button:active{
-       transform: scale(.9);
-    }
+   
     Table{
         width: 100%;
     }
@@ -1435,43 +1364,7 @@
     .pro_center::-webkit-scrollbar-thumb {
     background-color: transparent;
     }
-    .pro_bottom{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
-    .link_pagination{
-        display: flex;
-        gap: 1rem;
-        align-items: center;    }
-    .links{
-        display: flex;
-    }
-    .link_pagination a{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 2.2rem;
-        height: 2.2rem;
-        text-decoration: none;
-        color: black;
-        border: 1px solid rgba(0, 0, 0, 0.739);
-        font-family: 'Poppins' , sans-serif;
-    }
-    .link_pagination button{
-        padding: .42rem .7rem;
-        letter-spacing: .05rem;
-        border: none;
-        background-color: black;
-        color: white;
-        transition: all .5s;
-        font-family: 'Poppins',sans-serif;
-    }
-    .link_pagination button:active{
-       transform: scale(.9);
-    }
+
     Table{
         width: 100%;
     }
@@ -1582,43 +1475,7 @@
     .pro_center::-webkit-scrollbar-thumb {
     background-color: transparent;
     }
-    .pro_bottom{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
-    .link_pagination{
-        display: flex;
-        gap: 1rem;
-        align-items: center;    }
-    .links{
-        display: flex;
-    }
-    .link_pagination a{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 2.2rem;
-        height: 2.2rem;
-        text-decoration: none;
-        color: black;
-        border: 1px solid rgba(0, 0, 0, 0.739);
-        font-family: 'Poppins' , sans-serif;
-    }
-    .link_pagination button{
-        padding: .42rem .7rem;
-        letter-spacing: .05rem;
-        border: none;
-        background-color: black;
-        color: white;
-        transition: all .5s;
-        font-family: 'Poppins',sans-serif;
-    }
-    .link_pagination button:active{
-       transform: scale(.9);
-    }
+   
     Table{
         width: 100%;
     }
@@ -1727,9 +1584,11 @@
         height: 38rem;
         box-sizing: content-box;
         padding: 1rem;
-        border: 1px solid rgba(0, 0, 0, 0.316);
-        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.185);
-    }
+        border-radius: .2rem;
+        box-shadow: 0px 0px 9px 6px rgba(0, 0, 0, 0.202); 
+        background-color: #2e3444;
+        color: white !important;
+     }
     .top{
         display: flex;
         width: 100%;
@@ -1752,23 +1611,26 @@
         width: 9rem;
         height: 9rem;
         border: 1px solid rgba(0, 0, 0, 0.291);
+        background-color: white;
     }
     .file_div{
         display: flex;
         position: relative;
+        cursor: pointer;
     }
     .choose_file{
         padding: .5rem .9rem;
         border-radius: .2rem;
         color: white;
         font-size: .9rem;
-        background-color: black;
-    }
+        cursor: pointer;
+        background-color:#04173e;    }
     .input_file{
         color: transparent;
         position: absolute;
         opacity: 0;
         height: 2rem;
+        cursor: pointer;
     }
     .top_left{
         display: flex;
@@ -1807,16 +1669,19 @@
         resize: none;
         outline: none;
         padding: 1rem;
+        font-family: 'Poppins',sans-serif;
     }
     .add_btn{
-        padding: .6rem 1rem;
+        padding: .7rem 1rem;
         font-family: 'Poppins', sans-serif;
         background: none;
         outline: none;
         border: none;
-        background-color: black;
         color: white;
         transition: transform .5s;
+        border-radius: .2rem;
+        cursor: pointer;
+        background-color:#04173e;
     }
     .add_btn:active{
         transform: scale(.95);
@@ -2145,44 +2010,6 @@
     
     .pro_center::-webkit-scrollbar-thumb {
     background-color: transparent;
-    }
-    .pro_bottom{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        height: 10%;
-    }
-    .link_pagination{
-        display: flex;
-        gap: 1rem;
-        align-items: center; 
-    }
-    .links{
-        display: flex;
-    }
-    .link_pagination a{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 2.2rem;
-        height: 2.2rem;
-        text-decoration: none;
-        color: black;
-        border: 1px solid rgba(0, 0, 0, 0.739);
-        font-family: 'Poppins' , sans-serif;
-    }
-    .link_pagination button{
-        padding: .42rem .7rem;
-        letter-spacing: .05rem;
-        border: none;
-        background-color: black;
-        color: white;
-        transition: all .5s;
-        font-family: 'Poppins',sans-serif;
-    }
-    .link_pagination button:active{
-       transform: scale(.9);
     }
     Table{
         width: 100%;
