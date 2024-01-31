@@ -72,7 +72,13 @@ exports.postSignup = async(req, res) => {
 
 
 
+
+
+
+
 // <<<< ========== KEY VERIFICATION ========== >>>>>
+
+
 
 
 
@@ -87,7 +93,6 @@ exports.getKeyverify = (req, res) => {
 exports.postKeyverify = async(req,res) => {
 
     try {
-        console.log('hii');
         const secretKey = process.env.KEY_VERIFY
         const {password} = req.body
         const email = req.params.email
@@ -110,7 +115,7 @@ exports.postKeyverify = async(req,res) => {
           }
         }
         else{
-            req.flash('wrongkey',"Incorrect KEY")
+            req.flash('wrongkey',"Incorrect Verification KEY")
             return res.redirect(`/admin/key_verification/${email}`)
         }
       }
@@ -122,7 +127,9 @@ exports.postKeyverify = async(req,res) => {
 
 
 
+
 // <<<< ========== LOGIN ========== >>>>>
+
 
 
 
@@ -160,8 +167,8 @@ exports.postLogin = async(req,res) => {
 
               if(userExist.verified){
 
-              req.session.email = email   /* Setting email as session */
-              return res.status(200).json({auth:true})
+                req.session.admin = true
+                return res.status(200).json({auth:true})
 
               }
               else{
@@ -181,8 +188,91 @@ exports.postLogin = async(req,res) => {
 
 
 
+// <<<<< ============== EMAIL VERIFY =============== >>>>
 
 
+
+exports.getEmailverify = (req,res) => {
+    const errMsg = req.flash('errMsg') 
+    res.render('admin/pages/emailverify',{errMsg})
+}
+
+
+exports.postEmailverify = async(req,res) => {
+   
+    try {
+        if(req.body.email===''){
+          req.flash('errMsg',"Please Enter the Email")
+          return res.redirect('/admin/email_verify')
+        }
+        else if(!emailRegex.test(req.body.email)){
+         req.flash('errMsg',"Invalid Email Format")
+          return res.redirect('/admin/email_verify')
+        }
+        
+        const userExist = await adminDatas.findOne({email:req.body.email})
+
+        if(!userExist){
+             req.flash('errMsg',"Accound with email not Exist")
+             return res.redirect('/admin/email_verify')
+            }else{
+          return res.redirect('/admin/forget_password') 
+        }
+        
+   } catch (error) {
+        console.log('Error in post forget password',error.message);
+   }
+}
+
+
+
+
+
+
+// <<<<< ============ FORGET PASSWORD ============= >>>>>
+
+
+
+
+exports.getForgetpassword = (req, res) => {
+    const errMsg = req.flash('wrongkey')
+    res.render('admin/pages/forgetpass',{errMsg})
+}
+
+
+
+exports.postForgetpassword = async(req,res) => {
+    try {
+        const secretKey = process.env.KEY_VERIFY
+        const {password} = req.body
+
+        if(!password){
+            req.flash('wrongkey',"Please Enter the Verification KEY")
+            return res.redirect(`/admin/forget_password`)
+
+        }
+
+
+
+        if(secretKey==password){
+
+            req.session.admin = true
+            res.redirect('/admin/home')
+
+       }else{
+        req.flash('wrongkey',"Incorrect Verification KEY")
+        return res.redirect(`/admin/forget_password`)
+     }     
+} catch (error) {
+    console.log('Error in admin keyvrification',error.message);
+}
+}
+
+
+
+
+
+// <<<<< ============== HOME ================= >>>>>
 
 
 

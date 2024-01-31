@@ -1,0 +1,52 @@
+<%- include('../components/head.ejs') %>
+   <div class="wrapper keyverify_wrapper">
+      <%- include('../components/signup_topnav.ejs') %>
+      <div class="keyverify_content">
+      <form action="/admin/forget_password" spellcheck="false" method="post">
+      <div class="login_frame">
+         <div class="left">
+            <h3 class="login_text">KEY VERIFICATION</h3>
+            <p class="enter_p">ENTER THE 12 DIGIT SECRET KEY TO VERIFY</p>
+            <div class="input_frame">
+               <div class="input_div"><span class="input_icon"><i class="bi bi-input bi-key"></i></span><input class="inputs" type="password" minlength="8" maxlength="12" name="password" placeholder="***************"><i class="bi bi-password passEye bi-eye-slash"></i></div>
+               <div class="submit_div"><button class="submit_btn" type="submit">SUBMIT</button></div>
+               <p class="err_msg" style="text-align: center; font-family: 'Poppins',sans-serif; margin-top: .7rem; color: red; font-size: .9rem ;"><%= errMsg %></p>
+               <% if(errMsg) { %>
+               <script>
+               const errPara =  document.querySelector('.err_msg')
+                 setTimeout(() => {
+                    errPara.innerHTML = ''
+                 }, 2000);
+               </script>
+              <% } %>
+            </div>
+         </div>
+      </div>
+   </form>
+    </div>
+   </div>
+   <script>
+
+   document.addEventListener('DOMContentLoaded', () => {
+      const passEye = document.querySelector('.passEye');
+      const passwordInput = document.getElementsByName('password')[0];
+
+      passEye.addEventListener('click', (e) => {
+         if (passEye.classList.contains('bi-eye-slash')) {
+               passEye.classList.replace('bi-eye-slash', 'bi-eye');
+               passwordInput.type = 'text';
+               setTimeout(() => {
+                  passwordInput.type = 'password';
+                  passEye.classList.replace('bi-eye', 'bi-eye-slash');
+               }, 2000);
+         } else {
+               passEye.classList.replace('bi-eye', 'bi-eye-slash');
+               passwordInput.type = 'password';
+         }
+      });
+   });
+
+
+
+   </script>
+   <%- include('../../common/end.ejs') %>

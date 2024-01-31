@@ -1,0 +1,22 @@
+<%- include('../components/head.ejs') %>
+   <div class="wrapper forgetpass_wrapper">
+      <%- include('../components/signup_topnav.ejs') %>
+      <div class="forgetpass_content">
+      <form spellcheck="false" action="/admin/email_verify" method="post" class="login_form">
+      <div class="login_frame">
+         <div class="left">
+            <h3 class="login_text">Forgot Password</h3>
+            <div class="input_frame">
+                <p class="forgot_disc">Enter your registered email to enter KEY Verification</p>
+               <div class="input_div"><span class="input_icon"><i class="bi bi-input bi-envelope-fill"></i></span><input class="inputs" type="text" maxlength="40" name="email" placeholder="example@gmail.com"></div>
+               <div class="submit_div"><button class="submit_btn" type="submit">SUBMIT</button></div>
+               <p class="err_msg"><%= errMsg %></p>
+               <a class="back_login" href="/admin/login">BACK TO LOGIN</a>
+            </div>
+         </div>
+         <div class="right">LABIO</div>
+      </div>
+   </form>
+    </div>
+   </div>
+   <%- include('../../common/end.ejs') %>

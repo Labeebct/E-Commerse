@@ -22,6 +22,13 @@ router.get('/key_verification/:email',controller.getKeyverify)
 router.post('/key_verification/:email',controller.postKeyverify)
 
 
+router.get('/email_verify',controller.getEmailverify)
+router.post('/email_verify',controller.postEmailverify)
+
+router.get('/forget_password',controller.getForgetpassword)
+router.post('/forget_password',controller.postForgetpassword)
+
+
 
 
 
