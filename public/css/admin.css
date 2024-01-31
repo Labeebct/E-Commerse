@@ -403,6 +403,7 @@
     margin: 0 .15rem;
     text-decoration: none;
     border-radius: .2rem;
+    cursor: pointer;
     color: black;
     border: 1px solid rgba(0, 0, 0, 0.391);
     font-family: 'Poppins' , sans-serif;
@@ -420,7 +421,10 @@
 .link_pagination button:active{
    transform: scale(.9);
 }
-
+.active_link{
+  background-color: #F80E0E;
+  color: white !important;
+}
 
 
 
@@ -1040,10 +1044,11 @@
         font-size: 1.1rem;
         color: red;
         cursor: pointer;
+        transition: all .5s;
     }
     td{
         text-align: center;
-        padding: 1.5rem 0;
+        padding: 1.6rem 0;
         font-family: 'Poppins',sans-serif;
         font-size: .9rem;
         background-color: rgba(250, 235, 215, 0.408);

@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt')
 const moment = require('moment')
 
-
+const signupModel = require('../models/signup')
 const adminDatas = require('../models/admin_signup')
 const productModel = require('../models/products')
 
@@ -287,12 +287,6 @@ exports.getHome = (req, res) => {
 }
 
 
-exports.getUsers = (req, res) => {
-    const state = 'users'
-    res.render('admin/pages/users', { state })
-}
-
-
 
 // <<<<<<< ================ PRODUCTS ================ >>>>>>
 
@@ -372,6 +366,60 @@ exports.postAddproduct = async(req,res) => {
   }
 }
 
+    
+
+
+
+
+// <<<<< ============== USERS ================== >>>>>>
+
+
+
+exports.getUsers = async(req, res) => {
+    try {
+
+        const state = 'users'
+        const page = parseInt(req.query.page) || 1
+        const pageSize = 6
+
+        const skip = (page - 1) * pageSize
+        
+        const userList = await signupModel.find().skip(skip).limit(pageSize)
+
+        if(userList){
+            res.render('admin/pages/users', { state , userList})
+        }
+        else{
+            res.status(500).send('Bad Server')
+        }
+
+        
+    } catch (error) {
+        console.log('Error in admin get users',error.message);
+    }
+}
+
+
+
+
+
+exports.deleteUsers = async(req, res) => {
+    try {
+      const { id } = req.body
+
+      const deleteUser = await signupModel.deleteOne({_id:id})
+      if(deleteUser){
+        res.status(200).json({success:true})
+      }
+        
+    } catch (error) {
+        console.log('Error in admin delete users',error.message);
+    }
+}
+
+
+
+
 
 
 
@@ -429,6 +477,9 @@ exports.getAddcoupons = (req,res) =>{
 exports.getUsermessage = (req,res) =>{
     res.render('admin/pages/usermessage',{state:''})
 }
+
+
+
 
 
 exports.getCustomer = (req,res) =>{

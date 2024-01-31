@@ -51,12 +51,8 @@ router.post('/forget_password',controller.postForgetpassword)
 
 
 
-
 // <<<<< ================== HOME ====================== >>>>>
  
-
-
-
 
 
 
@@ -64,6 +60,8 @@ router.post('/forget_password',controller.postForgetpassword)
 // ADMIN HOME ----------------------------
 
 router.get('/home',controller.getHome)
+
+
 
 
 
@@ -76,11 +74,21 @@ router.post('/product/add_product', upload.array('productimg', 5), controller.po
 
 
 
-router.get('/orders_list',controller.getOrders)
+
+// USERS MANAGE
 
 router.get('/custumers',controller.getUsers)
 router.get('/custumer',controller.getCustomer)
-router.delete('/custumer/remove/:id')
+router.delete('/custumer/remove',controller.deleteUsers)
+
+
+
+
+
+
+
+
+router.get('/orders_list',controller.getOrders)
 
 router.get('/customer/order_list/:id')
 

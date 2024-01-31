@@ -11,28 +11,30 @@
                 <div class="pro_center">
                     <Table>
                         <thead>
-                            <tr class="th_tr"   1>
+                            <tr class="th_tr">
                             <th style="width: 3%;">SI</th>
                             <th style="width: 15%;">USER _ID</th>
-                            <th style="width: 10%;">REG_DATE</th>
                             <th style="width: 14%;">NAME</th>
                             <th style="width: 17%;">EMAIL</th>
                             <th style="width: 12%;">MOBILE</th>
+                            <th style="width: 10%;">REG_DATE</th>
                             <th style="width: 7%;">ORDERS</th>
                             <th style="width: 7%;">DELETE</th>
                         </tr>
                         </thead>
                         <tbody>
-                            <tr style="cursor: pointer;">
+                        <% userList.forEach((user,index)=> { %>
+                            <tr class="data_tr<%= user._id %>" style="cursor: pointer;">
+                                <td class="si_td"><%= index+1 %></td>
+                                <td><%= user._id %></td>
+                                <td><%= user.username %></td>
+                                <td><%= user.email %></td>
+                                <td><%= user.mobilenum %></td>
+                                <td><%= user.regdate %></td>
                                 <td>1</td>
-                                <td>87432458723883459</td>
-                                <td>12-03-2024</td>
-                                <td>labeeb ct</td>
-                                <td>ctlabeebthaliyil@gmail.com</td>
-                                <td>8590471530</td>
-                                <td>1</td>
-                                <td><i class="bi bi-trash"></i></td>
+                                <td><button class="delet_btn delet_btn<%= user._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>
+                          <% }) %>  
                         </tbody>
                       </Table>
                 </div>
@@ -40,13 +42,13 @@
                     <div class="link_pagination">
                         <button><i class="bi bi-chevron-left"></i></button>
                         <div class="links">
-                        <a href="#" value="1">1</a>
-                        <a href="#" value="2">2</a>
-                        <a href="#" value="3">3</a>
-                        <a href="#" value="4">4</a>
-                        <a href="#" value="5">5</a>
-                        <a href="#" value="6">6</a>
-                        <a href="#" value="7">7</a>
+                        <a href="/admin/custumers?page=1" class="page_a active_link" value="1">1</a>
+                        <a href="/admin/custumers?page=2" class="page_a" value="2">2</a>
+                        <a href="/admin/custumers?page=3" class="page_a" value="3">3</a>
+                        <a href="/admin/custumers?page=4" class="page_a" value="4">4</a>
+                        <a href="/admin/custumers?page=5" class="page_a" value="5">5</a>
+                        <a href="/admin/custumers?page=6" class="page_a" value="6">6</a>
+                        <a href="/admin/custumers?page=7" class="page_a" value="7">7</a>
                         </div>
                         <button><i class="bi bi-chevron-right"></i></button>
                     </div>
@@ -55,4 +57,58 @@
         </div>
     </div>
 </div>
+
+
+<% userList.forEach((user,index)=> { %>
+
+<script>
+
+
+document
+
+
+
+
+
+document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',async(e) => {
+
+    e.preventDefault()
+
+    try {
+
+        const response = await fetch('/admin/custumer/remove',{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({id:'<%= user._id %>'})
+        })
+
+        const result = await response.json()
+
+        if(!response.ok){
+        throw new Error('Error in user delete')
+        }
+        else{
+            if(result.success){
+                document.querySelector('.data_tr<%= user._id %>').remove()
+                document.querySelector('.si_td').innerHTML = '<%= index  %>'
+
+            }
+            else{
+                console.log('User Deletion Failed');
+            }
+        }
+
+
+    } catch (error) {
+        console.log('Error in user deletion',error.message);
+    }
+})
+
+
+</script>
+
+<% }) %>  
+
 <%- include('../../common/end.ejs') %>
