@@ -2,6 +2,7 @@ const accountSID = process.env.TWILIO_ACCOUNT_SID
 const authToken = process.env.TWILIO_AUTH_TOKEN
 const serviceSid = process.env.TWILIO_SERVICE_SID
 
+
 const client = require('twilio')(accountSID, authToken)
 const signupModel = require('../models/signup')
 
@@ -57,5 +58,8 @@ const verifyOtp = async(num,code,res,req) => {
    
 }
  
+
+
+
 
 module.exports = {sendOtp , verifyOtp}

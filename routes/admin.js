@@ -9,7 +9,10 @@ const upload = require('../middleware/multer')
 
 
 
+
 // <<<<< ============== AUTHENTICATION =============== >>>>>
+
+
 
 
 
@@ -51,8 +54,11 @@ router.post('/forget_password',controller.postForgetpassword)
 
 
 
+
 // <<<<< ================== HOME ====================== >>>>>
  
+
+
 
 
 
@@ -65,11 +71,12 @@ router.get('/home',controller.getHome)
 
 
 
+
 //  ADD PRODUCT --------------------------
 
 router.get('/products',controller.getProducts)
 router.get('/product/add_product',controller.getAddproducts)
-router.post('/product/add_product', upload.array('productimg', 5), controller.postAddproduct);
+router.post('/product/add_product', upload.array('productimg', 20), controller.postAddproduct);
 
 
 
@@ -84,12 +91,18 @@ router.delete('/custumer/remove',controller.deleteUsers)
 
 
 
+// CATEGORY 
 
+
+router.get('/category',controller.getCategory)
+
+router.get('/category/add_category',controller.getAddcategory)
+router.post('/category/add_category',upload.single('categoryimg'),controller.postAddcategory)
+router.delete('/category/deletecategory/:id',controller.deletCategory)
 
 
 
 router.get('/orders_list',controller.getOrders)
-
 router.get('/customer/order_list/:id')
 
 
@@ -97,13 +110,6 @@ router.delete('/product/remove_product/:id')
 
 router.get('/product/editproduct') 
 router.put('/product/editproduct')
-
-
-router.get('/category',controller.getCategory)
-
-router.get('/category/add_category',controller.getAddcatogery)
-router.post('/category/add_category')
-router.delete('/category/deletecategory/:id')
 
 
 router.get('/category/edit_category/:id')

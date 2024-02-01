@@ -40,17 +40,17 @@
                 </div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
-                        <button><i class="bi bi-chevron-left"></i></button>
+                        <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
                         <div class="links">
-                        <a href="/admin/custumers?page=1" class="page_a active_link" value="1">1</a>
-                        <a href="/admin/custumers?page=2" class="page_a" value="2">2</a>
-                        <a href="/admin/custumers?page=3" class="page_a" value="3">3</a>
-                        <a href="/admin/custumers?page=4" class="page_a" value="4">4</a>
-                        <a href="/admin/custumers?page=5" class="page_a" value="5">5</a>
-                        <a href="/admin/custumers?page=6" class="page_a" value="6">6</a>
-                        <a href="/admin/custumers?page=7" class="page_a" value="7">7</a>
+                            <button class="page_btn" onclick="active()" value="1">1</button>
+                            <button class="page_btn" onclick="active()" value="2">2</button>
+                            <button class="page_btn" onclick="active()" value="3">3</button>
+                            <button class="page_btn" onclick="active()" value="4">4</button>
+                            <button class="page_btn" onclick="active()" value="5">5</button>
+                            <button class="page_btn" onclick="active()" value="6">6</button>
+                            <button class="page_btn" onclick="active()" value="7">7</button>
                         </div>
-                        <button><i class="bi bi-chevron-right"></i></button>
+                        <button class="next_btn" onclick="next()"><i class="bi bi-chevron-right"></i></button>
                     </div>
                 </div>
              </div>
@@ -59,17 +59,95 @@
 </div>
 
 
+<script>
+
+// const prevBtn = document.querySelector('.back_btn')
+// const pagesBtn = document.querySelectorAll('.page_btn')
+// const nextBtn = document.querySelector('.next_btn')
+
+
+
+// pagesBtn.forEach((btn) => {
+    
+//     btn.addEventListener('click',(e) => {
+       
+//         const pageValue = e.target.value
+//         window.location.href = `/admin/custumers?page=${pageValue}`
+        
+//     })
+    
+// })
+
+
+const pagesBtn = document.getElementsByClassName('page_btn')
+
+
+
+let currentValue = 1
+
+
+function  active(){
+    for(l of pagesBtn){
+
+        l.classList.remove('active_link')
+    }
+    event.target.classList.add('active_link')
+    currentValue = parseInt(event.target.value)
+    window.location.href = `/admin/custumers?page=${currentValue}`
+
+}
+
+
+
+function prev(){
+    if(currentValue > 1){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+
+   currentValue--;
+   window.location.href = `/admin/custumers?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+
+    }
+}
+
+function next(){
+    if(currentValue < 7 ){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+   
+   currentValue++;
+   window.location.href = `/admin/custumers?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
 <% userList.forEach((user,index)=> { %>
 
 <script>
-
-
-document
-
-
-
-
-
+    
+    
 document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',async(e) => {
 
     e.preventDefault()

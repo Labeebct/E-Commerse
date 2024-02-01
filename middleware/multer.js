@@ -5,7 +5,15 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
 
      if(file.fieldname === 'productimg'){
-         cb(null, './public/products-img')
+
+      if(req.files.length > 5){
+        cb(null, './public/dump')
+      }else{
+        cb(null, './public/products-img')
+      }
+     }
+     else if(file.fieldname === 'categoryimg'){
+      cb(null, './public/category-image')
      }
 
     },

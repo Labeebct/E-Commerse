@@ -14,7 +14,7 @@
                         <thead>
                             <tr class="th_tr">
                             <th style="width: 4%;">SI</th>
-                            <th style="width: 17%;">PRODUCT _ID</th>
+                            <th style="width: 23%;">PRODUCT _ID</th>
                             <th style="width: 14%;">IMAGE</th>
                             <th style="width: 14%;">NAME</th>
                             <th style="width: 6%;">STOCKS</th>
@@ -26,34 +26,38 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <% products.forEach((product,index)=> { %>
                             <tr>
-                                <td>1</td>
-                                <td>8743245872388336</td>
-                                <td class="product_image_li"><img src="/images/iphone 15.jpg" class="product_img"></td>
-                                <td>Iphone 15 pro</td>
-                                <td>4</td>
-                                <td>Electronics</td>
-                                <td>mobiles</td>
-                                <td>1,25,897</td>
+
+                                <td><%= index+1 %></td>
+                                <td><%= product._id %></td>
+                                <td class="product_image_li"><img src="<%= product.productimg[0] %>" class="product_img"></td>
+                                <td><%= product.productname %></td>
+                                <td><%= product.stock %></td>
+                                <td><%= product.category %></td>
+                                <td><%= product.subcategory %></td>
+                                <td><%= product.newprice.toLocaleString() %></td>
                                 <td><button><i class="bi bi-pencil-square"></i></button></td>
                                 <td><button><i class="bi bi-trash"></i></button></td>
                             </tr>
+
+                            <% }) %>  
                         </tbody>
                       </Table>
                 </div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
-                        <button><i class="bi bi-chevron-left"></i></button>
+                        <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
                         <div class="links">
-                        <a href="#" value="1">1</a>
-                        <a href="#" value="2">2</a>
-                        <a href="#" value="3">3</a>
-                        <a href="#" value="4">4</a>
-                        <a href="#" value="5">5</a>
-                        <a href="#" value="6">6</a>
-                        <a href="#" value="7">7</a>
+                            <button class="page_btn" onclick="active()" value="1">1</button>
+                            <button class="page_btn" onclick="active()" value="2">2</button>
+                            <button class="page_btn" onclick="active()" value="3">3</button>
+                            <button class="page_btn" onclick="active()" value="4">4</button>
+                            <button class="page_btn" onclick="active()" value="5">5</button>
+                            <button class="page_btn" onclick="active()" value="6">6</button>
+                            <button class="page_btn" onclick="active()" value="7">7</button>
                         </div>
-                        <button><i class="bi bi-chevron-right"></i></button>
+                        <button class="next_btn" onclick="next()"><i class="bi bi-chevron-right"></i></button>
                     </div>
                 </div>
              </div>

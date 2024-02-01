@@ -72,9 +72,6 @@ submitBtn.addEventListener('click',async(e) => {
             } 
             else{
                 errMsg.innerHTML = result.ERR
-                setTimeout(() => {
-                   window.location.href = '/admin/product/add_product'
-                }, 2000);
             }
 
         }

@@ -4,9 +4,9 @@ const moment = require('moment')
 const signupModel = require('../models/signup')
 const adminDatas = require('../models/admin_signup')
 const productModel = require('../models/products')
+const categoryModel = require('../models/category')
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
-
 
 
 
@@ -293,17 +293,27 @@ exports.getHome = (req, res) => {
 
 
 
-exports.getProducts = (req, res) => {
-    const state = 'products'
-    res.render('admin/pages/products', { state })
+exports.getProducts = async(req, res) => {
+    try {
+        
+        const state = 'products'
+        const products = await productModel.find()
+        
+        res.render('admin/pages/products', { state , products})
+
+    } catch (error) {
+        console.log('Error in get products',error.message);
+    }
 }
 
 
 exports.postAddproduct = async(req,res) => {
   try {
     
-    if(!req.files || req.files.length > 5){
-        return res.redirect('/admin/product/add_product')
+    if(req.files.length > 10){
+
+     return res.status(207).json({success:false,ERR:'Cannot exceed Image more than 5'})
+
     }
     else{
 
@@ -321,7 +331,7 @@ exports.postAddproduct = async(req,res) => {
         color,
         subcategory,
         deliverywithin,
-        description,
+        description,    
         returns,
     } = req.body
 
@@ -380,7 +390,7 @@ exports.getUsers = async(req, res) => {
 
         const state = 'users'
         const page = parseInt(req.query.page) || 1
-        const pageSize = 6
+        const pageSize = 7
 
         const skip = (page - 1) * pageSize
         
@@ -421,10 +431,7 @@ exports.deleteUsers = async(req, res) => {
 
 
 
-
-
-
-
+// <<<<<<< =================== CATEGORY ======================= >>>>>>>>>
 
 
 
@@ -433,6 +440,68 @@ exports.getCategory = (req, res) => {
     const state = 'category'
     res.render('admin/pages/category', { state })
 }
+
+         
+exports.getAddcategory = (req,res) =>{
+    const errMsg = req.flash('err')
+    res.render('admin/pages/addcategory',{state:'',errMsg})
+}
+
+exports.postAddcategory = async(req,res) =>{
+    try {
+
+        const {categoryname , subcategory} = req.body
+
+        const catExist = await categoryModel.findOne({categoryname:req.body.categoryname})
+       
+        if(!categoryname || !subcategory){
+            return res.status(244).json({success:false})
+
+        }
+    
+        const newSchema = new categoryModel({
+            categoryname:req.body.categoryname,
+            subcategory
+        })
+
+        if(!catExist){
+            await newSchema.save()
+            res.status(200).json({success:true})
+            console.log('Category added success');
+        }
+        else{
+
+            for (const sub of subcategory) {
+                 await categoryModel.updateOne(
+                    { categoryname: categoryname },
+                    { $push: { subcategory: sub } }
+                    );
+                }
+                
+             res.status(200).json({success:true})
+             console.log('Sub category pushed Success')
+
+        }
+
+
+
+    } catch (error) {
+        console.log('Error in post add category',error.message);
+    }
+}
+
+exports.deletCategory = (req,res) =>{
+
+}
+
+
+
+
+
+
+
+
+
 
 exports.getCoupons = (req, res) => {
     const state = 'coupons'
@@ -457,10 +526,6 @@ exports.getBanners = (req, res) => {
 
 exports.getAddproducts = (req,res) =>{
     res.render('admin/pages/addproducts',{state:''})
-}
-
-exports.getAddcatogery = (req,res) =>{
-    res.render('admin/pages/addcategory',{state:''})
 }
 
 

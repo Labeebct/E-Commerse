@@ -14,6 +14,7 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,15}$/
 // Password Eye Open and Close
 
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const passEye = document.querySelector('.passEye');
     const passwordInput = document.getElementsByName('password')[0];
