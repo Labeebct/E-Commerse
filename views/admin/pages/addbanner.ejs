@@ -4,26 +4,24 @@
     <div class="content addbanner_content">
         <%- include('../components/left_bar.ejs') %>
         <div class="right_content">
-            <form action="">
+            <form action="" class="form_data">
                 <div class="addcatogery_frame">
                      <img src="" class="category_img" alt="">
-                     <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="categoryimg" class="input_file"></div>
+                     <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="bannerimg" class="input_file"></div>
                      <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 0rem; width: 80%;">
-                        <label for="category name">Banner Product</label>
-                        <input type="text" name="bannerproduct" class="input_text">
+                        <label for="category name">Banner name</label>
+                        <input type="text" name="bannername" class="input_text">
                         
                         <label for="category name">Banner Heading</label>
-                        <input type="text" name="bannerheading" class="input_text">
+                        <input type="text" name="bannerhead" class="input_text">
                         
-                        <label for="category name">Banner Discription</label>
-                        <input type="text" name="bannerdiscription" class="input_text">
 
-                        <label for="category name">Button Link</label>
-                        <input type="text" name="buttonlink" class="input_text">
+                        <label for="category name">Banner Amount</label>
+                        <input type="text" name="banneramount" class="input_text">
 
 
                         <div style="display: flex;">
-                            <span style="display: flex; flex-direction: column; gap: .3rem; width: 80%;">
+                            <span style="display: flex; flex-dkirection: column; gap: .3rem; width: 80%;">
                                <label for="startdate">Start Date</label>
                                <input type="date" name="startdate" style="height: 2rem; width: 50%;">
                             </span>
@@ -33,14 +31,52 @@
                             </span>
                         </div>
                         
-                        
+                     <p class="error_msg"></p>
                      </div>
                      <div style="width: 100%; margin-top: 0rem; display: flex; justify-content: center; padding: .9rem;">
-                        <button type="submit" class="add_btn">Add Banner</button>
+                     <button type="submit" class="add_btn">Add Banner</button>
                     </div>
                     </div>
                 </form> 
         </div>
     </div>
 </div>
+
+<script>
+
+
+const errMsg = document.querySelector('.error_msg')
+const bannerForm = document.querySelector('.form_data')
+const submitBtn = document.querySelector('.add_btn')
+
+
+const bannerName = document.getElementsByName('bannername')[0]
+const bannerHead = document.getElementsByName('bannerhead')[0]
+const bannerAmount = document.getElementsByName('banneramount')[0]
+const startDate = document.getElementsByName('startdate')[0]
+const endDate = document.getElementsByName('enddate')[0]
+
+
+submitBtn.addEventListener('click',async(e) => {
+    try {
+
+        const form = new FormData(bannerForm)
+
+        const response = await fetch('/admin/banners/add_banners',{
+            method:'POST',
+            body:form
+        })
+
+        const result = await response.json()
+        
+
+
+
+    } catch (error) {
+        console.log('Error in add banner fetch',error.message);
+    }
+})
+
+</script>
+
 <%- include('../../common/end.ejs') %>

@@ -296,6 +296,7 @@ exports.getHome = (req, res) => {
 exports.getProducts = async(req, res) => {
     try {
         
+        
         const state = 'products'
         const products = await productModel.find()
         
@@ -305,6 +306,22 @@ exports.getProducts = async(req, res) => {
         console.log('Error in get products',error.message);
     }
 }
+
+
+
+exports.getAddproducts = async(req,res) =>{
+    try {
+        
+        const categories = await categoryModel.find()
+        res.render('admin/pages/addproducts',{state:'' , categories})
+
+    } catch (error) {
+        console.log('Error in get add products',error.message);
+    }
+  
+}
+
+
 
 
 exports.postAddproduct = async(req,res) => {
@@ -436,16 +453,27 @@ exports.deleteUsers = async(req, res) => {
 
 
 
-exports.getCategory = (req, res) => {
-    const state = 'category'
-    res.render('admin/pages/category', { state })
+exports.getCategory = async(req, res) => {
+    try {
+        
+        const categories = await categoryModel.find()
+
+        const state = 'category'
+        res.render('admin/pages/category', { state ,categories })
+
+    } catch (error) {
+        console.log('Error in get category',error.message);
+    }
 }
+
 
          
 exports.getAddcategory = (req,res) =>{
     const errMsg = req.flash('err')
     res.render('admin/pages/addcategory',{state:'',errMsg})
 }
+
+
 
 exports.postAddcategory = async(req,res) =>{
     try {
@@ -490,7 +518,26 @@ exports.postAddcategory = async(req,res) =>{
     }
 }
 
-exports.deletCategory = (req,res) =>{
+exports.deletCategory = async(req,res) =>{
+
+    try {
+
+        const {id} = req.body
+       
+        const findCatAndDelete =  await categoryModel.deleteOne({_id:id})
+
+        if(findCatAndDelete){
+            res.status(200).json({success:true})
+            console.log('Category delete success');
+        }
+        else{
+            res.status(256).json({success:false})
+            console.log('Category delete failed');
+        }
+        
+    } catch (error) {
+        console.log('Error in delete category',error.message);
+    }
 
 }
 
@@ -524,9 +571,6 @@ exports.getBanners = (req, res) => {
 }
 
 
-exports.getAddproducts = (req,res) =>{
-    res.render('admin/pages/addproducts',{state:''})
-}
 
 
 exports.getAddbanner = (req,res) =>{

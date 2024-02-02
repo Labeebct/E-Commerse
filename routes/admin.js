@@ -53,8 +53,6 @@ router.post('/forget_password',controller.postForgetpassword)
 
 
 
-
-
 // <<<<< ================== HOME ====================== >>>>>
  
 
@@ -98,7 +96,7 @@ router.get('/category',controller.getCategory)
 
 router.get('/category/add_category',controller.getAddcategory)
 router.post('/category/add_category',upload.single('categoryimg'),controller.postAddcategory)
-router.delete('/category/deletecategory/:id',controller.deletCategory)
+router.delete('/category/deletecategory',controller.deletCategory)
 
 
 

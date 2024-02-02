@@ -22,10 +22,10 @@ const productDatas = new Schema({
     default: false
   },
   size: {
-    type: String,
+    type: Array,
   },
   color: {
-    type: String
+    type: Array
   },
   subcategory: {
     type: String,

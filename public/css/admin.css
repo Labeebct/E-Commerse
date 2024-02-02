@@ -1079,7 +1079,9 @@
 
 
 
+
 /* <<<<============ PRODUCTS WRAPPER ============>>> */
+
 
 
 
@@ -1232,6 +1234,7 @@
         font-weight: 500;
         font-size: 1.2rem;
     }
+   
     .pro_top button{
         position: absolute;
         right: 0;
@@ -1243,9 +1246,10 @@
         color: white;
         text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.257);
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.349);
-        background-color:red;
+        background-color:#04173e;
         padding: .6rem .6rem;
         transition: all .5s;
+        border-radius: .2rem;
         cursor: pointer;
     }
     
@@ -1311,6 +1315,14 @@
     td button:active{
         transform: scale(.9);
     }
+    .sub_li{
+        text-align: start !important;
+        padding-left: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: .2rem;
+        border: 1px solid rgba(0, 0, 0, 0.311);
+    }
 }
 
 
@@ -1355,7 +1367,7 @@
         color: white;
         text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.257);
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.349);
-        background-color:red;
+        background-color:#051d4d;
         padding: .6rem .6rem;
         transition: all .5s;
         cursor: pointer;
@@ -1712,6 +1724,56 @@
     .add_btn:active{
         transform: scale(.95);
     }
+    .color_drop{
+        position: relative;
+        display: block;
+        text-align: center;
+        width: 7rem;
+        height: 2.5rem;
+        background-color: white !important;
+        cursor: pointer;
+    }
+    .color_drop p{
+        color: black;
+        font-family: 'Poppins',sans-serif;
+        width: 100%;
+        height: 100%;
+        font-size: .9rem;
+        padding-top: .5rem;
+    }
+    .color_drop ul{
+        display: none;
+        position: absolute;        
+        width: 100%;
+        height: 100%;
+    }
+    .color_drop ul li{
+        color: black;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        padding-left: .3rem;
+        width: 100%;
+        height: 2rem;
+        z-index: 999;
+        background-color: white;
+    }
+    .color_drop ul li:hover{
+        background-color: rgb(207, 206, 206);
+    }
+    .color_drop:hover  .drop_bar{
+        display: block !important;
+    }
+    .drop_bar label{
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        width: 100%;
+        height: 100%;
+        font-family: 'Poppins',sans-serif;
+        font-size: .9rem;
+    }
+
 }
 
 
@@ -1849,13 +1911,22 @@
         width: 30rem;
         height: 40rem;
         margin-bottom: 1rem;
-        border: 1px solid rgba(0, 0, 0, 0.585);
+        box-shadow: 0px 0px 9px 6px rgba(0, 0, 0, 0.202); 
+        background-color: #2e3444;
+        color: white !important;
     }
     .category_img{
         width: 24rem;
-        height: 8rem;
+        height: 9rem;
         margin-top: 2rem;
         border: 1px solid rgba(0, 0, 0, 0.44);
+        background-color: white;
+    }
+        .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: 1.1rem;
     }
     .file_div{
         display: flex;
@@ -1866,7 +1937,8 @@
         border-radius: .2rem;
         color: white;
         font-size: .9rem;
-        background-color: black;
+        background-color:#04173e;  
+        margin-top: 1rem;
     }
     .input_file{
         color: transparent;
@@ -1892,9 +1964,11 @@
         background: none;
         outline: none;
         border: none;
-        background-color: black;
+        background-color:#04173e;
         color: white;
         transition: transform .5s;
+        cursor: pointer;
+        border-radius: .3rem;
     }
     .add_btn:active{
         transform: scale(.95);

@@ -16,7 +16,8 @@
                             <th style="width: 3%;">SI</th>
                             <th style="width: 20%;">BANNER _ID</th>
                             <th style="width: 14%;">BANNER NAME</th>
-                            <th style="width: 14%;">AMOUNT</th>
+                            <th style="width: 10%;">AMOUNT</th>
+                            <th style="width: 14%;">BANNER HEAD</th>
                             <th style="width: 10%;">START DATE</th>
                             <th style="width: 10%;">END DATE</th>
                             <th style="width: 7%;">EDIT</th>
@@ -29,6 +30,7 @@
                                 <td>87432458723883459</td>
                                 <td>Roadster mens</td>
                                 <td>132424</td>
+                                <td>sales on shirts</td>
                                 <td>22-05-2024</td>
                                 <td>12-03-2024</td>
                                 <td><button><i class="bi bi-pencil-square"></i></button></td>
@@ -39,17 +41,17 @@
                 </div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
-                        <button><i class="bi bi-chevron-left"></i></button>
+                        <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
                         <div class="links">
-                        <a href="#" value="1">1</a>
-                        <a href="#" value="2">2</a>
-                        <a href="#" value="3">3</a>
-                        <a href="#" value="4">4</a>
-                        <a href="#" value="5">5</a>
-                        <a href="#" value="6">6</a>
-                        <a href="#" value="7">7</a>
+                            <button class="page_btn" onclick="active()" value="1">1</button>
+                            <button class="page_btn" onclick="active()" value="2">2</button>
+                            <button class="page_btn" onclick="active()" value="3">3</button>
+                            <button class="page_btn" onclick="active()" value="4">4</button>
+                            <button class="page_btn" onclick="active()" value="5">5</button>
+                            <button class="page_btn" onclick="active()" value="6">6</button>
+                            <button class="page_btn" onclick="active()" value="7">7</button>
                         </div>
-                        <button><i class="bi bi-chevron-right"></i></button>
+                        <button class="next_btn" onclick="next()"><i class="bi bi-chevron-right"></i></button>
                     </div>
                 </div>
              </div>
