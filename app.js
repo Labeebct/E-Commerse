@@ -45,7 +45,7 @@ app.use('/admin',adminRouter)
 
 mongoose.connect('mongodb://localhost:27017/CART_1M')
 .then(()=>{
-    app.listen(PORT,()=> console.log('Servere CONNECTED',PORT))
+    app.listen(PORT,()=> console.log('Server CONNECTED',PORT))
     console.log('Database Connected Succes')
 })
 .catch((err)=> console.log('Database Connection Failed',err))

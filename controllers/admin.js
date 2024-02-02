@@ -449,7 +449,10 @@ exports.deleteUsers = async(req, res) => {
 
 
 
+
 // <<<<<<< =================== CATEGORY ======================= >>>>>>>>>
+
+
 
 
 
@@ -545,10 +548,10 @@ exports.deletCategory = async(req,res) =>{
 
 
 
+// <<<< =================== BANNERS ====================== >>>>
 
-// <<<< ================ BANNERS =================== >>>>
 
-    
+
 
 
 
@@ -567,7 +570,7 @@ exports.getBanners = async(req, res) => {
 
 }
 
-
+  
 exports.getAddbanner = (req,res) =>{
     res.render('admin/pages/addbanner',{state:''})
 }
@@ -630,16 +633,34 @@ exports.deleteBanner = async(req,res) => {
 
 
 
+exports.getEditbanner = async(req,res) => {
 
-
-
-exports.getEditbanner = (req,res) => {
+    try {
+        const id = req.params.id
     
+        const Banner = await bannerModel.findOne({_id:id})
+    
+        res.render('admin/pages/editbanner',{state:'',id,Banner})
+        
+    } catch (error) {
+        console.log('Error in get edit banner');
+    }
 }
 
 
 
-exports.postEditbanner = (req,res) => {
+exports.postEditbanner = async(req,res) => {
+
+    try {
+
+        const id = req.params.id
+
+        const findBanner = await bannerModel.findOne({_id:id})
+        
+    } catch (error) {
+
+        console.log('Error in post edit banner',error.message);
+    }
 
 }
 

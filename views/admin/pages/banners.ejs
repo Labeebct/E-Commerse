@@ -36,7 +36,7 @@
                                 <td><%= ban.banneramount.toLocaleString() %></td>
                                 <td style="font-size: .8rem;"><%= ban.startdate.toDateString() %></td>
                                 <td style="font-size: .8rem;"><%= ban.enddate.toDateString() %></td>
-                                <td><button><i class="bi bi-pencil-square"></i></button></td>
+                                <td><button class="edit_btn<%= ban._id %>"><i class="bi bi-pencil-square"></i></button></td>
                                 <td><button class="delete_btn<%= ban._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>
 
@@ -97,6 +97,33 @@ document.querySelector('.delete_btn<%= ban._id %>').addEventListener('click',asy
         console.log('Error in banner Delete',error.message);
     }
 })
+
+
+
+
+
+
+document.querySelector('.edit_btn<%= ban._id %>').addEventListener('click',(e) => {
+    try {
+        
+        window.location.href = '/admin/banners/edit_banner/<%= ban._id %>'
+        
+    } catch (error) {
+        console.log('Error in banner Edit',error.message);
+    }
+})
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 </script>

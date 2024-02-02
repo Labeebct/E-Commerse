@@ -103,8 +103,8 @@ router.get('/banners',controller.getBanners)
 router.get('/banners/add_banners',controller.getAddbanner)
 router.post('/banners/add_banners',upload.single('bannerimg'),controller.postAddbanner)
 
-router.get('/banners/edit_banner',controller.getEditbanner)
-router.post('/banners/edit_banner',upload.single('bannerimg'),controller.postEditbanner)
+router.get('/banners/edit_banner/:id',controller.getEditbanner)
+router.post('/banners/edit_banner/:id',upload.single('bannerimg'),controller.postEditbanner)
 
 router.delete('/banners/remove_banners',controller.deleteBanner)
 
