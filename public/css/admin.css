@@ -1384,7 +1384,7 @@
     .pro_center::-webkit-scrollbar {
         width: 0.5em;
     }
-    
+ 
     .pro_center::-webkit-scrollbar-track {
     background-color: transparent;
     }
@@ -1926,7 +1926,7 @@
         text-align: center;
         font-family: 'Poppins',sans-serif;
         color: red;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     .file_div{
         display: flex;
@@ -1972,6 +1972,8 @@
     }
     .add_btn:active{
         transform: scale(.95);
+    }   .success{
+        color: rgb(4, 183, 4) !important;
     }
 }
 

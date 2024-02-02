@@ -5,6 +5,7 @@ const signupModel = require('../models/signup')
 const adminDatas = require('../models/admin_signup')
 const productModel = require('../models/products')
 const categoryModel = require('../models/category')
+const bannerModel = require('../models/banner')
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 
@@ -333,7 +334,7 @@ exports.postAddproduct = async(req,res) => {
 
     }
     else{
-
+    
 
     }
     const imagePath = req.files.map((file) => '/products-img/' + file.filename)
@@ -512,7 +513,6 @@ exports.postAddcategory = async(req,res) =>{
         }
 
 
-
     } catch (error) {
         console.log('Error in post add category',error.message);
     }
@@ -546,6 +546,110 @@ exports.deletCategory = async(req,res) =>{
 
 
 
+// <<<< ================ BANNERS =================== >>>>
+
+    
+
+
+
+exports.getBanners = async(req, res) => {
+
+    try {
+
+        const banners = await bannerModel.find()
+        
+        const state = 'banners'
+        res.render('admin/pages/banners', { state , banners})
+
+    } catch (error) {
+        console.log('Error in get Banners',error.message);
+    }
+
+}
+
+
+exports.getAddbanner = (req,res) =>{
+    res.render('admin/pages/addbanner',{state:''})
+}
+
+
+
+exports.postAddbanner = async(req,res) =>{
+
+    try {
+
+        const {bannername , bannerhead , banneramount , startdate , enddate } = req.body  
+
+        if(!req.file){
+            return res.status(402).json({err:"Please Provide a Image"})
+        }
+
+        const imagePath = '/banner-image/' + req.file.filename
+
+        const newSchema = new bannerModel({
+            bannerimg:imagePath,
+            bannername,
+            bannerhead,
+            banneramount,
+            startdate,
+            enddate
+        })
+        
+        await newSchema.save()
+        res.status(200).json({success:true})
+
+    } catch (error) {
+        console.log('Error in post add banner',error.message);
+    }
+    
+}
+
+
+
+exports.deleteBanner = async(req,res) => {
+
+    try {
+
+      const { id } = req.body
+
+      const bannerDelete = await bannerModel.deleteOne({_id:id})
+
+      if(bannerDelete){
+        res.status(200).json({success:true})
+
+      }
+      else{
+        return res.status(224).json({success:false})
+      }
+        
+    } catch (error) {
+        console.log('Error in delete banner',error.message);
+    }
+    
+}
+
+
+
+
+
+
+exports.getEditbanner = (req,res) => {
+    
+}
+
+
+
+exports.postEditbanner = (req,res) => {
+
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -565,17 +669,6 @@ exports.getMessages = (req, res) => {
     res.render('admin/pages/messages', { state })
 }
 
-exports.getBanners = (req, res) => {
-    const state = 'banners'
-    res.render('admin/pages/banners', { state })
-}
-
-
-
-
-exports.getAddbanner = (req,res) =>{
-    res.render('admin/pages/addbanner',{state:''})
-}
 
 
 exports.getAddcoupons = (req,res) =>{

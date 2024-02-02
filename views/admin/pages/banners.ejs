@@ -16,8 +16,8 @@
                             <th style="width: 3%;">SI</th>
                             <th style="width: 20%;">BANNER _ID</th>
                             <th style="width: 14%;">BANNER NAME</th>
-                            <th style="width: 10%;">AMOUNT</th>
                             <th style="width: 14%;">BANNER HEAD</th>
+                            <th style="width: 10%;">AMOUNT</th>
                             <th style="width: 10%;">START DATE</th>
                             <th style="width: 10%;">END DATE</th>
                             <th style="width: 7%;">EDIT</th>
@@ -25,17 +25,23 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr>
+
+                            <% banners.forEach((ban,index)=>{ %>
+
+                            <tr class="td_tr<%= ban._id %>">
                                 <td>1</td>
-                                <td>87432458723883459</td>
-                                <td>Roadster mens</td>
-                                <td>132424</td>
-                                <td>sales on shirts</td>
-                                <td>22-05-2024</td>
-                                <td>12-03-2024</td>
+                                <td><%= ban._id %></td>
+                                <td><%= ban.bannername %></td>
+                                <td><%= ban.bannerhead %></td>
+                                <td><%= ban.banneramount.toLocaleString() %></td>
+                                <td style="font-size: .8rem;"><%= ban.startdate.toDateString() %></td>
+                                <td style="font-size: .8rem;"><%= ban.enddate.toDateString() %></td>
                                 <td><button><i class="bi bi-pencil-square"></i></button></td>
-                                <td><button><i class="bi bi-trash"></i></button></td>
+                                <td><button class="delete_btn<%= ban._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>
+
+                            <% }) %>
+
                         </tbody>
                       </Table>
                 </div>
@@ -58,4 +64,45 @@
         </div>
     </div>
 </div>
+
+<% banners.forEach((ban,index)=>{ %>
+
+
+<script>
+
+document.querySelector('.delete_btn<%= ban._id %>').addEventListener('click',async(e) => {
+    try {
+
+        const response = await fetch('/admin/banners/remove_banners',{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({id:'<%= ban._id %>'})
+        })
+
+        const result = await response.json()
+
+        if(response.ok){
+            if(result.success){
+                document.querySelector('.td_tr<%= ban._id %>').remove()
+            }
+            else{
+                console.log('Failed to delete banner');
+            }
+        }
+
+        
+    } catch (error) {
+        console.log('Error in banner Delete',error.message);
+    }
+})
+
+
+</script>
+
+
+<% }) %>
+
+
 <%- include('../../common/end.ejs') %>

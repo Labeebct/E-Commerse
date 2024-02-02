@@ -68,14 +68,11 @@ router.get('/home',controller.getHome)
 
 
 
-
-
 //  ADD PRODUCT --------------------------
 
 router.get('/products',controller.getProducts)
 router.get('/product/add_product',controller.getAddproducts)
-router.post('/product/add_product', upload.array('productimg', 20), controller.postAddproduct);
-
+router.post('/product/add_product',upload.array('productimg', 20), controller.postAddproduct);
 
 
 
@@ -93,10 +90,27 @@ router.delete('/custumer/remove',controller.deleteUsers)
 
 
 router.get('/category',controller.getCategory)
-
 router.get('/category/add_category',controller.getAddcategory)
-router.post('/category/add_category',upload.single('categoryimg'),controller.postAddcategory)
+router.post('/category/add_category',controller.postAddcategory)
 router.delete('/category/deletecategory',controller.deletCategory)
+
+
+
+
+//BANNER
+
+router.get('/banners',controller.getBanners)
+router.get('/banners/add_banners',controller.getAddbanner)
+router.post('/banners/add_banners',upload.single('bannerimg'),controller.postAddbanner)
+
+router.get('/banners/edit_banner',controller.getEditbanner)
+router.post('/banners/edit_banner',upload.single('bannerimg'),controller.postEditbanner)
+
+router.delete('/banners/remove_banners',controller.deleteBanner)
+
+
+
+
 
 
 
@@ -128,9 +142,6 @@ router.get('/messages',controller.getMessages)
 router.get('/messages/user_message',controller.getUsermessage)
 
 
-router.get('/banners',controller.getBanners)
-router.get('/banners/add_banners',controller.getAddbanner)
-router.post('/banners/add_banners')
 
 
 

@@ -4,24 +4,24 @@
     <div class="content addbanner_content">
         <%- include('../components/left_bar.ejs') %>
         <div class="right_content">
-            <form action="" class="form_data">
+            <form method="post" class="form_data" enctype="multipart/form-data" spellcheck="false">
                 <div class="addcatogery_frame">
-                     <img src="" class="category_img" alt="">
-                     <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="bannerimg" class="input_file"></div>
+                     <img src="" class="category_img" id="imagePreview" alt="">
+                     <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="bannerimg" onchange="previewImage(this)" class="input_file"></div>
                      <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 0rem; width: 80%;">
                         <label for="category name">Banner name</label>
-                        <input type="text" name="bannername" class="input_text">
+                        <input type="text" style="text-transform: uppercase;" name="bannername" class="input_text">
                         
                         <label for="category name">Banner Heading</label>
-                        <input type="text" name="bannerhead" class="input_text">
+                        <input type="text" style="text-transform: uppercase;" name="bannerhead" class="input_text">
                         
 
                         <label for="category name">Banner Amount</label>
-                        <input type="text" name="banneramount" class="input_text">
+                        <input type="number" name="banneramount" class="input_text">
 
 
                         <div style="display: flex;">
-                            <span style="display: flex; flex-dkirection: column; gap: .3rem; width: 80%;">
+                            <span style="display: flex; flex-direction: column; gap: .3rem; width: 80%;">
                                <label for="startdate">Start Date</label>
                                <input type="date" name="startdate" style="height: 2rem; width: 50%;">
                             </span>
@@ -34,7 +34,7 @@
                      <p class="error_msg"></p>
                      </div>
                      <div style="width: 100%; margin-top: 0rem; display: flex; justify-content: center; padding: .9rem;">
-                     <button type="submit" class="add_btn">Add Banner</button>
+                     <button type="button" class="add_btn">Add Banner</button>
                     </div>
                     </div>
                 </form> 
@@ -44,23 +44,48 @@
 
 <script>
 
+function previewImage(input) {  
+    var file = input.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('imagePreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+
+
 
 const errMsg = document.querySelector('.error_msg')
-const bannerForm = document.querySelector('.form_data')
+
 const submitBtn = document.querySelector('.add_btn')
 
 
-const bannerName = document.getElementsByName('bannername')[0]
-const bannerHead = document.getElementsByName('bannerhead')[0]
-const bannerAmount = document.getElementsByName('banneramount')[0]
-const startDate = document.getElementsByName('startdate')[0]
-const endDate = document.getElementsByName('enddate')[0]
-
-
 submitBtn.addEventListener('click',async(e) => {
+
+    const bannerName = document.getElementsByName('bannername')[0].value
+    const bannerHead = document.getElementsByName('bannerhead')[0].value
+    const bannerAmount = document.getElementsByName('banneramount')[0].value
+    const startDate = document.getElementsByName('startdate')[0].value
+    const endDate = document.getElementsByName('enddate')[0].value
+    
+    const bannerForm = document.querySelector('.form_data')
+
+    const form = new FormData(bannerForm)
+
     try {
 
-        const form = new FormData(bannerForm)
+
+        if(!bannerName || !bannerHead || !bannerAmount || !startDate || !endDate){
+            errMsg.innerHTML = 'Please Fill all Fields'
+            setTimeout(() => {
+                errMsg.innerHTML = ''
+            }, 2000);
+            return
+        }
+        else{
 
         const response = await fetch('/admin/banners/add_banners',{
             method:'POST',
@@ -69,8 +94,23 @@ submitBtn.addEventListener('click',async(e) => {
 
         const result = await response.json()
         
+        if(!response.ok){
+            errMsg.innerHTML = result.err
+            setTimeout(() => {
+                errMsg.innerHTML = ''
+            }, 2000);
+        }
+        else{
+            if(result.success){
+            errMsg.innerHTML = 'Banner Added Succes'
+            errMsg.classList.add('success')
+            setTimeout(() => {
+                window.location.href = '/admin/banners'
+            }, 400);
+            }
+        }
 
-
+    }
 
     } catch (error) {
         console.log('Error in add banner fetch',error.message);
