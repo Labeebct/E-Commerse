@@ -86,14 +86,19 @@ const pagesBtn = document.getElementsByClassName('page_btn')
 let currentValue = 1
 
 
-function  active(){
+async function  active(){
     for(l of pagesBtn){
 
         l.classList.remove('active_link')
     }
     event.target.classList.add('active_link')
-    currentValue = parseInt(event.target.value)
-    window.location.href = `/admin/custumers?page=${currentValue}`
+    currentValue = event.target.value
+
+    const response = await fetch('`/admin/custumers?page=${currentValue}`')
+
+    const result = await response.json()
+
+    console.log(result.userList)
 
 }
 

@@ -4,54 +4,16 @@
     <div class="content message_content">
         <%- include('../components/left_bar.ejs') %>
         <div class="right_content">
-            <div class="msg_cont">
+
+            <% messages.forEach((msg)=>{ %>
+
+            <div class="msg_cont msg_cont<%= msg._id %>" onclick="window.location.href = '/admin/messages/user_message/<%= msg._id %>' ">
              <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
+             <div class="bottom"><%= msg.email %></div>
             </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
-            <div class="msg_cont">
-             <div class="top"><i class="bi bi-envelope-fill"></i></div>
-             <div class="bottom">ctlabeebthaliyil@gmail.com</div>
-            </div>
+
+            <% }) %>
+           
         </div>
     </div>
 </div>

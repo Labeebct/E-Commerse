@@ -7,17 +7,17 @@
             <div class="user_msg_frame">
                 <h3>User Message</h3>
                 <form action="" style="width: 90%; height: 100%;">
-                  <label for="user">Name</label>
-                  <input type="text" >
+                  <label for="user" >Name</label>
+                  <input type="text" value="<%= message.username %>" name="username">
 
                   <label for="user">Email</label>
-                  <input type="text" >
+                  <input type="text" value="<%= message.email %>" name="email">
 
                   <label for="user">Subject</label>
-                  <input type="text" >
+                  <input type="text" value="<%= message.subject %>"  name="subject">
 
                   <label for="user">Message</label>
-                  <textarea class="user_msg_textarea"></textarea>
+                  <textarea class="user_msg_textarea" name="message"><%= message.message %></textarea>
                 </form>
             </div>
         </div>

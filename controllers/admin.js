@@ -7,7 +7,7 @@ const productModel = require('../models/products')
 const categoryModel = require('../models/category')
 const bannerModel = require('../models/banner')
 const couponModel = require('../models/coupon')
-const router = require('../routes/admin')
+const messageModel = require('../models/message')
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 
@@ -15,7 +15,9 @@ const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z
 
 
 
-// <<<< ========== SIGNUP ========== >>>>>
+
+// <<<<< ================================  SIGNUP ==================================== >>>>>>
+
 
 
 
@@ -77,8 +79,9 @@ exports.postSignup = async(req, res) => {
 
 
 
+// <<<<< ================================  KEY VERIFICATION ===================================== >>>>>>
 
-// <<<< ========== KEY VERIFICATION ========== >>>>>
+
 
 
 
@@ -130,7 +133,9 @@ exports.postKeyverify = async(req,res) => {
 
 
 
-// <<<< ========== LOGIN ========== >>>>>
+  
+// <<<<< ================================== LOGIN ======================================= >>>>>>
+
 
 
 
@@ -192,8 +197,8 @@ exports.postLogin = async(req,res) => {
 
 
 
+// <<<<< ====================================== EMAIL VERIFY ========================================== >>>>>>
 
-// <<<<< ============== EMAIL VERIFY =============== >>>>
 
 
 
@@ -235,9 +240,8 @@ exports.postEmailverify = async(req,res) => {
 
 
 
+// <<<<< ======================================= FORGET PASSWORD ============================================ >>>>>>
 
-
-// <<<<< ============ FORGET PASSWORD ============= >>>>>
 
 
 
@@ -278,7 +282,7 @@ exports.postForgetpassword = async(req,res) => {
 
 
 
-// <<<<< ============== HOME ================= >>>>>
+// <<<<< ========================================= HOME ============================================== >>>>>>
 
 
 
@@ -291,7 +295,7 @@ exports.getHome = (req, res) => {
 
 
 
-// <<<<<<< ================ PRODUCTS ================ >>>>>>
+// <<<<< ========================================= PRODUCTS ============================================== >>>>>>
 
 
 
@@ -500,7 +504,7 @@ exports.deleteProduct = async(req,res) =>{
 }
 
 
-// --------- PRODUCT OPEN -------
+// ------- PRODUCT OPEN ------
 
 exports.getOpenproduct = async(req,res) => {
 
@@ -522,7 +526,9 @@ exports.getOpenproduct = async(req,res) => {
 
 
 
-// <<<<< ============== USERS ================== >>>>>>
+// <<<<< ========================================= USERS ============================================== >>>>>>
+
+
 
 
 
@@ -559,7 +565,9 @@ exports.getCustomer = async(req,res) =>{
 
         const id = req.params.id
 
-        res.render('admin/pages/individualuser',{state:''})
+        const user = await signupModel.findOne({_id:id})
+
+        res.render('admin/pages/individualuser',{state:'',user})
 
     } catch (error) {
         console.log('Error in customer indi get',error.message);
@@ -591,8 +599,9 @@ exports.deleteUsers = async(req, res) => {
 
 
 
+// <<<<< ================================  CATEGORY ==================================== >>>>>>
 
-// <<<<<<< =================== CATEGORY ======================= >>>>>>>>>
+
 
 
 
@@ -696,7 +705,8 @@ exports.deletCategory = async(req,res) =>{
 
 
 
-// <<<< =================== BANNERS ====================== >>>>
+// <<<<< ================================  BANNERS ==================================== >>>>>>
+
 
 
 
@@ -840,7 +850,10 @@ exports.postEditbanner = async(req,res) => {
 
 
 
-// <<<<<< ==================== COUPONS ========================= >>>>>>>
+
+// <<<<< ================================  COUPONS ==================================== >>>>>>
+
+
 
 
 
@@ -976,6 +989,47 @@ exports.deleteCoupon = async(req,res) => {
 
 
 
+// <<<<< ================================  USER MESSAGES ==================================== >>>>>>
+
+
+
+
+
+exports.getMessages = async(req, res) => {
+    try {
+
+        const messages = await messageModel.find()
+        
+        const state = 'messages'
+        res.render('admin/pages/messages', { state , messages})
+    } catch (error) {
+        console.log('Error in user messages',error.messsage);
+    }
+}
+
+
+
+
+
+exports.getUsermessage = async(req,res) =>{
+
+    try {
+
+        const id = req.params.id
+
+        const message = await messageModel.findOne({_id:id})
+
+        res.render('admin/pages/usermessage',{state:'' , message})
+        
+    } catch (error) {
+        console.log('Error in user message open',error.message);
+    }
+}
+
+
+
+
+
 
 
 
@@ -985,17 +1039,3 @@ exports.getOrders = (req,res) => {
     const state = 'orders'
     res.render('admin/pages/orders', { state })
 }
-
-exports.getMessages = (req, res) => {
-    const state = 'messages'
-    res.render('admin/pages/messages', { state })
-}
-
-
-
-
-
-exports.getUsermessage = (req,res) =>{
-    res.render('admin/pages/usermessage',{state:''})
-}
-

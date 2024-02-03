@@ -136,6 +136,12 @@ router.delete('/coupons/remove_coupon',controller.deleteCoupon)
 
 
 
+// MESSAGES
+
+router.get('/messages',controller.getMessages)
+router.get('/messages/user_message/:id',controller.getUsermessage)
+
+
 
 
 
@@ -159,9 +165,6 @@ router.put('/coupons/edit_coupon/:id')
 
 router.post('/coupons/remove_coupon/:id')
 
-
-router.get('/messages',controller.getMessages)
-router.get('/messages/user_message',controller.getUsermessage)
 
 
 
