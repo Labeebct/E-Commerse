@@ -26,7 +26,7 @@
                         <% userList.forEach((user,index)=> { %>
                             <tr class="data_tr<%= user._id %>" style="cursor: pointer;">
                                 <td class="si_td"><%= index+1 %></td>
-                                <td><%= user._id %></td>
+                                <td class="user<%= user._id %>"><%= user._id %></td>
                                 <td><%= user.username %></td>
                                 <td><%= user.email %></td>
                                 <td><%= user.mobilenum %></td>
@@ -137,9 +137,6 @@ function next(){
 
 
 
-
-
-
 </script>
 
 
@@ -183,6 +180,16 @@ document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',asy
         console.log('Error in user deletion',error.message);
     }
 })
+
+
+
+document.querySelector('.user<%= user._id %>').addEventListener('click',() => {
+    window.location.href = '/admin/custumer/<%= user._id %>'
+})
+
+
+
+
 
 
 </script>

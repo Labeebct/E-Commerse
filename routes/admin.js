@@ -17,7 +17,6 @@ const upload = require('../middleware/multer')
 
 
 
-
 // SIGNUP -----------------------------
 
 router.get('/signup',controller.getSignup)
@@ -59,29 +58,39 @@ router.post('/forget_password',controller.postForgetpassword)
 
 
 
-
-
 // ADMIN HOME ----------------------------
+
 
 router.get('/home',controller.getHome)
 
 
-
-
+      
+   
 //  ADD PRODUCT --------------------------
+
+    
 
 router.get('/products',controller.getProducts)
 router.get('/product/add_product',controller.getAddproducts)
 router.post('/product/add_product',upload.array('productimg', 20), controller.postAddproduct);
+
+router.get('/product/edit_product/:id',controller.getEditproduct)
+router.post('/product/edit_product/:id',upload.array('productimg', 20),controller.postEditproduct)
+
+router.delete('/product/remove_product',controller.deleteProduct)
+
+router.get('/product/product_deltails',controller.getOpenproduct)
 
 
 
 
 // USERS MANAGE
 
+
 router.get('/custumers',controller.getUsers)
-router.get('/custumer',controller.getCustomer)
+router.get('/custumer/:id',controller.getCustomer)
 router.delete('/custumer/remove',controller.deleteUsers)
+
 
 
 
@@ -112,6 +121,22 @@ router.delete('/banners/remove_banners',controller.deleteBanner)
 
 
 
+// COUPONS
+
+
+router.get('/coupons',controller.getCoupons)
+router.get('/coupons/add_coupon',controller.getAddcoupons)
+router.post('/coupons/add_coupon',controller.postAddcoupons)
+
+router.get('/coupons/edit_coupon/:id',controller.getEditcoupons)
+router.post('/coupons/edit_coupon/:id',controller.postEditcoupons)
+
+router.delete('/coupons/remove_coupon',controller.deleteCoupon)
+
+
+
+
+
 
 
 router.get('/orders_list',controller.getOrders)
@@ -128,9 +153,6 @@ router.get('/category/edit_category/:id')
 router.put('/category/edit_category/:id')
 
 
-router.get('/coupons',controller.getCoupons)
-router.get('/coupons/add_coupon',controller.getAddcoupons)
-router.post('/coupons/add_coupon')
 
 router.get('/coupons/edit_coupon/:id')
 router.put('/coupons/edit_coupon/:id')

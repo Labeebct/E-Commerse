@@ -1,0 +1,133 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper product_open_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content productopen_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+           
+            <div class="main_frame">
+                <div class="product_frame">
+                   <div class="img_frame">
+                      <button><i class="bi left_right_icon bi-caret-left"></i></button>
+                      <div>
+                      <img src="<%= product.productimg[0] %>" class="product_image_img" alt="">
+                    </div>
+                    <button><i class="bi left_right_icon bi-caret-right"></i></button>
+                   </div>
+                   <div class="img_position" style="display: flex; width: 100%; justify-content: space-evenly; margin-bottom: 1rem;">
+                    <% product.productimg.forEach((img) => { %>
+                        
+                        <div style="width: 4.5rem; height: 4.7rem;  border-radius: 0%; cursor: pointer;"><img src="<%= img %>" style="width: 100%; height: 100%;" alt=""></div>
+                        
+                   <% }) %>
+                   </div>
+                </div>
+                <div class="product_detail_frame">
+                   <ul>
+                      <li style="font-size: 2rem; font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(255, 255, 255, 0.866);"><%= product.productname %></li>
+ 
+                      <!-- ================================================================= -->
+ 
+                      <li style="display: flex; gap: .7rem; align-items: center;">
+                         <p class="old_price"><%= product.oldprice %></p>
+                         <p class="new_price"><%= product.newprice %></p>
+                         <p class="discount">80%</p>
+                      </li>
+ 
+                     <!-- ========================================== -->
+ 
+                     
+                      <li style="display: flex; gap: .7rem; align-items: center; height: 2rem;">
+                         <span style="display: flex; align-items: center; font-family: 'sans-serif'; ">Return <span  style="color: red; padding-top: .3rem; font-size: 1.3rem;"><i class="bi bi-x"></i></span></span>
+                         <span style="display: flex; align-items: center; font-family: 'sans-serif'; ">Availabe<span  style="color: rgb(0, 201, 0); padding-top: .3rem; font-size: 1.4rem;"><i class="bi bi-check"></i></span></span>
+                      </li>
+ 
+    
+                      <!-- ===================================== -->
+ 
+                      <li style="font-family: 'Poppins',sans-serif; height: 2.5rem;">
+                         Rating : ⭐⭐⭐⭐⭐
+                      </li>
+ 
+  
+                      <!-- =========================================================== -->
+                      <li class="size_li">
+                         <p style="font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(255, 255, 255, 0.876);">SIZE :</p>
+                         <% if(product.size.length > 0){ %>
+
+                         <% product.size.forEach((size) => { %>
+
+                         <span class="label_span">
+                          <input id="s" value="<%= size %>" name="size" type="radio" >
+                          <label for="s" ><%= size %></label>
+                         </span>
+                         
+                         <% }) %>
+                         <% } %>
+
+
+                      </span>
+                      </li>
+ 
+                      <!-- ======================================== -->
+ 
+                      <li class="color_li">
+                         <p style="font-family: 'Poppins',sans-serif; font-weight: 600; color: rgba(255, 255, 255, 0.876);">COLOR :</p>
+
+                         <% if(product.color.length > 0){ %>
+
+                         <% product.color.forEach((color) => { %>
+
+                            <span style="background-color:rgb(234, 234, 234)" class="label_span_color">
+                                <input  id="black" name="color"  type="radio" >
+                                <label for="black" ><%= color %></label>
+                            </span>
+                                
+                            
+                            <% }) %>  
+                            
+                        <% } %>
+
+
+                      </li>
+ 
+                      <!-- =================================================== -->
+ 
+                      <li>
+                         <div style="display: flex; gap: 1rem; align-items: center;">
+                            <div class="stock_left"><%= product.stock %> STOCKS</div>
+                         </div>
+                      </li>
+ 
+ 
+                      <!-- ======================================= -->
+ 
+ 
+ 
+                      <li style="height: 12rem; flex-direction: column; align-items: start; gap: .3rem;">
+                         <p class="disc_p">Description</p>
+                         <div class="discription_frame" style="color: black;">
+                            <%= product.description %>
+                         </div>
+                      </li>
+ 
+                      <!-- ======================================================= -->
+ 
+ 
+ 
+ 
+                      <!-- =================================================================== -->
+ 
+                      <li class="btn_li" style="display: flex; height: 3rem; justify-content: space-between; width: 90%; margin-top: 2rem;">
+                        DELIVERY WITHIN : <%= product.deliverywithin %> Days
+                      </li>
+ 
+                   </ul>
+                </div>
+             </form>
+             </div>                  
+
+        </div>
+    </div>
+</div>
+<%- include('../../common/end.ejs') %>

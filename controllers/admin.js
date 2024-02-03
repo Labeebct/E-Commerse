@@ -6,6 +6,8 @@ const adminDatas = require('../models/admin_signup')
 const productModel = require('../models/products')
 const categoryModel = require('../models/category')
 const bannerModel = require('../models/banner')
+const couponModel = require('../models/coupon')
+const router = require('../routes/admin')
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 
@@ -309,6 +311,8 @@ exports.getProducts = async(req, res) => {
 }
 
 
+// -------- ADD ------
+
 
 exports.getAddproducts = async(req,res) =>{
     try {
@@ -394,12 +398,133 @@ exports.postAddproduct = async(req,res) => {
   }
 }
 
+
+
+// -------- EDIT -------
+
+
+exports.getEditproduct = async(req,res) => {
+
+    try {
+
+        const id = req.params.id
+
+        const product = await productModel.findOne({_id:id})
+
+        const categories = await categoryModel.find()
+        
+        res.render('admin/pages/editproduct',{state:'',categories , id , product})
+
+    } catch (error) {
+
+        console.log('Error in get edit product',error.message);
+    }
+
+}
+
+
     
+exports.postEditproduct = async(req,res) => {
+
+    try {
+
+        const id = req.params.id
+
+        const findProduct = await productModel.findOne({_id:id})
+
+        const {productname , oldprice , newprice , category , subcategory , size , color , returns , stock , deliverywithin , description} = req.body
+        
+         const update = {
+            productimg:'',
+            productname,
+            oldprice,
+            newprice,
+            category:category || findProduct.category,
+            subcategory:subcategory || findProduct.subcategory,
+            size,
+            color,
+            returns,
+            stock,
+            deliverywithin,
+            description
+        }
+
+        
+        if(req.files.length > 0){
+            const imagePath = req.files.map((file) => '/products-img/' + file.filename)
+            update.productimg = imagePath
+        }
+        else{
+            update.productimg = findProduct.productimg
+        }
+
+           
+        await productModel.updateOne({_id:id},update)
+        res.status(200).redirect('/admin/products')
+
+
+
+    } catch (error) {
+
+        console.log('Error in post edit product',error.message);
+    }
+}
+
+
+
+// ------- DELETE ---------
+
+
+
+exports.deleteProduct = async(req,res) =>{
+
+    try {
+
+
+        const { id } = req.body
+
+        const productDelete = await productModel.deleteOne({_id:id})
+  
+        if(productDelete){
+          res.status(200).json({success:true})
+  
+        }
+        else{
+          return res.status(224).json({success:false})
+        }
+
+        
+    } catch (error) {
+        console.log('Error in product delete',error.message)
+    }
+}
+
+
+// --------- PRODUCT OPEN -------
+
+exports.getOpenproduct = async(req,res) => {
+
+    try {
+
+        const id = req.query.product
+
+        const product = await productModel.findOne({_id:id})
+
+        res.render('admin/pages/productopen',{state:'',product})
+        
+    } catch (error) {
+        console.log('Error in get open product',error.message);
+    }
+}
+
+
 
 
 
 
 // <<<<< ============== USERS ================== >>>>>>
+
+
 
 
 
@@ -429,6 +554,23 @@ exports.getUsers = async(req, res) => {
 
 
 
+exports.getCustomer = async(req,res) =>{
+    try {
+
+        const id = req.params.id
+
+        res.render('admin/pages/individualuser',{state:''})
+
+    } catch (error) {
+        console.log('Error in customer indi get',error.message);
+    }
+}
+
+
+
+
+
+// -------- DELETE ------
 
 
 exports.deleteUsers = async(req, res) => {
@@ -478,6 +620,8 @@ exports.getAddcategory = (req,res) =>{
 }
 
 
+// -------- ADD ------
+
 
 exports.postAddcategory = async(req,res) =>{
     try {
@@ -520,6 +664,10 @@ exports.postAddcategory = async(req,res) =>{
         console.log('Error in post add category',error.message);
     }
 }
+
+
+// -------- DELETE ------
+
 
 exports.deletCategory = async(req,res) =>{
 
@@ -571,6 +719,9 @@ exports.getBanners = async(req, res) => {
 }
 
   
+// -------- ADD ------
+
+
 exports.getAddbanner = (req,res) =>{
     res.render('admin/pages/addbanner',{state:''})
 }
@@ -607,6 +758,7 @@ exports.postAddbanner = async(req,res) =>{
     
 }
 
+// -------- DELETE ------
 
 
 exports.deleteBanner = async(req,res) => {
@@ -632,6 +784,8 @@ exports.deleteBanner = async(req,res) => {
 }
 
 
+// -------- EDIT ------
+
 
 exports.getEditbanner = async(req,res) => {
 
@@ -639,6 +793,7 @@ exports.getEditbanner = async(req,res) => {
         const id = req.params.id
     
         const Banner = await bannerModel.findOne({_id:id})
+
     
         res.render('admin/pages/editbanner',{state:'',id,Banner})
         
@@ -652,10 +807,26 @@ exports.getEditbanner = async(req,res) => {
 exports.postEditbanner = async(req,res) => {
 
     try {
-
+        const{ bannername , bannerhead , banneramount , startdate , enddate }  = req.body
+        
         const id = req.params.id
 
-        const findBanner = await bannerModel.findOne({_id:id})
+        if(req.file){
+            var imagePath = '/banner-image/' + req.file.filename 
+        }
+
+        await bannerModel.updateOne({_id:id},
+        {
+            bannerimg:imagePath,
+            bannername,
+            bannerhead,
+            banneramount,
+            startdate,
+            enddate
+        })
+
+        res.status(200).redirect('/admin/banners')
+
         
     } catch (error) {
 
@@ -669,16 +840,146 @@ exports.postEditbanner = async(req,res) => {
 
 
 
+// <<<<<< ==================== COUPONS ========================= >>>>>>>
 
 
 
 
 
 
-exports.getCoupons = (req, res) => {
-    const state = 'coupons'
-    res.render('admin/pages/coupons', { state })
+exports.getCoupons = async(req, res) => {
+
+    try {      
+
+        const coupons = await couponModel.find()
+        const state = 'coupons'
+
+        res.render('admin/pages/coupons', { state , coupons})
+        
+    } catch (error) {
+        console.log('Error in get coupons',error.message);
+    }
+ 
 }
+
+
+
+
+// ---------- ADD ----------
+
+
+
+exports.getAddcoupons = (req,res) =>{
+    res.render('admin/pages/addcoupons',{state:''})
+}
+
+
+exports.postAddcoupons = async(req,res) => {
+    try {
+
+        const {couponnname} = req.body
+
+        const couponExist = await couponModel.findOne({couponnname})
+
+        if(couponExist){
+
+          return res.status(240).json({success:false})
+        }
+        else{
+
+            await couponModel.create(req.body)
+            res.status(200).json({success:true})
+        }
+
+        
+    } catch (error) {
+        console.log('Error in post add coupons',error.message);
+    }
+}
+
+
+
+// ---------- EDIT ----------
+
+
+
+
+exports.getEditcoupons = async(req,res) => {
+    try {
+
+        const id = req.params.id
+    
+        const coupon = await couponModel.findOne({_id:id})
+
+    
+        res.render('admin/pages/editcoupons',{state:'' , id , coupon})
+
+        
+    } catch (error) {
+        console.log('Error in post edit coupons',error.message);
+    }
+}
+
+
+
+exports.postEditcoupons = async(req,res) => {
+    try {
+
+        const id  = req.params.id
+
+        const updateCoupon = await couponModel.updateOne({_id:id},req.body)
+
+        if(updateCoupon){
+            console.log('Coupon edit Succes');
+            res.status(200).redirect('/admin/coupons')
+        }
+        else{
+            console.log('Coupon edit Failed');
+            res.status(400).redirect(`/admin/coupons/edit_coupon/${id}`)
+        }
+
+        
+    } catch (error) {
+        console.log('Error in post edit coupons',error.message);
+    }
+}
+
+
+
+
+// --------- DELETE ----------
+
+
+
+exports.deleteCoupon = async(req,res) => {
+    try {
+
+        const { id } = req.body
+
+        const couponDelete = await couponModel.deleteOne({_id:id})
+  
+        if(couponDelete){
+          res.status(200).json({success:true})
+  
+        }
+        else{
+          return res.status(224).json({success:false})
+        }
+
+        
+    } catch (error) {
+        console.log('Error in post edit coupons',error.message);
+    }
+}
+
+
+
+
+
+
+
+
+
 
 exports.getOrders = (req,res) => {
     const state = 'orders'
@@ -692,20 +993,9 @@ exports.getMessages = (req, res) => {
 
 
 
-exports.getAddcoupons = (req,res) =>{
-    res.render('admin/pages/addcoupons',{state:''})
-}
 
 
 exports.getUsermessage = (req,res) =>{
     res.render('admin/pages/usermessage',{state:''})
-}
-
-
-
-
-
-exports.getCustomer = (req,res) =>{
-    res.render('admin/pages/individualuser',{state:''})
 }
 

@@ -1,0 +1,132 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper add_products_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content add_products_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+            <div class="form_frame">
+                <form action="/admin/product/edit_product/<%= id %>" method="post" spellcheck="false" class="product_form" enctype="multipart/form-data">
+                <div class="top">
+                    <div class="top_left">
+                        <label for="product_name">Product Name</label>
+                        <input type="text" value="<%= product.productname %>" name="productname">
+
+                        <div style="display: flex; gap: 1rem; width: 100%; padding: .5rem 0;">
+                            <span style="display: flex; flex-direction: column; gap: .2rem;">
+                                <label for="product_name">Old Price</label>
+                                <input type="number" value="<%= product.oldprice %>" name="oldprice" style="width: 100%;" >
+                            </span>
+                            <span style="display: flex; flex-direction: column; gap: .2rem;">
+                                <label for="product_name">Discount Price</label>
+                                <input type="number" value="<%= product.newprice %>" name="newprice" style="padding-left: 1rem; width: 100%; " >
+                            </span>
+                        </div>
+
+                        <label for="product_name">Category</label>
+                        <select style="font-family: 'Poppins',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;" name="category" id="size">
+                            <option style="font-size: .8rem;"><%= product.category.toUpperCase() %></option>
+                            <% categories.forEach((cat)=>{ %>
+                                <option value="<%= cat.categoryname %>"><%= cat.categoryname %></option>
+                           <% }) %>
+                        </select>
+                    </div>
+                    <div class="top_right">
+                        <img src="<%= product.productimg[0] %>" id="imagePreview" class="product_img">
+                        <div class="file_div"><span class="choose_file">Choose File</span><input onchange="previewImage(this)" type="file" value="<%= product.productname %>" name="productimg" class="input_file"  multiple></div>
+                    </div>
+                </div>
+                <div class="bottom" style="padding: 0 1rem;">
+
+                    <div style="display: flex; gap: 1rem; width: 100%;">
+                        <span style="display: flex; flex-direction: column; gap: .2rem;">
+                        <label for="size">Size</label>
+                        <div class="color_drop">
+                            <p>SIZE  : <%= product.size %></p>
+                            <ul class="drop_bar">
+                            <li><input type="checkbox" name="size" id="S" value="S"><label for="S">S</label></li>
+                            <li><input type="checkbox" name="size" id="M" value="M"><label for="M" >M</label></li>
+                            <li><input type="checkbox" name="size" id="L" value="L"><label  for="L">L</label></li>
+                            <li><input type="checkbox" name="size" id="XL" value="XL"><label  for="XL">XL</label></li>
+                            <li><input type="checkbox" name="size" id="2XL" value="2XL"><label for="2XL">2XL</label></li>
+                           </ul>
+                    </div>
+                    </span>
+                    
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                    <label for="size">Color</label>
+                    <div class="color_drop">
+                            <p>COLOR : <%= product.color %></p>
+                            <ul class="drop_bar">
+                            <li><input type="checkbox" name="color" id="green" value="green"><label style="color: rgb(0, 195, 0);" for="green">green</label></li>
+                            <li><input type="checkbox" name="color" id="black" value="black"><label for="black" style="color: black;">black</label></li>
+                            <li><input type="checkbox" name="color" id="red" value="red"><label style="color: red;" for="red">red</label></li>
+                            <li><input type="checkbox" name="color" id="orange" value="orange"><label style="color: orange;" for="orange">orange</label></li>
+                            <li><input type="checkbox" name="color" id="pink" value="pink"><label style="color: rgb(216, 118, 135);" for="pink">pink</label></li>
+                           </ul>
+                    </div>
+                    </span>
+
+
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                    <label for="size">Sub Category</label>
+                    <select style="font-family: 'Poppins', sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 8rem; padding: .4rem;" name="subcategory" id="subcategory" onchange="selectSubcategory(this)">
+                        <option value=""><%= product.subcategory.toUpperCase() %></option>
+                        <% categories.forEach((cat) => { %>
+                            <% cat.subcategory.forEach((sub) => { %>
+                            <option value="<%= sub %>"><%= sub %></option>
+                            <% }) %>
+                        <% }) %>
+                    </select>
+                    </span>
+
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                        <label for="size">Return</label>
+                        <input type="checkbox" value='true' <%= product.returns ? 'checked' : '' %> name="returns">
+                    </span>
+
+                    <span style="display: flex; flex-direction: column; width: 9%; gap: .2rem;">
+                        <label for="size">Stock</label>
+                        <input type="number"  value="<%= product.stock %>" name="stock">
+                    </span>
+
+                    </div>
+
+                    <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
+                        <label for="size">Delivery Within</label>
+                        <input type="number" value="<%= product.stock %>" name="deliverywithin" style="width: 94%;">
+                    </span>
+                    
+                    <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
+                        <label for="size">Product Description</label>
+                        <textarea name="description" id="text_area"><%= product.description %></textarea>
+                    </span>
+                    <p class="error_msg"></p>
+                    <div style="width: 100%; display: flex; justify-content: center; padding: .9rem;">
+                        <button type="submit" class="add_btn">Add Product</button>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function previewImage(input) {
+    var file = input.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('imagePreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+
+
+
+</script>
+
+<%- include('../../common/end.ejs') %>

@@ -27,18 +27,18 @@
                         </thead>
                         <tbody>
                             <% products.forEach((product,index)=> { %>
-                            <tr>
+                            <tr class="td_tr<%= product._id %>">
 
                                 <td><%= index+1 %></td>
-                                <td><%= product._id %></td>
+                                <td class="product<%= product._id %>"><%= product._id %></td>
                                 <td class="product_image_li"><img src="<%= product.productimg[0] %>" class="product_img"></td>
                                 <td><%= product.productname %></td>
                                 <td><%= product.stock %></td>
                                 <td><%= product.category %></td>
                                 <td><%= product.subcategory %></td>
                                 <td><%= product.newprice.toLocaleString() %></td>
-                                <td><button><i class="bi bi-pencil-square"></i></button></td>
-                                <td><button><i class="bi bi-trash"></i></button></td>
+                                <td><button class="edit_btn<%= product._id %>"><i class="bi bi-pencil-square"></i></button></td>
+                                <td><button class="delete_btn<%= product._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>
 
                             <% }) %>  
@@ -64,4 +64,60 @@
         </div>
     </div>
 </div>
+
+
+<% products.forEach((product,index)=> { %>
+
+<script>
+
+document.querySelector('.edit_btn<%= product._id %>').addEventListener('click',() => {
+    window.location.href = '/admin/product/edit_product/<%= product._id %>'
+})
+
+
+document.querySelector('.delete_btn<%= product._id %>').addEventListener('click',async(e) => {
+    try {
+
+        const response = await fetch('/admin/product/remove_product',{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({id:'<%= product._id %>'})
+        })
+
+        const result = await response.json()
+
+        if(response.ok){
+            if(result.success){
+                document.querySelector('.td_tr<%= product._id %>').remove()
+            }
+            else{
+                console.log('Failed to delete product');
+            }
+        }
+
+        
+    } catch (error) {
+        console.log('Error in banner Delete',error.message);
+    }
+})
+
+
+
+document.querySelector('.product<%= product._id %>').addEventListener('click',() => {
+    window.location.href = '/admin/product/product_deltails?product=<%= product._id %>'
+})
+
+
+
+
+
+
+
+</script>
+
+<% }) %>  
+
+
 <%- include('../../common/end.ejs') %>
