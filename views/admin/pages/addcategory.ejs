@@ -7,22 +7,30 @@
             <div class="addcatogery_frame">
                 <h3 class="add_cat_text">ADD CATEGORY</h3>
                  <span style="display: flex; flex-direction: column; align-items: center; gap: .8rem; margin-top: 1rem; width: 100%;">
+                    
                     <label for="category name">Category Name</label>
                     <input spellcheck="false" type="text" style="text-transform: uppercase;"  class="input_text categoryname">
+                    
+                    <label for="category name">Category Image URL</label>
+                    <input spellcheck="false" type="text" class="input_text categoryimg">
                     <label for="category name">Subcategory Name</label>
-                    <div style="display: flex; width: 80%; gap: .4rem;">
+                    <div class="sub_cat_div">
+                    <div style="display: flex; width: 100%; gap: .4rem;">
                     <input spellcheck="false" type="text" style="text-transform: uppercase;" class="input_text subcategoryname">
                     <button type="button" class="add_btns" onclick="add()">ADD</button>
                    </div>
-                 </span>
-                 <p class="error_msg"></p>
-                 <script>
-                 const errPara =  document.querySelector('.error_msg')
-                 setTimeout(() => {
+                   <ul class="subcat_ul">
+                    </ul>
+                    </div>
+                    </span>
+                    <p class="error_msg"></p>
+                    <script>
+                    const errPara =  document.querySelector('.error_msg')
+                    setTimeout(() => {
                     errPara.innerHTML = ''
-                 }, 2000);
-               </script>
-                 <div style="width: 100%; display: flex; justify-content: center; padding: .9rem;">
+                    }, 2000);
+                </script>
+                    <div style="width: 100%; display: flex; justify-content: center; padding: .9rem;">
                 <button type="submit" class="add_btn">Add Category</button>
                 </div>
                 </div>
@@ -51,14 +59,29 @@ const errMsg = document.querySelector('.error_msg')
 
 const addCatgoryBtn = document.querySelector('.add_btn')
 const catname = document.querySelector('.categoryname')
+const categoryimg = document.querySelector('.categoryimg')
 const subCatname = document.querySelector('.subcategoryname')
 
+const subcatUl = document.querySelector('.subcat_ul')
 
 function add(){
 
+    if (subCatname.value.trim() === '') {
+        errMsg.textContent = 'Please enter a subcategory name';
+        return;
+    }
+
     subCatArray.push(subCatname.value.toUpperCase())
+
+    const subcatLi = document.createElement('li')
+    subcatLi.classList.add('subcat_li')
+    subcatLi.innerHTML = subCatname.value.toUpperCase()
+    subcatUl.appendChild(subcatLi)
+    
     subCatname.value = ''
 }
+
+
 
 
 
@@ -72,7 +95,7 @@ addCatgoryBtn.addEventListener('click',async(e) => {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({categoryname:catname.value.toUpperCase(),subcategory:subCatArray})
+            body:JSON.stringify({categoryname:catname.value.toUpperCase(),catimageUrl:categoryimg.value,subcategory:subCatArray})
         })
 
         if(!response.ok){
@@ -101,14 +124,6 @@ addCatgoryBtn.addEventListener('click',async(e) => {
         console.log('Error in Category add');
     }
 })
-
-
-
-
-
-
-
-
 
 
 

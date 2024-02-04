@@ -79,7 +79,7 @@ exports.postSignup = async(req, res) => {
 
 
 
-// <<<<< ================================  KEY VERIFICATION ===================================== >>>>>>
+// <<<<< ============================  KEY VERIFICATION =========================== >>>>>>
 
 
 
@@ -134,7 +134,7 @@ exports.postKeyverify = async(req,res) => {
 
 
   
-// <<<<< ================================== LOGIN ======================================= >>>>>>
+// <<<<< ================================= LOGIN ==================================== >>>>>>
 
 
 
@@ -197,7 +197,7 @@ exports.postLogin = async(req,res) => {
 
 
 
-// <<<<< ====================================== EMAIL VERIFY ========================================== >>>>>>
+// <<<<< ================================== EMAIL VERIFY ================================== >>>>>>
 
 
 
@@ -240,7 +240,7 @@ exports.postEmailverify = async(req,res) => {
 
 
 
-// <<<<< ======================================= FORGET PASSWORD ============================================ >>>>>>
+// <<<<< =================================== FORGET PASSWORD ================================== >>>>>>
 
 
 
@@ -282,7 +282,7 @@ exports.postForgetpassword = async(req,res) => {
 
 
 
-// <<<<< ========================================= HOME ============================================== >>>>>>
+// <<<<< ========================================== HOME =========================================== >>>>>>
 
 
 
@@ -295,7 +295,7 @@ exports.getHome = (req, res) => {
 
 
 
-// <<<<< ========================================= PRODUCTS ============================================== >>>>>>
+// <<<<< ======================================= PRODUCTS ======================================== >>>>>>
 
 
 
@@ -526,7 +526,7 @@ exports.getOpenproduct = async(req,res) => {
 
 
 
-// <<<<< ========================================= USERS ============================================== >>>>>>
+// <<<<< ================================================== USERS ================================================== >>>>>>
 
 
 
@@ -540,13 +540,17 @@ exports.getUsers = async(req, res) => {
         const state = 'users'
         const page = parseInt(req.query.page) || 1
         const pageSize = 7
+      
+        console.log(page);
 
         const skip = (page - 1) * pageSize
         
         const userList = await signupModel.find().skip(skip).limit(pageSize)
 
+
         if(userList){
-            res.render('admin/pages/users', { state , userList})
+
+            res.status(200).render('admin/pages/users', { state , userList})
         }
         else{
             res.status(500).send('Bad Server')
@@ -555,11 +559,11 @@ exports.getUsers = async(req, res) => {
         
     } catch (error) {
         console.log('Error in admin get users',error.message);
-    }
+    }    
 }
+   
 
-
-
+ 
 exports.getCustomer = async(req,res) =>{
     try {
 
@@ -599,7 +603,7 @@ exports.deleteUsers = async(req, res) => {
 
 
 
-// <<<<< ================================  CATEGORY ==================================== >>>>>>
+// <<<<< =====================================================  CATEGORY =================================================== >>>>>>
 
 
 
@@ -635,7 +639,7 @@ exports.getAddcategory = (req,res) =>{
 exports.postAddcategory = async(req,res) =>{
     try {
 
-        const {categoryname , subcategory} = req.body
+        const {categoryname , subcategory , catimageUrl} = req.body
 
         const catExist = await categoryModel.findOne({categoryname:req.body.categoryname})
        
@@ -646,6 +650,7 @@ exports.postAddcategory = async(req,res) =>{
     
         const newSchema = new categoryModel({
             categoryname:req.body.categoryname,
+            catimageUrl,
             subcategory
         })
 
@@ -705,7 +710,7 @@ exports.deletCategory = async(req,res) =>{
 
 
 
-// <<<<< ================================  BANNERS ==================================== >>>>>>
+// <<<<< ===================================================  BANNERS ===================================================== >>>>>>
 
 
 
@@ -851,7 +856,7 @@ exports.postEditbanner = async(req,res) => {
 
 
 
-// <<<<< ================================  COUPONS ==================================== >>>>>>
+// <<<<< ====================================================  COUPONS ============================================== >>>>>>
 
 
 
@@ -989,7 +994,7 @@ exports.deleteCoupon = async(req,res) => {
 
 
 
-// <<<<< ================================  USER MESSAGES ==================================== >>>>>>
+// <<<<< ==============================================  USER MESSAGES ================================================= >>>>>>
 
 
 
@@ -1028,6 +1033,8 @@ exports.getUsermessage = async(req,res) =>{
 
 
 
+
+// <<<<< ============================================  ORDERS =================================================== >>>>>>
 
 
 

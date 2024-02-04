@@ -1,11 +1,11 @@
 <%- include('../components/head.ejs') %>
 <div class="wrapper addbanner_wrapper">
     <%- include('../components/top_nav.ejs') %>
-    <div class="content addbanner_content">
+     <div class="content addbanner_content">
         <%- include('../components/left_bar.ejs') %>
-        <div class="right_content">
+          <div class="right_content">
             <form method="post" class="form_data" enctype="multipart/form-data" spellcheck="false">
-                <div class="addcatogery_frame">
+              <div class="addcatogery_frame">
                      <img src="" class="category_img" id="imagePreview" alt="">
                      <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="bannerimg" onchange="previewImage(this)" class="input_file"></div>
                      <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 0rem; width: 80%;">
@@ -20,16 +20,16 @@
                         <input type="number" name="banneramount" class="input_text">
 
 
-                        <div style="display: flex;">
-                            <span style="display: flex; flex-direction: column; gap: .3rem; width: 80%;">
-                               <label for="startdate">Start Date</label>
-                               <input type="date" name="startdate" style="height: 2rem; width: 50%;">
-                            </span>
-                            <span style="display: flex; flex-direction: column; gap: .3rem;">
-                               <label for="enddate">End Date</label>
-                               <input type="date" name="enddate" style="height: 2rem; width: 100%;">
-                            </span>
-                        </div>
+                     <div style="display: flex;">
+                        <span style="display: flex; flex-direction: column; gap: .3rem; width: 80%;">
+                            <label for="startdate">Start Date</label>
+                            <input type="date" name="startdate" style="height: 2rem; width: 50%;">
+                        </span>
+                        <span style="display: flex; flex-direction: column; gap: .3rem;">
+                            <label for="enddate">End Date</label>
+                            <input type="date" name="enddate" style="height: 2rem; width: 100%;">
+                        </span>
+                    </div>
                         
                      <p class="error_msg"></p>
                      </div>
@@ -38,11 +38,13 @@
                     </div>
                     </div>
                 </form> 
-        </div>
-    </div>
+          </div>
+     </div>
 </div>
 
 <script>
+
+
 
 function previewImage(input) {  
     var file = input.files[0];
@@ -117,6 +119,8 @@ submitBtn.addEventListener('click',async(e) => {
     }
 })
 
+
 </script>
+
 
 <%- include('../../common/end.ejs') %>

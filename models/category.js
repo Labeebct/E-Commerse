@@ -10,6 +10,10 @@ const categorySchema = new Schema({
     subcategory:{
         type:Array,
         required:true
+    },
+    catimageUrl:{
+        type:String,
+        required:true
     }
 })
 

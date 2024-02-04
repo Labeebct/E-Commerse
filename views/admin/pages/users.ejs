@@ -24,6 +24,7 @@
                         </thead>
                         <tbody>
                         <% userList.forEach((user,index)=> { %>
+
                             <tr class="data_tr<%= user._id %>" style="cursor: pointer;">
                                 <td class="si_td"><%= index+1 %></td>
                                 <td class="user<%= user._id %>"><%= user._id %></td>
@@ -34,15 +35,18 @@
                                 <td>1</td>
                                 <td><button class="delet_btn delet_btn<%= user._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>
+
                           <% }) %>  
                         </tbody>
                       </Table>
+                      <div id="userListData" style="display: none;"><%= JSON.stringify(userList) %>
+                    </div>
                 </div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
                         <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
                         <div class="links">
-                            <button class="page_btn" onclick="active()" value="1">1</button>
+                            <button class="page_btn active_link" onclick="active()" value="1">1</button>
                             <button class="page_btn" onclick="active()" value="2">2</button>
                             <button class="page_btn" onclick="active()" value="3">3</button>
                             <button class="page_btn" onclick="active()" value="4">4</button>
@@ -61,26 +65,9 @@
 
 <script>
 
-// const prevBtn = document.querySelector('.back_btn')
-// const pagesBtn = document.querySelectorAll('.page_btn')
-// const nextBtn = document.querySelector('.next_btn')
-
-
-
-// pagesBtn.forEach((btn) => {
-    
-//     btn.addEventListener('click',(e) => {
-       
-//         const pageValue = e.target.value
-//         window.location.href = `/admin/custumers?page=${pageValue}`
-        
-//     })
-    
-// })
-
 
 const pagesBtn = document.getElementsByClassName('page_btn')
-
+const userList =document.getElementById('userListData').innerHTML
 
 
 let currentValue = 1
@@ -94,17 +81,16 @@ async function  active(){
     event.target.classList.add('active_link')
     currentValue = event.target.value
 
-    const response = await fetch('`/admin/custumers?page=${currentValue}`')
+    const response = await fetch(`/admin/custumers?page=${currentValue}`)
 
-    const result = await response.json()
 
-    console.log(result.userList)
-
+    console.log(JSON.parse(userList));
 }
 
 
 
-function prev(){
+
+async function prev(){
     if(currentValue > 1){
         for(l of pagesBtn){
 
@@ -112,14 +98,15 @@ function prev(){
    }   
 
    currentValue--;
-   window.location.href = `/admin/custumers?page=${currentValue}`
+   const response = await fetch(`/admin/custumers?page=${currentValue}`)
    pagesBtn[currentValue-1].classList.add('active_link')
+   console.log(JSON.parse(userList));
 
 
     }
 }
 
-function next(){
+async function next(){
     if(currentValue < 7 ){
         for(l of pagesBtn){
 
@@ -127,19 +114,13 @@ function next(){
    }   
    
    currentValue++;
-   window.location.href = `/admin/custumers?page=${currentValue}`
+   const response = await fetch(`/admin/custumers?page=${currentValue}`)
    pagesBtn[currentValue-1].classList.add('active_link')
+   console.log(JSON.parse(userList));
 
 
     }
 }
-
-
-
-
-
-
-
 
 
 </script>

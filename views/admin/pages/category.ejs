@@ -14,9 +14,10 @@
                         <thead>
                             <tr class="th_tr">
                             <th style="width: 3%;">SI</th>
-                            <th style="width: 16%;">CATEGORY _ID</th>
+                            <th style="width: 8%;">CATEGORY _ID</th>
                             <th style="width: 10%;">CATEGORY NAME</th>
-                            <th style="width: 10%;">PRODUCT COUNT</th>
+                            <th style="width: 10%;">CATEGORY IMAGE</th>
+                            <th style="width: 8%;">PRODUCT COUNT</th>
                             <th style="width: 12%;">SUBCATEGORY</th>
                             <th style="width: 5%;">DELETE</th>
                         </tr>
@@ -27,6 +28,9 @@
                                 <td><%= index+1 %></td>
                                 <td><%= cat._id %></td>
                                 <td><%= cat.categoryname %></td>
+                                <td>
+                                    <img src="<%= cat.catimageUrl %>" height="60px" width="60px"  alt="">
+                                </td>
                                 <td>6</td>
                                 <td class="sub_li">
                                     <% cat.subcategory.forEach((sub)=>{ %>

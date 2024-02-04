@@ -62,6 +62,7 @@
         border: none;
         outline: none;
         overflow: hidden;
+
     }
     .search_input{
         border: none;
@@ -82,7 +83,7 @@
         border: none;
         outline: none;
         cursor: pointer;
-        background-color:#fb5a04;
+        background-color:#152D35;
         letter-spacing: .02rem;
         font-weight: 600;
         font-family: 'Poppins', sans-serif;
@@ -1739,6 +1740,16 @@ word-wrap: break-word;
         margin: 2rem;
         letter-spacing: .05rem;
     }
+    .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: .91rem;
+        margin-top: .4rem;
+    }
+    .succes{
+        color: rgb(0, 203, 0);
+    }
     .user_msg_frame form{
         display: flex;
         flex-direction: column;
@@ -1763,12 +1774,13 @@ word-wrap: break-word;
     }
     .user_msg_textarea{
         width: 100%;
-        height: 10rem;
+        height: 9rem;
         padding: 1rem;
         resize: none;
         outline: none;
         border-radius: .3rem;
         border-color: rgba(0, 0, 0, 0.172);
+        font-family: 'Poppins',sans-serif;
     }
     .send_msg_btn{
         padding: 1rem;
@@ -1904,6 +1916,13 @@ word-wrap: break-word;
         background-color: #152D35;
         color: white !important;
     }
+    .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: .91rem;
+        margin-top: .5rem;
+    }
     .user_msg_frame h3{
         font-family: 'Poppins',sans-serif;
         text-align: center;
@@ -1918,6 +1937,9 @@ word-wrap: break-word;
         flex-direction: column;
         gap: .8rem;
         margin-top: 3rem;
+    }
+    .succes{
+        color: rgb(4, 197, 4);
     }
     .user_msg_frame label{
         font-size: .7rem;
@@ -1955,7 +1977,7 @@ word-wrap: break-word;
         font-family: 'Poppins',sans-serif;
         letter-spacing: .1rem;
         cursor: pointer;
-        margin-top: 2rem;
+        margin-top: 1rem;
         transition: all .5s;
         box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.305);
     }
@@ -2572,7 +2594,7 @@ word-wrap: break-word;
     cursor: pointer;
     font-weight: 500;
     transition: top .2s;
-    font-size: .9rem;
+    font-size: .85rem;
     color: rgba(255, 255, 255, 0.845);
    }
    header ul li:hover{
@@ -2765,6 +2787,22 @@ word-wrap: break-word;
     justify-content: center;
     width: 100%;
     height: 60%;
+
+}
+.wish_btn{
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all .4s;
+}
+.wish_btn:active{
+    transform: scale(.9);
+}
+.bi-heart{
+    font-size: 1.2rem;
 }
 .center{
     display: flex;

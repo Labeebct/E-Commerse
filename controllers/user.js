@@ -16,7 +16,7 @@ const {emailOtp , verify} = require('../middleware/emailotp')
 
 
 
-// <<<< ========== SIGNUP ========== >>>>>
+// <<<< ===================================== SIGNUP ======================================== >>>>>
 
 
 
@@ -82,7 +82,7 @@ try {
 
 
 
-// <<<< ========== LOGIN ========== >>>>>
+// <<<< ================================================= LOGIN ============================================= >>>>>
 
 
 
@@ -124,6 +124,7 @@ exports.postLogin = async(req,res) => {
                if(userExist.verified){
                     
                req.session.email = email   /* Setting email as session */
+               req.session.loggedin = true
                return res.status(200).json({auth:true})
                     
                }
@@ -148,7 +149,7 @@ exports.postLogin = async(req,res) => {
 
 
 
-// <<<< ========== OTP VERIFICATION ========== >>>>>
+// <<<< ========================================== OTP VERIFICATION =========================================== >>>>>
 
 
 
@@ -179,7 +180,7 @@ exports.postOtpverification = (req,res) => {
 
 
 
-// <<<< ========== RESEND OTP ========== >>>>>
+// <<<< ============================================== RESEND OTP ================================================== >>>>>
 
 
 
@@ -206,7 +207,7 @@ exports.getOtpsuccess = (req,res) => {
 
 
 
-// <<<<<============== FORGET PASSWORD ============>>>>
+// <<<<<============================================== FORGET PASSWORD =========================================== >>>>
 
 
 
@@ -251,15 +252,12 @@ exports.postForgetpass = async (req, res) => {
 
 
 
-// <<<<<============== EMAIL OTP ============>>>>
+// <<<<<========================================== EMAIL OTP ====================================================>>>>
 
 
 
 exports.getEmailOtp = async(req, res) => {
      try {
-          
-          const mobile = req.body
-          const findUser = await findOne({mobilenum:mobile})
           const errMsg =  req.flash('incorrect')
           res.render('user/pages/emailotp',{state:'',errMsg})
 
@@ -273,12 +271,12 @@ exports.postEmailOtp = (req, res) => {
      const {D1,D2,D3,D4} = req.body  
      const code = D1+D2+D3+D4
      verify(code,res,req)
-}
+}    
 
 
 
 
-// <<<<<< =========== RESEND EMAIL OTP ============ >>>>>>
+// <<<<<< ========================================= RESEND EMAIL OTP ======================================= >>>>>>
 
 
 
@@ -298,7 +296,7 @@ exports.getResendemailotp = async(req,res) =>{
 
 
 
-// <<<<<============== CHANGE PASSWORD ============>>>>
+// <<<<<====================================== CHANGE PASSWORD =====================================================>>>>
 
 
 
@@ -345,9 +343,7 @@ exports.postChangepass = async(req, res) => {
 
      }
 
-
-
-
+     
      } catch (error) {
           console.log('Error in getchange pass',error.message);
      }
@@ -359,7 +355,7 @@ exports.postChangepass = async(req, res) => {
 
 
 
-// <<<<< ============ HOME ============== >>>>>
+// <<<<< ============================================== HOME ========================================================= >>>>>
 
 
 

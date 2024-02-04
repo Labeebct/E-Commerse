@@ -6,7 +6,7 @@
             <div class="right_content">
                <div class="user_msg_frame">
                   <h3>CONTACT</h3>
-                  <form action="" style="width: 90%; height: 100%;" spellcheck="false">
+                  <form method="post" style="width: 90%; height: 100%;" id="form" spellcheck="false">
                     <label for="user">Name</label>
                     <input type="text" name="username" >
   
@@ -14,13 +14,13 @@
                     <input type="text" name="email">
   
                     <label for="user">Subject</label>
-                    <input type="text" name="Subject">
+                    <input type="text" name="subject">
   
                     <label for="user">Message</label>
                     <textarea class="user_msg_textarea" name="message"></textarea>
+      
+                    <p class="error_msg"></p>
 
-                    
-                    
                   <button type="button" class="send_msg_btn">SEND MESSAGE</button>
                   </form>
               </div>
@@ -28,4 +28,74 @@
          </div>
          <%- include('../../common/footer.ejs') %>
    </div>
+
+
+   <script>
+
+
+      const submitBtn = document.querySelector('.send_msg_btn')
+      const errMsg = document.querySelector('.error_msg')
+      const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
+      
+      
+      submitBtn.addEventListener('click',async(e)=>{
+         try {
+      
+            e.preventDefault()
+      
+            const userName = document.getElementsByName('username')[0].value
+            const email = document.getElementsByName('email')[0].value
+            const subject = document.getElementsByName('subject')[0].value
+            const message = document.getElementsByName('message')[0].value
+      
+            const updateForm = document.getElementById('form')
+      
+            const form =new FormData(updateForm)
+      
+            if(!userName || !email || !subject || !message){
+               errMsg.innerHTML = 'Please Fill all Fields'
+               setTimeout(() => {
+                  errMsg.innerHTML = ''
+               }, 2000);
+            }
+            else if(!emailRegex.test(email)){
+               errMsg.innerHTML = 'Incorrect email Format'
+              setTimeout(() => {
+                  errMsg.innerHTML = ''
+              }, 2000);
+            }
+            else{
+               console.log('dd');
+               const response = await fetch('/account/contactus',{
+               method:'POST',
+               headers:{
+                  'Content-Type':'application/json'
+               },
+               body:JSON.stringify(Object.fromEntries(form))
+            })
+      
+            const result = await response.json()
+            if(!response.ok){
+             throw new Error('Error in contact use post')
+            }
+            else{
+               if(result.success){
+                  errMsg.innerHTML = 'Message send succes'
+                  errMsg.classList.add('succes')
+                  setTimeout(() => {
+                     window.location.href = '/home'
+                  }, 400);
+
+               }
+            }
+         }  
+         } catch (error) {
+            console.log('Error in update password',error.message);
+         }
+      })
+      
+      
+      
+      </script>
+
 <%- include('../../common/end.ejs') %>
