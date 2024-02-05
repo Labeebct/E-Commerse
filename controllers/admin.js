@@ -1,5 +1,6 @@
  const bcrypt = require('bcrypt')
 const moment = require('moment')
+const fs = require('fs')
 
 const signupModel = require('../models/signup')
 const adminDatas = require('../models/admin_signup')
@@ -302,12 +303,22 @@ exports.getHome = (req, res) => {
 
 exports.getProducts = async(req, res) => {
     try {
-        
-        
+
+
         const state = 'products'
-        const products = await productModel.find()
+
+        const page = parseInt(req.query.page) || 1
+
+        const pageSize = 4
+      
+        const totalLength = await productModel.find()
+        const pagCount = Math.floor( totalLength.length / pageSize + 1)
         
-        res.render('admin/pages/products', { state , products})
+        const skip = (page - 1) * pageSize
+        
+        const products = await productModel.find().skip(skip).limit(pageSize)
+                
+        res.render('admin/pages/products', { state , products , page , pagCount })
 
     } catch (error) {
         console.log('Error in get products',error.message);
@@ -341,10 +352,7 @@ exports.postAddproduct = async(req,res) => {
      return res.status(207).json({success:false,ERR:'Cannot exceed Image more than 5'})
 
     }
-    else{
-    
 
-    }
     const imagePath = req.files.map((file) => '/products-img/' + file.filename)
 
     const {
@@ -455,6 +463,12 @@ exports.postEditproduct = async(req,res) => {
 
         
         if(req.files.length > 0){
+
+            findProduct.productimg.forEach((img)=>{
+                const imgpath = 'public/' + img
+                fs.unlinkSync(imgpath)
+             })
+
             const imagePath = req.files.map((file) => '/products-img/' + file.filename)
             update.productimg = imagePath
         }
@@ -487,13 +501,18 @@ exports.deleteProduct = async(req,res) =>{
 
         const { id } = req.body
 
-        const productDelete = await productModel.deleteOne({_id:id})
+        const productDelete = await productModel.findByIdAndDelete(id)
   
         if(productDelete){
+          
+          productDelete.productimg.forEach((img)=>{
+             const imgpath = 'public/' + img
+             fs.unlinkSync(imgpath)
+          })
           res.status(200).json({success:true})
   
         }
-        else{
+        else{ 
           return res.status(224).json({success:false})
         }
 
@@ -533,7 +552,6 @@ exports.getOpenproduct = async(req,res) => {
 
 
 
-
 exports.getUsers = async(req, res) => {
     try {
 
@@ -541,7 +559,7 @@ exports.getUsers = async(req, res) => {
         const page = parseInt(req.query.page) || 1
         const pageSize = 7
       
-        console.log(page);
+        console.log(req.query.page);
 
         const skip = (page - 1) * pageSize
         
@@ -550,18 +568,18 @@ exports.getUsers = async(req, res) => {
 
         if(userList){
 
-            res.status(200).render('admin/pages/users', { state , userList})
+            res.status(200).render('admin/pages/users', { state , userList , page})
         }
         else{
             res.status(500).send('Bad Server')
         }
 
-        
     } catch (error) {
         console.log('Error in admin get users',error.message);
     }    
 }
    
+
 
  
 exports.getCustomer = async(req,res) =>{
@@ -722,10 +740,21 @@ exports.getBanners = async(req, res) => {
 
     try {
 
-        const banners = await bannerModel.find()
         
         const state = 'banners'
-        res.render('admin/pages/banners', { state , banners})
+
+        const page = parseInt(req.query.page) || 1
+
+        const pageSize = 7
+      
+        const totalLength = await bannerModel.find()
+        const pagCount = Math.floor( totalLength.length / pageSize + 1)
+
+        const skip = (page - 1) * pageSize
+        
+        const bannersList = await bannerModel.find().skip(skip).limit(pageSize)
+        
+        res.render('admin/pages/banners', { state , bannersList , page , pagCount})
 
     } catch (error) {
         console.log('Error in get Banners',error.message);
@@ -782,9 +811,11 @@ exports.deleteBanner = async(req,res) => {
 
       const { id } = req.body
 
-      const bannerDelete = await bannerModel.deleteOne({_id:id})
+      const bannerDelete = await bannerModel.findByIdAndDelete(id)
 
       if(bannerDelete){
+        const imagePath = 'public/' +  bannerDelete.bannerimg
+        fs.unlinkSync(imagePath)
         res.status(200).json({success:true})
 
       }
@@ -796,7 +827,7 @@ exports.deleteBanner = async(req,res) => {
         console.log('Error in delete banner',error.message);
     }
     
-}
+}  
 
 
 // -------- EDIT ------
@@ -868,11 +899,23 @@ exports.postEditbanner = async(req,res) => {
 exports.getCoupons = async(req, res) => {
 
     try {      
-
-        const coupons = await couponModel.find()
+            
         const state = 'coupons'
 
-        res.render('admin/pages/coupons', { state , coupons})
+        const page = parseInt(req.query.page) || 1
+
+        const pageSize = 7
+    
+        const totalLength = await couponModel.find()
+        const pagCount = Math.floor( totalLength.length / pageSize + 1)
+        
+
+        const skip = (page - 1) * pageSize
+        
+        const coupons = await couponModel.find().skip(skip).limit(pageSize)
+
+
+        res.render('admin/pages/coupons', { state , coupons , page , pagCount})
         
     } catch (error) {
         console.log('Error in get coupons',error.message);

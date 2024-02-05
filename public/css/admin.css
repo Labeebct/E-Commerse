@@ -1111,7 +1111,7 @@
     }
     .product_frame{
         width: 70rem;
-        height: 42rem;
+        height: 43rem;
         margin-bottom: 1.5rem;
     }
     .pro_top{
@@ -1159,7 +1159,7 @@
         overflow-y: scroll;
         padding-top: 1rem;
         width: 100%;
-        height: 80%;
+        height: 85%;
     }
     .pro_center::-webkit-scrollbar {
         width: 0.5em;
@@ -1236,14 +1236,13 @@
     .product_frame{
         width: 70rem;
         height: 42rem;
-        margin-bottom: 1.5rem;
     }
     .pro_top{
         position: relative;
         display: flex;
         align-items: center;
         width: 100%;
-        height: 10%;
+        height: 8%;
     }
     .pro_top h3{
         font-family: 'Poppins',sans-serif;
@@ -1276,7 +1275,7 @@
         overflow-y: scroll;
         padding-top: 1rem;
         width: 100%;
-        height: 80%;
+        height: 92%;
     }
     .pro_center::-webkit-scrollbar {
         width: 0.5em;
@@ -1295,7 +1294,7 @@
         background-color: rgba(250, 235, 215, 0.408);
     }
     table,td,th{
-        border: 1px solid rgba(88, 88, 88, 0.77);
+        border: 1px solid rgba(88, 88, 88, 0.617);
         border-collapse: collapse;
       }
     th{
@@ -1359,7 +1358,7 @@
     }
     .product_frame{
         width: 70rem;
-        height: 42rem;
+        height: 43rem;
         margin-bottom: 1.5rem;
     }
     .pro_top{
@@ -1397,7 +1396,7 @@
         overflow-y: scroll;
         padding-top: 1rem;
         width: 100%;
-        height: 80%;
+        height: 85%;
     }
     .pro_center::-webkit-scrollbar {
         width: 0.5em;
@@ -1470,7 +1469,7 @@
     }
     .product_frame{
         width: 70rem;
-        height: 42rem;
+        height: 43rem;
         margin-bottom: 1.5rem;
     }
     .pro_top{
@@ -1508,7 +1507,7 @@
         overflow-y: scroll;
         padding-top: 1rem;
         width: 100%;
-        height: 80%;
+        height: 85%;
     }
     .pro_center::-webkit-scrollbar {
         width: 0.5em;
@@ -1978,7 +1977,6 @@
         width: 24rem;
         height: 9rem;
         margin-top: 2rem;
-        border: 1px solid rgba(0, 0, 0, 0.44);
         background-color: white;
     }
         .error_msg{

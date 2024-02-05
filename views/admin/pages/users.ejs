@@ -40,7 +40,7 @@
                           <% }) %>  
                         </tbody>
                       </Table>
-                      <div id="userListData" style="display: none;"><%= JSON.stringify(userList) %></div>
+                      <div id="pagecount" style="display: none;"><%= page %></div>
                 </div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
@@ -80,30 +80,28 @@ const loadingScreen = document.querySelector('.loading_screen')
 
 
 const pagesBtn = document.getElementsByClassName('page_btn')
-const userList =document.getElementById('userListData').innerHTML
+
+const pagecount =document.getElementById('pagecount').innerHTML
 
 
-let currentValue = 1
+let currentValue = pagecount
 
 
-async function  active(){
+function  active(){
     for(l of pagesBtn){
 
         l.classList.remove('active_link')
     }
-    event.target.classList.add('active_link')
     currentValue = event.target.value
+    event.target.classList.add('active_link')
+    window.location.href = `/admin/custumers?page=${currentValue}`
 
-    const response = await fetch(`/admin/custumers?page=${currentValue}`)
-
-    console.log(JSON.parse(userList));
 
 }
 
 
 
-
-async function prev(){
+function prev(){
     if(currentValue > 1){
         for(l of pagesBtn){
 
@@ -111,15 +109,14 @@ async function prev(){
    }   
 
    currentValue--;
-   const response = await fetch(`/admin/custumers?page=${currentValue}`)
+   window.location.href = `/admin/custumers?page=${currentValue}`
    pagesBtn[currentValue-1].classList.add('active_link')
-   console.log(JSON.parse(userList));
 
 
     }
 }
 
-async function next()
+function next()
 {
     if(currentValue < 7 ){
         for(l of pagesBtn){
@@ -127,15 +124,13 @@ async function next()
    l.classList.remove('active_link')
    }   
    
-
    currentValue++;
-   const response = await fetch(`/admin/custumers?page=${currentValue}`)
+   window.location.href = `/admin/custumers?page=${currentValue}`
    pagesBtn[currentValue-1].classList.add('active_link')
-   console.log(JSON.parse(userList));
-
 
     }
 }
+
 
 
 </script>
@@ -204,9 +199,3 @@ document.querySelector('.user<%= user._id %>').addEventListener('click',() => {
 <% }) %>  
 
 <%- include('../../common/end.ejs') %>
-
-
-<!-- let html = ''
-for(let i=0;i<120;i++){
-    html+=`<td>${result[i].name}</td<td>${result[i].name}</td<td>${result[i].name}</td<td>${result[i].name}</td<td>${result[i].name}</td<td>${result[i].name}</td>`
-} -->

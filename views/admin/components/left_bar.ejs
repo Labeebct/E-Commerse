@@ -3,12 +3,12 @@
     <ul>
         <li class="first_li"><i class="bi bi-android"></i></li>
         <li onclick="location.href='/admin/home' " class="<%= state=='dashboard' ? 'active' : '' %>"><i class="bi bi_left_bar bi-clipboard-data-fill"></i>Dashboard</li>
-        <li onclick="location.href='/admin/products' " class="<%= state==='products' ? 'active' : '' %>"><i class="bi bi_left_bar bi-box-seam-fill"></i>Products</li>
-        <li onclick="location.href='/admin/custumers' " class="<%= state==='users' ? 'active' : '' %>"><i class="bi bi_left_bar bi-person-fill"></i>Users</li>
+        <li onclick="location.href='/admin/products?page=1' " class="<%= state==='products' ? 'active' : '' %>"><i class="bi bi_left_bar bi-box-seam-fill"></i>Products</li>
+        <li onclick="location.href='/admin/custumers?page=1' " class="<%= state==='users' ? 'active' : '' %>"><i class="bi bi_left_bar bi-person-fill"></i>Users</li>
         <li onclick="location.href='/admin/category' " class="<%= state==='category' ? 'active' : '' %>"><i class="bi bi_left_bar bi-tags-fill"></i>Category</li>
-        <li onclick="location.href='/admin/coupons' " class="<%= state==='coupons' ? 'active' : '' %>"><i class="bi bi_left_bar bi-person-vcard-fill"></i>Coupons</li>
+        <li onclick="location.href='/admin/coupons?page=1' " class="<%= state==='coupons' ? 'active' : '' %>"><i class="bi bi_left_bar bi-person-vcard-fill"></i>Coupons</li>
         <li onclick="location.href='/admin/orders_list' " class="<%= state==='orders' ? 'active' : '' %>"><i class="bi bi-gift-fill"></i>Orders</li>
-        <li onclick="location.href='/admin/banners' " class="<%= state==='banners' ? 'active' : '' %>"><i class="bi bi-calendar-date-fill"></i>Banners</li>
+        <li onclick="location.href='/admin/banners?page=1' " class="<%= state==='banners' ? 'active' : '' %>"><i class="bi bi-calendar-date-fill"></i>Banners</li>
         <li onclick="location.href='/admin/messages' " class="<%= state==='messages' ? 'active' : '' %>"><i class="bi bi-chat-text-fill"></i>Messages</li>
     </ul>
 </div>

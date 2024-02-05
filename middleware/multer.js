@@ -5,12 +5,7 @@ const storage = multer.diskStorage({
     destination: function (req, file, cb) {
 
      if(file.fieldname === 'productimg'){
-   
-      if(req.files.length > 5){
-        cb(null, './public/dump')
-      }else{
         cb(null, './public/products-img')
-      }
      }
      else if(file.fieldname === 'categoryimg'){
       cb(null, './public/category-image')
@@ -33,4 +28,4 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 module.exports = upload
-
+   

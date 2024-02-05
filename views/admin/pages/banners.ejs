@@ -27,7 +27,7 @@
                         </thead>
                         <tbody>
 
-                            <% banners.forEach((ban,index)=>{ %>
+                            <% bannersList.forEach((ban,index)=>{ %>
 
                             <tr class="td_tr<%= ban._id %>">
                                 <td><%= index+1 %></td>
@@ -46,6 +46,8 @@
                         </tbody>
                      </Table>
                 </div>
+                <div id="pagecount" style="display: none;"><%= page %></div>
+                <div id="pagetotalcount" style="display: none;"><%= pagCount %></div>
                 <div class="pro_bottom">
                    <div class="link_pagination">
                       <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
@@ -78,11 +80,65 @@
             loadingScreen.style.display = 'none'
         }
         
-        
+        const pagesBtn = document.getElementsByClassName('page_btn')
+
+const pagecount =document.getElementById('pagecount').innerHTML
+const pagetotalcount =document.getElementById('pagetotalcount').innerHTML
+
+
+
+let currentValue = parseInt(pagecount)
+
+
+
+function  active(){
+    for(l of pagesBtn){
+
+        l.classList.remove('active_link')
+    }
+    event.target.classList.add('active_link')
+    currentValue = event.target.value
+    window.location.href = `/admin/banners?page=${currentValue}`
+
+
+}
+
+
+function prev(){
+    if(currentValue > 1){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+
+   currentValue--;
+   window.location.href = `/admin/banners?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+
+    }
+}
+
+function next()
+{
+    if(currentValue < pagetotalcount ){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+   
+   currentValue++;
+   window.location.href = `/admin/banners?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+    }
+}
+
+
 
 </script>
 
-<% banners.forEach((ban,index)=>{ %>
+<% bannersList.forEach((ban,index)=>{ %>
 
 <script>
 

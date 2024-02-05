@@ -18,7 +18,7 @@
                             <th style="width: 23%;">PRODUCT _ID</th>
                             <th style="width: 14%;">IMAGE</th>
                             <th style="width: 14%;">NAME</th>
-                            <th style="width: 6%;">STOCKS</th>
+                            <th style="width: 8%;">STOCKS</th>
                             <th style="width: 12%;">CATEGORY</th>
                             <th style="width: 12%;">SUB CATE</th>
                             <th style="width: 7%;">PRICE</th>
@@ -46,6 +46,8 @@
                         </tbody>
                       </Table>
                 </div>
+                <div id="pagecount" style="display: none;"><%= page %></div>
+                <div id="pagetotalcount" style="display: none;"><%= pagCount %></div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
                         <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
@@ -78,7 +80,60 @@
         function hideLoading(){
             loadingScreen.style.display = 'none'
         }
+
+
         
+const pagesBtn = document.getElementsByClassName('page_btn')
+const pagecount =document.getElementById('pagecount').innerHTML
+const pagetotalcount =document.getElementById('pagetotalcount').innerHTML
+
+
+let currentValue = parseInt(pagecount)
+
+
+function  active(){
+    for(l of pagesBtn){
+
+        l.classList.remove('active_link')
+    }
+    event.target.classList.add('active_link')
+    currentValue = event.target.value
+    window.location.href = `/admin/products?page=${currentValue}`
+
+
+}
+
+
+function prev(){
+    if(currentValue > 1){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+
+   currentValue--;
+   window.location.href = `/admin/products?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+
+    }
+}
+
+function next()
+{
+    if(currentValue < pagetotalcount ){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+   
+   currentValue++;
+   window.location.href = `/admin/products?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+    }
+}
+
         
 
 </script>
