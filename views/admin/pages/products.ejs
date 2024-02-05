@@ -1,5 +1,6 @@
 <%- include('../components/head.ejs') %>
 <div class="wrapper products_wrapper">
+    <div class="loading_screen"></div>
     <%- include('../components/top_nav.ejs') %>
     <div class="content products_content">
         <%- include('../components/left_bar.ejs') %>
@@ -66,9 +67,30 @@
 </div>
 
 
+<script>
+    
+    const loadingScreen = document.querySelector('.loading_screen')
+        
+        function showLoading(){
+            loadingScreen.style.display = 'block'
+        }
+        
+        function hideLoading(){
+            loadingScreen.style.display = 'none'
+        }
+        
+        
+
+</script>
+
+
 <% products.forEach((product,index)=> { %>
 
 <script>
+
+
+document.addEventListener('DOMContentLoaded',() => {
+
 
 document.querySelector('.edit_btn<%= product._id %>').addEventListener('click',() => {
     window.location.href = '/admin/product/edit_product/<%= product._id %>'
@@ -77,6 +99,8 @@ document.querySelector('.edit_btn<%= product._id %>').addEventListener('click',(
 
 document.querySelector('.delete_btn<%= product._id %>').addEventListener('click',async(e) => {
     try {
+
+        showLoading()
 
         const response = await fetch('/admin/product/remove_product',{
             method:'DELETE',
@@ -87,6 +111,7 @@ document.querySelector('.delete_btn<%= product._id %>').addEventListener('click'
         })
 
         const result = await response.json()
+        hideLoading()
 
         if(response.ok){
             if(result.success){
@@ -110,9 +135,7 @@ document.querySelector('.product<%= product._id %>').addEventListener('click',()
 })
 
 
-
-
-
+})
 
 
 </script>

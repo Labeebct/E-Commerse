@@ -1,5 +1,6 @@
 <%- include('../components/head.ejs') %>
 <div class="wrapper category_wrapper">
+    <div class="loading_screen"></div>
     <%- include('../components/top_nav.ejs') %>
     <div class="content category_content">
         <%- include('../components/left_bar.ejs') %>
@@ -63,16 +64,35 @@
     </div>
 </div>
 
+<script>
+    
+    const loadingScreen = document.querySelector('.loading_screen')
+        
+        function showLoading(){
+            loadingScreen.style.display = 'block'
+        }
+        
+        function hideLoading(){
+            loadingScreen.style.display = 'none'
+        }
+        
+        
+
+</script>
 
 <% categories.forEach((cat,index)=>{ %>
 
 <script>
 
+
+document.addEventListener('DOMContentLoaded',() => {
+
+
 document.querySelector('.delete_btn<%= cat._id %>').addEventListener('click',async(e) => {
     try {
 
         e.preventDefault()
-
+        showLoading()
         const response = await fetch('/admin/category/deletecategory',{
             method:'DELETE',
             headers:{
@@ -82,7 +102,7 @@ document.querySelector('.delete_btn<%= cat._id %>').addEventListener('click',asy
         })
 
         const result = await response.json()
-    
+        hideLoading()
         if(result.success){
             document.querySelector('.td_tr<%= cat._id %>').remove()
         }
@@ -93,6 +113,8 @@ document.querySelector('.delete_btn<%= cat._id %>').addEventListener('click',asy
     } catch (error) {
         console.log('Error in category delere',error.message);
     }
+})
+
 })
 
 </script>

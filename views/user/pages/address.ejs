@@ -10,7 +10,7 @@
                      <button onclick="location.href = '/account/editaddress'">Edit Profile</button>
                  </div>
                <div class="form_frame">
-                   <form action="" spellcheck="false">
+                   <form method="post" id="form" spellcheck="false" enctype="multipart/form-data">
                    <div class="top">
                        <div class="top_left">
                            <label for="username">User Name</label>
@@ -32,15 +32,16 @@
    
                        </div>
                        <div class="top_right">
-                           <img src="" class="product_img" alt="">
-                           <div class="file_div"><span class="choose_file">Choose File</span><input type="file" class="input_file"></div>
+                           <img src="" id="imagePreview" class="product_img" alt="">
+                       <span style="display: flex; flex-direction: column; gap: .2rem;  width: 25%;">
+                        <div class="file_div"><span class="choose_file">Choose</span><input type="file" onchange="previewImage(this)"  name="profileimg" class="input_file"></div>
                        </div>
                    </div>
                    <div class="bottom" style="padding: 0 1rem;">
 
                      <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
                         <label for="dob">DOB</label>
-                        <input type="date" name="dob" style="width: 94%;">
+                        <input type="date" name="DOB" style="width: 94%;">
                     </span>
                     
                        <div style="display: flex; gap: 1rem; width: 94%; margin-top: .4rem;">
@@ -80,6 +81,10 @@
                            <label for="address">Address</label>
                            <textarea name="address" id="text_area"></textarea>
                        </span>
+                       <p class="error_msg"></p>
+                       <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
+                           <button type="button" class="update_profile_btn">UPDATE PROFILE</button>
+                       </span>
                    </div>
                </form>
                </div>
@@ -88,4 +93,61 @@
         </div>
         <%- include('../../common/footer.ejs') %>
    </div>
+
+<script>
+
+
+function previewImage(input) {  
+    var file = input.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('imagePreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+
+
+const submitBtn = document.querySelector('.update_profile_btn')
+
+submitBtn.addEventListener('click',async(e) =>{
+
+    try {
+
+        const firstName = document.getElementsByName('firstname')[0].value
+        const lastName = document.getElementsByName('lastname')[0].value
+        const DOB = document.getElementsByName('DOB')[0].value
+        const country = document.getElementsByName('country')[0].value
+        const state = document.getElementsByName('state')[0].value
+        const district = document.getElementsByName('district')[0].value
+        const zip = document.getElementsByName('zip')[0].value
+        const landmark = document.getElementsByName('landmark')[0].value
+        const address = document.getElementsByName('address')[0].innerHTML
+
+        const errMsg = document.querySelector('.error_msg')
+        const profile_form = document.getElementById('form')
+        const form = new FormData(profile_form)
+
+        if(!firstName || !lastName || !DOB || !country || !state || !district || !zip || !landmark || !address ){
+            errMsg.innerHTML = 'Please Fill all Fields'
+            setTimeout(() => {
+                errMsg.innerHTML = ''
+            }, 2000);
+        }
+        // else if()
+
+
+
+    } catch (error) {
+        console.log('Error in profile address',error.message);
+    }
+})
+
+
+
+
+</script>
+
 <%- include('../../common/end.ejs') %>

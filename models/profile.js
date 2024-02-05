@@ -34,33 +34,50 @@ const addressSchema = new Schema({
 })
 
 
-const cartSchema = new Schema({
-    
-})
-
 
 
 const profileSchema = new Schema({
-     firstname: {
+   firstname: {
+      type: String,
+      required: true
+   },
+   lastname: {
+      type: String,
+      required: true
+   },
+   DOB:{
+      type:Date,
+      required:true
+   },
+   country: {
+      type: String,
+      required: true
+   },
+   state: {
+      type: String,
+      required: true
+   }, 
+   district: {
+      type: String,
+      required: true
+   },
+    address:{
         type: String,
         required: true
-     },
-      lastname: {
+    }, 
+    landmark: {
         type: String,
         required: true
-     },
-     DOB:{
-        type:Date,
-        required:true
-     },
-     address:[addressSchema],
-     cart:[],
-     wishlist:[],
-     order:[],
-     userId: {
-        type: Schema.Types.ObjectId,
+    },
+    zip:{
+        type: Number,
         required: true
-    } }); 
+    },
+    newadress:[addressSchema],
+    userId:{
+      type: Schema.Types.ObjectId,
+      required: true
+   } }); 
 
 
 module.exports = new mongoose.model('profile',profileSchema)

@@ -1,5 +1,6 @@
 <%- include('../components/head.ejs') %>
 <div class="wrapper users_wrapper">
+    <div class="loading_screen"></div>
     <%- include('../components/top_nav.ejs') %>
     <div class="content users_content">
         <%- include('../components/left_bar.ejs') %>
@@ -39,13 +40,12 @@
                           <% }) %>  
                         </tbody>
                       </Table>
-                      <div id="userListData" style="display: none;"><%= JSON.stringify(userList) %>
-                    </div>
+                      <div id="userListData" style="display: none;"><%= JSON.stringify(userList) %></div>
                 </div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
-                        <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
-                        <div class="links">
+                       <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
+                         <div class="links">
                             <button class="page_btn active_link" onclick="active()" value="1">1</button>
                             <button class="page_btn" onclick="active()" value="2">2</button>
                             <button class="page_btn" onclick="active()" value="3">3</button>
@@ -53,8 +53,8 @@
                             <button class="page_btn" onclick="active()" value="5">5</button>
                             <button class="page_btn" onclick="active()" value="6">6</button>
                             <button class="page_btn" onclick="active()" value="7">7</button>
-                        </div>
-                        <button class="next_btn" onclick="next()"><i class="bi bi-chevron-right"></i></button>
+                         </div>
+                       <button class="next_btn" onclick="next()"><i class="bi bi-chevron-right"></i></button>
                     </div>
                 </div>
              </div>
@@ -64,6 +64,19 @@
 
 
 <script>
+
+
+const loadingScreen = document.querySelector('.loading_screen')
+        
+        function showLoading(){
+            loadingScreen.style.display = 'block'
+        }
+        
+        function hideLoading(){
+            loadingScreen.style.display = 'none'
+        }
+        
+        
 
 
 const pagesBtn = document.getElementsByClassName('page_btn')
@@ -83,8 +96,8 @@ async function  active(){
 
     const response = await fetch(`/admin/custumers?page=${currentValue}`)
 
-
     console.log(JSON.parse(userList));
+
 }
 
 
@@ -106,13 +119,15 @@ async function prev(){
     }
 }
 
-async function next(){
+async function next()
+{
     if(currentValue < 7 ){
         for(l of pagesBtn){
 
    l.classList.remove('active_link')
    }   
    
+
    currentValue++;
    const response = await fetch(`/admin/custumers?page=${currentValue}`)
    pagesBtn[currentValue-1].classList.add('active_link')
@@ -130,6 +145,9 @@ async function next(){
 
 <script>
     
+
+document.addEventListener('DOMContentLoaded',() => {
+ 
     
 document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',async(e) => {
 
@@ -137,6 +155,7 @@ document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',asy
 
     try {
 
+        showLoading()
         const response = await fetch('/admin/custumer/remove',{
             method:'DELETE',
             headers:{
@@ -146,6 +165,7 @@ document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',asy
         })
 
         const result = await response.json()
+        hideLoading()
 
         if(!response.ok){
         throw new Error('Error in user delete')
@@ -177,6 +197,7 @@ document.querySelector('.user<%= user._id %>').addEventListener('click',() => {
 
 
 
+})
 
 </script>
 

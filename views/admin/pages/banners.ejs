@@ -1,5 +1,6 @@
 <%- include('../components/head.ejs') %>
 <div class="wrapper banner_wrapper">
+    <div class="loading_screen"></div>
     <%- include('../components/top_nav.ejs') %>
     <div class="content banner_content">
         <%- include('../components/left_bar.ejs') %>
@@ -65,14 +66,35 @@
     </div>
 </div>
 
-<% banners.forEach((ban,index)=>{ %>
+<script>
+    
+    const loadingScreen = document.querySelector('.loading_screen')
+        
+        function showLoading(){
+            loadingScreen.style.display = 'block'
+        }
+        
+        function hideLoading(){
+            loadingScreen.style.display = 'none'
+        }
+        
+        
 
+</script>
+
+<% banners.forEach((ban,index)=>{ %>
 
 <script>
 
-document.querySelector('.delete_btn<%= ban._id %>').addEventListener('click',async(e) => {
-    try {
 
+
+document.addEventListener('DOMContentLoaded',() => {
+        
+    
+    document.querySelector('.delete_btn<%= ban._id %>').addEventListener('click',async(e) => {
+        try {
+            
+        showLoading()
         const response = await fetch('/admin/banners/remove_banners',{
             method:'DELETE',
             headers:{
@@ -80,9 +102,8 @@ document.querySelector('.delete_btn<%= ban._id %>').addEventListener('click',asy
             },
             body:JSON.stringify({id:'<%= ban._id %>'})
         })
-
         const result = await response.json()
-
+        hideLoading()
         if(response.ok){
             if(result.success){
                 document.querySelector('.td_tr<%= ban._id %>').remove()
@@ -111,6 +132,8 @@ document.querySelector('.edit_btn<%= ban._id %>').addEventListener('click',(e) =
     }
 })
 
+
+})
 
 </script>
 

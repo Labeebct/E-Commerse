@@ -1,5 +1,6 @@
 <%- include('../components/head.ejs') %>
 <div class="wrapper coupons_wrapper">
+    <div class="loading_screen"></div>
     <%- include('../components/top_nav.ejs') %>
     <div class="content coupons_content">
         <%- include('../components/left_bar.ejs') %>
@@ -66,15 +67,35 @@
     </div>
 </div>
 
+
+<script>
+    
+    const loadingScreen = document.querySelector('.loading_screen')
+        
+        function showLoading(){
+            loadingScreen.style.display = 'block'
+        }
+        
+        function hideLoading(){
+            loadingScreen.style.display = 'none'
+        }
+        
+        
+
+</script>
+
 <% coupons.forEach((coupons,index)=>{ %>
 
 
 <script>
 
+document.addEventListener('DOMContentLoaded',() => {
+
 
 document.querySelector('.delete_btn<%= coupons._id %>').addEventListener('click',async(e) => {
     try {
 
+        showLoading()
         const response = await fetch('/admin/coupons/remove_coupon',{
             method:'DELETE',
             headers:{
@@ -84,7 +105,7 @@ document.querySelector('.delete_btn<%= coupons._id %>').addEventListener('click'
         })
 
         const result = await response.json()
-
+        hideLoading()
         if(response.ok){
             if(result.success){
                 document.querySelector('.td_tr<%= coupons._id %>').remove()
@@ -115,6 +136,7 @@ document.querySelector('.edit_btn<%= coupons._id %>').addEventListener('click',(
 
 
 
+})
 
 
 

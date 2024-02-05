@@ -43,6 +43,20 @@
 }
 
 
+.loading_screen{
+    position: absolute;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-color:#0c0c0c;
+    z-index:1;
+    background-image: url('/images/loading.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: 40rem;
+}
+
 
 /* <<<<============ SIGNUP WRAPPER ============>>> */
 

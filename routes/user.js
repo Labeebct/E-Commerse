@@ -4,6 +4,7 @@ const controller = require('../controllers/user')
 const accountController = require('../controllers/account') 
 
 
+const upload = require('../middleware/multer')
 
 
 // <<<<<<< ====================== AUTHENTICATION ======================== >>>>>>>
@@ -139,7 +140,7 @@ router.get('/order_success')
 
 
 router.get('/account/address',accountController.getAdress)
-router.get('/account/editaddress',accountController.getEditaddress)
+router.get('/account/editaddress',upload.single('profileimg'),accountController.getEditaddress)
 
 router.put('/account/address')
 

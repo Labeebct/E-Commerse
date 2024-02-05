@@ -3,7 +3,7 @@ const submitBtn = document.querySelector('.submit_btn')
 const errorMsg = document.querySelector('.error_msg')
 
 
-// CLientside regec=xt testing
+// clientside regex testing
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 const mobilenumregex = /^\d{10}$/

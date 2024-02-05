@@ -2038,10 +2038,8 @@ word-wrap: break-word;
         transform: scale(.95);
     }
     .address_frame{
-        /* width: 37rem;
-        height: 83%; */
-        height: 100%;
-        width: 90%;
+        height: 90%;
+        width: 70%;
        
     }
     .form_frame{
@@ -2053,6 +2051,16 @@ word-wrap: break-word;
         border: 1px solid rgba(0, 0, 0, 0.084);
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.182);
         border-radius: .5rem;
+    }
+    .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: .91rem;
+        margin: .2rem 0;
+    }
+    .succes{
+        color: rgb(0, 203, 0);
     }
     .top{
         display: flex;
@@ -2074,16 +2082,17 @@ word-wrap: break-word;
     .product_img{
         margin-top: 2.3rem;
         margin-right: .4rem;
-        width: 40%;
+        width: 50%;
         height: 9rem;
         background-color: white;
     }
     .file_div{
         display: flex;
         position: relative;
+        right: 1.3rem;
     }
     .choose_file{
-        padding: .5rem .9rem;
+        padding: .7em 2rem;
         border-radius: .2rem;
         color: white;
         font-size: .9rem;
@@ -2107,14 +2116,13 @@ word-wrap: break-word;
     }
     .top_left input{
       font-family: 'Poppins',sans-serif;
-      height: 2.5rem;
+      height: 2.3rem;
       outline: none;
       padding-left: 1rem;
     }
     .bottom{
         display: flex;
         flex-direction: column;
-        gap: 1rem;
     }
     .bottom label{
         font-family: 'Poppins',sans-serif;
@@ -2128,7 +2136,7 @@ word-wrap: break-word;
     }
     #text_area{
         width: 94%;
-        height: 4rem;
+        height: 3rem;
         resize: none;
         outline: none;
         padding: .4rem 1rem;
@@ -2154,8 +2162,26 @@ word-wrap: break-word;
         box-shadow: 1px 1px 2px rgba(48, 48, 48, 0.127);
         padding-left: .8rem;
     }
+    .update_profile_btn{
+        padding: 1rem 0;
+        width: 94%;
+        cursor: pointer;
+        font-family: 'Poppins',sans-serif;
+        font-size: .9rem;
+        font-weight: 600;
+        color: white;
+        background: none;
+        border: none;
+        transition: all .3s;
+        background-color: #345B63;
+    }
+    .update_profile_btn:active{
+        transform: scale(.95);
+    }
 
 }
+
+
 
 
 .editaddress_wrapper{

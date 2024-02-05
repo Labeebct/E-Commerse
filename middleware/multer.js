@@ -17,6 +17,9 @@ const storage = multer.diskStorage({
      }
      else if(file.fieldname === 'bannerimg'){
       cb(null, './public/banner-image')
+    }
+    else if(file.fieldname === 'profileimg'){      
+      cb(null, './public/profile-image')
      }
 
     },
