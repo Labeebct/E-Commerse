@@ -2057,9 +2057,9 @@ word-wrap: break-word;
         font-family: 'Poppins',sans-serif;
         color: red;
         font-size: .91rem;
-        margin: .2rem 0;
+        margin: .4rem 0;
     }
-    .succes{
+    .success{
         color: rgb(0, 203, 0);
     }
     .top{
@@ -2075,27 +2075,33 @@ word-wrap: break-word;
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         gap: 1rem;
         width: 35%;
         height: 100%;
     }
+    .img_div{
+        width: 8rem;
+        height: 9rem;
+    }
     .product_img{
         margin-top: 2.3rem;
         margin-right: .4rem;
-        width: 50%;
+        width: 8rem;
         height: 9rem;
         background-color: white;
     }
     .file_div{
         display: flex;
         position: relative;
-        right: 1.3rem;
+        right: 1.4rem;
+        top: 2rem;
     }
     .choose_file{
-        padding: .7em 2rem;
+        padding: .7em 1.8rem;
         border-radius: .2rem;
         color: white;
-        font-size: .9rem;
+        font-size: .8rem;
         background-color:rgb(4, 33, 24);
     }
     .input_file{
@@ -2103,6 +2109,7 @@ word-wrap: break-word;
         position: absolute;
         opacity: 0;
         height: 2rem;
+        width: 6rem;
     }
     .top_left{
         display: flex;

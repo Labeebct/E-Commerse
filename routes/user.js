@@ -140,6 +140,7 @@ router.get('/order_success')
 
 
 router.get('/account/address',accountController.getAdress)
+router.post('/account/add_address',upload.single('profileimg'),accountController.postAddress)
 router.get('/account/editaddress',upload.single('profileimg'),accountController.getEditaddress)
 
 router.put('/account/address')

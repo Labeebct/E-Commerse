@@ -2,8 +2,8 @@ const bcrypt = require('bcrypt')
 
 const signupModel = require('../models/signup')
 const messageModel = require('../models/message')
-
-
+const profileModel = require('../models/profile')
+const { Types } = require('mongoose')
 
 
 
@@ -82,6 +82,7 @@ exports.postContactus = async(req,res) => {
 
 
 
+// <<<< ==================================== PROFILE ================================== >>>>
 
 
 
@@ -92,9 +93,59 @@ exports.getAdress = (req,res) => {
     res.render('user/pages/address',{state})
 }
 
+exports.postAddress = async(req,res) => {
+   
+    try {
+
+        if(!req.file){
+            return res.status(402).json({err:'Please Provide a Profile'})
+        }
+
+        const { firstname,lastname,DOB,country,state,district,address,landmark,zip } = req.body
+
+        const user = await signupModel.findOne({email:req.session.email})
+
+        const userId = new Types.ObjectId(user._id)
+
+        const imagePath = '/profile-image' + req.file.filename
+        
+        const newSchema = new profileModel({
+            firstname,
+            lastname,
+            photo:imagePath,
+            DOB,
+            country,
+            state,
+            district,
+            address,
+            landmark,
+            zip,
+            newadress:[],
+            userId,
+        })
+         
+        await newSchema.save()
+
+        console.log('Successfully profile updated');
+
+        res.status(200).json({success:true})
+
+        
+    } catch (error) {
+        console.log('Error in post address',error.message);
+    }
+}
+
 exports.getEditaddress = (req,res) => {
     res.render('user/pages/editaddress',{state:''})
 }
+
+
+
+
+
+// <<<< ======================================= ABOUT US ================================== >>>>
+
 
 exports.getAboutus = (req,res) => {
     const state = 'aboutus'

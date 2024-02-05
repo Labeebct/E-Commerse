@@ -45,6 +45,10 @@ const profileSchema = new Schema({
       type: String,
       required: true
    },
+   photo:{
+      type:String,
+      required:true
+   },
    DOB:{
       type:Date,
       required:true

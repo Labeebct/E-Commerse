@@ -14,7 +14,7 @@
                    <div class="top">
                        <div class="top_left">
                            <label for="username">User Name</label>
-                           <input type="text" name="username" >
+                           <input type="text"  >
    
                            <div style="display: flex; gap: 1rem; width: 96%; padding: .5rem 0;">
                                <span style="display: flex; flex-direction: column; gap: .2rem; width: 50%;">
@@ -28,13 +28,13 @@
                            </div>
    
                            <label for="email">Email</label>
-                           <input type="text" name="email" >
+                           <input type="text" >
    
                        </div>
                        <div class="top_right">
-                           <img src="" id="imagePreview" class="product_img" alt="">
+                           <div class="img_div"><img src="" id="imagePreview" class="product_img" alt=""></div>
                        <span style="display: flex; flex-direction: column; gap: .2rem;  width: 25%;">
-                        <div class="file_div"><span class="choose_file">Choose</span><input type="file" onchange="previewImage(this)"  name="profileimg" class="input_file"></div>
+                        <div class="file_div"><span class="choose_file">CHOOSE</span><input type="file" onchange="previewImage(this)"  name="profileimg" class="input_file"></div>
                        </div>
                    </div>
                    <div class="bottom" style="padding: 0 1rem;">
@@ -65,7 +65,7 @@
    
                        <span style="display: flex; flex-direction: column; gap: .2rem; width: 18%;">
                        <label for="zip">Zip</label>
-                       <input type="text" name="zip" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
+                       <input type="number" maxlength="8" name="zip" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
                        
                        </span>
    
@@ -124,7 +124,7 @@ submitBtn.addEventListener('click',async(e) =>{
         const district = document.getElementsByName('district')[0].value
         const zip = document.getElementsByName('zip')[0].value
         const landmark = document.getElementsByName('landmark')[0].value
-        const address = document.getElementsByName('address')[0].innerHTML
+        const address = document.getElementsByName('address')[0].value
 
         const errMsg = document.querySelector('.error_msg')
         const profile_form = document.getElementById('form')
@@ -136,7 +136,32 @@ submitBtn.addEventListener('click',async(e) =>{
                 errMsg.innerHTML = ''
             }, 2000);
         }
-        // else if()
+        else{
+
+            const response = await fetch('/account/add_address',{
+                method:'POST',
+                body:form
+            })
+
+            const result = await response.json()
+
+            if(!response.ok){
+                errMsg.innerHTML = result.err
+                setTimeout(() => {
+                    errMsg.innerHTML = ''
+                }, 2000);
+            }
+            else{
+                if(result.success){
+                    errMsg.innerHTML = 'Profile Update Success'
+                    errMsg.classList.add('success')
+                    setTimeout(() => {
+                       window.location.href = '/home'
+                    }, 400);
+                }
+            }
+
+        }
 
 
 
