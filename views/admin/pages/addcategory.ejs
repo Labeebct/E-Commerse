@@ -71,7 +71,11 @@ function add(){
         return;
     }
 
-    subCatArray.push(subCatname.value.toUpperCase())
+    const subcat = {
+        name:subCatname.value.toUpperCase()
+    }
+
+    subCatArray.push(subcat)
 
     const subcatLi = document.createElement('li')
     subcatLi.classList.add('subcat_li')

@@ -1,0 +1,174 @@
+<%- include('../components/head.ejs') %>
+<div class="wrapper addcategory_wrapper">
+    <%- include('../components/top_nav.ejs') %>
+    <div class="content addcategory_content">
+        <%- include('../components/left_bar.ejs') %>
+        <div class="right_content">
+            <div class="addcatogery_frame">
+                <h3 class="add_cat_text">ADD CATEGORY</h3>
+                 <span style="display: flex; flex-direction: column; align-items: center; gap: .8rem; margin-top: 1rem; width: 100%;">
+                    
+                    <label for="category name">Category Name</label>
+                    <input spellcheck="false" value="<%= category.categoryname %>" type="text" style="text-transform: uppercase;" class="input_text categoryname">
+                    
+                    <label for="category name">Category Image URL</label>
+                    <input spellcheck="false" value="<%= category.catimageUrl %>" type="text" class="input_text categoryimg">
+                    <label for="category name">Subcategory Name</label>
+                    <div class="sub_cat_div">
+                    <div style="display: flex; width: 100%; gap: .4rem;">
+                    <input spellcheck="false" type="text" style="text-transform: uppercase;" class="input_text subcategoryname">
+                    <button type="button" class="add_btns" onclick="add()">ADD</button>
+                   </div>
+                   <ul class="subcat_ul">
+                    <% category.subcategory.forEach((cat,index) => { %>
+                     <li class="subcat_li li<%= cat.Id %>" style="display: flex; align-items: center; justify-content: space-between;padding: 0 1rem;">
+                        <p><%= cat.name %></p>
+                        <span>
+                        <button style="border: none;background: none; cursor: pointer;" class="delete_btn<%= cat._id %>"><i style="color: red; font-size: 1.01rem;" class="bi bi-trash"></i></button>
+                        </span>
+                    </li>
+                    <% }) %>
+                    </ul>
+                    </div>
+                    </span>
+                    <p class="error_msg"></p>
+                    <script>
+                    const errPara =  document.querySelector('.error_msg')
+                    setTimeout(() => {
+                    errPara.innerHTML = ''
+                    }, 2000);
+                </script>
+                    <div style="width: 100%; display: flex; justify-content: center; padding: .9rem;">
+                <button type="button" class="add_btn">Add Category</button>
+                </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    const subCatArray = []
+    
+    
+    const errMsg = document.querySelector('.error_msg')
+    
+    const addCatgoryBtn = document.querySelector('.add_btn')
+    const catname = document.querySelector('.categoryname')
+    const categoryimg = document.querySelector('.categoryimg')
+    const subCatname = document.querySelector('.subcategoryname')
+    
+    const subcatUl = document.querySelector('.subcat_ul')
+    
+    function add(){
+    
+        if (subCatname.value.trim() === '') {
+            errMsg.textContent = 'Please enter a subcategory name';
+            return;
+        }
+    
+        const subcat = {
+        name:subCatname.value.toUpperCase()
+    }
+
+        subCatArray.push(subcat)
+    
+        const subcatLi = document.createElement('li')
+        subcatLi.classList.add('subcat_li')
+        subcatLi.innerHTML = subCatname.value.toUpperCase()
+        subcatUl.appendChild(subcatLi)
+        
+        subCatname.value = ''
+    }
+    
+    
+    
+    
+    
+    addCatgoryBtn.addEventListener('click',async(e) => {
+    
+        console.log('hhii');
+    
+        try {
+    
+            const response = await fetch('/admin/category/edit_category/<%= category._id %> ',{
+               method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({categoryname:catname.value.toUpperCase(),catimageUrl:categoryimg.value,subcategory:subCatArray})
+            })
+    
+            if(!response.ok){
+                throw new Error('Eror in category add')
+            }
+            else{
+                const result = await response.json()
+                if(result.success){
+                    errMsg.innerHTML = 'Category Updated Success'
+                    errMsg.classList.add('success')
+                    setTimeout(() => {
+                        window.location.href = '/admin/category'
+                    }, 600);
+                }
+                else{
+                    errMsg.innerHTML = 'Please fill all Fields'
+                    setTimeout(() => {
+                        errMsg.innerHTML = ''
+                    }, 2000);
+                }
+            }
+    
+            
+        } catch (error) {
+            console.log('Error in Category add');
+        }
+    })
+    
+    
+    </script>
+
+
+<% category.subcategory.forEach((cat,index) => { %>
+
+
+<script>
+
+document.querySelector('.delete_btn<%= cat._id %>').addEventListener('click',async(e)=>{
+        try {
+
+            const response = await fetch('/admin/category/remove_sub_category/<%= category._id %>/<%= cat._id %>',{
+                method:'DELETE',
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            })
+
+            const result = await response.json()
+
+            if(response.ok){
+
+            if(result.success){
+                console.log('success');
+                document.querySelector('.li<%= cat.Id %>').remove()
+            }
+            else{
+                console.log('failed to remove subcategory');
+            }
+
+        }
+
+        } catch (error) {
+            console.log('Error in subcategory delete',error);
+        }
+    })
+
+
+</script>
+    
+    <% }) %>
+
+
+<%- include('../../common/end.ejs') %>

@@ -103,6 +103,9 @@ router.delete('/custumer/remove',controller.deleteUsers)
 router.get('/category',controller.getCategory)
 router.get('/category/add_category',controller.getAddcategory)
 router.post('/category/add_category',controller.postAddcategory)
+router.get('/category/edit_category/:id',controller.getEditcategory)
+router.post('/category/edit_category/:id',controller.postEditcategory)
+router.delete('/category/remove_sub_category/:id/:index',controller.deleteSubcat)
 router.delete('/category/deletecategory',controller.deletCategory)
 
 

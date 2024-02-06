@@ -695,7 +695,60 @@ exports.postAddcategory = async(req,res) =>{
     } catch (error) {
         console.log('Error in post add category',error.message);
     }
+}        
+
+
+// EDIT
+
+
+exports.getEditcategory = async(req,res) => {
+    try {
+        
+    const id = req.params.id
+    const category = await categoryModel.findById(id)
+    res.render('admin/pages/editcategory',{state:'' ,id , category})
+
+    } catch (error) {
+        console.log('Error in get edit category',error.message);
+    }
+    
 }
+
+exports.postEditcategory = async(req,res) => {
+    try {
+
+        const id = req.params.id
+
+        const {categoryname , subcategory , catimageUrl} = req.body
+
+        const findCat = await categoryModel.findById(id)
+
+        const newSchema = await categoryModel.updateOne(
+            {_id:id},
+            {
+            categoryname:categoryname || findCat.categoryname,
+            catimageUrl:catimageUrl || findCat.categoryname,
+            subcategory:findCat.subcategory
+           })
+
+        if(newSchema){
+        for (const sub of subcategory) {
+            await categoryModel.updateOne(
+               { categoryname: categoryname },
+               { $push: { subcategory: sub } }
+               );
+           }
+
+         res.status(200).json({success:true})
+        }
+        
+    } catch (error) {
+        console.log('Error in post edit category',error.message);
+    }
+}
+
+
+
 
 
 // -------- DELETE ------
@@ -722,10 +775,36 @@ exports.deletCategory = async(req,res) =>{
         console.log('Error in delete category',error.message);
     }
 
+}   
+
+
+
+exports.deleteSubcat = async(req,res) => {
+   try {
+    
+    const id = req.params.id
+    const subcatId = req.params.index
+
+    const update = await categoryModel.updateOne(
+        {_id:id},
+
+        {$pull:{subcategory : {_id:subcatId}}
+        })
+
+    if(update.modifiedCount > 0 ){
+        console.log('Sucuss subcat remove');
+        return res.status(200).json({success:true})
+    }
+    else{
+        console.log('failed to remove  subcat');
+        return res.status(500).json({success:false})
+    }
+
+   } catch (error) {      
+      console.log('Error in delete sub cat',error);
+   }
 }
-
-
-
+        
 
 
 // <<<<< ===================================================  BANNERS ===================================================== >>>>>>

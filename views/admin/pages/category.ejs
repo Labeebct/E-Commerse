@@ -20,6 +20,7 @@
                             <th style="width: 10%;">CATEGORY IMAGE</th>
                             <th style="width: 8%;">PRODUCT COUNT</th>
                             <th style="width: 12%;">SUBCATEGORY</th>
+                            <th style="width: 7%;">EDIT</th>
                             <th style="width: 5%;">DELETE</th>
                         </tr>
                         </thead>
@@ -35,9 +36,10 @@
                                 <td>6</td>
                                 <td class="sub_li">
                                     <% cat.subcategory.forEach((sub)=>{ %>
-                                    <li><%= sub %></li>
+                                    <li><%= sub.name %></li>
                                     <% }) %>
                                 </td>
+                                <td><button class="edit_btn<%= cat._id %>"><i class="bi bi-pencil-square"></i></button></td>
                                 <td><button class="delete_btn<%= cat._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>
                             <% }) %>
@@ -101,6 +103,11 @@ document.querySelector('.delete_btn<%= cat._id %>').addEventListener('click',asy
 })
 
 })
+
+document.querySelector('.edit_btn<%= cat._id %>').addEventListener('click',() => {
+    window.location.href = '/admin/category/edit_category/<%= cat._id %>'
+})
+
 
 </script>
 
