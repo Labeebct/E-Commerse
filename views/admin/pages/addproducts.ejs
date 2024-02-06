@@ -62,7 +62,10 @@
                             <li><input type="checkbox" name="color" id="black" value="black"><label for="black" style="color: black;">black</label></li>
                             <li><input type="checkbox" name="color" id="red" value="red"><label style="color: red;" for="red">red</label></li>
                             <li><input type="checkbox" name="color" id="orange" value="orange"><label style="color: orange;" for="orange">orange</label></li>
-                            <li><input type="checkbox" name="color" id="pink" value="pink"><label style="color: rgb(216, 118, 135);" for="pink">pink</label></li>
+                            <li><input type="checkbox" name="color" id="blue" value="blue"><label style="color: rgb(0, 43, 107);" for="blue">blue</label></li>
+                            <li><input type="checkbox" name="color" id="yellow" value="yellow"><label style="color: rgb(255, 238, 0);" for="yellow">yellow</label></li>
+                            <li><input type="checkbox" name="color" id="olive" value="olive"><label style="color: rgb(19, 117, 64);" for="olive">olive</label></li>
+                            <li><input type="checkbox" name="color" id="brown" value="brown"><label style="color: rgb(59, 42, 16);" for="brown">brown</label></li>
                            </ul>
                     </div>
                     </span>
@@ -74,7 +77,7 @@
                         <option value="">Sub Category</option>
                         <% categories.forEach((cat) => { %>
                             <% cat.subcategory.forEach((sub) => { %>
-                            <option value="<%= sub %>"><%= sub %></option>
+                            <option value="<%= sub.name %>"><%= sub.name %></option>
                             <% }) %>
                         <% }) %>
                     </select>

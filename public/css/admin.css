@@ -1130,11 +1130,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        border: 1px solid rgba(0, 0, 0, 0.369) !important;
+        overflow: hidden;
+        border: 1px solid rgba(89, 89, 89, 0.369) !important;
     }
     .product_img{
-        width: 4rem;
-        height: 4.4rem;
+        width: 90%;
+        height: 90%;
     }
     .pro_top button{
         position: absolute;
@@ -1178,9 +1179,10 @@
         table-layout: fixed;
     }
     table, th, td {
-        border: 1px solid rgba(88, 88, 88, 0.77);
+        border: 1px solid rgba(88, 88, 88, 0.59);
         border-collapse: collapse;
         overflow: hidden;
+        background-color: rgba(250, 235, 215, 0.408);
       }
     th{
         background-color: #1B2430;

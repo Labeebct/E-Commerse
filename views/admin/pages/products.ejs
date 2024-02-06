@@ -37,7 +37,7 @@
                                 <td><%= product.stock %></td>
                                 <td><%= product.category %></td>
                                 <td><%= product.subcategory %></td>
-                                <td><%= product.newprice.toLocaleString() %></td>
+                                <td><i class="bi bi-currency-rupee"></i><%= product.newprice.toLocaleString() %></td>
                                 <td><button class="edit_btn<%= product._id %>"><i class="bi bi-pencil-square"></i></button></td>
                                 <td><button class="delete_btn<%= product._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>

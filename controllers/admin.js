@@ -309,7 +309,7 @@ exports.getProducts = async(req, res) => {
 
         const page = parseInt(req.query.page) || 1
 
-        const pageSize = 4
+        const pageSize = 10
       
         const totalLength = await productModel.find()
         const pagCount = Math.floor( totalLength.length / pageSize + 1)
@@ -523,7 +523,10 @@ exports.deleteProduct = async(req,res) =>{
 }
 
 
+
 // ------- PRODUCT OPEN ------
+
+
 
 exports.getOpenproduct = async(req,res) => {
 
