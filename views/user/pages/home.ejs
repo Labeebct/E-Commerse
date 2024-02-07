@@ -40,19 +40,17 @@
 
 
             <div class="category_div">
-               <div class="category_frame"><div class="cat_img_div"><img class="cat_img" src="/images/mens.webp" alt=""><p>Mens</p></div></div>
-               <div class="category_frame"><div class="cat_img_div"><img class="cat_img" src="/images/womens.jpg" alt=""><p>Womens</p></div></div>
-               <div class="category_frame"><div class="cat_img_div"><img class="cat_img" src="/images/Laptop.webp" alt=""><p>Electronics</p></div></div>
-               <div class="category_frame"><div class="cat_img_div"><img class="cat_img" src="/images/home.jpeg" alt=""><p>Home</p></div></div>
-               <div class="category_frame"><div class="cat_img_div"><img class="cat_img" src="/images/kids.jpg" alt=""><p>kids</p></div></div>
-            </div>
-
-
-
-
-
-
-             <!-- ============================================================================================================================ -->
+               <% categories.forEach((cat) => { %>
+                  <div class="category_frame"><div class="cat_img_div"><img class="cat_img" src="<%= cat.catimageUrl %>" alt=""><p><%= cat.categoryname %></p></div></div>
+                  <% }) %>
+               </div>
+               
+               
+               
+               
+               
+               
+               <!-- ============================================================================================================================ -->
 
 
              <!-- ------------------------- BEST MOBILES --------------------------- -->
@@ -60,26 +58,34 @@
 
              <div class="product_frame">
 
-               <div class="product_top">BEST MOBILES</div>
-               <div class="product_bottom">
+                <div class="product_top">MENS SHIRTS</div>
+                <div class="product_bottom">
 
-                  <div class="product_frame_grid">
+                   <% mensShirts.forEach((list) => { %>
+                   <div class="product_frame_grid">
+                      
+
                      <div class="top">
                         <button class="wish_btn"><i class="bi bi-heart"></i></button>
-                        <img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt="">
-                     </div>
-                     <div class="center">
-                        <p class="product_name">IPhone 15 pro</p>
+                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
+                      </div>
+                      <div class="center">
+                        <div class="name_div">
+                        <p class="product_name"><%= list.productname %></p>
+                        </div>
                         <div class="price_div">
-                           <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                           <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
+                           <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice %></p>
+                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice %></p>
                         </div>
                      </div>
                      <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-                  </div>
 
+                     
+                  </div>
+                  
+                  <% }) %>
                </div>
-             </div>
+            </div>
 
                
              <!-- --------------------------------------------------------------------------------------------------------- -->
@@ -96,33 +102,36 @@
 
 
             <!-- ---------------------------------------------------------------------------------------------------------------------- -->
-
-
             <div class="product_frame">
 
-               <div class="product_top">MENS SHIRTS</div>
+               <div class="product_top">MENS SHOES</div>
                <div class="product_bottom">
 
-
-                  
+                  <% mensShoes.forEach((list) => { %>
                   <div class="product_frame_grid">
-                     <div class="top">
-                        <button class="wish_btn"><i class="bi bi-heart"></i></button>
-                        <img src="/images/mens.webp" style="width: 7rem; height: 8.5rem;" alt="">
+                     
+
+                    <div class="top">
+                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
-                        <p class="product_name">Roadster Mens</p>
-                        <div class="price_div">
-                           <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                           <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                        </div>
-                     </div>
-                     <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-                  </div>
-         
-             </div>
-             </div>
+                       <div class="name_div">
+                       <p class="product_name"><%= list.productname %></p>
+                       </div>
+                       <div class="price_div">
+                          <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice %></p>
+                          <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice %></p>
+                       </div>
+                    </div>
+                    <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
 
+                    
+                 </div>
+                 
+                 <% }) %>
+              </div>
+           </div>
 
             <!-- ------------------------------------------------------------------------------------------------- -->
 
@@ -228,29 +237,36 @@
                
             <!-- --------------------------------------------------------------------------------------------------------------------------------- -->
 
-
             <div class="product_frame">
+
                <div class="product_top">BEST WATCHES</div>
                <div class="product_bottom">
 
+                  <% mensWatches.forEach((list) => { %>
                   <div class="product_frame_grid">
-                     <div class="top">
-                        <button class="wish_btn"><i class="bi bi-heart"></i></button>
-                        <img src="/images/watch.jpg" style="width: 7rem; height: 8.5rem;" alt="">
+                     
+
+                    <div class="top">
+                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <img src="<%= list.productimg[0] %>" style="width: 90%; height: 90%;" alt="">
                      </div>
                      <div class="center">
-                        <p class="product_name">TITAN</p>
-                        <div class="price_div">
-                           <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                           <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                        </div>
-                     </div>
-                     <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-                 </div>
+                       <div class="name_div">
+                       <p class="product_name"><%= list.productname %></p>
+                       </div>
+                       <div class="price_div">
+                          <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice %></p>
+                          <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice %></p>
+                       </div>
+                    </div>
+                    <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
 
-            
-               </div>
-               </div>
+                    
+                 </div>
+                 
+                 <% }) %>
+              </div>
+           </div>
 
                <!-- -------------------------------------------------------------------------------------------- -->
                

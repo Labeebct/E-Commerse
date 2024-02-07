@@ -1,6 +1,12 @@
 const bcrypt = require('bcrypt')
-const signupModel = require('../models/signup')
 const moment = require('moment')
+
+const signupModel = require('../models/signup')
+const productModel = require('../models/products')
+const categoryModel = require('../models/category')
+const bannerModel = require('../models/banner')
+const couponModel = require('../models/coupon')
+const messageModel = require('../models/message')
 
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
@@ -9,6 +15,7 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,15}$/
 
 const {sendOtp , verifyOtp} = require('../middleware/otp')
 const {emailOtp , verify} = require('../middleware/emailotp')
+const category = require('../models/category')
 
 
 
@@ -36,6 +43,7 @@ try {
     const hashedPassword = await bcrypt.hash(password , salt)    /* Hashing with Salting */
     const originalDate = moment().format('DD-MM-YYYY')
 
+    const signupDatas = await signupModel.find()
 
     const userNumExist = await signupModel.findOne({email})
     const userEmailExist = await signupModel.findOne({mobilenum})
@@ -45,7 +53,7 @@ try {
      const verifyUser = userNumExist.verified
 
      if(verifyUser){       /* checking whether user verified or not */
-
+    
       console.log('user exist');
       return res.status(403).json({error:'User Already Exist'})
 
@@ -362,9 +370,33 @@ exports.postChangepass = async(req, res) => {
 
 
 
-exports.getHome = (req,res) => {
-     const state = 'home'
-     res.render('user/pages/home',{state})
+exports.getHome = async(req,res) => {
+
+     try {
+
+
+          const state = 'home'
+          const categories = await categoryModel.find()
+          const products = await productModel.find()
+
+          const mensShirts = await productModel.aggregate([
+               {$match:{subcategory:'MENS SHIRTS'}}
+          ])
+          const mensShoes = await productModel.aggregate([
+               {$match:{subcategory:'MENS SHOES'}}
+          ])
+          const mensWatches = await productModel.aggregate([
+               {$match:{subcategory:'MENS WATCHES'}}
+          ])
+
+
+          res.render('user/pages/home',{state , categories , mensShirts , mensShoes , mensWatches})
+
+
+          
+     } catch (error) {
+          console.log('Error in user home get',error);
+     }
 }
  
 
