@@ -377,7 +377,6 @@ exports.getHome = async(req,res) => {
 
           const state = 'home'
           const categories = await categoryModel.find()
-          const products = await productModel.find()
 
           const mensShirts = await productModel.aggregate([
                {$match:{subcategory:'MENS SHIRTS'}}
@@ -488,17 +487,59 @@ exports.getCategory = async(req,res) => {
      try {        
 
           const category = req.params.cat
+          const categories = await categoryModel.find()
 
           const catProducts = await productModel.aggregate([
                { $match: {category:category} }
           ])          
 
-          res.render('user/pages/categoryproducts',{state:'',catProducts})
+          res.render('user/pages/categoryproducts',{state:category, catProducts , categories})
           
      } catch (error) {
           console.log('Error in get category',error);
      }
 }
+
+
+
+exports.getSubcategory = async(req,res) => {
+     try {        
+
+          const subcat = req.params.subcat
+          const categories = await categoryModel.find()
+
+          console.log(subcat);
+
+
+          const subcatProducts = await productModel.aggregate([
+               { $match: {subcategory:subcat} }
+          ])          
+
+          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories})
+          
+     } catch (error) {
+          console.log('Error in get category',error);
+     }
+}
+
+
+
+
+
+exports.getProductopen = async(req,res) => {
+     try {
+          const productId = req.query.product
+
+          const product = await productModel.findById(productId)
+
+          res.render('user/pages/productopen',{state:'',product})
+          
+     } catch (error) {
+          console.log('Error in get product open',error);
+     }
+}
+
+
 
 
 exports.getCart = (req,res) => {
@@ -507,9 +548,7 @@ exports.getCart = (req,res) => {
 }
 
 
-exports.getProductopen = (req,res) => {
-     res.render('user/pages/productopen',{state:''})
-}
+
 
 exports.getWishlist = (req,res) => {
      const state = 'wishlist'

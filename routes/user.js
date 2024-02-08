@@ -83,6 +83,7 @@ router.get('/resend_email_otp',controller.getResendemailotp)
 router.get('/home',controller.getHome)
 
 router.get('/category/:cat',controller.getCategory)
+router.get('/subcategory/:subcat',controller.getSubcategory)
 router.get('/product',controller.getProductopen)
 
 router.get('/all_products')
