@@ -373,7 +373,7 @@ exports.postChangepass = async(req, res) => {
 exports.getHome = async(req,res) => {
 
      try {
-
+        
 
           const state = 'home'
           const categories = await categoryModel.find()
@@ -382,15 +382,97 @@ exports.getHome = async(req,res) => {
           const mensShirts = await productModel.aggregate([
                {$match:{subcategory:'MENS SHIRTS'}}
           ])
+          const mensTshirts = await productModel.aggregate([
+               {$match:{subcategory:'MENS TSHIRT'}}
+          ])
+          const womensKurtas = await productModel.aggregate([
+               {$match:{subcategory:'WOMENS KURTA'}}
+          ])
+          const womensSaree = await productModel.aggregate([
+               {$match:{subcategory:'WOMENS SAREE'}}
+          ])
           const mensShoes = await productModel.aggregate([
                {$match:{subcategory:'MENS SHOES'}}
           ])
+          const womensFootwear = await productModel.aggregate([
+               {$match:{subcategory:'WOMENS FOOTWEAR'}}
+          ])
+          
+          const mensPant = await productModel.aggregate([
+               {$match:{subcategory:'MENS PANTS'}}
+          ])
+          const womensTop = await productModel.aggregate([
+               {$match:{subcategory:'WOMENS TOP'}}
+          ])
+      
+
+          const kidsFrocks = await productModel.aggregate([
+               {$match:{subcategory:'KIDS FROCK'}}
+          ])
+          const kidsToys = await productModel.aggregate([
+               {$match:{subcategory:'KID TOYS'}}
+          ])
+      
+          const babyWipes = await productModel.aggregate([
+               {$match:{subcategory:'BABY WIPES'}}
+          ])
+      
+          const mobiles = await productModel.aggregate([
+               {$match:{subcategory:'MOBILES'}}
+          ])
+          const laptops = await productModel.aggregate([
+               {$match:{subcategory:'LAPTOPS'}}
+          ])
+          const fridge = await productModel.aggregate([
+               {$match:{subcategory:'FRIDGE'}}
+          ])
+          const headset = await productModel.aggregate([
+               {$match:{subcategory:'HEADSET'}}
+          ])
+          const tv = await productModel.aggregate([
+               {$match:{subcategory:'TV'}}
+          ])
+
           const mensWatches = await productModel.aggregate([
                {$match:{subcategory:'MENS WATCHES'}}
           ])
+          const painting = await productModel.aggregate([
+               {$match:{subcategory:'PAINTINGS'}}
+          ])
+          const bedsheet = await productModel.aggregate([
+               {$match:{subcategory:'BEDSHEET'}}
+          ])
+          const utensils = await productModel.aggregate([
+               {$match:{subcategory:'UTENSILS'}}
+          ])
 
 
-          res.render('user/pages/home',{state , categories , mensShirts , mensShoes , mensWatches})
+
+          res.render('user/pages/home',
+          {
+          state,
+          categories,
+          mensShirts,
+          mensShoes,
+          mensWatches,
+          womensTop,
+          womensKurtas,
+          womensFootwear,
+          mensPant,
+          kidsFrocks,
+          kidsToys,
+          babyWipes,
+          mobiles,
+          laptops,
+          fridge,
+          headset,
+          tv,
+          mensTshirts,
+          womensSaree,
+          painting,
+          bedsheet,
+          utensils
+          })
 
 
           
