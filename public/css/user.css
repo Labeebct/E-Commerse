@@ -2397,6 +2397,11 @@ word-wrap: break-word;
     .prev_next_btn{
         border: none;
         background: none;
+        transition: all .4s;
+        padding: 1rem;
+    }
+    .prev_next_btn:active{
+        transform: scale(.9);
     }
     .left_right_icon:active{
         transform: scale(.9);
@@ -2428,7 +2433,7 @@ word-wrap: break-word;
     }
     .old_price{
         text-decoration: line-through;
-        color: red;
+        color: rgb(255, 0, 0);
         font-family: 'Poppins',sans-serif;
         font-size: .9rem;
         font-weight: 400;
@@ -2471,16 +2476,16 @@ word-wrap: break-word;
         cursor: pointer;
         border-radius: 100%;
         transition: all .4s;
-        background-color: rgba(175, 174, 174, 0.293);
+        background-color: white;
         color: rgba(0, 0, 0, 0.873);
-        border: 1px solid rgba(85, 85, 85, 0.786);
     }
     .label_span:active{
         transform: scale(.93);
     }
     .size_li input[type=radio]:checked + label{
-        background-color: #e44100;
+        background-color: #fa4a04;
         color: white;
+        border: none;
     }
 
     /* ================================= */
@@ -2545,6 +2550,18 @@ word-wrap: break-word;
         border: 1px solid rgba(255, 255, 255, 0.237);
         border-radius: .5rem;
         overflow-y: scroll;
+    }
+    .bi-check{
+        color: rgb(0, 255, 0);
+        font-size: 2rem;
+        padding-top: .22rem;
+
+    }
+    .bi-x{
+        color: red;
+        font-size: 2rem;
+        padding-top: .22rem;
+
     }
     .discription_frame::-webkit-scrollbar {
         width: 0em;

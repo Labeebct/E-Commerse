@@ -147,12 +147,16 @@ function next()
 document.addEventListener('DOMContentLoaded',() => {
 
 
-document.querySelector('.edit_btn<%= product._id %>').addEventListener('click',() => {
+document.querySelector('.edit_btn<%= product._id %>').addEventListener('click',(e) => {
+    e.preventDefault()
+    e.stopPropagation()
     window.location.href = '/admin/product/edit_product/<%= product._id %>'
 })
 
 
 document.querySelector('.delete_btn<%= product._id %>').addEventListener('click',async(e) => {
+    e.preventDefault()
+    e.stopPropagation()
     try {
 
         showLoading()
@@ -185,7 +189,9 @@ document.querySelector('.delete_btn<%= product._id %>').addEventListener('click'
 
 
 
-document.querySelector('.product<%= product._id %>').addEventListener('click',() => {
+document.querySelector('.td_tr<%= product._id %>').addEventListener('click',(e) => {
+    e.preventDefault()
+    e.stopPropagation()
     window.location.href = '/admin/product/product_deltails?product=<%= product._id %>'
 })
 

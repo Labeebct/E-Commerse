@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded',() => {
 document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',async(e) => {
 
     e.preventDefault()
-
+    e.stopPropagation()
     try {
 
         showLoading()
@@ -197,7 +197,9 @@ document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',asy
 
 
 
-document.querySelector('.user<%= user._id %>').addEventListener('click',() => {
+document.querySelector('.data_tr<%= user._id %>').addEventListener('click',(e) => {
+    e.preventDefault()
+    e.stopPropagation()
     window.location.href = '/admin/custumer/<%= user._id %>'
 })
 

@@ -1,10 +1,17 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/user')             
+const homeController = require('../controllers/userHome')             
 const accountController = require('../controllers/account') 
+const authController = require('../controllers/userAuth')
+const cartController = require('../controllers/cart')
+const wishController = require('../controllers/wishlist')
+const orderController = require('../controllers/order')
+
 
 
 const upload = require('../middleware/multer')
+
+
 
 
 // <<<<<<< ====================== AUTHENTICATION ======================== >>>>>>>
@@ -12,60 +19,58 @@ const upload = require('../middleware/multer')
 
 
 
-
-
 // SIGNUP -----------------------------
 
 
-router.get('/signup',controller.getSignup)
-router.post('/signup',controller.postSignup)
+router.get('/signup',authController.getSignup)
+router.post('/signup',authController.postSignup)
 
 
 // OTP VERIFICATION -------------------
 
-router.get('/otp_verification/:num',controller.getOtpverification)
-router.post('/otp_verification/:num',controller.postOtpverification)
+router.get('/otp_verification/:num',authController.getOtpverification)
+router.post('/otp_verification/:num',authController.postOtpverification)
 
 
 
 // RESEND OTP --------------------------
 
-router.get('/resend_otp/:num',controller.getResendotp)
-router.get('/otp_success',controller.getOtpsuccess)
+router.get('/resend_otp/:num',authController.getResendotp)
+router.get('/otp_success',authController.getOtpsuccess)
 
 
 //  LOGIN ------------------------------
 
 
-router.get('/login',controller.getLogin)
-router.post('/login',controller.postLogin)
+router.get('/login',authController.getLogin)
+router.post('/login',authController.postLogin)
 
 
 
 // FORGET PASSWORD ----------------------
 
-router.get('/forget_password',controller.getForgetpass)
-router.post('/forget_password',controller.postForgetpass)
+router.get('/forget_password',authController.getForgetpass)
+router.post('/forget_password',authController.postForgetpass)
 
 
 
 // EMAIL OTP ----------------------------
 
-router.get('/email_otp',controller.getEmailOtp)
-router.post('/email_otp',controller.postEmailOtp)
+router.get('/email_otp',authController.getEmailOtp)
+router.post('/email_otp',authController.postEmailOtp)
 
 
 
 // CHANGE PASSWORD ------------------------
 
-router.get('/change_password',controller.getChangepass)
-router.post('/change_password',controller.postChangepass)
+router.get('/change_password',authController.getChangepass)
+router.post('/change_password',authController.postChangepass)
 
 
 
 // RESEND EMAIL OTP --------------------------
 
-router.get('/resend_email_otp',controller.getResendemailotp)
+router.get('/resend_email_otp',authController.getResendemailotp)
 
 
 
@@ -78,14 +83,10 @@ router.get('/resend_email_otp',controller.getResendemailotp)
 
 
 
-
-
-router.get('/home',controller.getHome)
-
-router.get('/category/:cat',controller.getCategory)
-router.get('/subcategory/:subcat',controller.getSubcategory)
-router.get('/product',controller.getProductopen)
-
+router.get('/home',homeController.getHome)
+router.get('/category/:cat',homeController.getCategory)
+router.get('/subcategory/:subcat',homeController.getSubcategory)
+router.get('/product',homeController.getProductopen)
 router.get('/all_products')
 
 
@@ -93,7 +94,7 @@ router.get('/all_products')
 
 // WIDHLIST -------------------------
 
-router.get('/wishlist',controller.getWishlist)
+router.get('/wishlist',wishController.getWishlist)
 router.get('/wishist/add/:id')
 router.delete('/wishist/remove/:id')
 
@@ -101,13 +102,20 @@ router.delete('/wishist/remove/:id')
 
 // CART ----------------------------
 
-router.get('/cart',controller.getCart)
+router.get('/cart',cartController.getCart)
 router.get('/cart/add/:id')
 router.delete('/cart/remove/:id')
 
 
-router.post('/cart/add_coupon/:id')
 
+
+// <<<<<<<========================= ORDER ==============================>>>>>>>
+
+
+
+// ORDER
+
+router.post('/cart/add_coupon/:id')
 
 router.get('/checkout')
 router.post('/checkout/new_adress')
@@ -130,7 +138,7 @@ router.get('/order_success')
 
 
 
-// <<<<<<<========================= ACCOUNT CONTOLLER ==============================>>>>>>>
+// <<<<<<<========================= ACCOUNT ==============================>>>>>>>
 
 
 
@@ -173,6 +181,7 @@ router.get('/account/aboutus',accountController.getAboutus)
 
 
 router.get('/logout')
+
 
 
 module.exports = router
