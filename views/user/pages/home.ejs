@@ -43,7 +43,7 @@
 
             <div class="category_div">
                <% categories.forEach((cat) => { %>
-                  <div class="category_frame" onclick="window.location.href = '/cart/<%= cat._id %>' "><div class="cat_img_div"><img class="cat_img" src="<%= cat.catimageUrl %>" alt=""><p><%= cat.categoryname %></p></div></div>
+                  <div class="category_frame"><div class="cat_img_div" onclick="window.location.href = '/category/<%= cat.categoryname %>'"><img class="cat_img" src="<%= cat.catimageUrl %>" alt=""><p><%= cat.categoryname %></p></div></div>
                <% }) %>
                </div>
                

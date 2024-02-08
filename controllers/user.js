@@ -480,7 +480,26 @@ exports.getHome = async(req,res) => {
           console.log('Error in user home get',error);
      }
 }
- 
+
+
+
+
+exports.getCategory = async(req,res) => {
+     try {        
+
+          const category = req.params.cat
+
+          const catProducts = await productModel.aggregate([
+               { $match: {category:category} }
+          ])          
+
+          res.render('user/pages/categoryproducts',{state:'',catProducts})
+          
+     } catch (error) {
+          console.log('Error in get category',error);
+     }
+}
+
 
 exports.getCart = (req,res) => {
      const state = 'cart'

@@ -82,11 +82,10 @@ router.get('/resend_email_otp',controller.getResendemailotp)
 
 router.get('/home',controller.getHome)
 
-router.get('/products/category/:category')
-
-router.get('/products')
-
+router.get('/category/:cat',controller.getCategory)
 router.get('/product',controller.getProductopen)
+
+router.get('/all_products')
 
 
 
@@ -116,7 +115,7 @@ router.post('/checkout/payment_method')
 router.post('/checkout')
 
 router.get('/order_summary')
-
+    
 
 router.get('/payment_process')
 router.post('/payment_process')
