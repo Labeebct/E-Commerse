@@ -25,14 +25,14 @@ submitBtn.addEventListener('click',async(e) => {
     const form = new FormData(productForm)
 
 
-    const productName = document.getElementsByName('productname')[0].value
-    const oldPrice = document.getElementsByName('oldprice')[0].value
-    const newPrice = document.getElementsByName('newprice')[0].value
-    const category = document.getElementsByName('category')[0].value
-    const subCategory = document.getElementsByName('subcategory')[0].value
-    const deliveryDate = document.getElementsByName('deliverywithin')[0].value
-    const description = document.getElementsByName('description')[0].value
-    const stock = document.getElementsByName('stock')[0].value
+    const productName = document.getElementsByName('productname')[0].value.trim()
+    const oldPrice = document.getElementsByName('oldprice')[0].value.trim()
+    const newPrice = document.getElementsByName('newprice')[0].value.trim()
+    const category = document.getElementsByName('category')[0].value.trim()
+    const subCategory = document.getElementsByName('subcategory')[0].value.trim()
+    const deliveryDate = document.getElementsByName('deliverywithin')[0].value.trim()
+    const description = document.getElementsByName('description')[0].value.trim()
+    const stock = document.getElementsByName('stock')[0].value.trim()
     const productImg = document.getElementsByName('productimg')[0].value
 
     if(!productName || !oldPrice || !newPrice || !category || !subCategory ||!deliveryDate || !description || !stock ){

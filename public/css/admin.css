@@ -1061,9 +1061,15 @@
         font-weight: 500;
         padding: 1em 0;
     }
-    .bi-trash{
+    .bi-ban{
         font-size: 1.1rem;
         color: red;
+        cursor: pointer;
+        transition: all .5s;
+    }
+    .bi-circle{
+        font-size: 1.1rem;
+        color: rgb(0, 217, 0);
         cursor: pointer;
         transition: all .5s;
     }

@@ -54,10 +54,10 @@ submitBtn.addEventListener('click',async(e)=>{
 
         const errMsg = document.querySelector('.error_msg')
 
-        const couponName = document.getElementsByName('couponnname')[0].value
-        const couponDiscount = document.getElementsByName('discount')[0].value
-        const minAmount = document.getElementsByName('minamount')[0].value
-        const maxAmount = document.getElementsByName('maxamount')[0].value
+        const couponName = document.getElementsByName('couponnname')[0].value.trim()
+        const couponDiscount = document.getElementsByName('discount')[0].value.trim()
+        const minAmount = document.getElementsByName('minamount')[0].value.trim()
+        const maxAmount = document.getElementsByName('maxamount')[0].value.trim()
         const startDate = document.getElementsByName('startdate')[0].value
         const endDate = document.getElementsByName('enddate')[0].value
 
@@ -69,7 +69,7 @@ submitBtn.addEventListener('click',async(e)=>{
                 errMsg.innerHTML = ''
             }, 2000);
         }
-
+        else{
         const response = await fetch('/admin/coupons/add_coupon',{
             method:'POST',
             headers:{
@@ -95,7 +95,7 @@ submitBtn.addEventListener('click',async(e)=>{
             }, 2000);
         }
 
-
+    }
     } catch (error) {
         console.log('Error in coupon form add',error.message);
     }

@@ -43,10 +43,10 @@
       
             e.preventDefault()
       
-            const userName = document.getElementsByName('username')[0].value
-            const email = document.getElementsByName('email')[0].value
-            const subject = document.getElementsByName('subject')[0].value
-            const message = document.getElementsByName('message')[0].value
+            const userName = document.getElementsByName('username')[0].value.trim()
+            const email = document.getElementsByName('email')[0].value.trim()
+            const subject = document.getElementsByName('subject')[0].value.trim()
+            const message = document.getElementsByName('message')[0].value.trim()
       
             const updateForm = document.getElementById('form')
       

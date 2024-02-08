@@ -67,9 +67,9 @@ const submitBtn = document.querySelector('.add_btn')
 
 submitBtn.addEventListener('click',async(e) => {
 
-    const bannerName = document.getElementsByName('bannername')[0].value
-    const bannerHead = document.getElementsByName('bannerhead')[0].value
-    const bannerAmount = document.getElementsByName('banneramount')[0].value
+    const bannerName = document.getElementsByName('bannername')[0].value.trim()
+    const bannerHead = document.getElementsByName('bannerhead')[0].value.trim()
+    const bannerAmount = document.getElementsByName('banneramount')[0].value.trim()
     const startDate = document.getElementsByName('startdate')[0].value
     const endDate = document.getElementsByName('enddate')[0].value
     
@@ -78,7 +78,6 @@ submitBtn.addEventListener('click',async(e) => {
     const form = new FormData(bannerForm)
 
     try {
-
 
         if(!bannerName || !bannerHead || !bannerAmount || !startDate || !endDate){
             errMsg.innerHTML = 'Please Fill all Fields'

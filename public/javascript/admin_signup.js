@@ -71,11 +71,11 @@ submitBtn.addEventListener('click', async (e) => {
     e.preventDefault()
 
 
-    const usernameInput = document.getElementsByName('username')[0].value
-    const emailInput = document.getElementsByName('email')[0].value
-    const mobileInput = document.getElementsByName('mobilenum')[0].value
-    const passwordInput = document.getElementsByName('password')[0].value
-    const confirmPasswordInput = document.getElementsByName('confirmpassword')[0].value
+    const usernameInput = document.getElementsByName('username')[0].value.trim()
+    const emailInput = document.getElementsByName('email')[0].value.trim()
+    const mobileInput = document.getElementsByName('mobilenum')[0].value.trim()
+    const passwordInput = document.getElementsByName('password')[0].value.trim()
+    const confirmPasswordInput = document.getElementsByName('confirmpassword')[0].value.trim()
 
 
 

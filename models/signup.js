@@ -21,6 +21,10 @@ const SignupDatas = new Schema({
     type:Boolean,
     default:false
   },
+  blocked:{
+    type:Boolean,
+    default:false
+  },
   regdate:{
     type:String,
   }

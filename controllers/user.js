@@ -13,9 +13,8 @@ const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,15}$/
 
 
-const {sendOtp , verifyOtp} = require('../middleware/otp')
-const {emailOtp , verify} = require('../middleware/emailotp')
-const category = require('../models/category')
+const {sendOtp , verifyOtp} = require('../utils/otp')
+const {emailOtp , verify} = require('../utils/emailotp')
 
 
 
@@ -43,7 +42,6 @@ try {
     const hashedPassword = await bcrypt.hash(password , salt)    /* Hashing with Salting */
     const originalDate = moment().format('DD-MM-YYYY')
 
-    const signupDatas = await signupModel.find()
 
     const userNumExist = await signupModel.findOne({email})
     const userEmailExist = await signupModel.findOne({mobilenum})
@@ -86,7 +84,7 @@ try {
      res.status(500)
 }
 }
-
+   
 
 
 
@@ -130,10 +128,15 @@ exports.postLogin = async(req,res) => {
                if(comparePass){
 
                if(userExist.verified){
-                    
-               req.session.email = email   /* Setting email as session */
-               req.session.loggedin = true
-               return res.status(200).json({auth:true})
+
+                 if(!userExist.blocked){
+                    req.session.email = email   /* Setting email as session */
+                    req.session.loggedin = true
+                    return res.status(200).json({auth:true})
+                 }
+                 else{
+                    return res.status(402).json({auth:false,error:'Sorry You have been Blocked By Admin'})
+                 }  
                     
                }
                else{

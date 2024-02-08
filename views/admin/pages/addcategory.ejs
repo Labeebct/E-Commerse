@@ -94,13 +94,23 @@ addCatgoryBtn.addEventListener('click',async(e) => {
 
     try {
 
+        const catname = document.querySelector('.categoryname').value.trim()
+        const categoryimg = document.querySelector('.categoryimg').value.trim()
+
+        if(!catname || !categoryimg){
+            errMsg.innerHTML = 'Please fill all Fields'
+                setTimeout(() => {
+                    errMsg.innerHTML = ''
+                }, 2000);
+        }else{
+
         const response = await fetch('/admin/category/add_category',{
            method:'POST',
             headers:{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({categoryname:catname.value.toUpperCase(),catimageUrl:categoryimg.value,subcategory:subCatArray})
-        })
+        })  
 
         if(!response.ok){
             throw new Error('Eror in category add')
@@ -122,8 +132,8 @@ addCatgoryBtn.addEventListener('click',async(e) => {
             }
 
         }
-
         
+    }
     } catch (error) {
         console.log('Error in Category add');
     }

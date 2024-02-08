@@ -562,8 +562,6 @@ exports.getUsers = async(req, res) => {
         const page = parseInt(req.query.page) || 1
         const pageSize = 7
       
-        console.log(req.query.page);
-
         const skip = (page - 1) * pageSize
         
         const userList = await signupModel.find().skip(skip).limit(pageSize)
@@ -599,7 +597,7 @@ exports.getCustomer = async(req,res) =>{
     }
 }
 
-
+  
 
 
 
@@ -609,11 +607,18 @@ exports.getCustomer = async(req,res) =>{
 exports.deleteUsers = async(req, res) => {
     try {
       const { id } = req.body
-
-      const deleteUser = await signupModel.deleteOne({_id:id})
-      if(deleteUser){
-        res.status(200).json({success:true})
+      const findUser = await signupModel.findById(id)
+      if(findUser.blocked){
+        await signupModel.updateOne({_id:id},{$set:{blocked:false}})
+        return res.status(200).json({success:true,blocked:false})
+    }
+    else{
+        await signupModel.updateOne({_id:id},{$set:{blocked:true}})
+        return res.status(200).json({success:true,blocked:true})
       }
+
+
+        res.status(200).json({success:true})
         
     } catch (error) {
         console.log('Error in admin delete users',error.message);
