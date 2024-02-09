@@ -104,7 +104,7 @@ router.delete('/wishist/remove/:id')
 
 router.get('/cart',cartController.getCart)
 router.post('/cart/add',cartController.postAddCart)
-router.delete('/cart/remove/:id')
+router.delete('/cart/remove',cartController.postRemoveCart)
 
 
 

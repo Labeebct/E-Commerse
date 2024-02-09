@@ -79,7 +79,7 @@
 
                         <% product.color.forEach((color) => { %>
 
-                           <span style="background-color:saddlebrown" class="label_span_color">
+                           <span style="background-color:<%= color %>" class="label_span_color">
                               <input  id="<%= color %>" name="color" value="<%= color %>" type="radio" >
                               <label for="<%= color %>" ></label>
                               </span>

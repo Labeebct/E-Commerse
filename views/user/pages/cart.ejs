@@ -3,7 +3,7 @@
     <%- include('../components/top_nav.ejs') %>
 
          <!-- YOU NEED TO LOGIN -->
-         <div class="login_to_view">hi
+         <div style="<%= loggedIn ? 'display:none' : 'display:block;' %>" class="login_to_view">
           <div class="log_frame">
             <h3>PLEASE LOG IN</h3>
             <p>Login to view items in your CART.</p>
@@ -12,25 +12,27 @@
           </div>
          </div>
 
-         <div class="cart_content">
+         <div class="cart_content">    
 
          <div class="product_frame">
 
          <!-- YOU CART IS EMPTY -->
-         <div class="cart_is_empty">
+         <div style="<%= cartExist && cartCount > 0 ? 'display:none' : 'display:block;' %>" class="cart_is_empty">
             <div class="empty_frame">
                <img src="/images/empty cart.png" class="cart_empty_png" alt="">
                <h3>Your Cart is Empty</h3>
                <p>Looks like you haven't added anything to your cart yet.</p>
             </div>
          </div>
+   
+         <% if(cartProducts) { %>
 
-               <!-- --------------------------------------- -->
+         <% cartProducts.forEach((list) => { %>
 
-               <div class="product">
-                  <div class="image_sec"><img src="/images/iphone 15.jpg" style="width: 6rem; height: 7.2rem;" alt=""></div>
+               <div class="product product<%= list._id %>" onclick="productOpen(event,'<%= list._id %>')">
+                  <div class="image_sec"><img src="<%= list.productimg[0] %>" style="width: 6rem; height: 7.2rem;" alt=""></div>
                   <div class="discription_sec">
-                     <p class="product_name">Iphone 15 Pro</p>
+                     <p class="product_name"><%= list.productname %></p>
                      <div style="display: flex; gap: 1rem; align-items: center;">
                         <select  name="quantity" style="outline: none; padding: .3rem;">
                            <option value="1">Qty:1</option>
@@ -39,33 +41,38 @@
                            <option value="4">Qty:4</option>
                            <option value="5">Qty:5</option>
                         </select>
-                        <div class="stock_left">3 Left</div>
+                        <div class="stock_left"><%= list.stock %> Left</div>
                      </div>
                      <div style="display: flex; gap: .7rem; align-items: center;">
-                        <p class="old_price">120,333</p>
-                        <p class="new_price">143,933</p>
+                        <p class="old_price"><%= list.oldprice.toLocaleString() %></p>
+                        <p class="new_price"><%= list.newprice.toLocaleString() %></p>
                         <p class="discount">80%</p>
                      </div>
-                     <p class="return_status">Return policy✅</p>
+                     <p class="return_status">Return policy 
+                        <% if(list.returns) { %>
+                           <i class="bi bi-check"></i>
+                           <% } else{ %>
+                           <i class="bi bi-x"></i>
+                           <% } %>
+                     </p>
                   </div>
                   <div class="delete_section">
-                     <div style="margin-bottom: 1rem;"><button><i class="bi bi-trash"></i></button></div>
+                     <div style="margin-bottom: 1rem;"><button onclick="productRemove(event,'<%= list._id %>')"><i class="bi bi-trash"></i></button></div>
                   </div>
                </div>
 
-                <!-- --------------------------------------- -->
-
-
+               <% }) %>
+               <% } %>
             </div>
             <div class="price_frame">
                <div class="price_sub_frame">
                   <div class="cart_details"> 
-                     <p>Cart Quantity</p>
-                     <p>2</p>
+                     <p>Cart Items</p>
+                     <p><%= cartCount %></p>
                   </div>
                   <div class="cart_details"> 
                      <p>Cart Total</p>
-                     <p><i class="bi bi-currency-rupee"></i>12,1234</p>
+                     <p><i class="bi bi-currency-rupee"></i><%= cartTotal.toLocaleString() %></p>
                   </div>
                   <div class="cart_details"> 
                      <p>Discount </p>
@@ -77,7 +84,7 @@
                   </div>
                   <div class="cart_details"> 
                      <p>Delivery Charge</p>
-                     <p><i class="bi bi-currency-rupee"></i>30</p>
+                     <p style="color: rgb(0, 158, 0); font-weight: 600;">FREE DELIVERY</p>
                   </div>
                </div>
                <div class="total_amount"> 
@@ -92,5 +99,43 @@
 
 
 <script src="/javascript/addtocart.js"></script>
+<script src="/javascript/product-open.js"></script>
+
+
+<script>
+
+
+const productRemove = async(event,productId) => {
+
+event.stopPropagation()     
+event.preventDefault()
+
+try {
+
+    const response = await fetch('/cart/remove',{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({productId})
+    })
+
+    const result = await response.json()
+
+    if(result.success){
+      console.log('dd');
+      document.querySelector(`.product${result.productId}`).remove()
+    }
+    
+} catch (error) {
+    console.log('Error in add to cart',error.message);
+}
+
+}   
+
+
+
+</script>
+
 
 <%- include('../../common/end.ejs') %>

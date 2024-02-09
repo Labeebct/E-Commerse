@@ -876,16 +876,6 @@
          </div>
 
    <script src="/javascript/addtocart.js"></script>
-   <script>
-
-      
-      const  productOpen = (event,productId) => {
-            if (event.target.closest('.addto_cart_btn')) {
-                  event.stopPropagation()     
-                  event.preventDefault()
-                  }
-            window.location.href = `/product?product=${productId}`
-      }
-      
-      </script>
+   <script src="/javascript/product-open.js"></script>
+   
 <%- include('../../common/end.ejs') %>

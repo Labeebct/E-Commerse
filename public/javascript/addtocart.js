@@ -1,7 +1,3 @@
-
-
-const notLoggedScreen = document.querySelector('.login_to_view')
-
 const addToCart = async(event,productId) => {
 
     event.stopPropagation()     
@@ -23,7 +19,6 @@ const addToCart = async(event,productId) => {
             if(result.notloggedin){
                 window.location.href= '/cart'
             }
-            throw new Error('Error in adding to cart')
         }else{
  
         }

@@ -53,7 +53,7 @@
                            <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                         </div>
                      </div>
-                     <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
+                     <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn">ADD TO CART</button></div>
                      
                   </div>
                   
@@ -66,25 +66,7 @@
    </div>
 
 <script src="/javascript/addtocart.js"></script>
-<script>
+<script src="/javascript/product-open.js"></script>
 
-const addToCartBtn = document.querySelector('.addto_cart_btn');
-
-const  productOpen = (event,productId) => {
-    if (event.target.closest('.addto_cart_btn')) {
-            event.stopPropagation()     
-            event.preventDefault()
-           }
-    window.location.href = `/product?product=${productId}`
-}
-
-
-addToCartBtn.addEventListener('click',(e)=>{
-    event.stopPropagation()     
-    event.preventDefault()
-    console.log('hii');
-})
-
-</script>
 
 <%- include('../../common/end.ejs') %>    
