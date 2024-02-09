@@ -90,8 +90,8 @@ router.get('/product',homeController.getProductopen)
 router.get('/all_products')
 
 
-
-
+       
+  
 // WIDHLIST -------------------------
 
 router.get('/wishlist',wishController.getWishlist)
@@ -103,7 +103,7 @@ router.delete('/wishist/remove/:id')
 // CART ----------------------------
 
 router.get('/cart',cartController.getCart)
-router.get('/cart/add/:id')
+router.post('/cart/add',cartController.postAddCart)
 router.delete('/cart/remove/:id')
 
 

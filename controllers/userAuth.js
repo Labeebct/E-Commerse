@@ -128,6 +128,7 @@ exports.postLogin = async(req,res) => {
               if(userExist.verified){
 
                 if(!userExist.blocked){
+                   req.session.userId = userExist._id
                    req.session.email = email   /* Setting email as session */
                    req.session.loggedin = true
                    return res.status(200).json({auth:true})
