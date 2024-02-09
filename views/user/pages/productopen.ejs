@@ -135,8 +135,50 @@
             </form>
             </div>                  
          </div>
+                      <!-- ============================================================================================================================ -->
+
+
+             <!-- ------------------------- MENS SHIRTS --------------------------- -->
+
+
+             <div class="product_frame_related">
+
+               <div class="product_top">RELATED PRODUCTS</div>
+               <div class="product_bottom">
+
+                  <% relatedProducts.forEach((list) => { %>
+                  <div class="product_frame_grid" onclick="productOpen(event,'<%= list._id %>')">
+                     
+
+                    <div class="top">
+                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
+                     </div>
+                     <div class="center">
+                       <div class="name_div">
+                       <p class="product_name"><%= list.productname %></p>
+                       </div>
+                       <div class="price_div">
+                          <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice.toLocaleString() %></p>
+                          <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
+                       </div>
+                    </div>
+                    <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
+
+                    
+                 </div>
+                 
+                 <% }) %>
+              </div>
+           </div>
+
+              
+            <!-- --------------------------------------------------------------------------------------------------------- -->
          <%- include('../../common/footer.ejs') %>
    </div>
+
+
+
 
 <script>
 

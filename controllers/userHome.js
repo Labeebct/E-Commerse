@@ -172,10 +172,14 @@ exports.getSubcategory = async(req,res) => {
 exports.getProductopen = async(req,res) => {
      try {
           const productId = req.query.product
-
+    
           const product = await productModel.findById(productId)
 
-          res.render('user/pages/productopen',{state:'',product})
+          const relatedProducts = await productModel.aggregate([
+               {$match:{subcategory:product.subcategory}}
+          ])
+
+          res.render('user/pages/productopen',{state:'', product , relatedProducts})
           
      } catch (error) {
           console.log('Error in get product open',error);
