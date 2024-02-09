@@ -2640,8 +2640,8 @@ word-wrap: break-word;
     background-color: transparent;
     }
        .product_frame_grid{
-        height: 23rem;
-        width: 16rem;
+        height: 25rem;
+        width: 17rem;
         padding: 0 2rem;
         border: 1px solid rgba(62, 62, 62, 0.287);
         cursor: pointer;

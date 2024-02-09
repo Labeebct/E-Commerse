@@ -30,16 +30,19 @@ exports.getCart = async(req,res) => {
 
               const cartTotal = productIds.length > 0 ?  cartPrice[0].cartPrice : 0
 
-              const cartCount = cartExist.products.length 
+              const cartCount = cartExist.products.length
+              const discount = Math.round(cartTotal / 10)
+              const gst = cartTotal * 0.08
 
-              return res.render('user/pages/cart',{state , loggedIn:true , cartExist:true , cartCount , cartProducts , cartTotal})
+              
+              return res.render('user/pages/cart',{state , loggedIn:true , cartExist:true , cartCount , cartProducts , cartTotal , discount ,gst})
             }
             else{
-              return res.render('user/pages/cart',{state , loggedIn:true , cartExist:false , cartCount:0 ,cartProducts:'' , cartTotal:''})
+              return res.render('user/pages/cart',{state , loggedIn:true , cartExist:false , cartCount:0 ,cartProducts:'' , cartTotal:'' , discount:'' , gst:''})
             }
         }
         else{
-            return res.render('user/pages/cart',{state , loggedIn:false , cartExist:false , cartCount:0 , cartProducts:'' , cartTotal:''})
+            return res.render('user/pages/cart',{state , loggedIn:false , cartExist:false , cartCount:0 , cartProducts:'' , cartTotal:'',discount:'',gst:''})
         }
 
     } catch (error) {

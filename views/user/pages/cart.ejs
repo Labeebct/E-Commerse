@@ -76,11 +76,11 @@
                   </div>
                   <div class="cart_details"> 
                      <p>Discount </p>
-                     <p><i class="bi bi-currency-rupee"></i>-200</p>
+                     <p><i class="bi bi-currency-rupee"></i>-<%= discount.toLocaleString() %></p>
                   </div>
                   <div class="cart_details"> 
                      <p>GST</p>
-                     <p><i class="bi bi-currency-rupee"></i>10.4</p>
+                     <p><i class="bi bi-currency-rupee"></i><%= gst.toLocaleString() %></p>
                   </div>
                   <div class="cart_details"> 
                      <p>Delivery Charge</p>
@@ -89,7 +89,7 @@
                </div>
                <div class="total_amount"> 
                   <p>Total Amount</p>
-                  <p><i class="bi bi-currency-rupee"></i>12,3234</p>
+                  <p><i class="bi bi-currency-rupee"></i><%= (cartTotal - discount + gst).toLocaleString() %></p>
                </div>
                <div class="btn_div"><button class="place_order_btn">PLACE ORDER</button></div>
             </div>

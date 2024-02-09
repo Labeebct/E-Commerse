@@ -19,8 +19,6 @@ const addToCart = async(event,productId) => {
             if(result.notloggedin){
                 window.location.href= '/cart'
             }
-        }else{
- 
         }
         
     } catch (error) {
