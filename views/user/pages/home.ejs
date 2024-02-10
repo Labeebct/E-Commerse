@@ -70,7 +70,13 @@
                       
 
                      <div class="top">
-                        <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                        <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                           <i class="bi wish_icon<%= list._id %> <%= (() => {
+                              const productIdObjectId = new ObjectId(list._id );
+                              const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                              return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                          })() %>"></i>
+                        </button>
                         <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                       </div>
                       <div class="center">
@@ -100,7 +106,7 @@
 
              <div class="product_frame">
 
-                <div class="product_top">MENS SHIRTS</div>
+                <div class="product_top">MENS T-SHIRTS</div>
                 <div class="product_bottom">
 
                    <% mensTshirts.forEach((list) => { %>
@@ -108,7 +114,13 @@
                       
 
                      <div class="top">
-                        <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                        <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                           <i class="bi wish_icon<%= list._id %> <%= (() => {
+                              const productIdObjectId = new ObjectId(list._id );
+                              const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                              return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                          })() %>"></i>
+                        </button>
                         <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                       </div>
                       <div class="center">
@@ -146,7 +158,13 @@
                                  
            
                                 <div class="top">
-                                   <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                                   <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                                    <i class="bi wish_icon<%= list._id %> <%= (() => {
+                                       const productIdObjectId = new ObjectId(list._id );
+                                       const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                                       return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                                   })() %>"></i>
+                                 </button>
                                    <img src="<%= list.productimg[0] %>" style="width: 84%; height: 94%;" alt="">
                                  </div>
                                  <div class="center">
@@ -184,7 +202,13 @@
                                  
            
                                 <div class="top">
-                                   <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                                   <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                                    <i class="bi wish_icon<%= list._id %> <%= (() => {
+                                       const productIdObjectId = new ObjectId(list._id );
+                                       const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                                       return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                                   })() %>"></i>
+                                 </button>
                                    <img src="<%= list.productimg[0] %>" style="width: 84%; height: 94%;" alt="">
                                  </div>
                                  <div class="center">
@@ -237,7 +261,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -276,7 +306,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -322,7 +358,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -361,7 +403,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -401,7 +449,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -443,7 +497,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -483,7 +543,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -535,7 +601,13 @@
                               
          
                              <div class="top">
-                                <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                                <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                                 <i class="bi wish_icon<%= list._id %> <%= (() => {
+                                    const productIdObjectId = new ObjectId(list._id );
+                                    const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                                    return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                                })() %>"></i>
+                              </button>
                                 <img src="<%= list.productimg[0] %>" style="width: 89%; height: 90%; object-fit: contain;" alt="">
                               </div>
                               <div class="center">
@@ -574,7 +646,13 @@
                               
          
                              <div class="top">
-                                <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                                <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                                 <i class="bi wish_icon<%= list._id %> <%= (() => {
+                                    const productIdObjectId = new ObjectId(list._id );
+                                    const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                                    return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                                })() %>"></i>
+                              </button>
                                 <img src="<%= list.productimg[0] %>" style="width: 89%; height: 90%; object-fit: contain;" alt="">
                               </div>
                               <div class="center">
@@ -615,7 +693,13 @@
                               
          
                              <div class="top">
-                                <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                                <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                                 <i class="bi wish_icon<%= list._id %> <%= (() => {
+                                    const productIdObjectId = new ObjectId(list._id );
+                                    const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                                    return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                                })() %>"></i>
+                              </button>
                                 <img src="<%= list.productimg[0] %>" style="width: 89%; height: 90%; object-fit: contain;" alt="">
                               </div>
                               <div class="center">
@@ -655,7 +739,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 90%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -692,7 +782,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 90%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -731,7 +827,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 95%; height: 70%;" alt="">
                      </div>
                      <div class="center">
@@ -769,7 +871,13 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 95%; height: 70%;" alt="">
                      </div>
                      <div class="center">
@@ -807,7 +915,12 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 90%; height: 90%;" alt="">
                      </div>
                      <div class="center">
@@ -845,7 +958,12 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>                     </button>
                        <img src="<%= list.productimg[0] %>" style="width: 95%; height: 70%;" alt="">
                      </div>
                      <div class="center">
@@ -858,8 +976,6 @@
                        </div>
                     </div>
                     <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn">ADD TO CART</button></div>
-
-                    
                  </div>
                  
                  <% }) %>
@@ -875,7 +991,9 @@
             </div>
          </div>
 
-   <script src="/javascript/addtocart.js"></script>
-   <script src="/javascript/product-open.js"></script>
-   
+
+<script src="/javascript/addtowish.js"></script>
+<script src="/javascript/addtocart.js"></script>
+<script src="/javascript/product-open.js"></script>
+
 <%- include('../../common/end.ejs') %>

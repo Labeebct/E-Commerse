@@ -41,7 +41,13 @@
                       
 
                      <div class="top">
-                        <button class="wish_btn"><i class="bi bi-heart"></i></button>
+                        <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
+                           <i class="bi wish_icon<%= list._id %> <%= (() => {
+                              const productIdObjectId = new ObjectId(list._id );
+                              const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                              return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                          })() %>"></i>
+                         </button>
                         <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                       </div>
                       <div class="center">
@@ -65,6 +71,7 @@
          <%- include('../../common/footer.ejs') %>
    </div>
 
+<script src="/javascript/addtowish.js"></script>
 <script src="/javascript/addtocart.js"></script>
 <script src="/javascript/product-open.js"></script>
 

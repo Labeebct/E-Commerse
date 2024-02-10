@@ -1,145 +1,53 @@
 <%- include('../components/head.ejs') %>
    <div class="wrapper wishlist_wrapper">
     <%- include('../components/top_nav.ejs') %>
+            <!-- YOU NEED TO LOGIN -->
+            <div style="<%= loggedIn ? 'display:none' : 'display:block;' %>" class="login_to_view">
+               <div class="log_frame">
+                 <h3>PLEASE LOG IN</h3>
+                 <p>Login to view items in your WISHLIST.</p>
+                 <img src="/images/cart.png" class="cart_png" alt="">
+                 <button onclick="location.href = '/login' " class="login_from_wish_btn">LOGIN</button>
+               </div>
+              </div>
+     
          <div class="content wishlist_content">
-            <div class="my_wishlist_text">My Wishlist <span class="wish_list_items">4 Items</span></div>
+            <div class="my_wishlist_text">My Wishlist <span class="wish_list_items"><span class="wish_count"><%= wishCount %></span> Items</span></div>
             <div class="wish_frame"> 
 
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
+                           <!-- YOU CART IS EMPTY -->
+            <div style="<%= wishExist && wishCount > 0 ? 'display:none' : 'display:block;' %>" class="cart_is_empty">
+               <div class="empty_frame">
+                  <img src="/images/empty cart.png" class="cart_empty_png" alt="">
+                  <h3>Your Wishlist is Empty</h3>
+                  <p>Looks like you haven't added anything to your wishlist yet.</p>
+               </div>
+            </div>    
+   
+            <% if(wishProducts) { %>
+
+            <% wishProducts.forEach((list) => { %>
+
+               <div class="product_frame product<%= list._id %>" onclick="productOpen(event,'<%= list._id %>')">
+                  <div class="top"><img src="<%= list.productimg[0] %>" style="width: 10rem; height: 13em;" alt=""><button class="remove_wish_btn" onclick="removeFromWish(event,'<%= list._id %>')"><i class="bi bi-x-circle"></i></button></div>
                   <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
+                     <p class="product_name"><%= list.productname %></p>
                      <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
+                        <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice.toLocaleString() %></p>
+                        <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                      </div>
                   </div>
                   <div class="bottom"><button class="addto_cart_btn">MOVE TO CART</button></div>
                </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">MOVE TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
-               <div class="product_frame">
-                  <div class="top"><img src="/images/iphone 15.jpg" style="width: 7rem; height: 8.5rem;" alt=""><button class="remove_wish_btn"><i class="bi bi-x-circle"></i></button></div>
-                  <div class="center">
-                     <p class="product_name">IPhone 15 pro</p>
-                     <div class="price_div">
-                        <p class="old_price"><i class="bi bi-currency-rupee"></i>120,867</p>
-                        <p class="new_price"><i class="bi bi-currency-rupee"></i>112,424</p>
-                     </div>
-                  </div>
-                  <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-               </div>
+             
+               <% }) %>
+               <% } %>
 
             </div>
          </div>
          <%- include('../../common/footer.ejs') %>
    </div>
+<script src="/javascript/addtowish.js"></script>
+<script src="/javascript/product-open.js"></script>
+
 <%- include('../../common/end.ejs') %>

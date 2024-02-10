@@ -1,11 +1,12 @@
 const signupModel = require('../models/signup')
 const productModel = require('../models/products')
 const categoryModel = require('../models/category')
+const wishlistModel = require('../models/wishlist')
 const bannerModel = require('../models/banner')
 const couponModel = require('../models/coupon')
 const messageModel = require('../models/message')
 
-
+const { ObjectId } = require('mongodb');
 
 
 // <<<<< ============================================== HOME ========================================================= >>>>>
@@ -22,6 +23,11 @@ exports.getHome = async(req,res) => {
 
           const state = 'home'
           const categories = await categoryModel.find()
+
+          const userId = req.session.userId
+
+          const wishExist = await wishlistModel.findOne({userId})
+
 
           const mensShirts = await productModel.aggregate([
                {$match:{subcategory:'MENS SHIRTS'}}
@@ -88,8 +94,6 @@ exports.getHome = async(req,res) => {
                {$match:{subcategory:'UTENSILS'}}
           ])
 
-
-
           res.render('user/pages/home',
           {
           state,
@@ -105,7 +109,7 @@ exports.getHome = async(req,res) => {
           kidsToys,
           babyWipes,
           mobiles,
-          laptops,
+          laptops,   
           fridge,
           headset,
           tv,
@@ -113,9 +117,11 @@ exports.getHome = async(req,res) => {
           womensSaree,
           painting,
           bedsheet,
-          utensils
+          utensils,
+          wishExist:wishExist ? wishExist.products : [],
+          ObjectId
           })
-
+    
 
           
      } catch (error) {
@@ -131,12 +137,17 @@ exports.getCategory = async(req,res) => {
 
           const category = req.params.cat
           const categories = await categoryModel.find()
+          
+          const userId = req.session.userId
+
+          const wishExist = await wishlistModel.findOne({userId})
+
 
           const catProducts = await productModel.aggregate([
                { $match: {category:category} }
           ])          
 
-          res.render('user/pages/categoryproducts',{state:category, catProducts , categories})
+          res.render('user/pages/categoryproducts',{state:category, catProducts , categories, wishExist:wishExist ? wishExist.products : [], ObjectId})
           
      } catch (error) {
           console.log('Error in get category',error);
@@ -151,6 +162,12 @@ exports.getSubcategory = async(req,res) => {
           const subcat = req.params.subcat
           const categories = await categoryModel.find()
 
+                    
+          const userId = req.session.userId
+
+          const wishExist = await wishlistModel.findOne({userId})
+
+
           console.log(subcat);
 
 
@@ -158,7 +175,7 @@ exports.getSubcategory = async(req,res) => {
                { $match: {subcategory:subcat} }
           ])          
 
-          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories})
+          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories ,wishExist:wishExist ? wishExist.products : [], ObjectId })
           
      } catch (error) {
           console.log('Error in get category',error);
@@ -172,6 +189,10 @@ exports.getSubcategory = async(req,res) => {
 exports.getProductopen = async(req,res) => {
      try {
           const productId = req.query.product
+
+          const userId = req.session.userId
+
+          const wishExist = await wishlistModel.findOne({userId})
     
           const product = await productModel.findOne({_id:productId})
 
@@ -179,7 +200,7 @@ exports.getProductopen = async(req,res) => {
                {$match:{subcategory:product.subcategory}}
           ]) 
 
-          res.render('user/pages/productopen',{state:'', product , relatedProducts})
+          res.render('user/pages/productopen',{state:'', product , relatedProducts ,wishExist:wishExist ? wishExist.products : [], ObjectId})
           
      }catch (error) {
           console.log('Error in get product open',error.message);

@@ -91,12 +91,12 @@ router.get('/all_products')
 
 
        
-  
+
 // WIDHLIST -------------------------
 
 router.get('/wishlist',wishController.getWishlist)
-router.get('/wishist/add/:id')
-router.delete('/wishist/remove/:id')
+router.post('/wishist/add',wishController.postAddwishlist)
+router.delete('/wishist/remove',wishController.deleteWishlist)
 
 
 
