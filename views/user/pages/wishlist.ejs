@@ -37,7 +37,7 @@
                         <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                      </div>
                   </div>
-                  <div class="bottom"><button class="addto_cart_btn">MOVE TO CART</button></div>
+                  <div class="bottom"><button class="addto_cart_btn" onclick="wishToCart(event,'<%= list._id %>')">MOVE TO CART</button></div>
                </div>
              
                <% }) %>

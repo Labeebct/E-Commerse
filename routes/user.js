@@ -96,7 +96,9 @@ router.get('/all_products')
 
 router.get('/wishlist',wishController.getWishlist)
 router.post('/wishist/add',wishController.postAddwishlist)
+router.post('/wishlist/to_cart',wishController.postFromwishToCart)
 router.delete('/wishist/remove',wishController.deleteWishlist)
+
 
 
 

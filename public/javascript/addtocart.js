@@ -2,6 +2,10 @@ const addToCart = async(event,productId) => {
 
     event.stopPropagation()     
     event.preventDefault()
+
+    const quantity = document.getElementsByName('quantity')[0]
+
+    const cartQuantity = quantity ? quantity.value : 1
     
     try {
 
@@ -10,7 +14,7 @@ const addToCart = async(event,productId) => {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({productId})
+            body:JSON.stringify({productId,cartQuantity})
         })
 
         const result = await response.json()

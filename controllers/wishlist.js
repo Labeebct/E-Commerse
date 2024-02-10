@@ -1,5 +1,7 @@
 const productModel = require('../models/products')
 const wishlistModel = require('../models/wishlist')
+const cartModel = require('../models/cart')
+
 
 const { Types } = require('mongoose')
 
@@ -89,6 +91,70 @@ exports.postAddwishlist = async(req,res) => {
         console.log('Error in add to wishlist',error.message);
     }
 }
+
+
+
+
+exports.postFromwishToCart = async(req,res) => {
+
+    try {
+
+        console.log('hii');
+
+        const { productId } = req.body
+        const userId = req.session.userId
+
+        const userObjId = new Types.ObjectId(userId)
+        const productObjId = new Types.ObjectId(productId)
+
+        const cartExist = await cartModel.findOne({userId})
+
+        if(req.session.loggedin){
+        if(!cartExist){
+           const newSchema = new cartModel({
+            userId:userObjId,
+            products:[{productId:productObjId,quantity:1}]
+           })
+          await newSchema.save()
+
+          await wishlistModel.updateOne({userId},
+            {$pull:{products:{productId}}
+          })
+
+          return res.status(200).json({success:true,cartcreated:true})
+        }
+        else{
+           const productExist = cartExist.products.find((products)=> products.productId == productId)
+           if(!productExist){
+
+            await cartModel.updateOne({userId},
+                {$push:{products:{productId:productObjId,quantity:1}}}
+                )
+
+            await wishlistModel.updateOne({userId},
+                {$pull:{products:{productId}}
+                })
+                
+            console.log('Product succesfully added to cart');
+            return res.status(270).json({success:true})
+        }
+        else{
+            console.log('Product already exist in cart');
+            return res.status(200).json({success:true})
+           }
+        }
+    }else{
+        console.log('Not logged in');
+        res.status(423).json({notloggedin:true})
+    }
+    
+        
+    }catch(error){
+        console.log('Error in add to cart post',error.message);
+    }
+}
+
+
 
 
 exports.deleteWishlist = async(req,res) => {

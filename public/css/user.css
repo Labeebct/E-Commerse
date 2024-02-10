@@ -150,7 +150,9 @@
     .bi-list:active{
         transform: scale(.95);
     }
-
+.bi-heart{
+    font-size: 1.1rem !important;
+}
 
 .selected{
     border-bottom: 4px solid red;

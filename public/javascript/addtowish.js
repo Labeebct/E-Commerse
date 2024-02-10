@@ -92,3 +92,37 @@ async function removeFromWish(event,productId){
         console.log('Error in remove from wish');
     }
 }
+
+
+async function wishToCart(event,productId){
+
+    event.stopPropagation()     
+    event.preventDefault()
+
+    const wishIcon = document.querySelector(`.product${productId}`)
+    const wishCount = document.querySelector('.wish_count')
+
+    try {
+
+        const response = await fetch('/wishlist/to_cart',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({productId})
+           })
+
+           const result = await response.json()
+           if(result.success){
+            wishIcon.remove()
+            wishCount.innerHTML--
+            if(wishCount.innerHTML == 0 ){
+                document.querySelector('.cart_is_empty').style.display = 'block'
+            }
+
+        }
+        
+    } catch (error) {
+        console.log('Error in adiing product from wish to cart');
+    }
+} 
