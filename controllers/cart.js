@@ -80,7 +80,7 @@ exports.postAddCart = async(req,res) => {
             products:[{productId:productObjId,quantity}]
            })
           await newSchema.save()
-          return res.status(200).json({cartcreated:true})
+          return res.status(200).json({success:true,cartcreated:true})
         }
         else{
            const productExist = cartExist.products.find((products)=> products.productId == productId)
@@ -89,10 +89,12 @@ exports.postAddCart = async(req,res) => {
                 {$push:{products:{productId:productObjId,quantity}}}
                 )
             console.log('Product succesfully added to cart'); 
+            return res.status(245).json({success:true,cartcreated:true})
         }
         else{
             console.log('Product already exist in cart');
-            return res.status(289)
+            return res.status(200).json({success:true,cartcreated:true})
+
            }
         }
     }else{

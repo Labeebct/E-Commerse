@@ -15,6 +15,19 @@
     height: calc(100vh - 4.5rem);
 }
 
+.addto_cart_btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+}
+.bi-plus-lg{
+    font-size: 1.1rem;
+}
+.bi-arrow-right-short{
+    font-size: 1.4rem;
+}
+
 
 
 
@@ -2944,9 +2957,25 @@ word-wrap: break-word;
         cursor: pointer;
         transition: all .4s;
     }
+    .wish_btn_related{
+        position: absolute;
+        top: 1rem;
+        right: 0rem;
+        border: none;
+        background: none;
+    }
+    .wish_white{
+        color: white !important;
+    }
     .bi-heart{
-        font-size: 1.3rem;
-        color: white;
+        font-size: 1.3rem !important;
+        color: black;
+        cursor: pointer;
+    }
+    .bi-heart-fill{
+        font-size: 1.3rem !important;
+        color: red !important;
+        cursor: pointer;
     }
     .wish_btn:active{
         transform: scale(.95);

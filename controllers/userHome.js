@@ -1,10 +1,9 @@
-const signupModel = require('../models/signup')
 const productModel = require('../models/products')
 const categoryModel = require('../models/category')
 const wishlistModel = require('../models/wishlist')
+const cartModel = require('../models/cart')
 const bannerModel = require('../models/banner')
 const couponModel = require('../models/coupon')
-const messageModel = require('../models/message')
 
 const { ObjectId } = require('mongodb');
 
@@ -27,6 +26,7 @@ exports.getHome = async(req,res) => {
           const userId = req.session.userId
 
           const wishExist = await wishlistModel.findOne({userId})
+          const cartExist = await cartModel.findOne({userId})
 
 
           const mensShirts = await productModel.aggregate([
@@ -119,6 +119,7 @@ exports.getHome = async(req,res) => {
           bedsheet,
           utensils,
           wishExist:wishExist ? wishExist.products : [],
+          cartExist:cartExist ? cartExist.products : [],
           ObjectId
           })
     
@@ -141,13 +142,14 @@ exports.getCategory = async(req,res) => {
           const userId = req.session.userId
 
           const wishExist = await wishlistModel.findOne({userId})
+          const cartExist = await cartModel.findOne({userId})
 
 
           const catProducts = await productModel.aggregate([
                { $match: {category:category} }
           ])          
 
-          res.render('user/pages/categoryproducts',{state:category, catProducts , categories, wishExist:wishExist ? wishExist.products : [], ObjectId})
+          res.render('user/pages/categoryproducts',{state:category, catProducts , categories, wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
           
      } catch (error) {
           console.log('Error in get category',error);
@@ -166,6 +168,7 @@ exports.getSubcategory = async(req,res) => {
           const userId = req.session.userId
 
           const wishExist = await wishlistModel.findOne({userId})
+          const cartExist = await cartModel.findOne({userId})
 
 
           console.log(subcat);
@@ -175,7 +178,7 @@ exports.getSubcategory = async(req,res) => {
                { $match: {subcategory:subcat} }
           ])          
 
-          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories ,wishExist:wishExist ? wishExist.products : [], ObjectId })
+          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
           
      } catch (error) {
           console.log('Error in get category',error);
@@ -193,14 +196,15 @@ exports.getProductopen = async(req,res) => {
           const userId = req.session.userId
 
           const wishExist = await wishlistModel.findOne({userId})
-    
+          const cartExist = await cartModel.findOne({userId}) 
+
           const product = await productModel.findOne({_id:productId})
 
           const relatedProducts = await productModel.aggregate([
                {$match:{subcategory:product.subcategory}}
           ]) 
 
-          res.render('user/pages/productopen',{state:'', product , relatedProducts ,wishExist:wishExist ? wishExist.products : [], ObjectId})
+          res.render('user/pages/productopen',{state:'', product , relatedProducts ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
           
      }catch (error) {
           console.log('Error in get product open',error.message);

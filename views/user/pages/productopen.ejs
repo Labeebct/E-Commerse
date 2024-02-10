@@ -101,7 +101,7 @@
                            </select>
                            <div class="stock_left">Hurry only <%= product.stock %> LEFT</div>
                            <div class="wish_btn_div"><button class="wish_btn" onclick="addToWish(event,'<%= product._id %>')">
-                              <i class="bi wish_icon<%= product._id %> <%= (() => {
+                              <i class="bi wish_white wish_icon<%= product._id %> <%= (() => {
                                  const productIdObjectId = new ObjectId(product._id);
                                  const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
                                  return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
@@ -133,7 +133,18 @@
                      <!-- =================================================================== -->
 
                      <li class="btn_li" style="display: flex; height: 3rem; justify-content: space-between; width: 90%;">
-                        <button onclick="addToCart(event,'<%= product._id %>')" type="button">Add To Cart</button>
+                        <button onclick="addToCart(event,'<%= product._id %>')" type="button" class="addto_cart_btn addto_cart_btn<%= product._id %>">
+                           <%= (() => {
+                              const productIdObjectId = new ObjectId(product._id);
+                              const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                              return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                           })() %>
+                          <i class="bi <%= (() => {
+                          const productIdObjectId = new ObjectId(product._id);
+                          const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                          return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                          })() %>"></i>
+                        </button>
                         <button type="submit">Buy Now</button>
                      </li>
 
@@ -145,7 +156,6 @@
                       <!-- ============================================================================================================================ -->
 
 
-             <!-- ------------------------- MENS SHIRTS --------------------------- -->
 
 
              <div class="product_frame_related">
@@ -158,8 +168,14 @@
                      
 
                     <div class="top">
-                       <button class="wish_btn"><i class="bi bi-heart"></i></button>
-                       <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
+                     <button class="wish_btn_related" onclick="addToWish(event,'<%= list._id %>')">
+                        <i class="bi wish_related_pro_icon wish_icon<%= list._id %> <%= (() => {
+                           const productIdObjectId = new ObjectId(list._id );
+                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
+                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
+                       })() %>"></i>
+                     </button>
+                     <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
                      </div>
                      <div class="center">
                        <div class="name_div">
@@ -170,8 +186,19 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button class="addto_cart_btn">ADD TO CART</button></div>
-
+                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                     <%= (() => {
+                        const productIdObjectId = new ObjectId(list._id );
+                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                     })() %>
+                    <i class="bi <%= (() => {
+                    const productIdObjectId = new ObjectId(list._id );
+                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                    })() %>"></i>
+                   </button>
+                  </div>
                     
                  </div>
                  
@@ -185,7 +212,7 @@
    </div>
 
 
-
+<script src="/javascript/product-open.js"></script>
 <script src="/javascript/addtowish.js"></script>
 <script src="/javascript/addtocart.js"></script>
 
