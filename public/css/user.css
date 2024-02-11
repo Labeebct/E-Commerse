@@ -28,6 +28,21 @@
     font-size: 1.4rem;
 }
 
+body::-webkit-scrollbar {
+    width: 0em;
+  }
+  
+
+body::-webkit-scrollbar-track {
+    background-color: transparent;
+   }
+
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+
 
 
 
@@ -163,11 +178,10 @@
     .bi-list:active{
         transform: scale(.95);
     }
-.bi-heart{
+.bi_top_heart{
     font-size: 1.1rem !important;
-    color: white !important;
-}
 
+}
 .selected{
     border-bottom: 4px solid red;
 
@@ -2610,6 +2624,10 @@ word-wrap: break-word;
         cursor: pointer;
         transition: all .6s;
     }
+    .bi_top_heart{
+        color: white !important;
+        font-size: 1.1rem !important
+    }
     .prev_next_btn{
         border: none;
         background: none;
@@ -2767,11 +2785,11 @@ word-wrap: break-word;
     
     }
     .bi-heart{
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
     .bi-heart-fill{
         color: red;
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
     .center{
         display: flex;
@@ -3667,6 +3685,22 @@ word-wrap: break-word;
 
 
 .allproducts_wrapper{
+    position: relative;
+    .loading_screen{
+        display: none;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 2;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.118);
+    }
+    .loading_gif{
+       width: 3rem;
+       mix-blend-mode:darken;
+    }
+
     .all_products_content{
         width: 100%;
         height: calc(100vh - 4.5rem);
@@ -3744,13 +3778,18 @@ word-wrap: break-word;
         border-right: 1px solid rgba(0, 0, 0, 0.214);
     }
     .product_section{
+        display: grid;
+        grid-template-columns: repeat(4,1fr) !important;
+        grid-template-rows: repeat(auto , 25rem) !important;
+        row-gap: 2rem;
         height: 100%;
         width: calc(100% - 17rem);
-        padding: 1rem;
+        padding: 1rem 1.4rem;
+        overflow-y: scroll;
     }
     .product_frame_grid{
-        height: 22rem;
-        width: 16rem;
+        height: 26rem;
+        width: 17rem;
         padding: 0 2rem;
         border: 1px solid rgba(62, 62, 62, 0.287);
         cursor: pointer;
@@ -3857,7 +3896,7 @@ word-wrap: break-word;
         border-bottom: 1px solid rgba(0, 0, 0, 0.119);
     }
     .color_sec{
-        height: 15rem;
+        height: 13rem;
     }
     .filter_sec h4{
        font-family: 'Poppins';
@@ -3893,9 +3932,81 @@ word-wrap: break-word;
         width: .8rem;
         border-radius: 100%;
     }
-}
+    .bi-heart-fill{
+        font-size: 1.3rem;
+        color: red;
+    }
+    .button_div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 6rem;
+    }
+    .link_pagination{
+        display: flex;
+        gap: 1rem;
+        align-items: center; 
+    }
+    .links{
+        display: flex;
+    }
+    
+    .link_pagination button{
+        padding: .41rem .68em;
+        letter-spacing: .05rem;
+        border: none;
+        background-color:#1B2430;
+        color: white;
+        transition: transform .5s;
+        font-family: 'Poppins',sans-serif;
+        border-radius: .2rem;
+    }
+    .page_btn{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.1rem;
+        height: 2.1rem;
+        margin: 0 .15rem;
+        text-decoration: none;
+        border-radius: .2rem;
+        cursor: pointer;
+        background-color: white !important;
+        font-family: 'Poppins' , sans-serif;
+        color: black !important;
+        border: 1px solid rgba(0, 0, 0, 0.391) !important;
+    }
+    .link_pagination button{
+        cursor: pointer;
+    }
+    .page_btn:hover{
+        background-color: rgba(22, 22, 22, 0.153) !important;
+    }
+    .link_pagination button:active{
+        transform: scale(.9);
+    }
+    .active_link{
+      background-color: #26092f !important;
+      color: white !important;
+    }
+    .active_link:hover{
+        background-color: #26092f !important;
+    }
+    .pagination_div{
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        background-color: white;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+        width: 100%;
+    }
 
-
+}    
 
 
 

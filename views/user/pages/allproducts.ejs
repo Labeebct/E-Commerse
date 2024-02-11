@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerse</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/public/css/user.css">
-</head>
-<body>
+<%- include('../components/head.ejs') %>
     <div class="wrapper allproducts_wrapper">
-        <div class="top_nav">
-            <div class="web_logo"><i class="bi bi-list"></i><span class="labio_text">LABIO</span></div>
-            <div class="search_div">
-              <div class="search_bar">
-                <input class="search_input" placeholder="Search..." type="text" />
-                <button class="search_btn"><i class="bi bi-search"></i></button>
-              </div>
-            </div>
-            <div class="page_links">
-              <ul>
-                <li><a class="page_links home_li <%= state==='home'? 'active' : '' %>" href="/home">Home</a></li>
-                <li><a class="page_links" href="/wishlist"><i class="bi bi-heart bi_top_heart <%= state==='wishlist'? 'active' : '' %>"></i><span class="product_count">0</span></a></li>
-                <li><a class="page_links" href="/cart"><i class="bi bi-cart3  <%= state==='cart'? 'active' : '' %>"></i><span class="product_count">0</span></a></li>
-                <li><a class="page_links <%= state==='address'? 'active' : '' %>" href="/account/address">Account</a></li>
-                <li><a class="page_links" href=""><i class="bi bi-box-arrow-right"></i></a></li>
-              </ul>
-            </div>
-          </div>
+      <div class="loading_screen"><img src="/images/loading gif.gif" class="loading_gif" alt=""></div>
+      <%- include('../components/top_nav.ejs') %>
     <div class="all_products_content">
         <section class="top_sec">
             <h4>FILTERS</h4>
@@ -87,30 +59,34 @@
 
             <div class="product_section">
 
-                <div class="product_frame_grid">
-                      
-
-                    <div class="top">
-                       <button class="wish_btn"><i class="bi wish_icon bi-heart"></i></button>
-
-                       <img src="/public/images/iphone 15.jpg" style="width: 85%; height: 90%;" alt="">
-                     </div>
-                     <div class="center">
-                       <div class="name_div">
-                       <p class="product_name">Iphone 15 pro</p>
-                       </div>
-                       <div class="price_div">
-                          <p class="old_price"><i class="bi bi-currency-rupee"></i>32,645</p>
-                          <p class="new_price"><i class="bi bi-currency-rupee"></i>14,6532</p>
-                       </div>
-                    </div>
-                    <div class="bottom"><button class="addto_cart_btn ">ADD TO CART</button>
-                    </div>                     
-                 </div>
             </div>
+
         </div>
 
+      </div>
+
+      <div class="pagination_div">
+      <div class="link_pagination">
+        <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
+          <div class="links">
+              <button class="page_btn active_link" onclick="active()" value="1">1</button>
+              <button class="page_btn" onclick="active()" value="2">2</button>
+              <button class="page_btn" onclick="active()" value="3">3</button>
+              <button class="page_btn" onclick="active()" value="4">4</button>
+              <button class="page_btn" onclick="active()" value="5">5</button>
+              <button class="page_btn" onclick="active()" value="6">6</button>
+              <button class="page_btn" onclick="active()" value="7">7</button>
+           </div>
+          <button class="next_btn" onclick="next()"><i class="bi bi-chevron-right"></i></button>
+      </div>
     </div>
+
+    <%- include('../../common/footer.ejs') %>
    </div>
-</body>
-</html>
+
+<script src="/javascript/addtowish.js"></script>
+<script src="/javascript/addtocart.js"></script>
+<script src="/javascript/product-open.js"></script>
+<script src="/javascript/allproducts.js"></script>
+
+<%- include('../../common/end.ejs') %>

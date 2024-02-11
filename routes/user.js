@@ -87,7 +87,8 @@ router.get('/home',homeController.getHome)
 router.get('/category/:cat',homeController.getCategory)
 router.get('/subcategory/:subcat',homeController.getSubcategory)
 router.get('/product',homeController.getProductopen)
-router.get('/all_products')
+router.get('/all_products',homeController.getAllproducts)
+router.get('/all_products/show',homeController.getShowAllproducts)
 
 
        

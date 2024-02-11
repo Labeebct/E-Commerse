@@ -215,5 +215,45 @@ exports.getProductopen = async(req,res) => {
 
 
 
+exports.getAllproducts = async(req,res) => {
+     try {
+        
+          res.render('user/pages/allproducts',{state:''})
+          
+     }catch (error) {
+          console.log('Error in get product open',error.message);
+     }
+}
+
+
+
+
+exports.getShowAllproducts = async(req,res) => {
+     try {
+
+          const userId = req.session.userId
+
+          const page = parseInt(req.query.page) || 1
+
+          const pageSize = 40
+
+          const skip = (page - 1) * pageSize
+          
+          const wishExist = await wishlistModel.findOne({userId})
+          const cartExist = await cartModel.findOne({userId}) 
+        
+          const products = await productModel.find().skip(skip).limit(pageSize)
+
+          res.status(200).json({products,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+          
+     }catch (error) {
+          console.log('Error in get product open',error.message);
+     }
+}
+
+
+
+
+
 
 
