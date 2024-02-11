@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/public/css/user.css">
+</head>
+<body>
+    <div class="wrapper allproducts_wrapper">
+        <div class="top_nav">
+            <div class="web_logo"><i class="bi bi-list"></i><span class="labio_text">LABIO</span></div>
+            <div class="search_div">
+              <div class="search_bar">
+                <input class="search_input" placeholder="Search..." type="text" />
+                <button class="search_btn"><i class="bi bi-search"></i></button>
+              </div>
+            </div>
+            <div class="page_links">
+              <ul>
+                <li><a class="page_links home_li <%= state==='home'? 'active' : '' %>" href="/home">Home</a></li>
+                <li><a class="page_links" href="/wishlist"><i class="bi bi-heart bi_top_heart <%= state==='wishlist'? 'active' : '' %>"></i><span class="product_count">0</span></a></li>
+                <li><a class="page_links" href="/cart"><i class="bi bi-cart3  <%= state==='cart'? 'active' : '' %>"></i><span class="product_count">0</span></a></li>
+                <li><a class="page_links <%= state==='address'? 'active' : '' %>" href="/account/address">Account</a></li>
+                <li><a class="page_links" href=""><i class="bi bi-box-arrow-right"></i></a></li>
+              </ul>
+            </div>
+          </div>
+    <div class="all_products_content">
+        <section class="top_sec">
+            <h4>FILTERS</h4>
+            <div class="sort_by_div">
+                <p class="sort_recomended">Sort By : Recomended<i class="bi bi-chevron-down"></i></p>
+                <ul class="sort_ul">
+                    <li><a href="">Recomended</a></li>
+                    <li><a href="">Whats New</a></li>
+                    <li><a href="">Popularity</a></li>
+                    <li><a href="">Better Discount</a></li>
+                    <li><a href="">High to Low</a></li>
+                    <li><a href="">Low to High</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="bottom_products_div">
+        <form action="">
+            <div class="filter_section">
+
+                <div class="filter_sec cat_sec">
+                    <h4>Category</h4>
+                      <ul>
+                        <li><input type="radio" value="mens" name="category" id="mens"><label for="mens">MENS</label></li>
+                        <li><input type="radio" value="womens" name="category" id="womens"><label for="womens">WOMENS</label></li>
+                        <li><input type="radio" value="kids" name="category" id="kids"><label for="kids">KIDS</label></li>
+                        <li><input type="radio" value="electronics" name="category" id="electronics"><label for="electronics">ELECTRONICS</label></li>
+                        <li><input type="radio" value="home" name="category" id="home"><label for="home">HOME</label></li>
+                      </ul>
+                </div>
+                <div class="filter_sec price_sec">
+                    <h4>Price</h4>
+                    <ul>
+                        <li><input type="radio" value="500" name="price" id="500" ><label for="500">Under ₹500</label></li>
+                        <li><input type="radio" value="1000" name="price" id="1000" ><label for="1000">₹500 - ₹1000</label></li>
+                        <li><input type="radio" value="1500" name="price" id="1500" ><label for="1500">₹1000 - ₹1500</label></li>
+                        <li><input type="radio" value="2500" name="price" id="2500" ><label for="2500">₹1500 - ₹2500</label></li>
+                        <li><input type="radio" value="3000" name="price" id="3000" ><label for="3000">Over ₹2,500</label></li>
+                      </ul>
+                </div>
+                <div class="filter_sec color_sec">
+                    <h4>Color</h4>
+                    <ul>
+                        <li><input type="radio" value="red" name="color" id="red"><label for="red"><span style="background-color: red;" class="color_balls"></span>Red</label></li>
+                        <li><input type="radio" value="green" name="color" id="green"><label for="green"><span style="background-color: green;" class="color_balls"></span>Green</label></li>
+                        <li><input type="radio" value="yellow" name="color" id="yellow"><label for="yellow"><span style="background-color: yellow;" class="color_balls"></span>Yellow</label></li>
+                        <li><input type="radio" value="blue" name="color" id="blue"><label for="blue"><span style="background-color: blue;" class="color_balls"></span>Blue</label></li>
+                        <li><input type="radio" value="olive" name="color" id="olive"><label for="olive"><span style="background-color: olive;" class="color_balls"></span>Olive</label></li>
+                        <li><input type="radio" value="orange" name="color" id="orange"><label for="orange"><span style="background-color: orange;" class="color_balls"></span>Orange</label></li>
+                      </ul>
+                </div>
+
+            </div>
+        </form>
+
+            <div class="product_section">
+
+                <div class="product_frame_grid">
+                      
+
+                    <div class="top">
+                       <button class="wish_btn"><i class="bi wish_icon bi-heart"></i></button>
+
+                       <img src="/public/images/iphone 15.jpg" style="width: 85%; height: 90%;" alt="">
+                     </div>
+                     <div class="center">
+                       <div class="name_div">
+                       <p class="product_name">Iphone 15 pro</p>
+                       </div>
+                       <div class="price_div">
+                          <p class="old_price"><i class="bi bi-currency-rupee"></i>32,645</p>
+                          <p class="new_price"><i class="bi bi-currency-rupee"></i>14,6532</p>
+                       </div>
+                    </div>
+                    <div class="bottom"><button class="addto_cart_btn ">ADD TO CART</button>
+                    </div>                     
+                 </div>
+            </div>
+        </div>
+
+    </div>
+   </div>
+</body>
+</html>
