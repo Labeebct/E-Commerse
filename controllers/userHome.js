@@ -234,17 +234,78 @@ exports.getShowAllproducts = async(req,res) => {
           const userId = req.session.userId
 
           const page = parseInt(req.query.page) || 1
+          const filterBase = req.query.f
+          const filterValue = req.query.filter
 
           const pageSize = 40
-
           const skip = (page - 1) * pageSize
           
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId}) 
         
-          const products = await productModel.find().skip(skip).limit(pageSize)
+          if(filterBase && filterValue){
 
-          res.status(200).json({products,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+               if(filterBase === 'CATEGORY'){
+                    const filterProducts = await productModel.aggregate([
+                         {$match:{category:filterValue}}
+                    ])
+                   return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+               }
+               else if(filterBase === 'PRICE'){
+
+
+                    if(filterValue === '500'){
+                         const filterProducts = await productModel.aggregate([
+                              {$match:{newprice:{$lt:500}}}
+                         ])
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                    }
+                    else if(filterValue === '1000'){
+                         const filterProducts = await productModel.aggregate([
+                              {$match:{newprice:{$gte:500 , $lt:1000}}}
+                         ])
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+
+                    }
+                    else if(filterValue === '1500'){
+                         const filterProducts = await productModel.aggregate([
+                              {$match:{newprice:{$gte:1000 , $lt:1500}}}
+                         ])
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+
+                    }
+                    else if(filterValue === '2500'){
+                         const filterProducts = await productModel.aggregate([
+                              {$match:{newprice:{$gte:1500 , $lt:2500}}}
+                         ])
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                    }
+                    else{
+                         const filterProducts = await productModel.aggregate([
+                              {$match:{newprice:{$gt:2500}}}
+                         ])
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                    }
+               }
+               else{
+               const allProducts = await productModel.find()
+               const filterProducts = [];
+
+               allProducts.forEach((product) => {
+                    const filterProduct = product.color.filter((color) => color === filterValue);
+                    if (filterProduct.length > 0) {
+                        filterProducts.push(product);
+                    }
+                });
+               return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+               }
+
+          }else{
+               const products = await productModel.find().skip(skip).limit(pageSize)
+
+               res.status(200).json({products,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+          }
+
           
      }catch (error) {
           console.log('Error in get product open',error.message);
