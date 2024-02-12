@@ -1,5 +1,7 @@
 let currentValue = 0
 
+const productSection = document.querySelector('.product_section')
+
 
 async function fetchProducts(){
     const response = await fetch(`/all_products/show?page=${currentValue}`)
@@ -7,7 +9,6 @@ async function fetchProducts(){
     productSection.innerHTML = ''
     hideLoading()
     const products = result.products
- 
     products.forEach((list) => {
         const productDiv = document.createElement('div')
         productDiv.classList.add('product_frame_grid')
@@ -23,8 +24,8 @@ async function fetchProducts(){
                 <p class="product_name">${list.productname}</p>
                 </div>
                 <div class="price_div">
-                    <p class="old_price"><i class="bi bi-currency-rupee"></i>${list.oldprice}</p>
-                    <p class="new_price"><i class="bi bi-currency-rupee"></i>${list.newprice}</p>
+                    <p class="old_price"><i class="bi bi-currency-rupee"></i>${list.oldprice.toLocaleString()}</p>
+                    <p class="new_price"><i class="bi bi-currency-rupee"></i>${list.newprice.toLocaleString()}</p>
                 </div>
                 </div>
                 <div class="bottom"><button class="addto_cart_btn addto_cart_btn${list._id}">
@@ -113,7 +114,6 @@ const showLoading = ()=> loadingScreen.style.display = 'flex'
 const hideLoading = ()=> loadingScreen.style.display = 'none'
 
 
-const productSection = document.querySelector('.product_section')
 
 document.addEventListener('DOMContentLoaded', async()=>{
       try {
@@ -136,6 +136,7 @@ document.addEventListener('DOMContentLoaded', async()=>{
 
 
 async function filterProducts(filterBase,filter){
+    showLoading()
     const response = await fetch(`/all_products/show?f=${filterBase}&filter=${filter}`)
     const result = await response.json()
     productSection.innerHTML = ''
@@ -159,8 +160,8 @@ async function filterProducts(filterBase,filter){
                 <p class="product_name">${list.productname}</p>
                 </div>
                 <div class="price_div">
-                    <p class="old_price"><i class="bi bi-currency-rupee"></i>${list.oldprice}</p>
-                    <p class="new_price"><i class="bi bi-currency-rupee"></i>${list.newprice}</p>
+                    <p class="old_price"><i class="bi bi-currency-rupee"></i>${list.oldprice.toLocaleString()}</p>
+                    <p class="new_price"><i class="bi bi-currency-rupee"></i>${list.newprice.toLocaleString()}</p>
                 </div>
                 </div>
                 <div class="bottom"><button class="addto_cart_btn addto_cart_btn${list._id}">

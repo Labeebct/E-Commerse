@@ -8,12 +8,8 @@
             <div class="sort_by_div">
                 <p class="sort_recomended">Sort By : Recomended<i class="bi bi-chevron-down"></i></p>
                 <ul class="sort_ul">
-                    <li><a href="">Recomended</a></li>
-                    <li><a href="">Whats New</a></li>
-                    <li><a href="">Popularity</a></li>
-                    <li><a href="">Better Discount</a></li>
-                    <li><a href="">High to Low</a></li>
-                    <li><a href="">Low to High</a></li>
+                    <li onclick="filterProducts('PRICE','low to high')">Low to High</a></li>
+                    <li onclick="filterProducts('PRICE','high to low')">High to Low</li>
                 </ul>
             </div>
         </section>
@@ -58,11 +54,11 @@
         </form>
 
             <div class="product_section">
-
+              
+  
             </div>
 
         </div>
-
       </div>
 
       <div class="pagination_div">
@@ -88,5 +84,7 @@
 <script src="/javascript/addtocart.js"></script>
 <script src="/javascript/product-open.js"></script>
 <script src="/javascript/allproducts.js"></script>
+<script src="/javascript/searching.js"></script>
+
 
 <%- include('../../common/end.ejs') %>

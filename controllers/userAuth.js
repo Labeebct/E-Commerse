@@ -28,7 +28,7 @@ const {emailOtp , verify} = require('../utils/emailotp')
 
 
 exports.getSignup = (req,res) => {
-    res.render('user/pages/signup',{state:''})    /*  Rendering Signup page */
+    res.render('user/pages/signup',{state:'',cartCount:0,wishCount:0})    /*  Rendering Signup page */
 }
 
 
@@ -95,7 +95,7 @@ try {
 
 
 exports.getLogin = (req,res) => {
-    res.render('user/pages/login',{state:''}) 
+    res.render('user/pages/login',{state:'',cartCount:0,wishCount:0}) 
 } 
 
 
@@ -173,7 +173,7 @@ exports.getOtpverification = async(req,res) => {
 
          const otpFailed = req.flash('otpfailed') || ''
          const otpNumber = req.flash('number') || ''
-         res.render('user/pages/otp',{state:'',number,otpFailed,otpNumber}) 
+         res.render('user/pages/otp',{state:'',number,otpFailed,otpNumber,cartCount:0,wishCount:0}) 
     } catch (error) {
          console.log(error.message);
     }
@@ -209,7 +209,7 @@ exports.getResendotp = async (req,res) => {
 
 
 exports.getOtpsuccess = (req,res) => {
-    res.render('user/pages/otp_succes',{state:'',success:true})
+    res.render('user/pages/otp_succes',{state:'',success:true,cartCount:0,wishCount:0})
 }
 
 
@@ -224,7 +224,7 @@ exports.getOtpsuccess = (req,res) => {
 
 exports.getForgetpass = (req, res) => {
     const errMsg = req.flash('errMsg') 
-    res.render('user/pages/forgetpass',{state:'',errMsg})
+    res.render('user/pages/forgetpass',{state:'',errMsg,cartCount:0,wishCount:0})
 }
 
 
@@ -269,7 +269,7 @@ exports.postForgetpass = async (req, res) => {
 exports.getEmailOtp = async(req, res) => {
     try {
          const errMsg =  req.flash('incorrect')
-         res.render('user/pages/emailotp',{state:'',errMsg})
+         res.render('user/pages/emailotp',{state:'',errMsg,cartCount:0,wishCount:0})
 
     } catch (error) {
          console.log('Error admin getemail',error.message)
@@ -314,7 +314,7 @@ exports.getResendemailotp = async(req,res) =>{
 
 exports.getChangepass = (req, res) => {
     const errMsg =  req.flash('errMsg')
-    res.render('user/pages/changepassword',{state:'',errMsg})
+    res.render('user/pages/changepassword',{state:'',errMsg,cartCount:0,wishCount:0})
 }
 
  

@@ -1,3 +1,6 @@
+const wishCountTopNav = document.querySelector('.wish_count_top')
+const wishCount = document.querySelector('.wish_count')
+
 
 async function addToWish(event,productId){
     
@@ -9,7 +12,6 @@ async function addToWish(event,productId){
     try {
 
         if(wishIcon.classList.contains('bi-heart')){
-            
            wishIcon.classList.replace('bi-heart','bi-heart-fill')
 
            const response = await fetch('/wishist/add',{
@@ -39,6 +41,7 @@ async function addToWish(event,productId){
 
            const result = await response.json()
            if(result.success){
+            wishCountTopNav.innerHTML++
             wishIcon.classList.replace('bi-heart-fill','bi-heart')
          }
            else{
@@ -62,7 +65,6 @@ async function removeFromWish(event,productId){
     event.preventDefault()
     
     const wishIcon = document.querySelector(`.product${productId}`)
-    const wishCount = document.querySelector('.wish_count')
 
 
     try {
@@ -79,6 +81,7 @@ async function removeFromWish(event,productId){
            if(result.success){
             wishIcon.remove()
             wishCount.innerHTML--
+            wishCountTopNav.innerHTML--
             if(wishCount.innerHTML == 0 ){
                 document.querySelector('.cart_is_empty').style.display = 'block'
             }
@@ -116,6 +119,8 @@ async function wishToCart(event,productId){
            if(result.success){
             wishIcon.remove()
             wishCount.innerHTML--
+            wishCountTopNav.innerHTML--
+            cartCount.innerHTML ++
             if(wishCount.innerHTML == 0 ){
                 document.querySelector('.cart_is_empty').style.display = 'block'
             }

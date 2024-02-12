@@ -1,3 +1,6 @@
+const cartCount = document.querySelector('.cart_count')
+
+
 const addToCart = async(event,productId) => {
 
     event.stopPropagation()     
@@ -32,6 +35,7 @@ const addToCart = async(event,productId) => {
             }
         }else{
             if(result.success){
+                cartCount.innerHTML ++
                 addToCartBtn.innerHTML = 'GO TO CART <i class="bi bi-arrow-right-short"></i>'
             }
         }
@@ -41,3 +45,35 @@ const addToCart = async(event,productId) => {
     }
 
  }   
+
+
+
+
+ const productRemove = async(event,productId) => {
+
+    event.stopPropagation()     
+    event.preventDefault()
+    
+    try {
+    
+        const response = await fetch('/cart/remove',{
+            method:'DELETE',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({productId})
+        })
+    
+        const result = await response.json()
+    
+        if(result.success){
+          cartCount.innerHTML --
+          document.querySelector('.cartCount').innerHTML--
+          document.querySelector(`.product${result.productId}`).remove()
+        }
+        
+    } catch (error) {
+        console.log('Error in add to cart',error.message);
+    }
+    
+    }   

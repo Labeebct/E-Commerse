@@ -132,11 +132,11 @@ body::-webkit-scrollbar-thumb {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: .75rem;
+        font-size: .64rem;
         font-family: 'Poppins',sans-serif;
-        font-weight: 500;
-        height: .95rem;
-        width: .95rem;
+        font-weight: 600;
+        height: 1.07rem;
+        width: 1.07rem;
         border-radius: 50%;
         background-color: #F80E0E;
         position: absolute;
@@ -159,10 +159,6 @@ body::-webkit-scrollbar-thumb {
         font-weight: 500;
         padding: 1rem;
     }
-    .active{
-        color: rgb(255, 179, 0);
-    }
-
     .bi-list{
         font-size: 1.8rem;
         display: none;
@@ -3741,21 +3737,13 @@ word-wrap: break-word;
         width: 100%;
         display: none;
         position: absolute;
+        z-index: 2;
         border: 1px solid rgba(0, 0, 0, 0.067);
         background-color: white;
     }
     .sort_ul li{
-        list-style: none;
         width: 100%;
-        height: 2.5rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.079);
-    }
-    .sort_ul li:hover{
-        background-color: rgb(242, 242, 242);
-    }
-    .sort_ul li a{
-        width: 100%;
-        height: 100%;
+        height: 3rem;
         display: flex;
         align-items: center;
         padding-left: 1rem;
@@ -3763,6 +3751,11 @@ word-wrap: break-word;
         color: black;
         font-family: sans-serif;
         font-size: .87rem;
+        list-style: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.079);
+    }
+    .sort_ul li:hover{
+        background-color: rgb(242, 242, 242);
     }
     .sort_by_div:hover .sort_ul{
         display: block;
@@ -3778,6 +3771,7 @@ word-wrap: break-word;
         border-right: 1px solid rgba(0, 0, 0, 0.214);
     }
     .product_section{
+        position: relative;
         display: grid;
         grid-template-columns: repeat(4,1fr) !important;
         grid-template-rows: repeat(auto , 25rem) !important;

@@ -1,5 +1,6 @@
 const productModel = require('../models/products')
 const cartModel = require('../models/cart')
+const wishlistModel = require('../models/wishlist')
 const { ObjectId } = require('mongodb');
 
 const { Types } = require('mongoose')
@@ -14,6 +15,7 @@ exports.getCart = async(req,res) => {
         const userId = req.session.userId
 
         const cartExist = await cartModel.findOne({userId})
+        const wishExist = await wishlistModel.findOne({userId})
 
 
         if(req.session.loggedin){
@@ -39,14 +41,14 @@ exports.getCart = async(req,res) => {
               const gst = cartTotal / 1000
 
               
-              return res.render('user/pages/cart',{state , loggedIn:true , cartExist , cartQuantity , cartCount , cartProducts , cartTotal , discount ,gst ,ObjectId})
+              return res.render('user/pages/cart',{state , loggedIn:true , cartExist , cartQuantity , cartCount , cartProducts , cartTotal , discount ,gst ,ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
             }
             else{
-              return res.render('user/pages/cart',{state , loggedIn:true , cartExist:false, cartQuantity:'' , cartCount:0 ,cartProducts:'' , cartTotal:'' , discount:'' , gst:'' , ObjectId})
+              return res.render('user/pages/cart',{state , loggedIn:true , cartExist:false, cartQuantity:'' , cartCount:0 ,cartProducts:'' , cartTotal:'' , discount:'' , gst:'' , ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
             }
         }
         else{
-            return res.render('user/pages/cart',{state , loggedIn:false , cartExist:false , cartQuantity:'' , cartCount:0 , cartProducts:'' , cartTotal:'',discount:'',gst:'' , ObjectId})
+            return res.render('user/pages/cart',{state , loggedIn:false , cartExist:false , cartQuantity:'' , cartCount:0 , cartProducts:'' , cartTotal:'',discount:'',gst:'' , ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
         }
 
     } catch (error) {

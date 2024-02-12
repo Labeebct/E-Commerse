@@ -17,6 +17,7 @@ exports.getWishlist = async(req,res) => {
         const userId = req.session.userId
 
         const wishExist = await wishlistModel.findOne({userId})
+        const cartExist = await cartModel.findOne({userId})
 
 
         if(req.session.loggedin){
@@ -29,14 +30,14 @@ exports.getWishlist = async(req,res) => {
               const wishCount = wishExist.products.length
 
               
-              return res.render('user/pages/wishlist',{state , loggedIn:true , wishExist , wishProducts , wishCount})
+              return res.render('user/pages/wishlist',{state , loggedIn:true , wishExist , wishProducts ,wishCount: wishExist? wishExist.products.length : 0,cartCount: cartExist? cartExist.products.length : 0})
             }
             else{
-              return res.render('user/pages/wishlist',{state , loggedIn:true , wishExist:false ,wishProducts:'' , wishCount:0})
+              return res.render('user/pages/wishlist',{state , loggedIn:true , wishExist:false ,wishProducts:'' , wishCount:0,cartCount: cartExist? cartExist.products.length : 0})
             }
         }
         else{
-             return res.render('user/pages/wishlist',{state , loggedIn:false , wishExist:false ,wishProducts:'' , wishCount:''})
+             return res.render('user/pages/wishlist',{state , loggedIn:false , wishExist:false ,wishProducts:'' , wishCount:'',cartCount: cartExist? cartExist.products.length : 0})
         }
  
     } catch (error) {

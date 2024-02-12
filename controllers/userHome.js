@@ -117,6 +117,8 @@ exports.getHome = async(req,res) => {
           womensSaree,
           painting,
           bedsheet,
+          cartCount: cartExist? cartExist.products.length : 0,
+          wishCount: wishExist? wishExist.products.length : 0,
           utensils,
           wishExist:wishExist ? wishExist.products : [],
           cartExist:cartExist ? cartExist.products : [],
@@ -149,7 +151,7 @@ exports.getCategory = async(req,res) => {
                { $match: {category:category} }
           ])          
 
-          res.render('user/pages/categoryproducts',{state:category, catProducts , categories, wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+          res.render('user/pages/categoryproducts',{state:category, catProducts , categories, wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
           
      } catch (error) {
           console.log('Error in get category',error);
@@ -178,7 +180,7 @@ exports.getSubcategory = async(req,res) => {
                { $match: {subcategory:subcat} }
           ])          
 
-          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
           
      } catch (error) {
           console.log('Error in get category',error);
@@ -204,7 +206,7 @@ exports.getProductopen = async(req,res) => {
                {$match:{subcategory:product.subcategory}}
           ]) 
 
-          res.render('user/pages/productopen',{state:'', product , relatedProducts ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+          res.render('user/pages/productopen',{state:'', product , relatedProducts ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
           
      }catch (error) {
           console.log('Error in get product open',error.message);
@@ -217,8 +219,14 @@ exports.getProductopen = async(req,res) => {
 
 exports.getAllproducts = async(req,res) => {
      try {
+
+          const userId = req.session.userId
+
+            
+          const wishExist = await wishlistModel.findOne({userId})
+          const cartExist = await cartModel.findOne({userId}) 
         
-          res.render('user/pages/allproducts',{state:''})
+          res.render('user/pages/allproducts',{state:'',cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
           
      }catch (error) {
           console.log('Error in get product open',error.message);
@@ -237,19 +245,25 @@ exports.getShowAllproducts = async(req,res) => {
           const filterBase = req.query.f
           const filterValue = req.query.filter
 
+          const search = req.query.search
+
           const pageSize = 40
           const skip = (page - 1) * pageSize
           
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId}) 
         
-          if(filterBase && filterValue){
+          if(search){
+             const searchFilter = await productModel.find({productname: { $regex:search, $options: 'i' } })
+             return res.status(200).json({searchFilter,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+          }
+          else if(filterBase && filterValue){
 
                if(filterBase === 'CATEGORY'){
                     const filterProducts = await productModel.aggregate([
                          {$match:{category:filterValue}}
                     ])
-                   return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                   return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                }
                else if(filterBase === 'PRICE'){
 
@@ -258,33 +272,45 @@ exports.getShowAllproducts = async(req,res) => {
                          const filterProducts = await productModel.aggregate([
                               {$match:{newprice:{$lt:500}}}
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else if(filterValue === '1000'){
                          const filterProducts = await productModel.aggregate([
                               {$match:{newprice:{$gte:500 , $lt:1000}}}
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 
                     }
                     else if(filterValue === '1500'){
                          const filterProducts = await productModel.aggregate([
                               {$match:{newprice:{$gte:1000 , $lt:1500}}}
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 
                     }
                     else if(filterValue === '2500'){
                          const filterProducts = await productModel.aggregate([
                               {$match:{newprice:{$gte:1500 , $lt:2500}}}
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+                    }
+                    else if(filterValue === 'low to high'){
+                         const filterProducts = await productModel.aggregate([
+                              {$sort:{newprice:1}}
+                         ])
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+                    }
+                    else if(filterValue === 'high to low'){
+                         const filterProducts = await productModel.aggregate([
+                              {$sort:{newprice:-1}}
+                         ])
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else{
                          const filterProducts = await productModel.aggregate([
                               {$match:{newprice:{$gt:2500}}}
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                     }
                }
                else{
@@ -297,13 +323,13 @@ exports.getShowAllproducts = async(req,res) => {
                         filterProducts.push(product);
                     }
                 });
-               return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+               return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                }
 
           }else{
                const products = await productModel.find().skip(skip).limit(pageSize)
 
-               res.status(200).json({products,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : []})
+               res.status(200).json({products,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
           }
 
           

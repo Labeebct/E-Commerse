@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt')
 
 const signupModel = require('../models/signup')
 const messageModel = require('../models/message')
+const wishlistModel = require('../models/wishlist')
+const cartModel = require('../models/cart')
 const profileModel = require('../models/profile')
 const { Types } = require('mongoose')
 
@@ -13,9 +15,15 @@ const { Types } = require('mongoose')
 
 
 
-exports.getUpdatepassword = (req,res) => {
+exports.getUpdatepassword = async(req,res) => {
+
+    const userId = req.session.userId
+
+    const wishExist = await wishlistModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+
     const state = 'updatepassword'
-    res.render('user/pages/updatepassword',{state})
+    res.render('user/pages/updatepassword',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
 
 
@@ -59,9 +67,15 @@ exports.postUpdatepassword = async(req,res) => {
 
 
 
-exports.getContactus = (req,res) => {
+exports.getContactus = async(req,res) => {
+    
+    const userId = req.session.userId
+
+    const wishExist = await wishlistModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+
     const state = 'contactus'
-    res.render('user/pages/contactus',{state})
+    res.render('user/pages/contactus',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
 
 
@@ -70,7 +84,6 @@ exports.postContactus = async(req,res) => {
     try {
 
        await messageModel.create(req.body)
-
        res.status(200).json({success:true})
 
         
@@ -88,9 +101,15 @@ exports.postContactus = async(req,res) => {
 
 
 
-exports.getAdress = (req,res) => {
+exports.getAdress = async(req,res) => {
+
+    const userId = req.session.userId
+
+    const wishExist = await wishlistModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+
     const state = 'address'
-    res.render('user/pages/address',{state})
+    res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
 
 exports.postAddress = async(req,res) => {
@@ -136,8 +155,14 @@ exports.postAddress = async(req,res) => {
     }
 }
 
-exports.getEditaddress = (req,res) => {
-    res.render('user/pages/editaddress',{state:''})
+exports.getEditaddress = async(req,res) => {
+
+    const userId = req.session.userId
+
+    const wishExist = await wishlistModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+
+    res.render('user/pages/editaddress',{state:'',cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
 
 
@@ -147,15 +172,27 @@ exports.getEditaddress = (req,res) => {
 // <<<< ======================================= ABOUT US ================================== >>>>
 
 
-exports.getAboutus = (req,res) => {
+exports.getAboutus = async(req,res) => {
+    
+    const userId = req.session.userId
+
+    const wishExist = await wishlistModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+
     const state = 'aboutus'
-    res.render('user/pages/aboutus',{state})
+    res.render('user/pages/aboutus',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
 
 
 
-exports.getOrder = (req,res) => {
+exports.getOrder = async(req,res) => {
+
+    const userId = req.session.userId
+
+    const wishExist = await wishlistModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+
     const state = 'orders'
-    res.render('user/pages/orders',{state})
+    res.render('user/pages/orders',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
 
