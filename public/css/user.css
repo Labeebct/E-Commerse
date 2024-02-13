@@ -2369,6 +2369,7 @@ word-wrap: break-word;
         padding-left: 1rem;
     }
     #text_area{
+        line-height: 1.3rem;
         width: 94%;
         height: 3rem;
         resize: none;
@@ -2377,6 +2378,7 @@ word-wrap: break-word;
         border: 1px solid rgba(12, 12, 12, 0.122) !important; 
         box-shadow: 1px 1px 2px rgba(48, 48, 48, 0.127);
         padding-left: .8rem;
+        padding-top: .5rem;
     }
     .add_btn{
         padding: .6rem 1rem;
@@ -3052,9 +3054,9 @@ word-wrap: break-word;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.258);
    }
    .banner button{
-    position: fixed;
+    position: absolute;
     font-size: 3rem;
-    top: 38%;
+    top: 30%;
     z-index: 2;
     color: rgba(0, 0, 0, 0.491);
     background: none;
@@ -3064,7 +3066,7 @@ word-wrap: break-word;
     margin-top: 4rem;
    }
    .next_banner{
-     right: 4rem;
+     right: 0rem;
    }
    .banner button:active{
     transform: scale(.95);

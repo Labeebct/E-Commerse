@@ -6,7 +6,7 @@
         <div class="right_content">
             <form action="/admin/banners/edit_banner/<%= id %>" method="post" class="form_data" enctype="multipart/form-data" spellcheck="false">
                 <div class="addcatogery_frame">
-                     <img src="<%= Banner.bannerimg %>"" class="category_img" id="imagePreview" alt="">
+                     <img src="<%= Banner.bannerimg %>" class="category_img" id="imagePreview" alt="">
                      <div class="file_div"><span class="choose_file">Choose File</span><input type="file" name="bannerimg" onchange="previewImage(this)" class="input_file"></div>
                      <div style="display: flex; flex-direction: column; gap: .5rem; margin-top: 0rem; width: 80%;">
                         <label for="category name">Banner name</label>

@@ -27,6 +27,8 @@ exports.getUpdatepassword = async(req,res) => {
 }
 
 
+
+
 exports.postUpdatepassword = async(req,res) => {
     try {          
 
@@ -62,7 +64,10 @@ exports.postUpdatepassword = async(req,res) => {
 
 
 
+
 // <<<< ======================================= CONTACT US ================================== >>>>
+
+
 
 
 
@@ -77,6 +82,8 @@ exports.getContactus = async(req,res) => {
     const state = 'contactus'
     res.render('user/pages/contactus',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
+  
+
 
 
 exports.postContactus = async(req,res) => {
@@ -95,7 +102,13 @@ exports.postContactus = async(req,res) => {
 
 
 
+
+
+
+
 // <<<< ==================================== PROFILE ================================== >>>>
+
+
 
 
 
@@ -103,14 +116,38 @@ exports.postContactus = async(req,res) => {
 
 exports.getAdress = async(req,res) => {
 
+    const state = 'address'
     const userId = req.session.userId
+    const objUserId = new Types.ObjectId(userId)
 
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
-    const state = 'address'
-    res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
-}
+    const userAddress = await signupModel.aggregate([
+        {
+          $match:{
+            _id:objUserId
+          }
+        },{
+            $lookup:{
+            from:'profiles',
+            localField:'_id',
+            foreignField:'userId',
+            as:'userProfile'
+        }}    
+    ])
+
+    const userSignupData = userAddress[0]
+    const userProfile = userAddress[0].userProfile[0] 
+
+    res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,userProfile,userSignupData})
+}  
+
+
+
+
+
+
 
 exports.postAddress = async(req,res) => {
    
@@ -126,7 +163,7 @@ exports.postAddress = async(req,res) => {
 
         const userId = new Types.ObjectId(user._id)
 
-        const imagePath = '/profile-image' + req.file.filename
+        const imagePath = '/profile-image/' + req.file.filename
         
         const newSchema = new profileModel({
             firstname,
@@ -155,6 +192,11 @@ exports.postAddress = async(req,res) => {
     }
 }
 
+
+
+
+
+
 exports.getEditaddress = async(req,res) => {
 
     const userId = req.session.userId
@@ -169,7 +211,16 @@ exports.getEditaddress = async(req,res) => {
 
 
 
+
+
+
 // <<<< ======================================= ABOUT US ================================== >>>>
+
+
+
+
+
+
 
 
 exports.getAboutus = async(req,res) => {
@@ -182,6 +233,7 @@ exports.getAboutus = async(req,res) => {
     const state = 'aboutus'
     res.render('user/pages/aboutus',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
+
 
 
 
