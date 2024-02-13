@@ -28,6 +28,8 @@ exports.getHome = async(req,res) => {
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId})
 
+          const banners = await bannerModel.find()
+
 
           const mensShirts = await productModel.aggregate([
                {$match:{subcategory:'MENS SHIRTS'}}
@@ -122,7 +124,8 @@ exports.getHome = async(req,res) => {
           utensils,
           wishExist:wishExist ? wishExist.products : [],
           cartExist:cartExist ? cartExist.products : [],
-          ObjectId
+          ObjectId,
+          banners
           })
     
 

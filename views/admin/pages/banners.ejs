@@ -68,6 +68,7 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     
     const loadingScreen = document.querySelector('.loading_screen')
@@ -148,26 +149,62 @@ document.addEventListener('DOMContentLoaded',() => {
         
     
     document.querySelector('.delete_btn<%= ban._id %>').addEventListener('click',async(e) => {
-        try {
-            
-        showLoading()
-        const response = await fetch('/admin/banners/remove_banners',{
+        try {  
+        const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+        customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-secondary'
+    }
+        }).then(async(result) => {
+        if (result.isConfirmed) {
+
+            const response = await fetch('/admin/banners/remove_banners',{
             method:'DELETE',
             headers:{
                 'Content-Type':'application/json'
             },
             body:JSON.stringify({id:'<%= ban._id %>'})
-        })
-        const result = await response.json()
-        hideLoading()
-        if(response.ok){
+            })
+            const result = await response.json()
+            if(response.ok){
             if(result.success){
                 document.querySelector('.td_tr<%= ban._id %>').remove()
+                swalWithBootstrapButtons.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
             }
             else{
                 console.log('Failed to delete banner');
             }
         }
+
+        } else if (
+        result.dismiss === Swal.DismissReason.cancel
+        ) {
+        swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error"
+         });
+        }
+        });
+        
 
         
     } catch (error) {

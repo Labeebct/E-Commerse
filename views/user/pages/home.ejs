@@ -34,9 +34,22 @@
 
 
             <div class="banner">
-               <button><i class="bi banner_chevron bi-chevron-left"></i></button>
-               <img src="/images/banner_1.png" alt="" style="width: 100%; height: 100%;">
-               <button><i class="bi banner_chevron bi-chevron-right"></i></button>
+               <button class="prev_banner"><i class="bi banner_chevron bi-chevron-left"></i></button>
+               
+               <% banners.forEach((ban) => { %>
+
+               <div class="banner_sub_div">
+               <img src="<%= ban.bannerimg %>"  style="width: 45%;">
+               <div class="banner_text_frame">
+                    <h2><%= ban.bannerhead.toUpperCase() %></h2>
+                    <h4><%= ban.bannername.toUpperCase() %></h4>
+                    <h5><i class="bi bi-currency-rupee"></i><%= ban.banneramount.toLocaleString() %></h5>
+               </div>
+               </div>
+
+               <% }) %>
+                    
+               <button class="next_banner"><i class="bi banner_chevron bi-chevron-right"></i></button>
             </div>
 
             <!-- ========================================================================================================= -->
@@ -1215,5 +1228,6 @@
 <script src="/javascript/addtocart.js"></script>
 <script src="/javascript/product-open.js"></script>
 <script src="/javascript/btnsearch.js"></script>
+<script src="/javascript/banner.js"></script>
 
 <%- include('../../common/end.ejs') %>

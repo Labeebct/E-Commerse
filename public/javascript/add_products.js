@@ -36,7 +36,7 @@ submitBtn.addEventListener('click',async(e) => {
     const productImg = document.getElementsByName('productimg')[0].value
 
     if(!productName || !oldPrice || !newPrice || !category || !subCategory ||!deliveryDate || !description || !stock ){
-        errMsg.innerHTML = 'Please Fill up all Fields'
+        errMsg.innerHTML = 'All fields are Mandatory'
         setTimeout(() => {
             errMsg.innerHTML = ''
         }, 2000);

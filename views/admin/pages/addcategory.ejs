@@ -94,7 +94,7 @@ addCatgoryBtn.addEventListener('click',async(e) => {
 
     try {
 
-        const catname = document.querySelector('.categoryname').value.trim()
+        const catname = document.querySelector('.categoryname').value.toUpperCase().trim()
         const categoryimg = document.querySelector('.categoryimg').value.trim()
 
         if(!catname || !categoryimg){
@@ -109,7 +109,7 @@ addCatgoryBtn.addEventListener('click',async(e) => {
             headers:{
                 'Content-Type':'application/json'
             },
-            body:JSON.stringify({categoryname:catname.value.toUpperCase(),catimageUrl:categoryimg.value,subcategory:subCatArray})
+            body:JSON.stringify({categoryname:catname,catimageUrl:categoryimg,subcategory:subCatArray})
         })  
 
         if(!response.ok){
@@ -123,7 +123,7 @@ addCatgoryBtn.addEventListener('click',async(e) => {
                 setTimeout(() => {
                     window.location.href = '/admin/category'
                 }, 600);
-            }
+            }   
             else{
                 errMsg.innerHTML = 'Please fill all Fields'
                 setTimeout(() => {
@@ -135,7 +135,7 @@ addCatgoryBtn.addEventListener('click',async(e) => {
         
     }
     } catch (error) {
-        console.log('Error in Category add');
+        console.log('Error in Category add',error);
     }
 })
 

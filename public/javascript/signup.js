@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Confirm Password Eye Open and Close
 
-
+      
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             passEye.classList.replace('bi-eye', 'bi-eye-slash');
             confirmPasswordInput.type = 'password';
         }
-    });
+    });     
 });
 
 

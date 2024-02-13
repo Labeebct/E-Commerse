@@ -37,8 +37,8 @@
                                 <td>1</td>
                                 <td><%= user.regdate %></td>
                                 <td><%= user.verified ? "TRUE" : "FALSE" %></td>
-                                <td class="block_td"><%= user.blocked? 'BLOCKED' : 'ACTIVE' %></td>
-                                <td><button class="delet_btn delet_btn<%= user._id %>"><i class="bi block_unblock <%= user.blocked? 'bi-ban' : 'bi-circle' %>"></i></button></td>
+                                <td class="block_td<%= user._id %>"><%= user.blocked? 'BLOCKED' : 'ACTIVE' %></td>
+                                <td><button class="delet_btn delet_btn<%= user._id %>"><i class="bi block_unblock<%= user._id %> <%= user.blocked? 'bi-ban' : 'bi-circle' %>"></i></button></td>
                             </tr>
 
                           <% }) %>  
@@ -65,7 +65,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
 
@@ -173,14 +172,14 @@ document.querySelector('.delet_btn<%= user._id %>').addEventListener('click',asy
         else{
             if(result.success){
                 if(result.blocked){
-                 document.querySelector('.block_td').innerHTML = 'BLOCKED'
-                 document.querySelector('.block_unblock').classList.remove('bi-circle')
-                 document.querySelector('.block_unblock').classList.add('bi-ban')
+                 document.querySelector('.block_td<%= user._id %>').innerHTML = 'BLOCKED'
+                 document.querySelector('.block_unblock<%= user._id %>').classList.remove('bi-circle')
+                 document.querySelector('.block_unblock<%= user._id %>').classList.add('bi-ban')
                 }
                 else{
-                 document.querySelector('.block_td').innerHTML = 'ACTIVE'
-                 document.querySelector('.block_unblock').classList.remove('bi-ban')
-                 document.querySelector('.block_unblock').classList.add('bi-circle')
+                 document.querySelector('.block_td<%= user._id %>').innerHTML = 'ACTIVE'
+                 document.querySelector('.block_unblock<%= user._id %>').classList.remove('bi-ban')
+                 document.querySelector('.block_unblock<%= user._id %>').classList.add('bi-circle')
                 }
 
             }

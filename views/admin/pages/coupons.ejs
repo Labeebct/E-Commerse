@@ -70,6 +70,7 @@
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     
     const loadingScreen = document.querySelector('.loading_screen')
@@ -151,6 +152,29 @@ document.addEventListener('DOMContentLoaded',() => {
 document.querySelector('.delete_btn<%= coupons._id %>').addEventListener('click',async(e) => {
     try {
 
+
+        const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+        },
+        buttonsStyling: false
+        });
+        swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+        customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-secondary'
+    }
+        }).then(async(result) => {
+        if (result.isConfirmed) {
+
         showLoading()
         const response = await fetch('/admin/coupons/remove_coupon',{
             method:'DELETE',
@@ -165,12 +189,28 @@ document.querySelector('.delete_btn<%= coupons._id %>').addEventListener('click'
         if(response.ok){
             if(result.success){
                 document.querySelector('.td_tr<%= coupons._id %>').remove()
+                swalWithBootstrapButtons.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+            });
             }
             else{
                 console.log('Failed to delete coupon');
             }
         }
 
+        
+    } else if (
+        result.dismiss === Swal.DismissReason.cancel
+        ) {
+        swalWithBootstrapButtons.fire({
+            title: "Cancelled",
+            text: "Your imaginary file is safe :)",
+            icon: "error"
+         });
+        }
+        });
         
     } catch (error) {
         console.log('Error in coupon Delete',error.message);
