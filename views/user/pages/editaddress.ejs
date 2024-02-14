@@ -7,48 +7,48 @@
                <div class="address_frame">
                      <h3 class="edit_text" style="text-align: center;">Edit Profile</h3>
                <div class="form_frame">
-                   <form action="" spellcheck="false">
+                   <form method="post" id="form" spellcheck="false" enctype="multipart/form-data">
                    <div class="top">
                        <div class="top_left">
                            <label for="username">User Name</label>
-                           <input type="text" name="username" >
+                           <input type="text" name="username" value="<%= findUser? findUser.username : '' %>" name="username">
    
                            <div style="display: flex; gap: 1rem; width: 96%; padding: .5rem 0;">
                                <span style="display: flex; flex-direction: column; gap: .2rem; width: 50%;">
                                    <label for="firstname">First Name</label>
-                                   <input type="text" name="firstname" style="width: 100%;" >
+                                   <input type="text" value="<%= userProfile? userProfile.firstname : '' %>" name="firstname" style="width: 100%;" >
                                </span>
                                <span style="display: flex; flex-direction: column; gap: .2rem;  width: 50%;">
                                    <label for="lastname">Last Name</label>
-                                   <input type="text" name="lastname" style="width: 110%; padding-left: 0; " >
+                                   <input type="text" value="<%= userProfile? userProfile.lastname : '' %>" name="lastname" style="width: 110%; padding-left: 1rem; " >
                                </span>
                            </div>
    
                            <label for="email">Email</label>
-                           <input type="text" name="email" >
+                           <input name="email" type="text" value="<%= findUser ? findUser.email : '' %>" name="email" >
    
                        </div>
                        <div class="top_right">
-                           <img src="" class="product_img" alt="">
-                           <div class="file_div"><span class="choose_file">Choose File</span><input type="file" class="input_file"></div>
+                           <img src="<%= userProfile? userProfile.photo : '' %>" class="product_img" id="imagePreview" alt="">
+                           <div class="file_div"><span class="choose_file">Choose File</span><input name="profileimg" type="file" onchange="previewImage(this)" class="input_file"></div>
                        </div>
                    </div>
                    <div class="bottom" style="padding: 0 1rem;">
 
                      <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
                         <label for="dob">DOB</label>
-                        <input type="date" name="dob" style="width: 94%;">
+                        <input value="<%= userProfile? userProfile.DOB.toISOString().substring(0, 10) : '' %>" type="date" name="dob" style="width: 94%;">
                     </span>
                     
                        <div style="display: flex; gap: 1rem; width: 94%; margin-top: .4rem;">
                            <span style="display: flex; flex-direction: column; gap: .2rem; width: 27%;">
                            <label for="country">Country</label>
-                           <input type="text" name="country" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
+                           <input value="<%= userProfile? userProfile.country : '' %>" type="text" name="country" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
                        </span>
                        
                        <span style="display: flex; flex-direction: column; gap: .2rem;  width: 25%;">
                        <label for="state">State</label>
-                       <input type="text" name="state" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
+                       <input value="<%= userProfile? userProfile.state : '' %>" type="text" name="state" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
                        </span>
    
    
@@ -56,12 +56,12 @@
                        
                        <span style="display: flex; flex-direction: column; gap: .2rem;  width: 20%;">
                            <label for="district">District</label>
-                           <input type="text" name="district" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
+                           <input value="<%= userProfile? userProfile.district : '' %>" type="text" name="district" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
                        </span>
    
                        <span style="display: flex; flex-direction: column; gap: .2rem; width: 18%;">
                        <label for="zip">Zip</label>
-                       <input type="text" name="zip" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
+                       <input type="text" value="<%= userProfile? userProfile.zip : '' %>" name="zip" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;">
                        
                        </span>
    
@@ -69,16 +69,15 @@
    
                        <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
                            <label for="landmark">Landmark</label>
-                           <input type="text" name="landmark" style="width: 94%;">
+                           <input type="text" value="<%= userProfile? userProfile.landmark : '' %>" name="landmark" style="width: 94%;">
                        </span>
 
-                    
                        <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
                            <label for="address">Address</label>
-                           <textarea name="address" id="text_area"></textarea>
+                           <textarea name="address" id="text_area"><%= userProfile? userProfile.address : '' %></textarea>
                         </span>
-                        <button class="save_btn">SAVE DETAILS</button>
-                       
+                        <p class="error_msg"></p>
+                        <button type="button" class="save_btn update_profile_btn">UPDATE PROFILE</button>  
                    </div>
                </form>
                </div>
@@ -88,5 +87,98 @@
       <%- include('../../common/footer.ejs') %>
    </div>
    <script src="/javascript/btnsearch.js"></script>
+
+
+<script>
+
+function previewImage(input) {   
+    var file = input.files[0];
+    if (file) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            document.getElementById('imagePreview').src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+}
+
+
+
+const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
+
+
+const submitBtn = document.querySelector('.update_profile_btn')
+
+submitBtn.addEventListener('click',async(e) =>{
+
+    try {
+        console.log(22);
+
+        const userName = document.getElementsByName('username')[0].value.trim()
+        const firstName = document.getElementsByName('firstname')[0].value.trim()
+        const lastName = document.getElementsByName('lastname')[0].value.trim()
+        const email = document.getElementsByName('email')[0].value.trim()
+        const DOB = document.getElementsByName('DOB')[0]
+        const country = document.getElementsByName('country')[0].value.trim()
+        const state = document.getElementsByName('state')[0].value.trim()
+        const district = document.getElementsByName('district')[0].value.trim()
+        const zip = document.getElementsByName('zip')[0].value.trim()
+        const landmark = document.getElementsByName('landmark')[0].value.trim()
+        const address = document.getElementsByName('address')[0].innerHTML.trim()
+
+        const errMsg = document.querySelector('.error_msg')
+        const profile_form = document.getElementById('form')
+        const form = new FormData(profile_form)
+
+        if(!userName || !firstName || !lastName || !country || !state || !district || !zip || !landmark || !address ){
+            errMsg.innerHTML = 'Please Fill all Fields'
+            setTimeout(() => {
+                errMsg.innerHTML = ''
+            }, 2000);
+        }
+        else if(!emailRegex.test(email)){
+            errMsg.innerHTML = 'Please Provide a valid Email Format'
+            setTimeout(() => {
+                errMsg.innerHTML = ''
+            }, 2000);
+        }
+        else{
+
+            const response = await fetch('/account/editaddress?id=<%= userProfile._id %>',{
+                method:'POST',
+                body:form
+            })
+
+            const result = await response.json()
+
+            if(!response.ok){
+                errMsg.innerHTML = result.err
+                setTimeout(() => {
+                    errMsg.innerHTML = ''
+                }, 2000);
+            }
+            else{
+                if(result.success){
+                    errMsg.innerHTML = 'Profile Update Success'
+                    errMsg.classList.add('succes')
+                    setTimeout(() => {
+                       window.location.href = '/account/address'
+                    }, 400);
+                }
+            }
+
+        }
+
+
+
+    } catch (error) {
+        console.log('Error in profile address',error);
+    }
+})
+
+
+
+
+   </script>
 
 <%- include('../../common/end.ejs') %>

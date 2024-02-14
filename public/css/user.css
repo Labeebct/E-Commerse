@@ -2523,14 +2523,14 @@ word-wrap: break-word;
     }
     .top_left input{
       font-family: 'Poppins',sans-serif;
-      height: 2.5rem;
+      height: 2.2rem;
       outline: none;
       padding-left: 1rem;
     }
     .bottom{
         display: flex;
         flex-direction: column;
-        gap: .2rem;
+        gap: .1rem;
     }
     .bottom label{
         font-family: 'Poppins',sans-serif;
@@ -2538,13 +2538,13 @@ word-wrap: break-word;
     }
     .bottom input{
         font-family: 'Poppins',sans-serif;
-        height: 2.5rem;
+        height: 2.2rem;
         outline: none;
         padding-left: 1rem;
     }
     #text_area{
         width: 94%;
-        height: 4rem;
+        height: 3.9rem;
         resize: none;
         outline: none;
         padding: .4rem 1rem;
@@ -2569,6 +2569,20 @@ word-wrap: break-word;
         border: 1px solid rgba(12, 12, 12, 0.122) !important; 
         box-shadow: 1px 1px 2px rgba(48, 48, 48, 0.127);
         padding-left: .8rem;
+    }
+    .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: .91rem;
+        margin-top: .4rem;
+    }
+    .succes{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: rgb(0, 191, 0);
+        font-size: .91rem;
+        margin-top: .4rem;
     }
 
 }
@@ -4046,6 +4060,47 @@ word-wrap: break-word;
 }    
 
 
+
+
+/* ========================================================== */
+
+
+
+.checkout_wrapper{
+    .checkout_content{
+      display: flex;
+    }
+    .checkout_left{
+        width: 80%;
+        height: 100%;
+        border-right: 1px solid black;
+    }
+    .checkout_right{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        width: 20%;
+        height: 100%;
+    }
+    .checkout_left_top{
+        width: 100%;
+        height: 70%;
+        border-bottom: 1px solid black;
+    }
+    .checkout_left_bottom{
+        width: 100%;
+        height:30%;
+    }
+    .checkouts_frame{
+        height: 45%;
+        width: 90%;
+        border: 1px solid black;
+    }
+    .checkouts_frame_add_new_address{
+        height: 5%;
+    }
+}
 
 
 

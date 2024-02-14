@@ -153,9 +153,9 @@ router.get('/order_success')
 
 router.get('/account/address',accountController.getAdress)
 router.post('/account/add_address',upload.single('profileimg'),accountController.postAddress)
-router.get('/account/editaddress',upload.single('profileimg'),accountController.getEditaddress)
+router.get('/account/editaddress',accountController.getEditaddress)
+router.post('/account/editaddress',upload.single('profileimg'),accountController.posEditAddress)
 
-router.put('/account/address')
 
 
 // UPDATE PASSWORD -----------------

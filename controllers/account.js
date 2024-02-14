@@ -6,6 +6,7 @@ const wishlistModel = require('../models/wishlist')
 const cartModel = require('../models/cart')
 const profileModel = require('../models/profile')
 const { Types } = require('mongoose')
+const fs = require('fs')
 
 
 
@@ -86,6 +87,8 @@ exports.getContactus = async(req,res) => {
 
 
 
+
+
 exports.postContactus = async(req,res) => {
 
     try {
@@ -115,7 +118,7 @@ exports.postContactus = async(req,res) => {
 
 
 exports.getAdress = async(req,res) => {
-
+      
     const state = 'address'
     const userId = req.session.userId
     const objUserId = new Types.ObjectId(userId)
@@ -123,25 +126,32 @@ exports.getAdress = async(req,res) => {
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
+    if(req.session.loggedin){
+
+    const findUser = await signupModel.findOne({_id:userId})
     const userAddress = await signupModel.aggregate([
-        {
-          $match:{
-            _id:objUserId
-          }
-        },{
-            $lookup:{
-            from:'profiles',
-            localField:'_id',
-            foreignField:'userId',
-            as:'userProfile'
-        }}    
+    {
+        $match:{
+        _id:objUserId   
+        }
+    },{
+        $lookup:{
+        from:'profiles',
+        localField:'_id',
+        foreignField:'userId',
+        as:'userProfile'
+    }}
     ])
+    
+    const userProfile = userAddress.length > 0 ? userAddress[0].userProfile[0] : null
 
-    const userSignupData = userAddress[0]
-    const userProfile = userAddress[0].userProfile[0] 
-
-    res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,userProfile,userSignupData})
-}  
+    return res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,userProfile,findUser})
+}
+else{
+    res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,findUser:null,userProfile:null})
+}
+     
+}    
 
 
 
@@ -186,25 +196,95 @@ exports.postAddress = async(req,res) => {
 
         res.status(200).json({success:true})
 
-        
+                 
     } catch (error) {
         console.log('Error in post address',error.message);
     }
-}
+}         
 
 
-
+              
 
 
 
 exports.getEditaddress = async(req,res) => {
 
     const userId = req.session.userId
+    const profileId = req.query.id
+
+    const userProfile = await profileModel.findById(profileId)
+    const findUser = await signupModel.findOne({_id:userId})
+
 
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
-    res.render('user/pages/editaddress',{state:'',cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+
+    res.render('user/pages/editaddress',{state:'',cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0 ,userProfile,findUser,profileId})
+}
+
+
+exports.posEditAddress = async(req,res) => {
+
+    try {
+
+        const userId = req.session.userId
+        const profileId = req.query.id
+        
+        const {   
+            username,
+            firstname,
+            lastname,
+            email,
+            DOB,
+            country,
+            state,
+            district,
+            address,
+            landmark,
+            zip,
+        } = req.body
+        
+        const userProfile = await profileModel.findById(profileId)
+        const  imagePath = req.file? '/profile-image/' + req.file.filename : userProfile.photo
+        req.file? fs.unlinkSync('public/' + userProfile.photo ) : ''
+   
+
+       const updateProfile =  await profileModel.updateOne(
+            {_id:profileId},
+            {
+                firstname,
+                lastname,
+                photo:imagePath,
+                DOB,
+                country,
+                state,
+                district,
+                address,
+                landmark,
+                zip,
+            }
+        )   
+
+       const updateUserdata =  await signupModel.updateOne(
+            {_id:userId},
+            {
+                username,
+                email
+            })
+        
+    if(updateProfile || updateUserdata ){
+        console.log('Successfully profile updated');
+        res.status(200).json({success:true})
+    }
+        
+    } catch (error) {
+        console.log('Error in post edit address',error);
+    }
+
+
+
+
 }
 
 
@@ -226,6 +306,7 @@ exports.getEditaddress = async(req,res) => {
 exports.getAboutus = async(req,res) => {
     
     const userId = req.session.userId
+
 
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
