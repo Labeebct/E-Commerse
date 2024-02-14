@@ -2640,6 +2640,12 @@ word-wrap: break-word;
         color: white !important;
         font-size: 1.1rem !important
     }
+
+    .discount{
+        font-family: sans-serif;
+        font-size: .9rem;
+        color: rgb(0, 199, 0);
+    }
     .prev_next_btn{
         border: none;
         background: none;
@@ -4069,36 +4075,469 @@ word-wrap: break-word;
 .checkout_wrapper{
     .checkout_content{
       display: flex;
+      overflow: hidden;
     }
     .checkout_left{
-        width: 80%;
+        width: 76%;
         height: 100%;
-        border-right: 1px solid black;
+        border-right: 1px solid rgba(145, 144, 144, 0.225);
     }
     .checkout_right{
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-around;
-        width: 20%;
+        justify-content: space-evenly;
+        width: 24%;
         height: 100%;
+        background-color: rgba(0, 0, 0, 0.023);
+
     }
     .checkout_left_top{
+        overflow-y: scroll;
         width: 100%;
-        height: 70%;
-        border-bottom: 1px solid black;
+        height: 67%;
+        border-bottom: 1px solid rgba(145, 144, 144, 0.225);
+    }
+    .checkout_left_top::-webkit-scrollbar {
+        width: 0em;
+      }
+      
+    .checkout_left_top::-webkit-scrollbar-track {
+        background-color: transparent;
+       }
+    .checkout_left_top::-webkit-scrollbar-thumb {
+        background-color: transparent;
     }
     .checkout_left_bottom{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
         width: 100%;
-        height:30%;
+        height:33%;
+        background-color: rgba(0, 0, 0, 0.023);
     }
     .checkouts_frame{
-        height: 45%;
         width: 90%;
-        border: 1px solid black;
+        background-color: white;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.184);
+    }
+    .payment_icon{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.5rem;
+    }
+    .payment_logo_png{
+        width: 1.3rem;
+    }
+    .payment_divs{
+        height: 24.3%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 2rem 0 1rem;
+        border-bottom: 1px solid rgba(145, 144, 144, 0.225);
+    }
+    .payment_divs label{
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        font-weight: 600;
+        color: rgba(0, 0, 0, 0.704);
+        width: 100%;
+        height: 100%;
+        font-family: 'Poppins',sans-serif;
+        font-size: .85rem;
+    }
+    .bi-plus,.bi-dash-lg{
+        font-size: 1.8rem;
+    }
+    .checkout_adress_frame{
+        height: 49%;
+    }
+    .checkout_total_price{
+        height: 37%;
+    }
+    .checkouts_frame_bottom_frame{
+        height: 90%;
+        background-color: white;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.184);
+    }
+    .checkouts_frame_bottom_coupon{
+        width: 30%;
+    }
+    .checkouts_frame_bottom_payment{
+        width: 60%;
+    }
+    .checkouts_frame_bottom_frame h3{
+        width: 100%;
+        font-family: 'Poppins',sans-serif;
+        color: rgba(0, 0, 0, 0.705);
+        padding: 1rem 1rem;
+        letter-spacing: .04rem;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(145, 144, 144, 0.225);
+    }
+    .checkouts_frame h3{
+        width: 100%;
+        font-family: 'Poppins',sans-serif;
+        color: rgba(0, 0, 0, 0.705);
+        padding: 1rem 1rem;
+        letter-spacing: .04rem;
+        font-size: 1rem;
+        border-bottom: 1px solid rgba(145, 144, 144, 0.225);
+    }
+    .product{
+        display: flex;
+        flex-wrap: wrap;
+        height: 15rem;
+        width: 100%;
+        cursor: pointer;
+        border-bottom: 1px solid rgba(145, 144, 144, 0.225);
+    }
+    .image_sec{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      flex: 2;
+    }
+    .discription_sec{
+      flex: 8;
+      padding-left: .4rem;
+      padding: .3rem 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+    .delete_section{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      flex: 1;
+      padding: 1rem;
+    }
+    .delete_section button{
+        border: none;
+        background: none;
+        transition: all .5s;
+        cursor: pointer;
+    }
+    .delete_section button:active{
+       transform: scale(.92);
+    }
+    .bi-x-circle{
+        font-size: 1.4rem;
+        color: #F80E0E;
+    }
+    .stock_left{
+        padding: .3rem .4rem;
+        font-size: .7rem;
+        color: red;
+        font-family: 'Poppins',sans-serif;
+        border: 1px solid rgb(239, 40, 40);
+    }
+    .product_name{
+        font-size: 1.5rem;
+        font-family: 'roboto',sans-serif;
+        font-weight: 700;
+        margin: .3rem 0;
+    }
+    .old_price{
+        text-decoration: line-through;
+        color: red;
+        font-family: 'Poppins',sans-serif;
+        font-size: .8rem;
+        font-weight: 400;
+    }
+    .new_price{
+        font-family: 'Poppins',sans-serif;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+    .discount{
+        font-family: sans-serif;
+        font-size: .9rem;
+        color: rgb(3, 159, 3);
+    }
+    .return_status{
+        display: flex;
+        align-items: center;
+        font-family:Arial, Helvetica, sans-serif;
+        font-size: .86rem;
+        color: rgba(0, 0, 0, 0.868);
+        font-weight: 400;
+    }
+    .color_size{
+        display: flex;
+        flex-direction: column;
+        gap: .9rem;
+    }
+    .size_li{
+        display: flex;
+        gap: .6rem;
+    }
+    .size_li input{
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+
+    }
+    .size_li label{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .label_span{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: 'Poppins',sans-serif;
+        font-size: .7rem;
+        font-weight: 700;
+        width: 1.4rem;
+        height: 1.4rem;
+        cursor: pointer;
+        border-radius: 100%;
+        transition: all .4s;
+        background-color:#152d35ea;
+        color: rgba(255, 255, 255, 0.858);
+    }
+    .label_span:active{
+        transform: scale(.93);
+    }
+    .size_li input[type=radio]:checked + label{
+        background-color: #fa4a04;
+        color: white;
+        border: none;
+    }
+    .color_li{
+        display: flex;
+        gap: .6rem;
+    }
+    .color_li input{
+        opacity: 0;
+        cursor: pointer;
+        width: 100%;
+
+    }
+    .color_li label{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 100%;
+
+    }
+    .label_span_color{
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        font-family: 'Poppins',sans-serif;
+        font-size: .7rem;
+        font-weight: 700;
+        width: 1.4rem;
+        height: 1.4rem;
+        cursor: pointer;
+        border-radius: 100%;
+        transition: all .4s;
+        background-color: rgba(175, 174, 174, 0.293);
+        color: rgba(0, 0, 0, 0.873);
+    }
+    .label_span:active{
+        transform: scale(.93);
+    }
+    .color_li input[type=radio]:checked + label{
+        border: 3px solid rgb(255, 0, 119);
+    }
+    .coupon_input_frame{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 100%;
+        height: 3.3rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.077);
+    }
+    .coupon_input_frame input{
+        width:60%;
+        height: 73%;
+        border: none;
+        border: 1px solid rgba(69, 69, 69, 0.112);
+        outline: none;
+        padding-left: 1rem;
+        font-family: 'Poppins',sans-serif;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.164);
+    }
+    .coupon_check_btn{
+        padding: .46rem .4rem;
+        border: none;
+        background-color: #033d5d;
+        color: white;
+        font-size: .8rem;
+        cursor: pointer;
+        transition: all .4s;
+        font-family: 'Poppins',sans-serif;
+    }
+    .coupon_check_btn:active{
+        transform: scale(.95);
+    }
+    .coupon_ul{
+        width: 100%;
+        height: 47%;
+        overflow-y: scroll;
+    }
+    .coupon_ul::-webkit-scrollbar {
+        width: 0em;
+      }
+      
+    .coupon_ul::-webkit-scrollbar-track {
+        background-color: transparent;
+       }
+    .coupon_ul::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+    .coupon_ul li{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 0 1.3rem;
+        width: 100%;
+        height: 3.1rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.113);
+        list-style: none;
+        font-family: 'Poppins',sans-serif;
+    }
+    .summary_frame{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 74%;
+    }
+    .summary_frame p{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0 1rem;
+        font-size: .85rem;
+        font-family: 'Poppins',sans-serif;
+        justify-content: space-between;
+        width: 100%;
+        height: 2.3rem;
+    }
+    .proceed_btn{
+        width: 90%;
+        margin-top: .3rem;
+        cursor: pointer;
+        border: none;
+        font-family: 'Poppins',sans-serif;
+        color: rgba(255, 255, 255, 0.864);
+        font-size: 1rem;
+        border-radius: .2rem;
+        font-weight: 600;
+        letter-spacing: .06rem;
+        font-size: .99rem;
+        transition: all .4s;
+        background-color: rgb(236, 59, 0);
+        padding: .6rem 0;
+    }
+    .proceed_btn:active{
+        transform: scale(.98);
+    }
+    .adress_frame{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /* gap: .6rem; */
+        padding: .7rem 1rem;
+        width: 100%;
+        height: 83%;
+    }
+    .adress_frame label{
+        font-family: 'Poppins',sans-serif;
+        font-size: .7rem;
+    }
+    .adress_frame input{
+        font-family: 'Poppins',sans-serif;
+        font-size: .8rem;
+        padding-left: .6rem !important;
+        outline: none;
+        height: 1.9rem;
+        border: 1px solid rgba(0, 0, 0, 0.263);
+    }
+    .adress_text_area{
+        font-family: 'Poppins',sans-serif;
+        font-size: .8rem;
+        height: 3rem;
+        color: rgba(0, 0, 0, 0.864);
+        width: 100%;
+        outline: none;
+        padding-left: checkouts_frame_add_new_address1rem;
+        border: 1px solid rgba(0, 0, 0, 0.263);
+        resize: none;
     }
     .checkouts_frame_add_new_address{
-        height: 5%;
+        display: block;
+        /* overflow: hidden; */
+        height: 7%;
+        position: relative;
+    }
+    .add_new_adress{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        font-family: 'Poppins',sans-serif;
+        font-weight: 700;
+        color: rgba(0, 0, 0, 0.809);
+        font-size: .9rem;
+        padding: 0 1rem;
+        justify-content: space-between;
+    }
+    .adrees_add_drop{
+        position: absolute;
+        transition:  all .4s;
+        bottom: 27rem;
+        width: 100%;
+        height: 0;
+        height: auto;
+        background-color: white;
+    }
+    .checkouts_frame_add_new_address button{
+        border: none;
+        cursor: pointer;
+        background: none;
+        transition: all .5s;
+    }
+    .checkouts_frame_add_new_address button:active{
+        transform: scale(.95);
+    }
+
+    .add_new_btn{
+        height: 2.4rem !important;
+        margin: .8rem 0;
+        width: 100% !important;
+        background-color: #0b1f2a;
+        color: white;
+        transition: all .4s;
+        cursor: pointer;
+        font-family: 'Poppins',sans-serif;
+    }
+    .add_new_btn:active{
+        transform: scale(.95);
     }
 }
 

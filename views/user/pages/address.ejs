@@ -41,11 +41,22 @@
                    </div>
                    <div class="bottom" style="padding: 0 1rem;">
 
-                     <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem; width: 95%;">
+
+                    <div style="display: flex; gap: 1rem; width: 96%; padding: .5rem 0;">
+
+
+                     <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem; width: 55%;">
+                        <label for="dob">Mobile</label>
+                        <input  style="pointer-events: <%= userProfile? 'none': 'all' %> ;" value="<%= findUser? findUser.mobilenum : '' %>" type="number" name="mobilenum">
+                    </span>
+
+                     <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem; width: 40%;">
                         <label for="dob">DOB</label>
                         <input  style="pointer-events: <%= userProfile? 'none': 'all' %> ;" value="<%= userProfile? userProfile.DOB.toISOString().substring(0, 10) : '' %>" type="date" name="DOB">
                     </span>
                     
+                    </div>
+
                        <div style="display: flex; gap: 1rem; width: 94%; margin-top: .4rem;">
                            <span style="display: flex; flex-direction: column; gap: .2rem; width: 27%;">
                            <label for="country">Country</label>
@@ -73,7 +84,7 @@
    
                        </div>
    
-                       <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem; width: 95%;">
+                       <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem; width: 94%;">
                            <label for="landmark">Landmark</label>
                            <input style="pointer-events: <%= userProfile? 'none': 'all' %> ;" value="<%= userProfile? userProfile.landmark : '' %>" type="text" name="landmark">
                        </span>

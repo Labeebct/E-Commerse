@@ -234,6 +234,7 @@ exports.posEditAddress = async(req,res) => {
         const {   
             username,
             firstname,
+            mobilenum,
             lastname,
             email,
             DOB,
@@ -270,7 +271,8 @@ exports.posEditAddress = async(req,res) => {
             {_id:userId},
             {
                 username,
-                email
+                email,
+                mobilenum
             })
         
     if(updateProfile || updateUserdata ){

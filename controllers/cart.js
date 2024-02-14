@@ -16,7 +16,7 @@ exports.getCart = async(req,res) => {
 
         const cartExist = await cartModel.findOne({userId})
         const wishExist = await wishlistModel.findOne({userId})
-
+       
 
         if(req.session.loggedin){
 

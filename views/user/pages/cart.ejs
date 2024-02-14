@@ -52,7 +52,7 @@
                      <div style="display: flex; gap: .7rem; align-items: center;">
                         <p class="old_price"><%= list.oldprice.toLocaleString() %></p>
                         <p class="new_price"><%= list.newprice.toLocaleString() %></p>
-                        <p class="discount">80%</p>
+                        <p class="discount"><%= Math.round(100 - (list.newprice / list.oldprice * 100)) %> %</p>
                      </div>
                      <p class="return_status">Return policy 
                         <% if(list.returns) { %>
