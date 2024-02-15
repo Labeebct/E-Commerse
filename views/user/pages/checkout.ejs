@@ -1,39 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerse</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/public/css/user.css">
-</head>
-<body>
+<%- include('../components/head.ejs') %>
 
     <div class="wrapper checkout_wrapper">
-        <div class="top_nav">
-            <div class="web_logo"><i class="bi bi-list"></i><span class="labio_text">LABIO</span></div>
-            <div class="search_div">
-              <div class="search_bar">
-                <input class="search_input" placeholder="Search..." type="text" />
-                <button class="search_btn"><i class="bi bi-search"></i></button>
-              </div>
-            </div>
-            <div class="page_links">
-              <ul>
-                <li><a class="page_links home_li <%= state==='home'? 'active' : '' %>" href="/home">Home</a></li>
-                <li><a class="page_links" href="/wishlist"><i class="bi bi-heart bi_top_heart <%= state==='wishlist'? 'active' : '' %>"></i><span class="product_count wish_count_top"><%= wishCount? wishCount : 0 %></span></a></li>
-                <li><a class="page_links" href="/cart"><i class="bi bi-cart3  <%= state==='cart'? 'active' : '' %>"></i><span class="product_count cart_count"><%= cartCount %></span></a></li>
-                <li><a class="page_links <%= state==='address'? 'active' : '' %>" href="/account/address">Account</a></li>
-                <li><a class="page_links" href=""><i class="bi bi-box-arrow-right"></i></a></li>
-              </ul>
-            </div>
-          </div>
-
-
-          <div class="content checkout_content">
+        <%- include('../components/top_nav.ejs') %>
+    <div class="content checkout_content">
 
             <div class="checkout_left">
 
@@ -42,7 +11,7 @@
                 <div class="checkout_left_top">
 
                     <div class="product">
-                        <div class="image_sec"><img src="/public/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
+                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
                         <div class="discription_sec">
                            <p class="product_name">Iphone 15 pro</p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
@@ -105,7 +74,7 @@
                         </div>
                      </div>
                     <div class="product">
-                        <div class="image_sec"><img src="/public/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
+                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
                         <div class="discription_sec">
                            <p class="product_name">Iphone 15 pro</p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
@@ -168,7 +137,7 @@
                         </div>
                      </div>
                     <div class="product">
-                        <div class="image_sec"><img src="/public/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
+                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
                         <div class="discription_sec">
                            <p class="product_name">Iphone 15 pro</p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
@@ -231,7 +200,7 @@
                         </div>
                      </div>
                     <div class="product">
-                        <div class="image_sec"><img src="/public/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
+                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
                         <div class="discription_sec">
                            <p class="product_name">Iphone 15 pro</p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
@@ -294,7 +263,7 @@
                         </div>
                      </div>
                     <div class="product">
-                        <div class="image_sec"><img src="/public/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
+                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
                         <div class="discription_sec">
                            <p class="product_name">Iphone 15 pro</p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
@@ -367,14 +336,16 @@
                 <div class="checkout_left_bottom">
                     <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_payment">
                         <h3>PAYMENT METHODE</h3>
-                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/public/images/upi.png" alt=""></div><label for="upi">UPI</label><input id="upi" name="payment" type="radio"></div>
-                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/public/images/card.png" alt=""></div><label for="card">CARD</label><input id="card" name="payment" type="radio"></div>
-                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/public/images/cashon delivery.png" alt=""></div><label for="cashondelivery">CASH ON DELIVERY</label><input id="cashondelivery" name="payment" type="radio"></div>
+                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/upi.png" alt=""></div><label for="upi">UPI</label><input id="upi" name="payment" type="radio"></div>
+                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/card.png" alt=""></div><label for="card">CARD</label><input id="card" name="payment" type="radio"></div>
+                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/cashon delivery.png" alt=""></div><label for="cashondelivery">CASH ON DELIVERY</label><input id="cashondelivery" name="payment" type="radio"></div>
                     </div>
+
+
                     <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_coupon">
                         <h3>COUPON</h3>
                         <div class="coupon_input_frame">
-                            <img src="/public/images/coupon.png" style="height: 3rem;" alt="">
+                            <img src="/images/coupon.png" style="height: 3rem;" alt="">
                             <input type="text">
                             <button class="coupon_check_btn">SELECT</button>
                         </div>
@@ -386,6 +357,15 @@
                             <li>R47HXD <span>save <i class="bi bi-currency-rupee"></i>399</span></li>
                         </ul>
                     </div>
+
+                    <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_adress">
+                        <h3>SELECT ADDRESS</h3>
+                        <div class="payment_divs select_adress_div"><input id="add1" name="payment" type="radio"><label for="add1">thaliyil(h) thavanoor(po)</label></div>
+                        <div class="payment_divs select_adress_div"><input id="add2" name="payment" type="radio"><label for="add2">pallippuraya(h)</label></div>
+                        <div class="payment_divs select_adress_div"><input id="add3" name="payment" type="radio"><label for="add3">parathakaad(h)</label></div>
+                    </div>
+
+
                 </div>
             </div>
             <div class="checkout_right">
@@ -507,6 +487,7 @@
             </div>
           </div>
 
+<%- include('../../common/footer.ejs') %>
     </div>
     
 
@@ -533,6 +514,4 @@
     </script>
 
 
-
-</body>
-</html>
+<%- include('../../common/end.ejs') %>

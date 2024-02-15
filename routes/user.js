@@ -120,13 +120,13 @@ router.delete('/cart/remove',cartController.postRemoveCart)
 
 router.post('/cart/add_coupon/:id')
 
-router.get('/checkout')
+router.get('/checkout',orderController.getCheckout)
 router.post('/checkout/new_adress')
 router.post('/checkout/payment_method')
 
 router.post('/checkout')
 
-router.get('/order_summary')
+router.get('/order_summary',orderController.getOrderSummary)
     
 
 router.get('/payment_process')
