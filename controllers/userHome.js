@@ -30,6 +30,7 @@ exports.getHome = async(req,res) => {
 
           const banners = await bannerModel.find()
 
+          // subcatagory based cotagorisation and assigning to a variable to pass to user home page while rendeering
 
           const mensShirts = await productModel.aggregate([
                {$match:{subcategory:'MENS SHIRTS'}}
@@ -149,10 +150,12 @@ exports.getCategory = async(req,res) => {
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId})
 
+          //finding the category that matcheds the user click query
 
           const catProducts = await productModel.aggregate([
                { $match: {category:category} }
           ])          
+
 
           res.render('user/pages/categoryproducts',{state:category, catProducts , categories, wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
           
@@ -176,8 +179,7 @@ exports.getSubcategory = async(req,res) => {
           const cartExist = await cartModel.findOne({userId})
 
 
-          console.log(subcat);
-
+          //finding the subcategory that matcheds the user click query
 
           const subcatProducts = await productModel.aggregate([
                { $match: {subcategory:subcat} }
@@ -204,6 +206,8 @@ exports.getProductopen = async(req,res) => {
           const cartExist = await cartModel.findOne({userId}) 
 
           const product = await productModel.findOne({_id:productId})
+
+          // Showing related products by subcategory finding 
 
           const relatedProducts = await productModel.aggregate([
                {$match:{subcategory:product.subcategory}}
@@ -250,17 +254,19 @@ exports.getShowAllproducts = async(req,res) => {
 
           const search = req.query.search
 
+          //Pagination
+
           const pageSize = 40
           const skip = (page - 1) * pageSize
           
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId}) 
         
-          if(search){
-             const searchFilter = await productModel.find({productname: { $regex:search, $options: 'i' } })
+          if(search){ // Updated search using input event and getting the vaue by query
+             const searchFilter = await productModel.find({productname: { $regex:search, $options: 'i' } })  // Searching regex
              return res.status(200).json({searchFilter,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
           }
-          else if(filterBase && filterValue){
+          else if(filterBase && filterValue){ // Fileteration based on category , price and color
 
                if(filterBase === 'CATEGORY'){
                     const filterProducts = await productModel.aggregate([
@@ -268,7 +274,7 @@ exports.getShowAllproducts = async(req,res) => {
                     ])
                    return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                }
-               else if(filterBase === 'PRICE'){
+               else if(filterBase === 'PRICE'){ // disfferent filteration based on the pricing
 
 
                     if(filterValue === '500'){
@@ -279,39 +285,39 @@ exports.getShowAllproducts = async(req,res) => {
                     }
                     else if(filterValue === '1000'){
                          const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$gte:500 , $lt:1000}}}
+                              {$match:{newprice:{$gte:500 , $lt:1000}}}  // finding gretaer than 500 and less than 100
                          ])
                          return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 
                     }
                     else if(filterValue === '1500'){
                          const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$gte:1000 , $lt:1500}}}
+                              {$match:{newprice:{$gte:1000 , $lt:1500}}} // finding gretaer than 1000 and less than 1500
                          ])
                          return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 
                     }
                     else if(filterValue === '2500'){
                          const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$gte:1500 , $lt:2500}}}
+                              {$match:{newprice:{$gte:1500 , $lt:2500}}}  // finding gretaer than 1500 and less than 2500
                          ])
                          return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else if(filterValue === 'low to high'){
                          const filterProducts = await productModel.aggregate([
-                              {$sort:{newprice:1}}
+                              {$sort:{newprice:1}}   // Sorting from low to high
                          ])
                          return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else if(filterValue === 'high to low'){
                          const filterProducts = await productModel.aggregate([
-                              {$sort:{newprice:-1}}
+                              {$sort:{newprice:-1}}  // Sorting from high to low
                          ])
                          return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else{
                          const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$gt:2500}}}
+                              {$match:{newprice:{$gt:2500}}}  // finding product greater than 2500
                          ])
                          return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
                     }
@@ -321,7 +327,7 @@ exports.getShowAllproducts = async(req,res) => {
                const filterProducts = [];
 
                allProducts.forEach((product) => {
-                    const filterProduct = product.color.filter((color) => color === filterValue);
+                    const filterProduct = product.color.filter((color) => color === filterValue); // Filtering product based on colors
                     if (filterProduct.length > 0) {
                         filterProducts.push(product);
                     }

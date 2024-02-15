@@ -20,13 +20,13 @@ exports.getWishlist = async(req,res) => {
         const cartExist = await cartModel.findOne({userId})
 
 
-        if(req.session.loggedin){
+        if(req.session.loggedin){ // Checking whether user wishlist or not
 
             if(wishExist){
 
               const productIds = wishExist.products.map((product)=> product.productId)
 
-              const wishProducts = await productModel.find({_id:{$in:productIds}})
+              const wishProducts = await productModel.find({_id:{$in:productIds}}) // Finding products that matches the  product id in wishlist  database
               const wishCount = wishExist.products.length
 
               
@@ -59,7 +59,7 @@ exports.postAddwishlist = async(req,res) => {
         const wishExist = await wishlistModel.findOne({userId})
 
         if(req.session.loggedin){
-        if(!wishExist){
+        if(!wishExist){  // If wishlist is not exist for users
            const newSchema = new wishlistModel({
             userId:userObjId,
             products:[{productId:productObjId}]
@@ -69,8 +69,8 @@ exports.postAddwishlist = async(req,res) => {
           return res.status(200).json({wishlistcreated:true})
         }
         else{
-           const productExist = wishExist.products.find((products)=> products.productId == productId)
-           if(!productExist){
+           const productExist = wishExist.products.find((products)=> products.productId == productId) 
+           if(!productExist){ // Checking whether product already exist in wishlist
             await wishlistModel.updateOne({userId},
                 {$push:{products:{productId:productObjId}}}
                 )
@@ -111,7 +111,7 @@ exports.postFromwishToCart = async(req,res) => {
         const cartExist = await cartModel.findOne({userId})
 
         if(req.session.loggedin){
-        if(!cartExist){
+        if(!cartExist){ //checking whether cart exist for users
            const newSchema = new cartModel({
             userId:userObjId,
             products:[{productId:productObjId,quantity:1}]
@@ -132,7 +132,7 @@ exports.postFromwishToCart = async(req,res) => {
                 {$push:{products:{productId:productObjId,quantity:1}}}
                 )
 
-            await wishlistModel.updateOne({userId},
+            await wishlistModel.updateOne({userId},  // pulling out the product from array
                 {$pull:{products:{productId}}
                 })
                 
@@ -164,12 +164,12 @@ exports.deleteWishlist = async(req,res) => {
         const { productId } = req.body
         const userId = req.session.userId
 
-        const removeProduct = await wishlistModel.updateOne({userId},
+        const removeProduct = await wishlistModel.updateOne({userId},  //removing product from wishlist
           {$pull:{products:{productId}}
         })
 
        if(removeProduct.modifiedCount > 0){
-        return res.status(200).json({success:true,productId})
+        return res.status(200).json({success:true,productId}) //passing succes message if  deletion success
        }
         
     } catch (error) {

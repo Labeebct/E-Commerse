@@ -1,6 +1,26 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+const reviewandrating = {
+  userId:{
+    type:Schema.Types.ObjectId,
+    required:true
+  },
+  productId:{
+    type:Schema.Types.ObjectId,
+    required:true
+  },
+  rating:{
+    type:Number,
+    required:true
+  },
+  review:{
+    type:String,
+    required:true
+  }
+}
+
 const productDatas = new Schema({
   productname: {
     type: String,
@@ -47,7 +67,8 @@ const productDatas = new Schema({
   description: {
     type: String,
     required: true
-  }
+  },
+  review:[reviewandrating]
 });
 
 module.exports = new mongoose.model('products', productDatas)

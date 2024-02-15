@@ -14,30 +14,33 @@ exports.getCart = async(req,res) => {
         const state = 'cart'
         const userId = req.session.userId
 
+        //Finding the user cart and wishlist
+
         const cartExist = await cartModel.findOne({userId})
         const wishExist = await wishlistModel.findOne({userId})
        
 
-        if(req.session.loggedin){
+        if(req.session.loggedin){ // Xhecking whether user logged in or not
 
             if(cartExist){
 
-                const productIds = cartExist.products.map((product)=> product.productId)
+                const productIds = cartExist.products.map((product)=> product.productId) //looping cart database to get product id from cart products array
 
-                const cartProducts = await productModel.find({_id:{$in:productIds}})
+                const cartProducts = await productModel.find({_id:{$in:productIds}})  // finding product from product database that matching cart product product id
 
 
-               const cartPrice =  await productModel.aggregate([
+               const cartPrice =  await productModel.aggregate([  //Grouping all produtc price in user cart
                 {$match:{_id:{$in:productIds}}},
                 {$group:{_id:null,cartPrice:{$sum:"$newprice"}}}
               ]) 
 
-              const cartTotal = productIds.length > 0 ?  cartPrice[0].cartPrice : 0
+        
+              const cartTotal = productIds.length > 0 ?  cartPrice[0].cartPrice : 0  // finding the cart total to sho in user cart
 
               const cartQuantity = cartExist ? cartExist.products : []
 
               const cartCount = cartExist.products.length
-              const discount = Math.round(cartTotal / 30)
+              const discount = Math.round(cartTotal / 30) //calculating discount for product in cart
               const gst = cartTotal / 1000
 
               
@@ -63,9 +66,10 @@ exports.getCart = async(req,res) => {
 exports.postAddCart = async(req,res) => {
 
     try {
-
+        
         const { productId , cartQuantity } = req.body
-        const quantity = parseInt(cartQuantity)
+
+        const quantity = parseInt(cartQuantity)  // collectiing quantity while product open and add to cart
         const userId = req.session.userId
 
 
@@ -74,18 +78,18 @@ exports.postAddCart = async(req,res) => {
 
         const cartExist = await cartModel.findOne({userId})
 
-        if(req.session.loggedin){
-        if(!cartExist){
+        if(req.session.loggedin){ 
+        if(!cartExist){ // if cart is not exist for the users
            const newSchema = new cartModel({
             userId:userObjId,
-            products:[{productId:productObjId,quantity}]
+            products:[{productId:productObjId,quantity}]  // adding quantity and product id in  cart products
            })
-          await newSchema.save()
+          await newSchema.save() // saving data
           return res.status(200).json({success:true,cartcreated:true})
         }
         else{
            const productExist = cartExist.products.find((products)=> products.productId == productId)
-           if(!productExist){
+           if(!productExist){ // checking whther product already exist in cart
             await cartModel.updateOne({userId},
                 {$push:{products:{productId:productObjId,quantity}}}
                 )
@@ -114,16 +118,17 @@ exports.postAddCart = async(req,res) => {
 exports.postRemoveCart = async(req,res) => {
     try {
 
-        const { productId } = req.body
+        const { productId } = req.body // Destructuring product id from req.body which is passed by usng fetch
         const userId = req.session.userId
 
         const findProduct = await productModel.findById(productId)
         const deleteProductPrice = findProduct.newprice
 
 
-        const removeProduct = await cartModel.updateOne({userId},
+        const removeProduct = await cartModel.updateOne({userId}, // removing the product from database using mongodb pull methode
           {$pull:{products:{productId}}
         })
+
 
 
        if(removeProduct.modifiedCount > 0){

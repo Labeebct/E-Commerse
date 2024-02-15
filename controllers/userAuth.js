@@ -236,7 +236,7 @@ exports.postForgetpass = async (req, res) => {
            req.flash('errMsg',"Please Enter the Email")
            return res.redirect('/forget_password')
          }
-         else if(!emailRegex.test(req.body.email)){
+         else if(!emailRegex.test(req.body.email)){   //Testing the email matches a valid email format
           req.flash('errMsg',"Invalid Email Format")
            return res.redirect('/forget_password')
          }
@@ -293,8 +293,8 @@ exports.postEmailOtp = (req, res) => {
 exports.getResendemailotp = async(req,res) =>{
 
     try {
-         const findUser = await signupModel.findOne({mobilenum:req.session.mobilenum})
-         emailOtp(findUser.email)
+         const findUser = await signupModel.findOne({mobilenum:req.session.mobilenum}) 
+         emailOtp(findUser.email) // calling the email otp function and passing number to function as argument
          req.flash('incorrect','Incorrect OTP')
          res.redirect('/email_otp')
 
@@ -325,18 +325,18 @@ exports.postChangepass = async(req, res) => {
     const {password , confirmpassword } = req.body
 
     const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password,salt)
+    const hashedPassword = await bcrypt.hash(password,salt) // hashing new password
 
 
-    if(!password || !confirmpassword){
+    if(!password || !confirmpassword){  //checking whether password   and confirmpassword exist
          req.flash('errMsg','Please Fill the Fields')
          return res.status(405).redirect('/change_password')
     }
-    else if(!passwordRegex.test(password)){
+    else if(!passwordRegex.test(password)){ //checking password regex which should have 1 number and one capital letter
          req.flash('errMsg','Password need one Uppercase and one Number')
          return res.status(405).redirect('/change_password')
     }
-    else if(password != confirmpassword){
+    else if(password != confirmpassword){ //checking whether old password and new password matches correct
          req.flash('errMsg','Password Mismatch')
          return res.status(405).redirect('/change_password')
     }else{

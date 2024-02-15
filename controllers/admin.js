@@ -384,6 +384,7 @@ exports.postAddproduct = async(req,res) => {
         deliverywithin,
         description,
         returns,
+        review:[]
     })
 
    if(!productExist){
@@ -478,6 +479,7 @@ exports.postEditproduct = async(req,res) => {
 
            
         await productModel.updateOne({_id:id},update)
+        
         res.status(200).redirect('/admin/products')
 
 

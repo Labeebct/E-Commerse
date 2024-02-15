@@ -14,6 +14,8 @@ exports.getOrderSummary = async(req,res) => {
         
         const state = ''
         const userId = req.session.userId
+
+        // checking cart or whixhlist exist for showing cart and wishlist count
     
         const cartExist = await cartModel.findOne({userId})
         const wishExist = await wishlistModel.findOne({userId})
@@ -34,6 +36,8 @@ exports.getCheckout = async(req,res) => {
         const state = ''
         const userId = req.session.userId
     
+        // checking cart or whixhlist exist for showing cart and wishlist count
+
         const cartExist = await cartModel.findOne({userId})
         const wishExist = await wishlistModel.findOne({userId})
        
