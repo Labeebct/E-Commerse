@@ -37,7 +37,7 @@ exports.getCart = async(req,res) => {
               const cartQuantity = cartExist ? cartExist.products : []
 
               const cartCount = cartExist.products.length
-              const discount = Math.round(cartTotal / 100)
+              const discount = Math.round(cartTotal / 30)
               const gst = cartTotal / 1000
 
               
@@ -68,7 +68,6 @@ exports.postAddCart = async(req,res) => {
         const quantity = parseInt(cartQuantity)
         const userId = req.session.userId
 
-        console.log(quantity);
 
         const userObjId = new Types.ObjectId(userId)
         const productObjId = new Types.ObjectId(productId)
@@ -118,12 +117,17 @@ exports.postRemoveCart = async(req,res) => {
         const { productId } = req.body
         const userId = req.session.userId
 
+        const findProduct = await productModel.findById(productId)
+        const deleteProductPrice = findProduct.newprice
+
+
         const removeProduct = await cartModel.updateOne({userId},
           {$pull:{products:{productId}}
         })
 
+
        if(removeProduct.modifiedCount > 0){
-        return res.status(200).json({success:true,productId})
+        return res.status(200).json({success:true,productId,deleteProductPrice})
        }
         
     } catch (error) {

@@ -1,5 +1,6 @@
 const wishCountTopNav = document.querySelector('.wish_count_top')
 const wishCount = document.querySelector('.wish_count')
+const cartCounts = document.querySelector('.cart_count')
 
 
 async function addToWish(event,productId){
@@ -85,6 +86,9 @@ async function removeFromWish(event,productId){
             if(wishCount.innerHTML == 0 ){
                 document.querySelector('.cart_is_empty').style.display = 'block'
             }
+            else{
+                document.querySelector('.cart_is_empty').style.display = 'none'
+             }
          }
            else{
             console.log('Error in removing from wishlist');
@@ -120,7 +124,7 @@ async function wishToCart(event,productId){
             wishIcon.remove()
             wishCount.innerHTML--
             wishCountTopNav.innerHTML--
-            cartCount.innerHTML ++
+            cartCounts.innerHTML++
             if(wishCount.innerHTML == 0 ){
                 document.querySelector('.cart_is_empty').style.display = 'block'
             }

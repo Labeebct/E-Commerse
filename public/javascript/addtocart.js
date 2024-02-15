@@ -53,6 +53,14 @@ const addToCart = async(event,productId) => {
 
     event.stopPropagation()     
     event.preventDefault()
+
+    const cartTotalElement = document.querySelector('.cart_total');
+    const cartTotaAmount = document.querySelector('.cartTotalAmount')
+    const discount = document.querySelector('.productDiscount')
+    const gst = document.querySelector('.gst')
+    const cartTotal = parseFloat(cartTotalElement.innerHTML);
+
+
     
     try {
     
@@ -69,7 +77,25 @@ const addToCart = async(event,productId) => {
         if(result.success){
           cartCount.innerHTML --
           document.querySelector('.cartCount').innerHTML--
+          cartTotalElement.innerHTML = cartTotal - result.deleteProductPrice;
+
+          discount.innerHTML = Math.round((cartTotal-result.deleteProductPrice) / 30)
+          gst.innerHTML = (cartTotal-result.deleteProductPrice) / 1000
+
+          const discountValue = parseFloat(discount.innerHTML);
+          const gstValue = parseFloat(gst.innerHTML)
+
+          const currentAmount = Number(cartTotal-result.deleteProductPrice)
+
+          cartTotaAmount.innerHTML = Math.round((currentAmount - discountValue)+ gstValue)
           document.querySelector(`.product${result.productId}`).remove()
+
+          if(cartCount.innerHTML == 0 ){
+            document.querySelector('.cart_is_empty').style.display = 'block'
+         }
+         else{
+            document.querySelector('.cart_is_empty').style.display = 'none'
+         }
         }
         
     } catch (error) {

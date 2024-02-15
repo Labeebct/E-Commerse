@@ -52,7 +52,7 @@
                      <div style="display: flex; gap: .7rem; align-items: center;">
                         <p class="old_price"><%= list.oldprice.toLocaleString() %></p>
                         <p class="new_price"><%= list.newprice.toLocaleString() %></p>
-                        <p class="discount"><%= Math.round(100 - (list.newprice / list.oldprice * 100)) %> %</p>
+                        <p class="discount"><%= Math.round(100 - (list.newprice / list.oldprice * 100)) %>%</p>
                      </div>
                      <p class="return_status">Return policy 
                         <% if(list.returns) { %>
@@ -78,15 +78,15 @@
                   </div>
                   <div class="cart_details"> 
                      <p>Cart Total</p>
-                     <p><i class="bi bi-currency-rupee"></i><%= cartTotal.toLocaleString() %></p>
+                     <p><i class="bi bi-currency-rupee"></i><span class="cart_total"><%= cartTotal %></span></p>
                   </div>
                   <div class="cart_details"> 
                      <p>Discount </p>
-                     <p><i class="bi bi-currency-rupee"></i>-<%= discount.toLocaleString() %></p>
+                     <p><i class="bi bi-currency-rupee"></i>-<span class="productDiscount"><%= discount %></span></p>
                   </div>
                   <div class="cart_details"> 
                      <p>GST</p>
-                     <p><i class="bi bi-currency-rupee"></i><%= gst.toLocaleString() %></p>
+                     <p><i class="bi bi-currency-rupee"></i><span class="gst"><%= gst %></span></p>
                   </div>
                   <div class="cart_details"> 
                      <p>Delivery Charge</p>
@@ -95,9 +95,9 @@
                </div>
                <div class="total_amount"> 
                   <p>Total Amount</p>
-                  <p><i class="bi bi-currency-rupee"></i><%= (cartTotal - discount + gst).toLocaleString() %></p>
+                  <p><i class="bi bi-currency-rupee"></i><span class="cartTotalAmount"><%= Math.round((cartTotal - discount) + gst) %></span></p>
                </div>
-               <div class="btn_div"><button class="place_order_btn">PLACE ORDER</button></div>
+               <div class="btn_div"><button onclick="location.href = '/checkout' " class="place_order_btn">PLACE ORDER</button></div>
             </div>
          </div>
          <%- include('../../common/footer.ejs') %>
