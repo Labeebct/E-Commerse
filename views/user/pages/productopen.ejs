@@ -138,7 +138,7 @@
                           return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
                           })() %>"></i>
                         </button>
-                        <button onclick="location.href = '/checkout' " type="button">BUY NOW</button>
+                        <button onclick="checkoutFromProduct('<%= product._id %>')" type="button">BUY NOW</button>
                      </li>
 
                   </ul>
@@ -146,6 +146,7 @@
             </form>
             </div>                  
          </div>
+         
                       <!-- ============================================================================================================================ -->
 
 
@@ -228,7 +229,7 @@
          <%- include('../../common/footer.ejs') %>
    </div>
 
-
+<script src="/javascript/checkout.js"></script>
 <script src="/javascript/product-open.js"></script>
 <script src="/javascript/addtowish.js"></script>
 <script src="/javascript/addtocart.js"></script>

@@ -349,3 +349,17 @@ exports.getOrder = async(req,res) => {
     res.render('user/pages/orders',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
 }
 
+
+exports.getOrderOpen = async(req,res) => {
+
+    const userId = req.session.userId
+
+    // Passing wishlist and cart counts
+
+    const wishExist = await wishlistModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+
+    const state = 'orders'
+    res.render('user/pages/orderopen',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+}
+

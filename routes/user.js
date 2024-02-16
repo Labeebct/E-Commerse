@@ -177,6 +177,7 @@ router.post('/account/contactus',accountController.postContactus)
 
 
 router.get('/account/orders',accountController.getOrder)
+router.get('/account/order_open',accountController.getOrderOpen)
 router.get('/account/aboutus',accountController.getAboutus)
 
 

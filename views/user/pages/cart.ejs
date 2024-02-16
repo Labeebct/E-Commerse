@@ -97,13 +97,14 @@
                   <p>Total Amount</p>
                   <p><i class="bi bi-currency-rupee"></i><span class="cartTotalAmount"><%= Math.round((cartTotal - discount) + gst) %></span></p>
                </div>
-               <div class="btn_div"><button onclick="location.href = '/checkout' " class="place_order_btn">PLACE ORDER</button></div>
+               <div class="btn_div"><button onclick="checkoutFromCart('<%= cartExist._id %>')" class="place_order_btn">PLACE ORDER</button></div>
             </div>
          </div>
          <%- include('../../common/footer.ejs') %>
    </div>
 
 
+<script src="/javascript/checkout.js"></script>
 <script src="/javascript/addtocart.js"></script>
 <script src="/javascript/product-open.js"></script>
 <script src="/javascript/btnsearch.js"></script>
@@ -117,6 +118,8 @@ function productQuantity(){
     event.preventDefault()
  
  }
+
+
  
 
 </script>

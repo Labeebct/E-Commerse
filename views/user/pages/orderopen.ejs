@@ -1,0 +1,72 @@
+<%- include('../components/head.ejs') %>
+    
+    <div class="wrapper orderopen_wrapper">
+
+      <%- include('../components/top_nav.ejs') %> 
+
+      <div class="content order_open_content">
+
+        <h3 class="order_id">ORDER ID : <span>832802746662321</span></h3>
+
+        <div class="order_frames order_adress_frame">
+           <div class="delivery_adress_text">Delivery Address</div>
+           <div class="adrress_details">
+             <h4 class="user_name">Labeeb ct</h4>
+             <div class="user_address">
+                <p>India</p>
+                <p>Kerala</p>
+                <p>Malappuram</p>
+                <p>Thaliyil (h)Thavanoor (p.o)Kuzhimanna via Kizhisseri Vadakkeparambu Pothuvettippara Mundakkulam Road, Ernad Subdistrict, pothuvattippara Malappuram District - 673641, Kerala</p>
+             </div>
+             <h4 class="user_phone">Phone number</h4>
+             <p>8590471530</p>
+           </div>
+        </div>
+
+        <div class="order_frames order_product_frame">
+              <div class="product_img_div"><img src="/products-img/06-02-11-52-45-61DUqV412CL._SL1440_.jpg" style="height: 8.5rem;"></div>
+              <div class="product_details_div">
+                  <div class="details_div">
+                    <p class="product_name">SHREE MURLI Regular Lotus Seed Pop/Gorgon Nut Puffed Kernels </p>
+                    <p class="color_size">SIZE : <span>X</span></p>
+                    <p class="color_size">COLOR : <span>BLACK</span></p>
+                    <div style="display: flex; gap: .7rem; align-items: center;">
+                      <p class="old_price">₹338</p>
+                      <p class="new_price">₹138</p>
+                      <p class="discount">60%</p>
+                   </div> 
+                  </div>
+              </div>
+        </div>
+
+
+        <div class="order_frames review_div">
+           <div class="reviewproduct">Rate your Product</div>
+           <div class="review_frame">
+            <textarea class="review_textarea" placeholder="Review your Product here.." spellcheck="false"></textarea>
+            <button class="review_submit_btn" >Submit Review</button>
+           </div>
+        </div>
+
+        </div>
+
+        <%- include('../../common/footer.ejs') %>
+
+        </div>
+
+
+<script>
+
+
+const rateProduct = document.querySelector('.reviewproduct')
+const reviewProduct = document.querySelector('.review_frame')
+rateProduct.addEventListener('click',()=>{
+   reviewProduct.style.display = 'block'
+   reviewProduct.style.height = '10rem' 
+})
+
+
+
+</script>
+
+<%- include('../../common/end.ejs') %>
