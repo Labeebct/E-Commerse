@@ -108,6 +108,7 @@ router.delete('/wishist/remove',wishController.deleteWishlist)
 router.get('/cart',cartController.getCart)
 router.post('/cart/add',cartController.postAddCart)
 router.delete('/cart/remove',cartController.postRemoveCart)
+router.get('/cart/increase_quantity',cartController.getIncreaseQuantity)
 
 
 
@@ -121,21 +122,16 @@ router.delete('/cart/remove',cartController.postRemoveCart)
 router.post('/cart/add_coupon/:id')
 
 router.get('/checkout',orderController.getCheckout)
-router.post('/checkout/new_adress')
-router.post('/checkout/payment_method')
+router.delete('/checkout/delete_product',orderController.deleteCheckout)
+router.post('/checkout/add_new_adress',orderController.postAddnewadress)
 
-router.post('/checkout')
+router.get('/select_address',orderController.selectAddress)
+router.get('/select_coupon',orderController.selectCoupon)
+
+router.post('/checkout/payment_method')
 
 router.get('/order_summary',orderController.getOrderSummary)
     
-
-router.get('/payment_process')
-router.post('/payment_process')
-
-router.get('/confirm_order')
-
-router.get('/order_success')
-
 
 
     

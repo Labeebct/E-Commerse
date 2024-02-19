@@ -103,3 +103,9 @@ const addToCart = async(event,productId) => {
     }
     
     }   
+
+
+async function updateQuantity(event,productId){
+    const quantity = event.target.value
+    const response = await fetch(`/cart/increase_quantity?quantity=${quantity}&productId=${productId}`)
+}

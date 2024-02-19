@@ -10,38 +10,46 @@
 
                 <div class="checkout_left_top">
 
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
+                <% productArray.forEach((list)=>{ %>
+
+                    <div class="product product<%= list._id %>" onclick="productOpen(event,'<%= list._id %>')">
+                        <div class="image_sec"><img src="<%= list.productimg[0] %>" style="width: 8rem;" alt=""></div>
                         <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
+                           <p class="product_name"><%= list.productname %></p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
+                              <select name="quantity" style="outline: none; padding: .3rem;" onclick="selectQuantity(event)" >
+                                <option value="">Qty:<%= (() => {
+                                    const productIdObjectId = new ObjectId(list._id )
+                                    const productquantity = cartQuantity.find(product => product.productId.equals(productIdObjectId));
+                                    return productquantity.quantity
+                                    })() %>
+                                </option>
                                  <option value="1">Qty:1</option>
                                  <option value="2">Qty:2</option>
                                  <option value="3">Qty:3</option>
                                  <option value="4">Qty:4</option>
                                  <option value="5">Qty:5</option>
                               </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
+                              <div class="stock_left"><%= list.stock %> Left</div>
+                            </div>
                            <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
+                            <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice.toLocaleString() %></p>
+                            <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
+                            <p class="discount"><%= Math.round(100 - (list.newprice / list.oldprice * 100)) %> %</p>
                            </div>
 
                         <div class="color_size">
                             <div class="size_li">
                                 <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
+
+                                <% list.size.forEach((size) => { %>
+
+                                    <span class="label_span"onclick="selectSize(event)">
+                                    <input id="<%= size %>" value="<%= size %>" class="size" name="size" type="radio" >
+                                    <label for="<%= size %>" ><%= size %></label>
+                                    </span>
+                                    
+                                    <% }) %>
                                         
                             </div>
 
@@ -51,280 +59,34 @@
                      <div class="color_li">
                          <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
 
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
+                            <% list.color.forEach((color) => { %>
+
+                           <span style="background-color:<%= color %>" class="label_span_color" onclick="selectColor(event)" >
+                              <input  id="<%= color %>" name="color" value="<%= color %>" type="radio" >
+                              <label for="<%= color %>" ></label>
+                              </span>
+                           
+                           <% }) %>
                            
                      </div>
 
                            </div>
 
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
-
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
+                           <li style="display: flex; gap: .7rem; align-items: center; height: 2rem;">
+                            <div style="display: flex; align-items: center; font-family: 'sans-serif'; ">Return
+                               <% if(list.returns) { %>
+                                  <i class="bi bi-check"></i>
+                                  <% } else{ %>
+                                  <i class="bi bi-x"></i>
+                                  <% } %>
                             </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
-                     </div>
-
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
+                         </li>                     </div>
                         <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
+                           <div style="margin-bottom: 1rem;"><button onclick="deleteFromcheckout(event,'<%= list._id %>','<%= list.newprice %>')"><i class="bi bi-x-circle"></i></button></div>
                         </div>
                      </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
 
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
-                            </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
-                     </div>
-
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
-
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
-                            </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
-                     </div>
-
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 10rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
-
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
-                            </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
-                     </div>
-
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
+                     <% }) %>
 
 
                 </div>
@@ -344,85 +106,93 @@
 
                     <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_coupon">
                         <h3>COUPON</h3>
-                        <div class="coupon_input_frame">
-                            <img src="/images/coupon.png" style="height: 3rem;" alt="">
-                            <input type="text">
-                            <button class="coupon_check_btn">SELECT</button>
-                        </div>
+                        
+                            <div class="coupon_input_frame">
+                                <img src="/images/coupon.png" style="height: 3rem;" alt="">
+                                <input type="text" placeholder="Apply Coupon">
+                                <button class="coupon_check_btn">SELECT</button>
+                            </div>
+
                         <ul class="coupon_ul">
-                            <li>R47HXD <span>save <i class="bi bi-currency-rupee"></i>399</span></li>
-                            <li>R47HXD <span>save <i class="bi bi-currency-rupee"></i>399</span></li>
-                            <li>R47HXD <span>save <i class="bi bi-currency-rupee"></i>399</span></li>
-                            <li>R47HXD <span>save <i class="bi bi-currency-rupee"></i>399</span></li>
-                            <li>R47HXD <span>save <i class="bi bi-currency-rupee"></i>399</span></li>
+
+                            <% coupons.forEach((coupon)=>{ %>
+
+                            <li><%= coupon.couponnname %><p style="font-size: .7rem;">Amount<i class="bi bi-currency-rupee"></i><%= coupon.minamount %>-<i class="bi bi-currency-rupee"></i><%= coupon.maxamount %></p>
+                                <span style="color: rgb(0, 152, 0); font-family: 'Poppins',sans-serif;"><%= coupon.discount %>%</span>
+                                <span><button class="coupon_apply" onclick="selectCoupon('<%= coupon._id %>')">APPLY</button></span>
+                            </li>
+
+                            <% }) %>
                         </ul>
                     </div>
 
                     <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_adress">
                         <h3>SELECT ADDRESS</h3>
-                        <div class="payment_divs select_adress_div"><input id="add1" name="payment" type="radio"><label for="add1">thaliyil(h) thavanoor(po)</label></div>
-                        <div class="payment_divs select_adress_div"><input id="add2" name="payment" type="radio"><label for="add2">pallippuraya(h)</label></div>
-                        <div class="payment_divs select_adress_div"><input id="add3" name="payment" type="radio"><label for="add3">parathakaad(h)</label></div>
+                        <% userAddress.forEach((address,index)=>{ %>
+                            <div class="payment_divs select_adress_div"><input id="add<%= index %>" name="payment" type="radio" onclick="selectAddress('<%- address._id %>')"><label for="add<%= index %>"><%= address.address %></label></div>
+                        <% }) %>
+
                     </div>
 
 
                 </div>
             </div>
             <div class="checkout_right">
-                <div class="checkouts_frame checkout_adress_frame">
+                <div class="checkouts_frame checkout_adress_frame" style="pointer-events: none;">
                     <h3>ADDRESS</h3>
                     <div class="adress_frame">
 
                         <div style="display: flex;justify-content: space-between; width: 100%;">
                             <span style="display: flex; flex-direction: column;gap: .2rem; width: 50%;">
                                 <label for="firstname" >First Name</label>
-                                <input type="text"  name="firstname" style="width: 100%;" >
+                                <input type="text"  value="<%= userAddress[0].firstname %>"  name="firstname" style="width: 100%;" >
                             </span>
                             <span style="display: flex; flex-direction: column;gap: .2rem;  width: 48%;">
                                 <label for="lastname">Last Name</label>
-                                <input  type="text" name="lastname" style="width: 100%; padding-left: 1rem" >
+                                <input  type="text" value="<%= userAddress[0].lastname %>" name="lastname" style="width: 100%; padding-left: 1rem" >
                             </span>
                         </div>
 
                         <span style="display: flex; flex-direction: column;gap: .2rem;  width: 100%;">
                            <label for="lastname">Mobile</label>  
-                           <input  type="text" name="mobile" style="width: 100%; padding-left: 1rem" >
+                           <input  type="text" value="<%= userAddress[0].mobilenum %>" name="mobilenum" style="width: 100%; padding-left: 1rem" >
                        </span>
 
                        
                        <div style="display: flex;justify-content: space-between; width: 100%;">
                         <span style="display: flex; flex-direction: column;gap: .2rem; width: 50%;">
                             <label for="firstname" >Country</label>
-                            <input type="text"  name="country" style="width: 100%;" >
+                            <input type="text" value="<%= userAddress[0].country %>"  name="country" style="width: 100%;" >
                         </span>
                         <span style="display: flex; flex-direction: column;gap: .2rem;  width: 48%;">
                             <label for="lastname">State</label>
-                            <input  type="text" name="state" style="width: 100%; padding-left: 1rem" >
+                            <input  type="text" value="<%= userAddress[0].state %>" name="state" style="width: 100%; padding-left: 1rem" >
                         </span>
                     </div>  
                     
                        <div style="display: flex;justify-content: space-between; width: 100%;">
                         <span style="display: flex; flex-direction: column;gap: .2rem; width: 78%;">
                             <label for="firstname" >District</label>
-                            <input type="text"  name="district" style="width: 100%;" >
+                            <input type="text" value="<%= userAddress[0].district %>"  name="district" style="width: 100%;" >
                         </span>
                         <span style="display: flex; flex-direction: column;gap: .2rem;  width: 20%;">
                             <label for="lastname">Zip</label>
-                            <input  type="text" name="zip" style="width: 100%; padding-left: 1rem" >
+                            <input  type="text" value="<%= userAddress[0].zip %>" name="zip" style="width: 100%; padding-left: 1rem" >
                         </span>
                     </div>  
 
 
                     <span style="display: flex; flex-direction: column;gap: .2rem;  width: 100%;">
                      <label for="lastname">Address</label>  
-                     <textarea name="address" class="adress_text_area"></textarea>
+                     <textarea name="address" class="adress_text_area"><%= userAddress[0].address %></textarea>
                  </span>
 
                     </div>
                     
                 </div>
                 <div class="checkouts_frame checkouts_frame_add_new_address">
-                  <div class="add_new_adress">ADD NEW ADDRESS<button class="droup_right_btn"><i class="bi plus_btn bi-plus"></i></button></div>
+                    <div class="add_new_adress">ADD NEW ADDRESS<button class="droup_right_btn"><i class="bi plus_btn bi-plus"></i></button></div>
+                    <form id="adrress_form" method="post">
                 <div class="adress_frame adrees_add_drop">
 
                   <div style="display: flex;justify-content: space-between; width: 100%;">
@@ -438,13 +208,13 @@
 
                   <span style="display: flex; flex-direction: column;gap: .2rem;  width: 100%;">
                      <label for="lastname">Mobile</label>  
-                     <input  type="text" name="mobile" style="width: 100%; padding-left: 1rem" >
+                     <input  type="number" name="mobilenum" style="width: 100%; padding-left: 1rem" >
                  </span>
 
                  
                  <div style="display: flex;justify-content: space-between; width: 100%;">
                   <span style="display: flex; flex-direction: column;gap: .2rem; width: 50%;">
-                      <label for="firstname" >Country</label>
+                      <label for="firstname">Country</label>
                       <input type="text"  name="country" style="width: 100%;" >
                   </span>
                   <span style="display: flex; flex-direction: column;gap: .2rem;  width: 48%;">
@@ -469,18 +239,20 @@
                <label for="lastname">Address</label>  
                <textarea name="address" class="adress_text_area"></textarea>
             </span>
-            <input class="add_new_btn" type="button" value="ADD"> 
+            <p class="error_msg"></p>
+            <input class="add_new_btn" onclick="addNewAddress()" type="button" value="ADD"> 
          </div>
+        </form>
          
       </div>
       
       <div class="checkouts_frame checkout_total_price">
          <h3>SUMMARY</h3>
          <div class="summary_frame">
-            <p>Subtotal <span><i class="bi bi-currency-rupee"></i>32,999</span></p>
+            <p>Subtotal <span><i class="bi bi-currency-rupee"></i><span class="sub_total"><%= cartTotal %></span></span></p>
                         <p>Shipping <span style="color: rgb(0, 160, 0);">FREE</span></p>
-                        <p>Coupon <span>Nill</span></p>
-                        <p>Order Total <span><i class="bi bi-currency-rupee"></i>12,3234</span></p>
+                        <p>Coupon <span class="coupon">Nill</span></p>
+                        <p>Order Total <span><i class="bi bi-currency-rupee"></i><span class="order_total"><%= cartTotal %></span></span></p>
                         <button onclick="location.href='/order_summary' " class="proceed_btn">PROCEED</button>
                     </div>
                 </div>
@@ -490,28 +262,8 @@
 <%- include('../../common/footer.ejs') %>
     </div>
     
-
-    <script>
-
-
-    const dropBtn = document.querySelector('.droup_right_btn')
-    const plusIcon = document.querySelector('.plus_btn')
-    const dropFrame = document.querySelector('.adrees_add_drop')
-
-    dropBtn.addEventListener('click',()=>{
-      if(plusIcon.classList.contains('bi-plus')){
-         plusIcon.classList.replace('bi-plus','bi-dash-lg')
-         dropFrame.style.bottom = '3.5rem'
-      }
-      else{
-         plusIcon.classList.replace('bi-dash-lg','bi-plus')
-         dropFrame.style.bottom = '27rem'
-      }
-
-    })
-
-
-    </script>
-
+    <script src="/javascript/product-open.js"></script>
+    <script src="/javascript/btnsearch.js"></script>
+    <script src="/javascript/checkout.js"></script>
 
 <%- include('../../common/end.ejs') %>

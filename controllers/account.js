@@ -141,7 +141,7 @@ exports.getAdress = async(req,res) => {
     {
         $match:{
         _id:objUserId   
-        }
+        }    
     },{
         $lookup:{
         from:'profiles',
@@ -152,6 +152,8 @@ exports.getAdress = async(req,res) => {
     ])
     
     const userProfile = userAddress.length > 0 ? userAddress[0].userProfile[0] : null //checking user profile exist
+
+    console.log(userProfile);
 
     return res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,userProfile,findUser})
 }
@@ -182,6 +184,7 @@ exports.postAddress = async(req,res) => {
         const userId = new Types.ObjectId(user._id)
 
         const imagePath = '/profile-image/' + req.file.filename  // creating full path for the image
+
         
         const newSchema = new profileModel({
             firstname,
@@ -194,11 +197,25 @@ exports.postAddress = async(req,res) => {
             address,
             landmark,
             zip,
-            newadress:[],
+            newadress:[
+                {
+                    firstname,
+                    lastname,
+                    mobilenum:user.mobilenum,
+                    country,
+                    state,
+                    district,
+                    address,
+                    landmark,
+                    zip,
+                }
+            ],
             userId,
         })
          
         await newSchema.save() // Saving schema
+
+    
 
         console.log('Successfully profile updated');
 

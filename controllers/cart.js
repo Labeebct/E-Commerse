@@ -2,7 +2,6 @@ const productModel = require('../models/products')
 const cartModel = require('../models/cart')
 const wishlistModel = require('../models/wishlist')
 const { ObjectId } = require('mongodb');
-
 const { Types } = require('mongoose')
 
 
@@ -20,7 +19,7 @@ exports.getCart = async(req,res) => {
         const wishExist = await wishlistModel.findOne({userId})
        
 
-        if(req.session.loggedin){ // Xhecking whether user logged in or not
+        if(req.session.loggedin){ // Checking whether user logged in or not
 
             if(cartExist){
 
@@ -40,7 +39,7 @@ exports.getCart = async(req,res) => {
               const cartQuantity = cartExist ? cartExist.products : []
 
               const cartCount = cartExist.products.length
-              const discount = Math.round(cartTotal / 30) //calculating discount for product in cart
+              const discount = Math.round(cartTotal / 10) //calculating discount for product in cart
               const gst = cartTotal / 1000
 
               
@@ -88,8 +87,8 @@ exports.postAddCart = async(req,res) => {
           return res.status(200).json({success:true,cartcreated:true})
         }
         else{
-           const productExist = cartExist.products.find((products)=> products.productId == productId)
-           if(!productExist){ // checking whther product already exist in cart
+           const productExist = cartExist.products.find((products)=> products.productId == productId) // checking whther product already exist in cart
+           if(!productExist){ 
             await cartModel.updateOne({userId},
                 {$push:{products:{productId:productObjId,quantity}}}
                 )
@@ -99,7 +98,6 @@ exports.postAddCart = async(req,res) => {
         else{
             console.log('Product already exist in cart');
             return res.status(200).json({success:true,cartcreated:true})
-
            }
         }
     }else{
@@ -137,5 +135,27 @@ exports.postRemoveCart = async(req,res) => {
         
     } catch (error) {
         console.log('Error in remove from cart',error.message);
+    }
+}
+
+
+exports.getIncreaseQuantity = async(req,res) =>{
+    try {
+        
+        const userId = req.session.userId
+
+        const quantity = req.query.quantity
+        const productIdin = req.query.productId
+
+        const userObjId = new Types.ObjectId(userId)
+        const productIdObj = new Types.ObjectId(productIdin)
+
+        await cartModel.updateOne(
+            { userId:userObjId, "products.productId": productIdObj },
+            { "products.$.quantity": quantity } 
+        );
+
+    } catch (error) {
+        console.log('Error in increase cart quantity',error);
     }
 }

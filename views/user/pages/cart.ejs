@@ -34,7 +34,7 @@
                   <div class="discription_sec">
                      <p class="product_name"><%= list.productname %></p>
                      <div style="display: flex; gap: 1rem; align-items: center;">
-                        <select onclick="productQuantity(event)"  name="quantity" style="outline: none; padding: .3rem;">
+                        <select onclick="productQuantity(event)"  name="quantity" onchange="updateQuantity(event,'<%= list._id %>')" style="outline: none; padding: .3rem;">
                            <option value="">Qty:<%= (() => {
                                  const productIdObjectId = new ObjectId(list._id )
                                  const productquantity = cartQuantity.find(product => product.productId.equals(productIdObjectId));

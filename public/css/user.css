@@ -41,7 +41,9 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background-color: transparent;
 }
-
+.true{
+    color: green !important;
+}
 
 
 
@@ -2285,7 +2287,11 @@ word-wrap: break-word;
         margin: .4rem 0;
     }
     .success{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
         color: rgb(0, 203, 0);
+        font-size: .91rem;
+        margin: .4rem 0;
     }
     .top{
         display: flex;
@@ -2334,6 +2340,7 @@ word-wrap: break-word;
         opacity: 0;
         height: 2rem;
         width: 6rem;
+        bottom: .5rem;
     }
     .top_left{
         display: flex;
@@ -4157,6 +4164,16 @@ word-wrap: break-word;
         height: 100%;
         border-right: 1px solid rgba(145, 144, 144, 0.225);
     }
+    .true{
+        color: green;
+    }
+    .error_msg{
+        text-align: center;
+        font-family: 'Poppins',sans-serif;
+        color: red;
+        font-size: .91rem;
+        margin: .5rem 0;
+    }
     .checkout_right{
         display: flex;
         flex-direction: column;
@@ -4314,7 +4331,7 @@ word-wrap: break-word;
         border: 1px solid rgb(239, 40, 40);
     }
     .product_name{
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-family: 'roboto',sans-serif;
         font-weight: 700;
         margin: .3rem 0;
@@ -4445,6 +4462,16 @@ word-wrap: break-word;
         height: 3.3rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.077);
     }
+    .coupon_apply{
+        padding: .4rem .5rem;
+        font-size: .6rem;
+        border-radius: .1rem;
+        cursor: pointer;
+        border: none;
+        background-color: #052e44;
+        color: white;
+        font-family: 'Poppins',sans-serif;
+    }
     .coupon_input_frame input{
         width:60%;
         height: 73%;
@@ -4536,8 +4563,7 @@ word-wrap: break-word;
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* gap: .6rem; */
-        padding: .7rem 1rem;
+        padding: .3rem 1rem;
         width: 100%;
         height: 83%;
     }
@@ -4547,20 +4573,20 @@ word-wrap: break-word;
     }
     .adress_frame input{
         font-family: 'Poppins',sans-serif;
-        font-size: .8rem;
+        font-size: .75rem;
         padding-left: .6rem !important;
         outline: none;
-        height: 1.9rem;
+        height: 1.7rem;
         border: 1px solid rgba(0, 0, 0, 0.263);
     }
     .adress_text_area{
         font-family: 'Poppins',sans-serif;
-        font-size: .8rem;
-        height: 3rem;
+        font-size: .75rem;
+        height: 4.3rem;
         color: rgba(0, 0, 0, 0.864);
         width: 100%;
         outline: none;
-        padding-left: checkouts_frame_add_new_address1rem;
+        padding-left: .4rem;
         border: 1px solid rgba(0, 0, 0, 0.263);
         resize: none;
     }
@@ -4602,8 +4628,7 @@ word-wrap: break-word;
     }
 
     .add_new_btn{
-        height: 2.4rem !important;
-        margin: .8rem 0;
+        height: 2.3rem !important;
         width: 100% !important;
         background-color:rgb(4, 33, 24);
         color: white;
@@ -4615,7 +4640,28 @@ word-wrap: break-word;
         transform: scale(.95);
     }
     .checkouts_frame_bottom_adress{
+        overflow: scroll !important;
         width:20%;
+    }
+    .checkouts_frame_bottom_adress::-webkit-scrollbar {
+        width: 0em;
+      }
+      
+    .checkouts_frame_bottom_adress::-webkit-scrollbar-track {
+        background-color: transparent;
+       }
+    .checkouts_frame_bottom_adress::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+    .bi-check{
+        color: rgb(0, 142, 0);
+        font-size: 2rem;
+
+    }
+    .bi-x{
+        color: red;
+        font-size: 2rem;
+
     }
     .select_adress{
         width:100%;
@@ -4636,8 +4682,8 @@ word-wrap: break-word;
     }
     .select_adress_div label{
         padding-left: .3rem;
-        font-size: .77rem;
-        color: rgba(0, 0, 0, 0.71);
+        font-size: .72rem;
+        color: rgba(0, 0, 0, 0.694);
     }
 }
 
@@ -5104,6 +5150,7 @@ word-wrap: break-word;
         transform: scale(.95);
     }
     .checkouts_frame_bottom_adress{
+        overflow: scroll;
         width:20%;
     }
     .select_adress{
@@ -5247,6 +5294,16 @@ word-wrap: break-word;
     font-family: sans-serif;
     font-size: .9rem;
     font-weight: 400;
+}
+.bi-check{
+    color: rgb(0, 142, 0);
+    font-size: 2rem;
+
+}
+.bi-x{
+    color: red;
+    font-size: 2rem;
+
 }
 .new_price{
     font-family: sans-serif;
