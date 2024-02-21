@@ -16,12 +16,13 @@
                             <tr class="th_tr">
                             <th style="width: 3%;">SI</th>
                             <th style="width: 20%;">COUPON _ID</th>
-                            <th style="width: 12%;">COUPON NAME</th>
+                            <th style="width: 10%;">COUPON NAME</th>
+                            <th style="width: 8%;">MIN AMOUNT</th>
+                            <th style="width: 8%;">MAX AMOUNT</th>
                             <th style="width: 8%;">DISCOUNT</th>
-                            <th style="width: 10%;">MAX AMOUNT</th>
-                            <th style="width: 10%;">MIN AMOUNT</th>
                             <th style="width: 10%;">START DATE</th>
                             <th style="width: 10%;">END DATE</th>
+                            <th style="width: 10%;">AVAILABLE</th>
                             <th style="width: 6%;">EDIT</th>
                             <th style="width: 6%;">DELETE</th>
                         </tr>
@@ -33,11 +34,12 @@
                                 <td><%= index+1 %></td>
                                 <td><%= coupons._id %></td>
                                 <td><%= coupons.couponnname %></td>
-                                <td><%= coupons.discount + '%' %></td>
-                                <td><%= coupons.maxamount.toLocaleString() %></td>
                                 <td><%= coupons.minamount.toLocaleString() %></td>
+                                <td><%= coupons.maxamount.toLocaleString() %></td>
+                                <td style="color: rgb(0, 134, 0);"><%= coupons.discount + '%' %></td>
                                 <td style="font-size: .8rem;"><%= coupons.startdate.toDateString() %></td>
                                 <td style="font-size: .8rem;"><%= coupons.enddate.toDateString() %></td>
+                                <td style="font-size: .8rem;"><%= coupons.avalability %></td>
                                 <td><button class="edit_btn<%= coupons._id %>"><i class="bi bi-pencil-square"></i></button></td>
                                 <td><button class="delete_btn<%= coupons._id %>"><i class="bi bi-trash"></i></button></td>
                             </tr>

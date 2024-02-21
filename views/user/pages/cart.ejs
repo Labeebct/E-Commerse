@@ -29,33 +29,28 @@
 
          <% cartProducts.forEach((list) => { %>
 
-               <div class="product product<%= list._id %>" onclick="productOpen(event,'<%= list._id %>')">
-                  <div class="image_sec"><img src="<%= list.productimg[0] %>" style="width: 6rem; height: 7.2rem;" alt=""></div>
+               <div class="product product<%= list.productId._id %>" onclick="productOpen(event,'<%= list.productId._id %>')">
+                  <div class="image_sec"><img src="<%= list.productId.productimg[0] %>" style="width: 6rem; height: 7.2rem;" alt=""></div>
                   <div class="discription_sec">
-                     <p class="product_name"><%= list.productname %></p>
+                     <p class="product_name"><%= list.productId.productname %></p>
                      <div style="display: flex; gap: 1rem; align-items: center;">
-                        <select onclick="productQuantity(event)"  name="quantity" onchange="updateQuantity(event,'<%= list._id %>')" style="outline: none; padding: .3rem;">
-                           <option value="">Qty:<%= (() => {
-                                 const productIdObjectId = new ObjectId(list._id )
-                                 const productquantity = cartQuantity.find(product => product.productId.equals(productIdObjectId));
-                                 return productquantity.quantity
-                             })() %>
-                           </option>
+                        <select onclick="productQuantity(event)"  name="quantity" onchange="updateQuantity(event,'<%= list.productId._id %>')" style="outline: none; padding: .3rem;">
+                           <option value="<%= list.quantity %>">Qty:<%= list.quantity %></option>
                            <option value="1">Qty:1</option>
                            <option value="2">Qty:2</option>
                            <option value="3">Qty:3</option>
                            <option value="4">Qty:4</option>
                            <option value="5">Qty:5</option>
                         </select>
-                        <div class="stock_left"><%= list.stock %> Left</div>
+                        <div class="stock_left"><%= list.productId.stock %> Left</div>
                      </div>
                      <div style="display: flex; gap: .7rem; align-items: center;">
-                        <p class="old_price"><%= list.oldprice.toLocaleString() %></p>
-                        <p class="new_price"><%= list.newprice.toLocaleString() %></p>
-                        <p class="discount"><%= Math.round(100 - (list.newprice / list.oldprice * 100)) %>%</p>
+                        <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee"></i><p class="old_price"><%= list.productId.oldprice.toLocaleString() %></p></span>
+                        <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee"></i><p class="new_price new_price<%= list.productId._id %>"><%= list.quantity * list.productId.newprice.toLocaleString() %></p></span>
+                        <p class="discount"><%= Math.round(100 - (list.productId.newprice / list.productId.oldprice * 100)) %>%</p>
                      </div>
                      <p class="return_status">Return policy 
-                        <% if(list.returns) { %>
+                        <% if(list.productId.returns) { %>
                            <i class="bi bi-check"></i>
                            <% } else{ %>
                            <i class="bi bi-x"></i>
@@ -63,7 +58,7 @@
                      </p>
                   </div>
                   <div class="delete_section">
-                     <div style="margin-bottom: 1rem;"><button onclick="productRemove(event,'<%= list._id %>')"><i class="bi bi-trash"></i></button></div>
+                     <div style="margin-bottom: 1rem;"><button onclick="productRemove(event,'<%= list.productId._id %>')"><i class="bi bi-trash"></i></button></div>
                   </div>
                </div>
 
@@ -86,7 +81,7 @@
                   </div>
                   <div class="cart_details"> 
                      <p>GST</p>
-                     <p><i class="bi bi-currency-rupee"></i><span class="gst"><%= gst %></span></p>
+                     <p><i class="bi bi-currency-rupee"></i><span class="gst"><%= Math.round(gst) %></span></p>
                   </div>
                   <div class="cart_details"> 
                      <p>Delivery Charge</p>

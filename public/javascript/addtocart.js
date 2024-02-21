@@ -80,7 +80,7 @@ const addToCart = async(event,productId) => {
           cartTotalElement.innerHTML = cartTotal - result.deleteProductPrice;
 
           discount.innerHTML = Math.round((cartTotal-result.deleteProductPrice) / 30)
-          gst.innerHTML = (cartTotal-result.deleteProductPrice) / 1000
+          gst.innerHTML = Math.round((cartTotal-result.deleteProductPrice) / 1000)
 
           const discountValue = parseFloat(discount.innerHTML);
           const gstValue = parseFloat(gst.innerHTML)
@@ -107,5 +107,34 @@ const addToCart = async(event,productId) => {
 
 async function updateQuantity(event,productId){
     const quantity = event.target.value
+
+    const cartTotalElement = document.querySelector('.cart_total');
+    const cartTotaAmount = document.querySelector('.cartTotalAmount')
+    const discount = document.querySelector('.productDiscount')
+    const gst = document.querySelector('.gst')
+
+    const productPrice = document.querySelector(`.new_price${productId}`)
+    
     const response = await fetch(`/cart/increase_quantity?quantity=${quantity}&productId=${productId}`)
+    const result = await response.json()
+
+    const cartPriceParse = parseInt(cartTotalElement.innerHTML)
+    const currentPrice = parseInt(result.currentPrice)
+    const newPrice = parseInt(result.newPrice)
+
+    if(result.success){
+
+        const priceDiff = cartPriceParse - currentPrice + newPrice
+
+        cartTotalElement.innerHTML = priceDiff
+        productPrice.innerHTML = productPrice.innerHTML - currentPrice + newPrice
+
+        discount.innerHTML = Math.round( (priceDiff) * .05 )
+        gst.innerHTML = Math.round((priceDiff) * .01)
+
+        const discountValue = parseFloat(discount.innerHTML);
+        const gstValue = parseFloat(gst.innerHTML)
+
+        cartTotaAmount.innerHTML = Math.round((priceDiff - discountValue)+ gstValue)
+    }
 }

@@ -49,8 +49,7 @@ exports.getHome = async(req,res) => {
           ])
           const womensFootwear = await productModel.aggregate([
                {$match:{subcategory:'WOMENS FOOTWEAR'}}
-          ])
-          
+          ])  
           const mensPant = await productModel.aggregate([
                {$match:{subcategory:'MENS PANTS'}}
           ])
@@ -63,11 +62,9 @@ exports.getHome = async(req,res) => {
           const kidsToys = await productModel.aggregate([
                {$match:{subcategory:'KID TOYS'}}
           ])
-      
           const babyWipes = await productModel.aggregate([
                {$match:{subcategory:'BABY WIPES'}}
           ])
-      
           const mobiles = await productModel.aggregate([
                {$match:{subcategory:'MOBILES'}}
           ])
@@ -83,7 +80,6 @@ exports.getHome = async(req,res) => {
           const tv = await productModel.aggregate([
                {$match:{subcategory:'TV'}}
           ])
-
           const mensWatches = await productModel.aggregate([
                {$match:{subcategory:'MENS WATCHES'}}
           ])

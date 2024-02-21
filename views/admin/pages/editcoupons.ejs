@@ -20,6 +20,13 @@
                     <label for="discount">Discount</label>
                     <input type="number" value="<%= coupon.discount %>" name="discount">
 
+                    <label for="discount">Availability</label>
+                    <select style="height: 2.3rem; padding-left: .6rem;border: none;outline: none;" name="avalability" id="">
+                        <option value="<%= coupon.avalability %>"><%= coupon.avalability %></option>
+                        <option value="forallusers">FOR ALL USERS</option>
+                        <option value="limited">LIMITED</option>
+                    </select>
+
 
                     <label for="startdate">Start Date</label>
                     <input type="date" value="<%= coupon.startdate.toISOString().substring(0, 10) %>" name="startdate">

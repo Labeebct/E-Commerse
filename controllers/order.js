@@ -15,6 +15,9 @@ exports.getCheckout = async(req,res) => {
 
     try {
         
+        let cartTotal;
+        let cartPrice;
+
         const state = ''
         const userId = req.session.userId
 
@@ -23,15 +26,14 @@ exports.getCheckout = async(req,res) => {
         const productId = req.query.product
         const cartId = req.query.cart
 
+
         const cartExist = await cartModel.findOne({userId})
         const wishExist = await wishlistModel.findOne({userId})
         
-        const cartTotal = req.query.totalamount
         // Checking whether profile exist or not
         
         const profileExist = await profileModel.findOne({userId})
         const signupData = await signupModel.findById(userId)
-        const coupons = await couponModel.find()
 
         const cartQuantity = cartExist ? cartExist.products : []
 
@@ -39,24 +41,53 @@ exports.getCheckout = async(req,res) => {
                  
         if(!req.session.loggedin){
             return res.redirect('/login')
-        }
+        }     
 
-        if(!profileExist){
+        if(!profileExist){   
             return res.redirect('/account/address')
         }
         // checking cart or whixhlist exist for showing cart and wishlist count
 
+        const cart = await cartModel.find({userId}).populate('products.productId')
+        const cartProducts = cart ? cart[0].products : []
+
         if(productId){
           const findProduct = await productModel.findById(productId)
-          productArray.push(findProduct)
+
+          const productObj = {
+            productId: findProduct,
+            quantity:1,
+          }
+
+          const discount = Math.round(findProduct.newprice * .05) //calculating discount for product in cart
+          const gst = findProduct.newprice * .01
+          
+          cartTotal = Math.round(Number(findProduct.newprice - discount + gst))
+          cartPrice = findProduct.newprice
+
+          productArray.push(productObj)
         }
         else{   
-                   
-          const findCart = await cartModel.findById(cartId)
+          productArray = cartProducts
 
-          const productIds = findCart.products.map((product)=> product.productId) //looping cart database to get product id from cart products array
-          productArray = await productModel.find({_id:{$in:productIds}})  // finding product from product database that matching cart product product id
+         cartPrice = cartProducts.reduce((acc,item)=>{
+           return acc + (item.productId.newprice * item.quantity)
+        },0)
+
+        const discount = Math.round(cartPrice * .05) //calculating discount for product in cart
+        const gst = cartPrice * .01
+
+        cartTotal = Math.round(Number(cartPrice - discount + gst))
+    
         }
+
+        const coupons = await couponModel.find({
+            minamount:{ $lte: cartTotal},
+            maxamount:{$gte: cartTotal},
+            avalability:"forallusers",
+            startdate: { $lte: new Date() },
+            enddate: { $gte: new Date() } 
+        });
                
         res.render('user/pages/checkout'
         ,{
@@ -68,14 +99,15 @@ exports.getCheckout = async(req,res) => {
           signupData,
           cartQuantity,
           userAddress, 
-          coupons
+          coupons,
+          cartPrice,
         })
     
     } catch (error) {
         console.log('Error in order Summury get',error);
     }
 
-}
+}  
 
 
 
@@ -147,7 +179,6 @@ exports.selectAddress = async (req,res) =>{
 
     const userId = req.session.userId
     const addressId = req.query.addressId
-    console.log(addressId);
 
     const profileExist = await profileModel.findOne({userId})
 
@@ -163,7 +194,7 @@ exports.selectAddress = async (req,res) =>{
 
 exports.selectCoupon = async (req,res) =>{
     try {
-
+         
     const userId = req.session.userId
 
     const couponId = req.query.couponId
@@ -173,7 +204,7 @@ exports.selectCoupon = async (req,res) =>{
     const discount = findCoupon.discount
     const couponDiscountPrice = (subTotal*discount)/100
 
-    res.status(200).json({couponDiscountPrice,discount})
+    res.status(200).json({success:true,couponDiscountPrice,discount})
             
     } catch (error) {
         console.log('Error in select coupon');    

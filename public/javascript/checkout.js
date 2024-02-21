@@ -4,7 +4,7 @@ function checkoutFromProduct(product){
 
 function checkoutFromCart(cart){
     const totalPrice = document.querySelector('.cartTotalAmount').innerHTML
-    window.location.href = `/checkout?cart=${cart}&totalamount=${totalPrice}`
+    window.location.href = `/checkout?cart=${cart}`
 }
 
 
@@ -28,28 +28,46 @@ dropBtn.addEventListener('click',()=>{
 
 
 
-function deleteFromcheckout(event,productId,productprice){
+async function deleteFromcheckout(event,productId,productprice){
 
+    try {
+   
     event.stopPropagation()     
     event.preventDefault()
 
-    const deletePrice = Number(productprice)
+    const response = await fetch('/cart/remove',{
+        method:'DELETE',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({productId})
+    })
+
+    const result = await response.json()
+
+    if(result.success){
 
     const subTotal = document.querySelector('.sub_total')
     const orderTotal = document.querySelector('.order_total')
 
     const subTotalParse = parseFloat(subTotal.innerHTML)
     const orderTotalParse = parseFloat(orderTotal.innerHTML)
-    
-    const discount = Math.round(deletePrice / 30)
-    const gst = Math.round(deletePrice / 1000)
 
-    subTotal.innerHTML = (((subTotalParse - deletePrice) - gst) + discount)
-    
-    orderTotal.innerHTML = (((subTotalParse - deletePrice) - gst) + discount)
+    const cartPrice = Number(result.cartPrice)
 
     document.querySelector(`.product${productId}`).remove()
 
+
+    const discount = Math.round(cartPrice * .05) //calculating discount for product in cart
+    const gst = Math.round(cartPrice * .01 )
+
+    subTotal.innerHTML = ((cartPrice - discount) + gst )
+    orderTotal.innerHTML = ((cartPrice - discount) + gst )
+    }
+     
+    } catch (error) {
+            console.log('Error in remove checkout',error);
+    }
 }
 
 
@@ -150,10 +168,21 @@ async function selectAddress(addressId){
     }
  }
 
+
+ const couponUl = document.querySelector('.coupon_ul')
+const emptyCoupon = document.querySelector('.empty_coupon')
+
+if(couponUl.querySelectorAll('li').length === 0){
+    emptyCoupon.style.display = 'flex'
+}
+else{
+    emptyCoupon.style.display = 'none'
+}
+
  async function selectCoupon(couponId){
 
     try {
-     
+
         const coupon = document.querySelector('.coupon')
         const subTotal = document.querySelector('.sub_total')
         const orderTotal = document.querySelector('.order_total')
@@ -164,15 +193,59 @@ async function selectAddress(addressId){
 
         const response = await fetch(`/select_coupon?subTotal=${subTotalParse}&couponId=${couponId}`)
         const result = await response.json()
+        if(result.success){
 
         const {couponDiscountPrice , discount } =result
-        
+
+        if(document.querySelector(`.coupon_apply${couponId}`).innerText == 'APPLY'){
+
+        document.querySelector(`.coupon_apply${couponId}`).innerText = 'APPLIED'
+            
         coupon.innerHTML = `-<i class="bi bi-currency-rupee"></i>${Math.round(couponDiscountPrice)}`
         coupon.classList.add('true')
-
         orderTotal.innerHTML = orderTotalParse - Math.round(couponDiscountPrice)
+        }
+        else{
+            document.querySelector(`.coupon_apply${couponId}`).innerText = 'APPLY'
+
+            coupon.innerHTML = `Nill`
+            coupon.classList.remove('true')
+            orderTotal.innerHTML = orderTotalParse + Math.round(couponDiscountPrice)
+        }
+    }
         
     } catch (error) {
         console.log('Error selectCoupon',error);
     }
  }
+
+
+ 
+ async function updateQuantity(event,productId){
+
+    const quantity = event.target.value
+
+    const cartTotalElement = document.querySelector('.sub_total');
+    const cartTotaAmount = document.querySelector('.order_total')
+    const productNewPrice = document.querySelector(`.new_price${productId}`)
+
+    
+    const response = await fetch(`/cart/increase_quantity?quantity=${quantity}&productId=${productId}`)
+    const result = await response.json()
+
+    const cartPriceParse = parseInt(result.cartPrice)
+    const currentPrice = parseInt(result.currentPrice)
+    const newPrice = parseInt(result.newPrice)
+
+    const priceDiff = cartPriceParse - currentPrice + newPrice
+
+    if(result.success){
+ 
+        const discount = Math.round(Number(priceDiff * .05)) //calculating discount for product in cart
+        const gst = Math.round(Number(priceDiff * .01))
+
+        productNewPrice.innerHTML = newPrice
+        cartTotalElement.innerHTML = Math.round((priceDiff - discount) + gst)
+        cartTotaAmount.innerHTML = Math.round((priceDiff - discount) + gst)
+    }   
+}

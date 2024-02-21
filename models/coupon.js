@@ -19,6 +19,10 @@ const couponSchema = new Schema({
             type: Number,
             required: true
         },
+        avalability: {
+            type: String,
+            required: true
+        },
         startdate:{
             type:Date,
             required:true

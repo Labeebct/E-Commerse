@@ -2,7 +2,8 @@ const productModel = require('../models/products')
 const cartModel = require('../models/cart')
 const wishlistModel = require('../models/wishlist')
 const { ObjectId } = require('mongodb');
-const { Types } = require('mongoose')
+const { Types } = require('mongoose');
+const products = require('../models/products');
 
 
 
@@ -23,24 +24,19 @@ exports.getCart = async(req,res) => {
 
             if(cartExist){
 
-                const productIds = cartExist.products.map((product)=> product.productId) //looping cart database to get product id from cart products array
+            const cart = await cartModel.find({userId}).populate('products.productId')
 
-                const cartProducts = await productModel.find({_id:{$in:productIds}})  // finding product from product database that matching cart product product id
+            const cartProducts = cart ? cart[0].products : []
+            const cartQuantity = cartExist.products.length
+            const cartCount = cartExist.products.length
 
 
-               const cartPrice =  await productModel.aggregate([  //Grouping all produtc price in user cart
-                {$match:{_id:{$in:productIds}}},
-                {$group:{_id:null,cartPrice:{$sum:"$newprice"}}}
-              ]) 
+            const cartTotal = cartProducts.reduce((acc,item)=>{
+               return acc + (item.productId.newprice * item.quantity)
+            },0)
 
-        
-              const cartTotal = productIds.length > 0 ?  cartPrice[0].cartPrice : 0  // finding the cart total to sho in user cart
-
-              const cartQuantity = cartExist ? cartExist.products : []
-
-              const cartCount = cartExist.products.length
-              const discount = Math.round(cartTotal / 10) //calculating discount for product in cart
-              const gst = cartTotal / 1000
+            const discount = Math.round(cartTotal * .05) //calculating discount for product in cart
+            const gst = cartTotal * .01
 
               
               return res.render('user/pages/cart',{state , loggedIn:true , cartExist , cartQuantity , cartCount , cartProducts , cartTotal , discount ,gst ,ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
@@ -119,9 +115,21 @@ exports.postRemoveCart = async(req,res) => {
         const { productId } = req.body // Destructuring product id from req.body which is passed by usng fetch
         const userId = req.session.userId
 
-        const findProduct = await productModel.findById(productId)
-        const deleteProductPrice = findProduct.newprice
+        const cart = await cartModel.find({userId}).populate('products.productId')
 
+        const cartProducts = cart ? cart[0].products : []
+
+        const findProduct = cartProducts.find((products) => products.productId._id == productId)
+
+        if(!findProduct){
+            return
+        }
+
+        const deleteProductPrice = findProduct.productId.newprice * findProduct.quantity
+
+        const cartPrice = cartProducts.reduce((acc,item)=>{
+            return acc + (item.productId.newprice * item.quantity)
+         },0)-deleteProductPrice
 
         const removeProduct = await cartModel.updateOne({userId}, // removing the product from database using mongodb pull methode
           {$pull:{products:{productId}}
@@ -130,7 +138,7 @@ exports.postRemoveCart = async(req,res) => {
 
 
        if(removeProduct.modifiedCount > 0){
-        return res.status(200).json({success:true,productId,deleteProductPrice})
+        return res.status(200).json({success:true,productId,deleteProductPrice,cartPrice})
        }
         
     } catch (error) {
@@ -142,6 +150,10 @@ exports.postRemoveCart = async(req,res) => {
 exports.getIncreaseQuantity = async(req,res) =>{
     try {
         
+        let currentPrice;
+        let cartPrice;
+        let newPrice;
+
         const userId = req.session.userId
 
         const quantity = req.query.quantity
@@ -149,11 +161,37 @@ exports.getIncreaseQuantity = async(req,res) =>{
 
         const userObjId = new Types.ObjectId(userId)
         const productIdObj = new Types.ObjectId(productIdin)
+            
+        const cart = await cartModel.find({userId}).populate('products.productId')
 
+        const cartProducts = cart ? cart[0].products : []
+        
+        const findProduct = cartProducts.find((products) => products.productId._id == productIdin)
+        const findSingleProduct = await productModel.findOne({_id:productIdin})
+
+        if(!findProduct){
+            currentPrice = Number(findSingleProduct.newprice * 1)
+            newPrice = Number(findSingleProduct.newprice * quantity)
+            cartPrice = Number(findSingleProduct.newprice)
+        }
+        else{
+   
+        currentPrice = findProduct.productId.newprice * findProduct.quantity
+        
         await cartModel.updateOne(
             { userId:userObjId, "products.productId": productIdObj },
             { "products.$.quantity": quantity } 
-        );
+            );
+            
+        newPrice =  findProduct.productId.newprice * quantity
+            
+            cartPrice = cartProducts.reduce((acc,item)=>{
+                return acc + (item.productId.newprice * item.quantity)
+             },0)
+
+        }
+
+        res.status(200).json({success:true,currentPrice,newPrice,cartPrice})
 
     } catch (error) {
         console.log('Error in increase cart quantity',error);

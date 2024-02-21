@@ -1028,6 +1028,7 @@ exports.postAddcoupons = async(req,res) => {
     try {
 
         const {couponnname} = req.body
+        console.log(req.body);
 
         const couponExist = await couponModel.findOne({couponnname})
 
