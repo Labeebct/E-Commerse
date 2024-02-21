@@ -37,7 +37,7 @@ exports.getCheckout = async(req,res) => {
 
         const cartQuantity = cartExist ? cartExist.products : []
 
-        const userAddress = profileExist.newadress
+        const userAddress = profileExist? profileExist.newadress : []
                  
         if(!req.session.loggedin){
             return res.redirect('/login')
@@ -88,6 +88,7 @@ exports.getCheckout = async(req,res) => {
             startdate: { $lte: new Date() },
             enddate: { $gte: new Date() } 
         });
+
                
         res.render('user/pages/checkout'
         ,{
@@ -112,40 +113,23 @@ exports.getCheckout = async(req,res) => {
 
 
 
-exports.getOrderSummary = async(req,res) => {
 
-    try {
-        
-        const state = ''
-        const userId = req.session.userId
+exports.postCheckout = (req,res) => {
+  try {
 
-        // checking cart or whixhlist exist for showing cart and wishlist count
+    const { order } = req.body
+    console.log(order);
     
-        const cartExist = await cartModel.findOne({userId})
-        const wishExist = await wishlistModel.findOne({userId})
-
-
-       
-         res.render('user/pages/ordersummary',{state,ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
-    
-    } catch (error) {
-        console.log('Error in order Summury get',error);
-    }
-
+  } catch (error) {
+    console.log('Error in post checkout');
+  }
 }
 
+    
 
 
-exports.deleteCheckout = () =>{
-    try {
+     
 
-
-
-        
-    } catch (error) {
-        console.log('Error in delete from checkout',error.message);
-    }
-}
 
 exports.postAddnewadress = async(req,res) =>{
     try {
@@ -192,7 +176,7 @@ exports.selectAddress = async (req,res) =>{
 }
 
 
-exports.selectCoupon = async (req,res) =>{
+exports.applyCoupon = async (req,res) =>{
     try {
          
     const userId = req.session.userId
@@ -205,6 +189,33 @@ exports.selectCoupon = async (req,res) =>{
     const couponDiscountPrice = (subTotal*discount)/100
 
     res.status(200).json({success:true,couponDiscountPrice,discount})
+            
+    } catch (error) {
+        console.log('Error in select coupon');    
+    }
+}
+
+
+exports.selectCoupon = async (req,res) =>{
+    try {
+         
+    const userId = req.session.userId
+
+    const coponCode = req.query.coponCode
+    const subTotal = req.query.subTotal
+
+    const coupon = await couponModel.findOne({
+        couponnname: coponCode,
+        avalability:"limited",
+        minamount:{ $lte: subTotal},
+        startdate: { $lte: new Date() },
+        enddate: { $gte: new Date() } 
+    })
+
+    const discount = coupon ? coupon.discount : 0
+    const couponDiscountPrice = (subTotal*discount)/100
+
+    res.status(200).json({coupon,couponDiscountPrice})
             
     } catch (error) {
         console.log('Error in select coupon');    

@@ -117,22 +117,22 @@ router.get('/cart/increase_quantity',cartController.getIncreaseQuantity)
 
 
 
-// ORDER
+// ORDER    
 
-router.post('/cart/add_coupon/:id')
 
 router.get('/checkout',orderController.getCheckout)
-router.delete('/checkout/delete_product',orderController.deleteCheckout)
+router.post('/checkout',orderController.postCheckout)
+
 router.post('/checkout/add_new_adress',orderController.postAddnewadress)
 
 router.get('/select_address',orderController.selectAddress)
+router.get('/apply_coupon',orderController.applyCoupon)
+
 router.get('/select_coupon',orderController.selectCoupon)
 
-router.post('/checkout/payment_method')
-
-router.get('/order_summary',orderController.getOrderSummary)
+  
     
-
+   
 
     
 

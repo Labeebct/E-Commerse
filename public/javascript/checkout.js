@@ -179,7 +179,8 @@ else{
     emptyCoupon.style.display = 'none'
 }
 
- async function selectCoupon(couponId){
+
+ async function applyCoupon(couponId){
 
     try {
 
@@ -191,7 +192,7 @@ else{
         const subTotalParse = parseFloat(subTotal.innerHTML)
         const orderTotalParse = parseFloat(orderTotal.innerHTML)
 
-        const response = await fetch(`/select_coupon?subTotal=${subTotalParse}&couponId=${couponId}`)
+        const response = await fetch(`/apply_coupon?subTotal=${subTotalParse}&couponId=${couponId}`)
         const result = await response.json()
         if(result.success){
 
@@ -216,6 +217,59 @@ else{
         
     } catch (error) {
         console.log('Error selectCoupon',error);
+    }
+ }
+
+
+
+ async function selectCoupon(){
+    try {
+
+        const couponCode = document.querySelector('.coupon_input')
+
+        const coupon = document.querySelector('.coupon')
+        const orderTotal = document.querySelector('.order_total')
+        const subTotal = document.querySelector('.sub_total')
+
+        const orderTotalParse = parseFloat(orderTotal.innerHTML)
+        const subTotalParse = parseFloat(subTotal.innerHTML)
+
+
+        const response = await fetch(`/select_coupon?subTotal=${subTotalParse}&coponCode=${couponCode.value}`)
+        const result = await response.json()
+
+        if(!result.coupon){
+            couponCode.value = 'Invalid Coupon'
+            couponCode.classList.add('no_coupon')
+            setTimeout(() => {
+                couponCode.value = ''
+                couponCode.classList.remove('no_coupon')
+            }, 2000);
+        }
+        else{
+
+            const { couponDiscountPrice } = result
+
+            const selectBtn = document.querySelector('.coupon_check_btn')
+
+         if(selectBtn.innerText ==='SELECT'){
+
+            selectBtn.innerText = 'SELECTED'
+            coupon.innerHTML = `-<i class="bi bi-currency-rupee"></i>${Math.round(couponDiscountPrice)}`
+            coupon.classList.add('true')
+            orderTotal.innerHTML = orderTotalParse - Math.round(couponDiscountPrice)
+            }
+         else{
+            selectBtn.innerText = 'SELECT'
+
+            coupon.innerHTML = `Nill`
+            coupon.classList.remove('true')
+            orderTotal.innerHTML = orderTotalParse + Math.round(couponDiscountPrice)
+         }
+
+    }
+    } catch (error) {
+        console.log('Error in select coupon',error);
     }
  }
 
@@ -248,4 +302,133 @@ else{
         cartTotalElement.innerHTML = Math.round((priceDiff - discount) + gst)
         cartTotaAmount.innerHTML = Math.round((priceDiff - discount) + gst)
     }   
+}
+
+
+
+
+
+// ===================== CHECKOUT ========================
+
+const productArray = JSON.parse(document.querySelector('.productsArray').innerHTML)
+
+
+const order ={
+    paymentmethode:null,
+    address:null,
+    totalamount:null,
+    products:[]
+}
+
+
+productArray.forEach((product)=>{
+
+    let products = {
+        productId : product.productId._id,
+        quantity: product.quantity,
+        size: null
+    }
+
+    order.products.push(products)
+})
+
+
+
+function selectSize(event, size, index , productId) {
+    event.preventDefault()
+    event.stopPropagation();
+
+    const label = document.querySelector('.label' + productId + index )
+    const alllabel = document.querySelectorAll('.label' + productId)
+    const inputCheck = document.querySelector('.radio' + productId + index );
+    
+    alllabel.forEach((label)=>{
+        label.style.backgroundColor = '#152d35ea'
+    })
+
+    if (!inputCheck.checked) {
+        label.style.backgroundColor = 'rgba(255, 0, 0, 0.886)';
+    }
+    
+    const findProduct = order.products.find((pro)=> pro.productId == productId)
+
+    findProduct.size = size
+}
+
+
+
+function selectQuantity(event,productId) {
+    
+    event.stopPropagation();  
+    const productQuantity = event.target.value
+    
+    const findProduct = order.products.find((pro)=> pro.productId == productId)
+    
+    findProduct.quantity = Number(productQuantity)
+
+}
+
+
+
+const payment = document.querySelectorAll('.payment')
+payment.forEach((item)=>{
+
+     item.addEventListener('click',(e)=>{
+        const paymentMethode = e.target.value
+
+        order.paymentmethode = paymentMethode
+
+    })
+})
+
+
+
+const address = document.querySelectorAll('.address')
+address.forEach((item)=>{
+
+     item.addEventListener('click',(e)=>{
+        const address = e.target.value
+
+        order.address = address
+
+    })
+})
+
+
+
+
+async function proceed(event,addressId){
+    try {
+        
+        const errMsg = document.querySelector('.er_msg')
+        const orderTotal = document.querySelector('.order_total').innerHTML
+        
+        order.totalamount = Number(orderTotal)
+        
+        if(!order.paymentmethode){
+            errMsg.innerHTML = 'Please Choose a payment Method'
+            setTimeout(() => {
+                errMsg.innerHTML = ''
+            }, 2000);
+        }
+        else if(!order.address){
+            order.address = addressId
+        }
+        else{
+            const response = await fetch('/checkout',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify({order})
+            })
+            
+            console.log(response);
+        }
+
+        
+        
+    } catch (error) {
+        console.log('Error in proceed to order summary',error);
+    }
 }

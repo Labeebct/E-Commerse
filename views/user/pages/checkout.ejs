@@ -10,6 +10,8 @@
 
                 <div class="checkout_left_top">
 
+                    <div class="productsArray" style="display: none;"><%- JSON.stringify(productArray) %></div>
+
                 <% productArray.forEach((list)=>{ %>
 
                     <div class="product product<%= list.productId._id %>" onclick="productOpen(event,'<%= list.productId._id %>')">
@@ -17,7 +19,7 @@
                         <div class="discription_sec">
                            <p class="product_name"><%= list.productId.productname %></p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;" onclick="selectQuantity(event)" onchange="updateQuantity(event,'<%= list.productId._id %>')" >
+                              <select name="quantity"  class="quantity<%= list._id %>" style="outline: none; padding: .3rem;" onclick="selectQuantity(event,'<%= list.productId._id %>')" onchange="updateQuantity(event,'<%= list.productId._id %>')" >
                                 <option value="<%= list.quantity %>">Qty:<%= list.quantity %></option>
                                  <option value="1">Qty:1</option>
                                  <option value="2">Qty:2</option>
@@ -37,14 +39,14 @@
                             <div class="size_li">
                                 <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
 
-                                <% list.productId.size.forEach((size) => { %>
+                                <% list.productId.size.forEach((size,index) => { %>
 
-                                    <span class="label_span"onclick="selectSize(event)">
-                                    <input id="<%= size %>" value="<%= size %>" class="size" name="size" type="radio" >
-                                    <label for="<%= size %>" ><%= size %></label>
+                                    <span class="label_span" onclick="selectSize(event,'<%= size %>','<%= index %>','<%= list.productId._id %>')">
+                                    <input id="label<%= list.productId._id %><%= index %>" class="radio<%= list.productId._id %><%= index %>"  value="<%= size %>" name="size" type="radio" >
+                                    <label for="label<%= list.productId._id %><%= index %>" class="label<%= list.productId._id %> label<%= list.productId._id %><%= index %>" ><%= size %></label>
                                     </span>
                                     
-                                    <% }) %>
+                                <% }) %>
                                         
                             </div>
 
@@ -54,11 +56,11 @@
                      <div class="color_li">
                          <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
 
-                            <% list.productId.color.forEach((color) => { %>
+                            <% list.productId.color.forEach((color,index) => { %>
 
                            <span style="background-color:<%= color %>" class="label_span_color" onclick="selectColor(event)" >
-                              <input  id="<%= color %>" name="color" value="<%= color %>" type="radio" >
-                              <label for="<%= color %>" ></label>
+                              <input  id="<%= index %>" name="color" value="<%= color %>" type="radio" >
+                              <label for="<%= index %>" ></label>
                            </span>
 
                            <% }) %>
@@ -93,9 +95,9 @@
                 <div class="checkout_left_bottom">
                     <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_payment">
                         <h3>PAYMENT METHODE</h3>
-                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/upi.png" alt=""></div><label for="upi">UPI</label><input id="upi" name="payment" type="radio"></div>
-                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/card.png" alt=""></div><label for="card">CARD</label><input id="card" name="payment" type="radio"></div>
-                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/cashon delivery.png" alt=""></div><label for="cashondelivery">CASH ON DELIVERY</label><input id="cashondelivery" name="payment" type="radio"></div>
+                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/upi.png" alt=""></div><label for="upi">UPI</label><input id="upi" value="upi" name="payment" class="payment" type="radio"></div>
+                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/card.png" alt=""></div><label for="card">CARD</label><input id="card" name="payment" value="card" class="payment" type="radio"></div>
+                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/cashon delivery.png" alt=""></div><label for="cashondelivery">CASH ON DELIVERY</label><input id="cashondelivery" value="cashondelivery" name="payment" class="payment" type="radio"></div>
                     </div>
 
 
@@ -104,19 +106,19 @@
                         
                             <div class="coupon_input_frame">
                                 <img src="/images/coupon.png" style="height: 3rem;" alt="">
-                                <input type="text" placeholder="Apply Coupon">
-                                <button class="coupon_check_btn">SELECT</button>
+                                <input type="text" class="coupon_input" placeholder="Apply Coupon">
+                                <button class="coupon_check_btn" onclick="selectCoupon()">SELECT</button>
                             </div>
 
                         <ul class="coupon_ul">
                             
-                            <div class="empty_coupon"><p class="no_coupon_p">No Coupon Available</p></div>
+                            <div class="empty_coupon"><p class="no_coupon_p">No Coupon Available for this Purchas</p></div>
 
                             <% coupons.forEach((coupon)=>{ %>
 
                             <li><%= coupon.couponnname %><p style="font-size: .7rem;">For purchase Between <i class="bi bi-currency-rupee"></i><%= coupon.minamount.toLocaleString() %>-<i class="bi bi-currency-rupee"></i><%= coupon.maxamount.toLocaleString() %></p>
                                 <span style="color: rgb(0, 152, 0); font-family: 'Poppins',sans-serif;"><%= coupon.discount %>%</span>
-                                <span style="margin-right: 1rem;"><button class="coupon_apply coupon_apply<%= coupon._id %>" onclick="selectCoupon('<%= coupon._id %>')">APPLY</button></span>
+                                <span style="margin-right: 1rem;"><button class="coupon_apply coupon_apply<%= coupon._id %>" onclick="applyCoupon('<%= coupon._id %>')">APPLY</button></span>
                             </li>
 
                             <% }) %>
@@ -126,7 +128,7 @@
                     <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_adress">
                         <h3>SELECT ADDRESS</h3>
                         <% userAddress.forEach((address,index)=>{ %>
-                            <div class="payment_divs select_adress_div"><input id="add<%= index %>" name="payment" type="radio" onclick="selectAddress('<%- address._id %>')"><label for="add<%= index %>"><%= address.address %></label></div>
+                            <div class="payment_divs select_adress_div"><input id="add<%= index %>" value="<%= address._id %>" class="address" name="payment" type="radio" onclick="selectAddress('<%- address._id %>')"><label for="add<%= index %>"><%= address.address %></label></div>
                         <% }) %>
 
                     </div>
@@ -250,7 +252,8 @@
                         <p>Shipping <span style="color: rgb(0, 160, 0);">FREE</span></p>
                         <p>Coupon <span class="coupon">Nill</span></p>
                         <p>Order Total <span><i class="bi bi-currency-rupee"></i><span class="order_total"><%= cartTotal %></span></span></p>
-                        <button onclick="location.href='/order_summary' " class="proceed_btn">PROCEED</button>
+                        <span><p class="er_msg"></p></span>
+                        <button onclick="proceed(event,'<%= userAddress[0]._id %>')" class="proceed_btn">PROCEED</button>
                     </div>
                 </div>
             </div>
