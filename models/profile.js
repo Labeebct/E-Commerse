@@ -30,10 +30,6 @@ const addressSchema = new Schema({
    address:{
       type: String,
       required: true
-   }, 
-   landmark: {
-      type: String,
-      required: true
    },
    zip: {
       type: String,

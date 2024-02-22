@@ -11,6 +11,7 @@
                 <div class="checkout_left_top">
 
                     <div class="productsArray" style="display: none;"><%- JSON.stringify(productArray) %></div>
+                    <div class="defaultaddress" style="display: none;"><%- JSON.stringify(userAddress[0]._id) %></div>
 
                 <% productArray.forEach((list)=>{ %>
 
@@ -128,7 +129,9 @@
                     <div class="checkouts_frame_bottom_frame checkouts_frame_bottom_adress">
                         <h3>SELECT ADDRESS</h3>
                         <% userAddress.forEach((address,index)=>{ %>
-                            <div class="payment_divs select_adress_div"><input id="add<%= index %>" value="<%= address._id %>" class="address" name="payment" type="radio" onclick="selectAddress('<%- address._id %>')"><label for="add<%= index %>"><%= address.address %></label></div>
+                            <div class="payment_divs select_adress_div">
+                                <input id="add<%= index %>"  class="address" name="address" type="radio" onclick="selectAddress('<%= address._id %>')"><label for="add<%= index %>"><%= address.address %></label>
+                            </div>
                         <% }) %>
 
                     </div>
@@ -139,6 +142,7 @@
             <div class="checkout_right">
                 <div class="checkouts_frame checkout_adress_frame" style="pointer-events: none;">
                     <h3>ADDRESS</h3>
+                      
                     <div class="adress_frame">
 
                         <div style="display: flex;justify-content: space-between; width: 100%;">

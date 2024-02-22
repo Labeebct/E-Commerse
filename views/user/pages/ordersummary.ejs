@@ -9,322 +9,63 @@
 
                 <div class="checkout_left_top">
 
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 11rem;" alt=""></div>
+                  <% orderProductDetails.forEach((list)=>{ %>
+
+                    <div class="product" style="pointer-events: none;">
+                        <div class="image_sec"><img src="<%= list.productId.productimg[0] %>" style="width: 11rem;" alt=""></div>
                         <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
+                           <p class="product_name"><%= list.productId.productname %></p>
                            <div style="display: flex; gap: 1rem; align-items: center;">
                               <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
+                                <option value=""> Qty:<%= list.quantity %></option>
                               </select>
-                              <div class="stock_left">4 LEFT</div>
+                              <div class="stock_left"><%= list.productId.stock %> LEFT</div>
                            </div>
                            <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
+                              <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee" style="color: red; font-size: .7rem;"></i><p class="old_price"><%= list.productId.oldprice.toLocaleString() %></p></span>
+                              <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee"></i><p class="new_price new_price<%= list.productId._id %>"><%= list.quantity * list.productId.newprice.toLocaleString() %></p></span>
+                              <p class="discount"><%= Math.round(100 - (list.productId.newprice / list.productId.oldprice * 100)) %>%</p>
+                             </div>
 
                         <div class="color_size">
+                       <% if(list.size){ %>
                             <div class="size_li">
                                 <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
+               
                                 <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
+                                 <input id="<%= list.size %>" value="<%= list.size %>" name="size" type="radio" >
+                                <label><%= list.size %></label>
                                 </span>
                                         
                             </div>
-
+                       <% } %>
                             <!-- ------------------------------------- -->
 
+                <% if(list.color){ %>
                             
                      <div class="color_li">
                          <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
+                           <span style="background-color:<%= list.color %> ;" class="label_span_color">
+                              <input  id="<%= list.color %>" name="<%= list.color %>" value="<%= list.color %>" type="radio" >
+                              <label></label>
                             </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
                      </div>
 
+                     <% } %>
+
                            </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
+                           <div style="display: flex; align-items: center; font-family: 'sans-serif'; ">Return
+                              <% if(list.productId.returns) { %>
+                                 <i class="bi bi-check"></i>
+                                 <% } else{ %>
+                                 <i class="bi bi-x"></i>
+                                 <% } %>
+                           </div>
                         </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 11rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
 
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
-                            </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
                      </div>
 
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 11rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
-
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
-                            </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
-                     </div>
-
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 11rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
-
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
-                            </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
-                     </div>
-
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-                    <div class="product">
-                        <div class="image_sec"><img src="/products-img/06-02-11-47-28-717a7hlTgNL._SL1500_.jpg" style="width: 11rem;" alt=""></div>
-                        <div class="discription_sec">
-                           <p class="product_name">Iphone 15 pro</p>
-                           <div style="display: flex; gap: 1rem; align-items: center;">
-                              <select name="quantity" style="outline: none; padding: .3rem;">
-                                 <option value="1">Qty:1</option>
-                                 <option value="2">Qty:2</option>
-                                 <option value="3">Qty:3</option>
-                                 <option value="4">Qty:4</option>
-                                 <option value="5">Qty:5</option>
-                              </select>
-                              <div class="stock_left">4 LEFT</div>
-                           </div>
-                           <div style="display: flex; gap: .7rem; align-items: center;">
-                              <p class="old_price">13,343</p>
-                              <p class="new_price">12,324</p>
-                              <p class="discount"></p>
-                           </div>
-
-                        <div class="color_size">
-                            <div class="size_li">
-                                <p style="font-family: 'Poppins',sans-serif; font-weight: 500;font-size: .98rem; color: black;">SIZE :</p>
-                
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                <span class="label_span">
-                                 <input id="S" value="S" name="size" type="radio" >
-                                <label for="S" >S</label>
-                                </span>
-                                        
-                            </div>
-
-                            <!-- ------------------------------------- -->
-
-                            
-                     <div class="color_li">
-                         <p style="font-family: 'Poppins',sans-serif;color: black;font-size: .93rem;">COLOR :</p>
-
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           <span  class="label_span_color">
-                              <input  id="" name="color" value="" type="radio" >
-                              <label for="" ></label>
-                            </span>
-                           
-                     </div>
-
-                           </div>
-
-
-
-
-                           <p class="return_status">Return policy</p>
-                        </div>
-                        <div class="delete_section">
-                           <div style="margin-bottom: 1rem;"><button><i class="bi bi-x-circle"></i></button></div>
-                        </div>
-                     </div>
-
+                 <% }) %>
 
                 </div>
 
@@ -336,28 +77,32 @@
             <div class="checkout_right">
                 <div class="checkouts_frame checkout_adress_frame">
                     <h3>ADDRESS</h3>
-                    <p>India</p>
-                    <p>Kerala</p>
-                    <p>Malappuram</p>
+                    <p><%= address.firstname + ' ' + address.lastname  %></p>
+                    <p><%= address.mobilenum %></p>
+                    <div style="display: flex; gap: .2rem;">
+                     <p><%= address.country %></p>
+                     <p><%= address.state %></p>
+                     <p><%= address.district %></p>
+                  </div>
+                    <p><%= address.zip %></p>
                     <p>
-                        thaliyil(h)
-                        thaliyil(h)
+                       <%= address.address %>
                     </p>
                 </div>
 
                 <div class="checkouts_frame checkout_payment_methode">
                     <h3>PAYMENT METHODE</h3>
-                    <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/upi.png" alt=""></div><label for="upi">UPI</label><input id="upi" name="payment" type="radio"></div>
+                    <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/<%= paymentMethode %>.png" alt=""></div><label for="<%= paymentMethode %>"><%= paymentMethode %></label><input id="<%= paymentMethode %>" name="payment" checked type="radio"></div>
                 </div>
 
       <div class="checkouts_frame checkout_total_price">
          <h3>SUMMARY</h3>
          <div class="summary_frame">
-            <p>Subtotal <span><i class="bi bi-currency-rupee"></i>32,999</span></p>
+            <p>Subtotal <span><i class="bi bi-currency-rupee"></i><%= cartTotal %></span></p>
                 <p>Shipping <span style="color: rgb(0, 160, 0);">FREE</span></p>
-                <p>Coupon <span>Nill</span></p>
-                <p>Order Total <span><i class="bi bi-currency-rupee"></i>12,3234</span></p>
-                <button class="proceed_btn">PROCEED TO PAY</button>
+                <p>Coupon <span><%= couponDiscount? '-'+ couponDiscount : 'Nill' %></span></p>
+                <p>Order Total <span><i class="bi bi-currency-rupee"></i><%= orderTotal %></span></p>
+                <button class="proceed_btn" onclick="window.location.href = '/proceed_to_pay' ">PROCEED TO PAY</button>
                     </div>
                 </div>
             </div>

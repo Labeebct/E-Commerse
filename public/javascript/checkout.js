@@ -1,3 +1,13 @@
+const order ={
+    totalamount:null,
+    paymentmethode:null,
+    address:null,
+    coupon:null,
+    products:[]
+}
+
+
+
 function checkoutFromProduct(product){
     window.location.href = `/checkout?product=${product}`
 }
@@ -138,35 +148,12 @@ async function addNewAddress(){
         const addressDiv = document.createElement('div')
         addressDiv.classList.add('payment_divs')
         addressDiv.classList.add('select_adress_div')
-        addressDiv.innerHTML += `<input id=add${result.arrayLength+1} name="payment" type="radio" onclick="selectAddress('${result.latestAddress._id}')"><label for="add${result.arrayLength+1}">${address}</label>`;
+        addressDiv.innerHTML += `<input id=add${result.arrayLength+1} name="address" type="radio" onclick="selectAddress('${result.latestAddress._id}')"><label for="add${result.arrayLength+1}">${address}</label>`;
         newAddress.appendChild(addressDiv)
     }
 }
 }
 
-async function selectAddress(addressId){
-   
-    try {
-        
-        const response = await fetch(`/select_address?addressId=${addressId}`)
-        const result = await response.json()
-   
-        const { firstname,lastname,mobilenum,country,state,district,zip,address } = result.address
-
-        document.getElementsByName('firstname')[0].value = firstname
-        document.getElementsByName('mobilenum')[0].value = mobilenum
-        document.getElementsByName('lastname')[0].value = lastname
-        document.getElementsByName('country')[0].value = country
-        document.getElementsByName('state')[0].value = state
-        document.getElementsByName('district')[0].value = district
-        document.getElementsByName('zip')[0].value = zip
-        document.getElementsByName('address')[0].value = address
-
-
-    } catch (error) {
-        console.log('Error in selectAddress',error);
-    }
- }
 
 
  const couponUl = document.querySelector('.coupon_ul')
@@ -205,6 +192,7 @@ else{
         coupon.innerHTML = `-<i class="bi bi-currency-rupee"></i>${Math.round(couponDiscountPrice)}`
         coupon.classList.add('true')
         orderTotal.innerHTML = orderTotalParse - Math.round(couponDiscountPrice)
+        order.coupon = Math.round(couponDiscountPrice)
         }
         else{
             document.querySelector(`.coupon_apply${couponId}`).innerText = 'APPLY'
@@ -212,6 +200,7 @@ else{
             coupon.innerHTML = `Nill`
             coupon.classList.remove('true')
             orderTotal.innerHTML = orderTotalParse + Math.round(couponDiscountPrice)
+            order.coupon = null
         }
     }
         
@@ -258,6 +247,7 @@ else{
             coupon.innerHTML = `-<i class="bi bi-currency-rupee"></i>${Math.round(couponDiscountPrice)}`
             coupon.classList.add('true')
             orderTotal.innerHTML = orderTotalParse - Math.round(couponDiscountPrice)
+            order.coupon = Math.round(couponDiscountPrice)
             }
          else{
             selectBtn.innerText = 'SELECT'
@@ -265,6 +255,7 @@ else{
             coupon.innerHTML = `Nill`
             coupon.classList.remove('true')
             orderTotal.innerHTML = orderTotalParse + Math.round(couponDiscountPrice)
+            order.coupon = null
          }
 
     }
@@ -311,22 +302,24 @@ else{
 // ===================== CHECKOUT ========================
 
 const productArray = JSON.parse(document.querySelector('.productsArray').innerHTML)
+const defaultAddressId = JSON.parse(document.querySelector('.defaultaddress').innerHTML)
 
-
-const order ={
-    paymentmethode:null,
-    address:null,
-    totalamount:null,
-    products:[]
-}
 
 
 productArray.forEach((product)=>{
 
+    const productAmount = Number(product.quantity * product.productId.newprice)
+
     let products = {
         productId : product.productId._id,
+        category: product.productId.category,
         quantity: product.quantity,
-        size: null
+        color: product.productId.color[0],
+        size: null,
+        shipping_adress: defaultAddressId,
+        payment_methode:null,
+        amount: productAmount,
+        order_date: new Date()
     }
 
     order.products.push(products)
@@ -351,7 +344,6 @@ function selectSize(event, size, index , productId) {
     }
     
     const findProduct = order.products.find((pro)=> pro.productId == productId)
-
     findProduct.size = size
 }
 
@@ -373,26 +365,50 @@ function selectQuantity(event,productId) {
 const payment = document.querySelectorAll('.payment')
 payment.forEach((item)=>{
 
-     item.addEventListener('click',(e)=>{
-        const paymentMethode = e.target.value
+    item.addEventListener('click',(e)=>{
+     const paymentMethode = e.target.value
 
-        order.paymentmethode = paymentMethode
-
+    order.products.forEach((pro)=>{
+         pro.payment_methode = paymentMethode
     })
-})
+    order.paymentmethode = paymentMethode
+
+ })
+})        
 
 
 
-const address = document.querySelectorAll('.address')
-address.forEach((item)=>{
 
-     item.addEventListener('click',(e)=>{
-        const address = e.target.value
 
-        order.address = address
+async function selectAddress(addressId){
+   
+    try {
+        
+        const response = await fetch(`/select_address?addressId=${addressId}`)
+        const result = await response.json()
+   
+        const { firstname,lastname,mobilenum,country,state,district,zip,address } = result.address
 
-    })
-})
+        document.getElementsByName('firstname')[0].value = firstname
+        document.getElementsByName('mobilenum')[0].value = mobilenum
+        document.getElementsByName('lastname')[0].value = lastname
+        document.getElementsByName('country')[0].value = country
+        document.getElementsByName('state')[0].value = state
+        document.getElementsByName('district')[0].value = district
+        document.getElementsByName('zip')[0].value = zip
+        document.getElementsByName('address')[0].value = address
+
+        order.products.forEach((pro)=>{
+            pro.shipping_adress = addressId
+       })
+
+       order.address = addressId
+
+    } catch (error) {
+        console.log('Error in selectAddress',error);
+    }
+ }
+
 
 
 
@@ -415,6 +431,7 @@ async function proceed(event,addressId){
             order.address = addressId
         }
         else{
+            
             const response = await fetch('/checkout',{
                 method:'POST',
                 headers:{
@@ -423,7 +440,12 @@ async function proceed(event,addressId){
                 body:JSON.stringify({order})
             })
             
-            console.log(response);
+            const result = await response.json()
+
+            if(result.success){
+                window.location.href = '/summary'
+            }
+
         }
 
         

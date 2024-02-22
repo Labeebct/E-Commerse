@@ -4741,6 +4741,16 @@ word-wrap: break-word;
     .checkout_left_top::-webkit-scrollbar {
         width: 0em;
       }
+      .bi-check{
+        color: rgb(0, 142, 0);
+        font-size: 2rem;
+    
+    }
+    .bi-x{
+        color: red;
+        font-size: 2rem;
+    
+    }
       
     .checkout_left_top::-webkit-scrollbar-track {
         background-color: transparent;
@@ -4825,7 +4835,7 @@ word-wrap: break-word;
         height: 19rem;
         width: 100%;
         cursor: pointer;
-        border-bottom: 1px solid rgba(145, 144, 144, 0.225);
+        border-bottom: 2px solid rgba(145, 144, 144, 0.242);
     }
     .image_sec{
       display: flex;
@@ -4945,11 +4955,6 @@ word-wrap: break-word;
     .label_span:active{
         transform: scale(.93);
     }
-    .size_li input[type=radio]:checked + label{
-        background-color: #fa4a04;
-        color: white;
-        border: none;
-    }
     .color_li{
         display: flex;
         gap: .6rem;
@@ -5056,7 +5061,7 @@ word-wrap: break-word;
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 100%;
+        width: 98%;
         height: 74%;
     }
     .summary_frame p{
@@ -5071,14 +5076,14 @@ word-wrap: break-word;
         height: 2.3rem;
     }
     .proceed_btn{
-        width: 90%;
-        margin-top: .3rem;
+        width: 92%;
+        margin-top: 1rem;
         cursor: pointer;
         border: none;
         font-family: 'Poppins',sans-serif;
         color: rgba(255, 255, 255, 0.864);
         font-size: .9rem;
-        border-radius: .2rem;
+        border-radius: .1rem;
         font-weight: 600;
         letter-spacing: .06rem;
         font-size: .99rem;
@@ -5122,7 +5127,6 @@ word-wrap: break-word;
     }
     .checkouts_frame_add_new_address{
         display: block;
-        /* overflow: hidden; */
         height: 6%;
         position: relative;
     }
@@ -5207,10 +5211,12 @@ word-wrap: break-word;
         width: 100%;
         display: flex;
         align-items: center;
-        height: 1.8rem;
+        height: 2.4rem;
         padding: 1rem;
         font-family: 'Popppins',sans-serif;
         font-size: .8rem;
+        color: rgba(0, 0, 0, 0.913);
+        text-transform: capitalize;
     }
 }
 

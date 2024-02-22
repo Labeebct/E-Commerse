@@ -123,6 +123,9 @@ router.get('/cart/increase_quantity',cartController.getIncreaseQuantity)
 router.get('/checkout',orderController.getCheckout)
 router.post('/checkout',orderController.postCheckout)
 
+router.get('/summary',orderController.getSummary)
+router.get('/proceed_to_pay',orderController.postProceedtoPay)
+
 router.post('/checkout/add_new_adress',orderController.postAddnewadress)
 
 router.get('/select_address',orderController.selectAddress)

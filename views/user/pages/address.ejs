@@ -144,7 +144,7 @@ submitBtn.addEventListener('click',async(e) =>{
         const profile_form = document.getElementById('form')
         const form = new FormData(profile_form)
 
-        if(!firstName || !lastName || !DOB || !country || !state || !district || !zip || !landmark || !address ){
+        if(!firstName || !lastName || !DOB || !country || !state || !district || !zip || !address ){
             errMsg.innerHTML = 'Please Fill all Fields'
             setTimeout(() => {
                 errMsg.innerHTML = ''

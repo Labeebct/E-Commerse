@@ -6,8 +6,10 @@ const signupModel = require('../models/signup')
 const couponModel = require('../models/coupon')
 const { ObjectId } = require('mongodb');
 
+
 const { Types } = require('mongoose')
 const profile = require('../models/profile')
+
 
 
 
@@ -36,8 +38,6 @@ exports.getCheckout = async(req,res) => {
         const signupData = await signupModel.findById(userId)
 
         const cartQuantity = cartExist ? cartExist.products : []
-
-        const userAddress = profileExist? profileExist.newadress : []
                  
         if(!req.session.loggedin){
             return res.redirect('/login')
@@ -50,6 +50,7 @@ exports.getCheckout = async(req,res) => {
 
         const cart = await cartModel.find({userId}).populate('products.productId')
         const cartProducts = cart ? cart[0].products : []
+        const userAddress = profileExist.newadress
 
         if(productId){
           const findProduct = await productModel.findById(productId)
@@ -112,23 +113,93 @@ exports.getCheckout = async(req,res) => {
 
 
 
-
-
 exports.postCheckout = (req,res) => {
   try {
 
     const { order } = req.body
-    console.log(order);
+
+    req.session.order = order
+    
+    res.status(200).json({success:true})
     
   } catch (error) {
-    console.log('Error in post checkout');
+    console.log('Error in post checkout',error);
   }
 }
 
-    
 
 
+exports.getSummary = async(req,res) => {
+
+  try {
+
+    const userId = req.session.userId
+    const order = req.session.order
+
+    if(!req.session.loggedin){
+        return res.redirect('/login')
+    }     
+
+    const profileExist = await profileModel.findOne({userId})
+    const cartExist = await cartModel.findOne({userId})
+    const wishExist = await wishlistModel.findOne({userId})
      
+    const cart = await cartModel.find({userId}).populate('products.productId')
+    const cartProducts = cart ? cart[0].products : []
+
+    const address =  profileExist.newadress.find((address) => address._id == order.address )
+    const paymentMethode = order.paymentmethode
+    const couponDiscount = order.coupon
+    const orderTotal = order.totalamount
+    const productIds = order.products.map((product)=> product.productId)
+
+
+    const orderProductDetails = await Promise.all(order.products.map(async (product) => {
+      product.productId = await productModel.findOne({_id: product.productId});
+      return product;
+    }));
+  
+    const cartPrice = cartProducts.reduce((acc,item)=>{
+        return acc + (item.productId.newprice * item.quantity)
+     },0)
+
+    const discount = Math.round(cartPrice * .05) //calculating discount for product in cart
+    const gst = cartPrice * .01
+
+    cartTotal = Math.round(Number(cartPrice - discount + gst))
+
+
+    res.render('user/pages/ordersummary',
+    {
+        state:'',
+        cartCount: cartExist? cartExist.products.length : 0,
+        wishCount: wishExist? wishExist.products.length : 0,
+        address,
+        paymentMethode,
+        cartTotal,
+        couponDiscount,
+        orderTotal,
+        orderProductDetails
+    })
+
+  } catch (error) {
+    console.log('Error in get summary');
+  }
+}
+
+
+exports.postProceedtoPay = (req,res) => {
+  try {
+    
+    const order = req.session.order
+
+  } catch (error) {
+    console.log('Error in proceed to pay',error);
+  }
+}
+
+
+
 
 
 exports.postAddnewadress = async(req,res) =>{
@@ -171,7 +242,7 @@ exports.selectAddress = async (req,res) =>{
     res.status(200).json({address})
             
     } catch (error) {
-        console.log('Error in select address');    
+        console.log('Error in select address',error);    
     }
 }
 
@@ -218,6 +289,6 @@ exports.selectCoupon = async (req,res) =>{
     res.status(200).json({coupon,couponDiscountPrice})
             
     } catch (error) {
-        console.log('Error in select coupon');    
+        console.log('Error in select coupon',error);    
     }
 }

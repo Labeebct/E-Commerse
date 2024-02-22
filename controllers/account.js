@@ -206,7 +206,6 @@ exports.postAddress = async(req,res) => {
                     state,
                     district,
                     address,
-                    landmark,
                     zip,
                 }
             ],
