@@ -5,6 +5,7 @@ const session = require('express-session')
 require('dotenv').config() /* Loading varibales to the file */
 const nocache = require('nocache')
 
+
     
 const app = express()
 const PORT = process.env.PORT || 8080
@@ -30,6 +31,8 @@ app.use(session({
     saveUninitialized: true,
 }))
   
+
+
 // Setting template Engines
 
 app.set('view engine','ejs')

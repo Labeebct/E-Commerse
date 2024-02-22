@@ -319,6 +319,7 @@ productArray.forEach((product)=>{
         shipping_adress: defaultAddressId,
         payment_methode:null,
         amount: productAmount,
+        status:'pending',
         order_date: new Date()
     }
 

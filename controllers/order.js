@@ -4,10 +4,13 @@ const wishlistModel = require('../models/wishlist')
 const profileModel = require('../models/profile')
 const signupModel = require('../models/signup')
 const couponModel = require('../models/coupon')
+const orderModel = require('../models/order')
 const { ObjectId } = require('mongodb');
-
-
 const { Types } = require('mongoose')
+
+const {orderConfirm , verify} = require('../utils/confirmorder')
+
+
 const profile = require('../models/profile')
 
 
@@ -129,6 +132,54 @@ exports.postCheckout = (req,res) => {
 
 
 
+exports.getConfirmOtp = async(req,res) => {
+  try {
+
+    if(!req.session.loggedin){
+      return res.redirect('/login')
+   }   
+
+    const state = ''
+    const userId = req.session.userId
+    const email = req.session.email
+
+
+    const cartExist = await cartModel.findOne({userId})
+    const wishExist = await wishlistModel.findOne({userId})
+
+    res.render('user/pages/confirmorderotp',
+    {
+      state,cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0,
+      email,
+    }
+    )
+    
+  } catch (error) {
+    console.log('Error in order otp',error);
+  }
+}
+    
+
+
+
+exports.postConfirmOtp = (req,res) => {
+  try {
+
+    const {D1,D2,D3,D4} = req.body  
+    const code = D1+D2+D3+D4
+
+    verify(code,res,req)
+
+    
+  } catch (error) {
+    console.log('Error in order otp',error);
+  }
+}
+
+
+
+
 exports.getSummary = async(req,res) => {
 
   try {
@@ -188,16 +239,29 @@ exports.getSummary = async(req,res) => {
 }
 
 
+
+
 exports.postProceedtoPay = (req,res) => {
   try {
     
     const order = req.session.order
+    const email = req.session.email
+
+    if(order.paymentmethode === 'card'){
+      res.send('cardddddd')
+    }
+    else if(order.paymentmethode === 'upi'){
+      res.send('upiiii')
+    }
+    else{
+      orderConfirm(email)
+      res.redirect('/confirm_order')
+    }
 
   } catch (error) {
     console.log('Error in proceed to pay',error);
   }
 }
-
 
 
 

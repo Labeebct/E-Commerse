@@ -9,6 +9,7 @@ const orderController = require('../controllers/order')
 
 
 
+
 const upload = require('../middleware/multer')
 
 
@@ -124,6 +125,11 @@ router.get('/checkout',orderController.getCheckout)
 router.post('/checkout',orderController.postCheckout)
 
 router.get('/summary',orderController.getSummary)
+
+router.get('/confirm_order',orderController.getConfirmOtp)
+router.post('/confirm_order_otp',orderController.postConfirmOtp)
+
+
 router.get('/proceed_to_pay',orderController.postProceedtoPay)
 
 router.post('/checkout/add_new_adress',orderController.postAddnewadress)
@@ -176,7 +182,7 @@ router.post('/account/contactus',accountController.postContactus)
 
 
 router.get('/account/orders',accountController.getOrder)
-router.get('/account/order_open',accountController.getOrderOpen)
+router.get('/account/order_details',accountController.getOrderOpen)
 router.get('/account/aboutus',accountController.getAboutus)
 
 

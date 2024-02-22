@@ -5,6 +5,7 @@ const messageModel = require('../models/message')
 const wishlistModel = require('../models/wishlist')
 const cartModel = require('../models/cart')
 const profileModel = require('../models/profile')
+const orderModel = require('../models/order')
 const { Types } = require('mongoose')
 const fs = require('fs')
 
@@ -153,7 +154,6 @@ exports.getAdress = async(req,res) => {
     
     const userProfile = userAddress.length > 0 ? userAddress[0].userProfile[0] : null //checking user profile exist
 
-    console.log(userProfile);
 
     return res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,userProfile,findUser})
 }
@@ -354,28 +354,65 @@ exports.getAboutus = async(req,res) => {
 
 exports.getOrder = async(req,res) => {
 
+    try {
+        
     const userId = req.session.userId
-
+    const findOrder = await orderModel.findOne({userId}).populate('products.productId')
+    const userOrders = findOrder? findOrder.products : []  
+   
     // Passing wishlist and cart counts
 
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
     const state = 'orders'
-    res.render('user/pages/orders',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
-}
+    res.render('user/pages/orders',
+    {
+      state,
+      cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0,
+      userOrders
+    })
+
+    } catch (error) {
+        console.log('Error in get order page',error);    
+    }
+}       
+
+
+
 
 
 exports.getOrderOpen = async(req,res) => {
 
     const userId = req.session.userId
 
+    const orderId = req.query.orderId
+
+    if(!req.session.loggedin){
+        return res.redirect('/login')
+    }     
+
+    const profileExist = await profileModel.findOne({userId})
+
+    const findOrder = await orderModel.findOne({ userId }).populate('products.productId')
+
+    const userOrder = findOrder.products.find((order)=> order._id == orderId)
+    const shippAddress =  profileExist.newadress.find((address) => address._id == userOrder.shipping_adress )
+
     // Passing wishlist and cart counts
 
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
     const state = 'orders'
-    res.render('user/pages/orderopen',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+    res.render('user/pages/orderopen',
+    {
+     state,
+     cartCount: cartExist? cartExist.products.length : 0,
+     wishCount: wishExist? wishExist.products.length : 0,
+     userOrder,
+     shippAddress
+    })
 }
 

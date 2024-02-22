@@ -6,6 +6,7 @@ const  productOpen = (event,productId) => {
     window.location.href = `/product?product=${productId}`
 }
 
+
 function selectSize(event){
     event.stopPropagation()     
 }

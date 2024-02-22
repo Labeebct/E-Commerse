@@ -263,7 +263,7 @@ exports.postForgetpass = async (req, res) => {
 
 
 // <<<<<========================================== EMAIL OTP ====================================================>>>>
-
+    
 
 
 exports.getEmailOtp = async(req, res) => {
@@ -279,7 +279,7 @@ exports.getEmailOtp = async(req, res) => {
 
 exports.postEmailOtp = (req, res) => {
     const {D1,D2,D3,D4} = req.body  
-    const code = D1+D2+D3+D4
+    const code = D1+D2+D3+D4        
     verify(code,res,req)
 }    
 

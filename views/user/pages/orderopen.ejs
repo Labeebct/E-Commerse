@@ -13,30 +13,33 @@
            <div class="adrress_details">
              <h4 class="user_name">Labeeb ct</h4>
              <div class="user_address">
-                <p>India</p>
-                <p>Kerala</p>
-                <p>Malappuram</p>
-                <p>Thaliyil (h)Thavanoor (p.o)Kuzhimanna via Kizhisseri Vadakkeparambu Pothuvettippara Mundakkulam Road, Ernad Subdistrict, pothuvattippara Malappuram District - 673641, Kerala</p>
+                <p><%= shippAddress.country %></p>
+                <p><%= shippAddress.state %></p>
+                <p><%= shippAddress.district %></p>
+                <p><%= shippAddress.zip %></p>
+                <p><%= shippAddress.address %></p>
              </div>
              <h4 class="user_phone">Phone number</h4>
-             <p>8590471530</p>
+             <p><%= shippAddress.mobilenum %></p>
            </div>
         </div>
 
         <div class="order_frames order_product_frame">
-              <div class="product_img_div"><img src="/products-img/06-02-11-52-45-61DUqV412CL._SL1440_.jpg" style="height: 8.5rem;"></div>
+              <div class="product_img_div"><img src="<%= userOrder.productId.productimg[0] %>" style="height: 8.5rem;"></div>
               <div class="product_details_div">
                   <div class="details_div">
-                    <p class="product_name">SHREE MURLI Regular Lotus Seed Pop/Gorgon Nut Puffed Kernels </p>
-                    <p class="color_size">SIZE : <span>X</span></p>
-                    <p class="color_size">COLOR : <span>BLACK</span></p>
-                    <div style="display: flex; gap: .7rem; align-items: center;">
-                      <p class="old_price">₹338</p>
-                      <p class="new_price">₹138</p>
-                      <p class="discount">60%</p>
+                    <p class="product_name"><%= userOrder.productId.productname %></p>
+                    <p class="color_size">SIZE : <span><%= userOrder.size %></span></p>
+                    <p class="color_size">COLOR : <span style="color: <%= userOrder.color %>;"><%= userOrder.color %></span></p>
+                    <p class="color_size">QTY : <span><%= userOrder.quantity %></span></p>
+                    <div style="display: flex; gap: .9rem; align-items: center;">
+                      <p class="old_price">₹<%= userOrder.productId.oldprice %></p>
+                      <p class="new_price">₹<%= userOrder.productId.newprice %></p>
+                      <p class="discount"><%= Math.round(100 - (userOrder.productId.newprice / userOrder.productId.oldprice * 100)) %>%</p>
                    </div> 
                   </div>
               </div>
+              <div class="order_status"><%= userOrder.status.toUpperCase() %></div>
         </div>
 
 

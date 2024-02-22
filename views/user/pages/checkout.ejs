@@ -31,8 +31,8 @@
                               <div class="stock_left"><%= list.productId.stock %> Left</div>
                             </div>
                            <div style="display: flex; gap: .7rem; align-items: center;">
-                            <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee" style="color: red; font-size: .7rem;"></i><p class="old_price"><%= list.productId.oldprice.toLocaleString() %></p></span>
-                            <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee"></i><p class="new_price new_price<%= list.productId._id %>"><%= list.quantity * list.productId.newprice.toLocaleString() %></p></span>
+                            <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee" style="color: red; font-size: .7rem;"></i><p class="old_price"><%= Number(list.productId.oldprice).toLocaleString() %></p></span>
+                            <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee"></i><p class="new_price new_price<%= list.productId._id %>"><%= Number(list.quantity * list.productId.newprice).toLocaleString() %></p></span>
                             <p class="discount"><%= Math.round(100 - (list.productId.newprice / list.productId.oldprice * 100)) %>%</p>
                            </div>
 
@@ -98,7 +98,7 @@
                         <h3>PAYMENT METHODE</h3>
                         <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/upi.png" alt=""></div><label for="upi">UPI</label><input id="upi" value="upi" name="payment" class="payment" type="radio"></div>
                         <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/card.png" alt=""></div><label for="card">CARD</label><input id="card" name="payment" value="card" class="payment" type="radio"></div>
-                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/cashon delivery.png" alt=""></div><label for="cashondelivery">CASH ON DELIVERY</label><input id="cashondelivery" value="cashondelivery" name="payment" class="payment" type="radio"></div>
+                        <div class="payment_divs"><div class="payment_icon"><img class="payment_logo_png" src="/images/cashondelivery.png" alt=""></div><label for="cashondelivery">CASH ON DELIVERY</label><input id="cashondelivery" value="cashondelivery" name="payment" class="payment" type="radio"></div>
                     </div>
 
 
