@@ -151,6 +151,8 @@ router.get('/messages/user_message/:id',controller.getUsermessage)
 
 
 router.get('/orders_list',controller.getOrders)
+router.put('/change_order_status',controller.getOrderstatus)
+
 router.get('/customer/order_list/:id')
 
 

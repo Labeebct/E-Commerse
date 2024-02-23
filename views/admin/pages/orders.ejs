@@ -13,52 +13,134 @@
                         <thead>
                             <tr class="th_tr">
                             <th style="width: 3%;">SI</th>
-                            <th style="width: 15%;">ORDER _ID</th>
-                            <th style="width: 14%;">PRODUCT _ID</th>
-                            <th style="width: 16%;">USER _ID</th>
-                            <th style="width: 7%;">PRODUCT NAME</th>
-                            <th style="width: 10%;">USER</th>
-                            <th style="width: 10%;">STATUS</th>
+                            <th style="width: 13%;">ORDER _ID</th>
+                            <th style="width: 13%;">USER _ID</th>
+                            <th style="width: 10%;">PRODUCT NAME</th>
                             <th style="width: 7%;">PRICE</th>
-                            <th style="width: 2%;">QUA</th>
+                            <th style="width: 3%;">QN</th>
                             <th style="width: 7%;">PAYMENT METHODE</th>
-                            <th style="width: 12%;">ORDER DATE</th>
+                            <th style="width: 8%;">ORDER DATE</th>
+                            <th style="width: 10%;">STATUS</th>
                         </tr>
                         </thead>
                         <tbody>
+
+                        <% fullOrders.forEach((orders,index)=>{ %>
+
+                            <% orders.products.forEach((products,index)=>{ %>
+
                             <tr style="cursor: pointer;">
-                                <td>1</td>
-                                <td>87432458723883459</td>
-                                <td>68934658456983458</td>
-                                <td>894756934758967</td>
-                                <td>Iphone 14 plus</td>
-                                <td>1000</td>
-                                <td>1000</td>
-                                <td>90%</td>
-                                <td>1</td>
-                                <td>UPI</td>
-                                <td>12-03-2024</td>
+                                <td><%= index + 1 %></td>
+                                <td><%= products._id %></td>
+                                <td><%= orders.userId %></td>
+                                <td><%= products.productId.productname %></td>
+                                <td><%= products.productId.newprice %></td>
+                                <td><%= products.quantity %></td>
+                                <td><%= products.payment_methode %></td>
+                                <td>
+                                    <%= `${products.order_date.getDate()}-${products.order_date.getMonth() + 1}-${products.order_date.getFullYear()}` %>
+                                </td>
+                                <td>
+
+                                    <select onchange="changeStatus(event,'<%= orders._id %>','<%= products._id %>')" class="status" name="status" id="">
+                                        <option value="<%= products.status %>"><%= products.status.toUpperCase() %></option>
+                                        <option value="confirmed">CONFIRMED</option>
+                                        <option value="shipped">SHIPPED</option>
+                                        <option value="delivered">DELIVERED</option>
+                                    </select>
+                                </td>
                             </tr>
+
+                            <% }) %>
+                        <% }) %>
+
                         </tbody>
                       </Table>
                 </div>
                 <div class="pro_bottom">
                     <div class="link_pagination">
-                        <button><i class="bi bi-chevron-left"></i></button>
-                        <div class="links">
-                        <a href="#" value="1">1</a>
-                        <a href="#" value="2">2</a>
-                        <a href="#" value="3">3</a>
-                        <a href="#" value="4">4</a>
-                        <a href="#" value="5">5</a>
-                        <a href="#" value="6">6</a>
-                        <a href="#" value="7">7</a>
-                        </div>
-                        <button><i class="bi bi-chevron-right"></i></button>
-                    </div>
-                </div>
+                       <button class="back_btn" onclick="prev()"><i class="bi bi-chevron-left"></i></button>
+                         <div class="links">
+                             <button class="page_btn" onclick="active()" value="1">1</button>
+                             <button class="page_btn" onclick="active()" value="2">2</button>
+                             <button class="page_btn" onclick="active()" value="3">3</button>
+                             <button class="page_btn" onclick="active()" value="4">4</button>
+                             <button class="page_btn" onclick="active()" value="5">5</button>
+                             <button class="page_btn" onclick="active()" value="6">6</button>
+                             <button class="page_btn" onclick="active()" value="7">7</button>
+                          </div>
+                         <button class="next_btn" onclick="next()"><i class="bi bi-chevron-right"></i></button>
+                     </div>
+                 </div>
              </div>
         </div>
     </div>
 </div>
+
+
+<script>
+
+
+function  active(){
+    for(l of pagesBtn){
+
+        l.classList.remove('active_link')
+    }
+    event.target.classList.add('active_link')
+    currentValue = event.target.value
+    window.location.href = `/admin/banners?page=${currentValue}`
+
+
+}
+
+
+function prev(){
+    if(currentValue > 1){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+
+   currentValue--;
+   window.location.href = `/admin/banners?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+
+    }
+}
+
+function next()
+{
+    if(currentValue < pagetotalcount ){
+        for(l of pagesBtn){
+
+   l.classList.remove('active_link')
+   }   
+   
+   currentValue++;
+   window.location.href = `/admin/banners?page=${currentValue}`
+   pagesBtn[currentValue-1].classList.add('active_link')
+
+    }
+}
+
+const changeStatus = async(event,orderId,productId) =>{
+    event.preventDefault()
+
+    await fetch(`/admin/change_order_status?orderId=${orderId}&productId=${productId}`,{
+        method:'PUT',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({status:event.target.value})
+    })
+}
+
+
+
+
+
+
+</script>
+
 <%- include('../../common/end.ejs') %>

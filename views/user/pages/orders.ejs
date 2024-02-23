@@ -25,7 +25,7 @@
                         <div class="product_details">
                            <p class="order_product_name"><%= list.productId.productname %></p>
                            <p class="order_size">Size : <span style="font-size: .9rem;"><%= list.size %></span></p>
-                           <p class="order_color">Color : <span style="color: <%= list.color %>;"><%= list.color %></span></p>
+                           <p class="order_color">Color : <span style="font-size: .9rem; color: <%= list.color %>;"><%= list.color.toUpperCase() %></span></p>
                            <p class="order_color">Qty : <span><%= list.quantity %></span></p>
                         </div>
                      </td>
@@ -34,8 +34,7 @@
                      <td style="font-family: 'Poppins', sans-serif; font-weight: 600; color: rgba(0, 0, 0, 0.748);">
                         <%= `${list.order_date.getDate()}-${list.order_date.getMonth() + 1}-${list.order_date.getFullYear()}` %>
                       </td>
-                      <td class="status delivered"><%= list.status.toUpperCase() %></td>
-
+                      <td class="status status<%= list._id %>"><%= list.status.toUpperCase() %></td>
                   </tr>
                         <% }) %>
                   </tbody>
@@ -44,5 +43,39 @@
             </div>
          </div>
    </div>
-   <%- include('../../common/footer.ejs') %>
+
+<%- include('../../common/footer.ejs') %>
+
+<% userOrders.forEach((list)=>{ %>
+
+<script>
+
+document.addEventListener('DOMContentLoaded',()=>{
+
+   const status = document.querySelector('.status<%= list._id %>')
+   
+   if(status.innerHTML == 'PENDING'){
+     status.style.color = 'rgb(228, 202, 0)'
+   }
+   else if(status.innerHTML == 'CONFIRMED'){
+      status.style.color = 'rgb(255, 115, 0)'
+   }
+   else if(status.innerHTML == 'SHIPPED'){
+      status.style.color = 'rgb(4, 2, 131)'
+   }
+   else if(status.innerHTML == 'DELIVERED'){
+      status.style.color = 'rgb(0, 170, 0)'
+   }
+   else{
+      status.style.color = 'red'
+
+   }
+   
+})
+
+</script>
+
+<% }) %>
+
+
 <%- include('../../common/end.ejs') %>

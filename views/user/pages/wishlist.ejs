@@ -37,7 +37,15 @@
                         <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                      </div>
                   </div>
-                  <div class="bottom"><button class="addto_cart_btn" onclick="wishToCart(event,'<%= list._id %>')">MOVE TO CART</button></div>
+                  <div class="bottom">
+                     <% if(list.stock > 0){ %>
+                     <button class="addto_cart_btn" onclick="wishToCart(event,'<%= list._id %>')">MOVE TO CART</button>
+                     <% }else { %>
+                        <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                          OUT OF STOCK
+                       </button>
+                     <% } %>
+                  </div>
                </div>
              
                <% }) %>

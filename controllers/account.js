@@ -27,7 +27,12 @@ exports.getUpdatepassword = async(req,res) => {
     const cartExist = await cartModel.findOne({userId})
 
     const state = 'updatepassword'
-    res.render('user/pages/updatepassword',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+    res.render('user/pages/updatepassword',
+    {
+      state,
+      cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0
+    })
 }
 
 
@@ -86,7 +91,12 @@ exports.getContactus = async(req,res) => {
     const cartExist = await cartModel.findOne({userId})
 
     const state = 'contactus'
-    res.render('user/pages/contactus',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+    res.render('user/pages/contactus',
+    {
+      state,
+      cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0
+    })
 }
   
 
@@ -109,7 +119,6 @@ exports.postContactus = async(req,res) => {
     }
 
 }
-
 
 
 
@@ -155,10 +164,24 @@ exports.getAdress = async(req,res) => {
     const userProfile = userAddress.length > 0 ? userAddress[0].userProfile[0] : null //checking user profile exist
 
 
-    return res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,userProfile,findUser})
+    return res.render('user/pages/address',
+    {
+      state,
+      cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0,
+      userProfile,
+      findUser
+    })
 }
 else{
-    res.render('user/pages/address',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0,findUser:null,userProfile:null})
+    res.render('user/pages/address',
+    {
+       state,
+       cartCount: cartExist? cartExist.products.length : 0,
+       wishCount: wishExist? wishExist.products.length : 0,
+       findUser:null,
+       userProfile:null
+    })
 }
      
 }    
@@ -247,7 +270,15 @@ exports.getEditaddress = async(req,res) => {
     const cartExist = await cartModel.findOne({userId})
 
 
-    res.render('user/pages/editaddress',{state:'',cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0 ,userProfile,findUser,profileId})
+    res.render('user/pages/editaddress',
+    {
+      state:'',
+      cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0 ,
+      userProfile,
+      findUser,
+      profileId
+    })
 }
 
 
@@ -346,7 +377,12 @@ exports.getAboutus = async(req,res) => {
     // Rendering about us page
 
     const state = 'aboutus'
-    res.render('user/pages/aboutus',{state,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+    res.render('user/pages/aboutus',
+    {
+      state,
+      cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0
+    })
 }
 
 

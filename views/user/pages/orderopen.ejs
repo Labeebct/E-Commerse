@@ -24,14 +24,15 @@
            </div>
         </div>
 
-        <div class="order_frames order_product_frame">
+        <div class="order_frames order_product_frame product<%= userOrder.productId._id %>" onclick="productOpen(event,'<%= userOrder.productId._id %>')">
               <div class="product_img_div"><img src="<%= userOrder.productId.productimg[0] %>" style="height: 8.5rem;"></div>
               <div class="product_details_div">
                   <div class="details_div">
                     <p class="product_name"><%= userOrder.productId.productname %></p>
                     <p class="color_size">SIZE : <span><%= userOrder.size %></span></p>
-                    <p class="color_size">COLOR : <span style="color: <%= userOrder.color %>;"><%= userOrder.color %></span></p>
+                    <p class="color_size">COLOR : <span style="color: <%= userOrder.color %>;"><%= userOrder.color.toUpperCase() %></span></p>
                     <p class="color_size">QTY : <span><%= userOrder.quantity %></span></p>
+                    <p class="color_size">PAYMENT : <span><%= userOrder.payment_methode.toUpperCase() %></span></p>
                     <div style="display: flex; gap: .9rem; align-items: center;">
                       <p class="old_price">₹<%= userOrder.productId.oldprice %></p>
                       <p class="new_price">₹<%= userOrder.productId.newprice %></p>
@@ -39,7 +40,7 @@
                    </div> 
                   </div>
               </div>
-              <div class="order_status"><%= userOrder.status.toUpperCase() %></div>
+              <div class="order_status status<%= userOrder._id %>"><%= userOrder.status.toUpperCase() %></div>
         </div>
 
 
@@ -69,7 +70,30 @@ rateProduct.addEventListener('click',()=>{
 })
 
 
-
-</script>
+document.addEventListener('DOMContentLoaded',()=>{
+   
+      const status = document.querySelector('.status<%= userOrder._id %>')
+      
+      if(status.innerHTML == 'PENDING'){
+        status.style.color = 'rgb(228, 202, 0)'
+      }
+      else if(status.innerHTML == 'CONFIRMED'){
+         status.style.color = 'rgb(255, 115, 0)'
+      }
+      else if(status.innerHTML == 'SHIPPED'){
+         status.style.color = 'rgb(4, 2, 131)'
+      }
+      else if(status.innerHTML == 'DELIVERED'){
+         status.style.color = 'rgb(0, 170, 0)'
+      }
+      else{
+         status.style.color = 'red'
+   
+      }
+      
+   })
+   
+   </script>
+<script src="/javascript/product-open.js"></script>
 
 <%- include('../../common/end.ejs') %>

@@ -1,5 +1,11 @@
 const orderModel = require('../models/order')
+const productModel = require('../models/products')
+const cartModel = require('../models/cart')
+const wishlistModel = require('../models/wishlist')
+const profileModel = require('../models/profile')
+const signupModel = require('../models/signup')
 const { ObjectId } = require('mongodb');
+
 const { Types } = require('mongoose')
 
 const nodemailer = require("nodemailer");
@@ -61,7 +67,7 @@ const verify = async(postOtp,res,req) => {
 
       const userExistOrder = await orderModel.findOne({userId})
 
-      if(!userExistOrder){
+       if(!userExistOrder){
 
         const orderSchema = new orderModel({
           userId:userObjId,
@@ -70,34 +76,60 @@ const verify = async(postOtp,res,req) => {
 
         await orderSchema.save()
 
-        await Promise.all(orderedProducts.map(async (product) => {
+        const update = await Promise.all(orderedProducts.map(async (product) => {
 
           await orderModel.updateOne(
-              { userId, "products.productId": product.productId._id },
+              { userId, "products.productId": product.productId }, // Updating pending status to confirmed
               { $set: { "products.$.status": "confirmed" } }
           );
 
+          await cartModel.updateOne(  
+            {userId,"products.productId": product.productId._id },
+            {$pull:{products:{productId:product.productId._id}}}  // Removing ordered product from cart
+          )
+
+          await productModel.updateOne(
+            {_id:product.productId._id},
+            {$inc:{stock:-product.quantity}}
+          )
+          
+
         }));
 
-        delete req.session.order;
-        
+        if(update){
+          delete req.session.order;
+        }
+
         return res.status(200).json({success:true})
 
       }
       else{
 
-        await Promise.all(orderedProducts.map(async (product) => {
+      const update = await Promise.all(orderedProducts.map(async (product) => {
 
           await orderModel.updateOne({ userId }, { $push: { products: product } });
 
           await orderModel.updateOne(
-            { userId, "products.productId": product.productId },
+            { userId, "products.productId": product.productId }, // Updating pending status to confirmed
             { $set: { "products.$.status": "confirmed" } }
           );
 
+          await cartModel.updateOne(  
+            {userId,"products.productId": product.productId._id }, // Removing ordered product from cart
+            {$pull:{products:{productId:product.productId._id}}}
+          )
+
+          await productModel.updateOne(
+            {_id:product.productId._id},
+            {$inc:{stock:-product.quantity}}
+          )
+          
         }));
 
-        delete req.session.order;
+
+        if(update){
+          delete req.session.order;
+        }
 
         return res.status(200).json({success:true})
       }

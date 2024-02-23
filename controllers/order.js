@@ -51,8 +51,10 @@ exports.getCheckout = async(req,res) => {
         }
         // checking cart or whixhlist exist for showing cart and wishlist count
 
-        const cart = await cartModel.find({userId}).populate('products.productId')
-        const cartProducts = cart ? cart[0].products : []
+        const cart = await cartModel.findOne({userId}).populate('products.productId')
+        // const cartProducts = cart ? cart[0].products : []
+        const cartProducts = cart ? cart.products.filter((product)=> product.productId.stock > 0) : []
+
         const userAddress = profileExist.newadress
 
         if(productId){
@@ -202,7 +204,6 @@ exports.getSummary = async(req,res) => {
     const paymentMethode = order.paymentmethode
     const couponDiscount = order.coupon
     const orderTotal = order.totalamount
-    const productIds = order.products.map((product)=> product.productId)
 
 
     const orderProductDetails = await Promise.all(order.products.map(async (product) => {

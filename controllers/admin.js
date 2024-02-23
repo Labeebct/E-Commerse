@@ -9,15 +9,17 @@ const categoryModel = require('../models/category')
 const bannerModel = require('../models/banner')
 const couponModel = require('../models/coupon')
 const messageModel = require('../models/message')
+const orderModel = require('../models/order')
+
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 
 
 
 
-
-
 // <<<<< ================================  SIGNUP ==================================== >>>>>>
+
+
 
 
 
@@ -81,8 +83,6 @@ exports.postSignup = async(req, res) => {
 
 
 // <<<<< ============================  KEY VERIFICATION =========================== >>>>>>
-
-
 
 
 
@@ -1175,7 +1175,41 @@ exports.getUsermessage = async(req,res) =>{
 
 
 
-exports.getOrders = (req,res) => {
-    const state = 'orders'
-    res.render('admin/pages/orders', { state })
+exports.getOrders = async(req,res) => {
+    try {
+
+        const state = 'orders'
+
+        const fullOrders = await orderModel.find().populate('products.productId')
+
+        res.render('admin/pages/orders', { state , fullOrders})
+    
+    } catch (error) {
+        console.log('Error in admin get orders');
+    }
+
 }
+
+exports.getOrderstatus = async(req,res) => {
+    try {
+
+        const orderId = req.query.orderId
+        const productId = req.query.productId
+
+        const status = req.body.status
+
+        console.log(orderId);
+        console.log(productId);
+        console.log(status);
+
+       const updateStatus = await orderModel.updateOne(
+            {_id:orderId ,'products._id':productId},
+            { $set: { "products.$.status": status } }
+        )
+
+        
+    } catch (error) {
+        console.log('Error in admin get orders');
+    }
+       
+}    

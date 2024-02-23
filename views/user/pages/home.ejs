@@ -101,7 +101,13 @@
                            <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                         </div>
                      </div>
-                     <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+
+
+                     <div class="bottom">
+
+                     <% if(list.stock > 0){ %>
+
+                      <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
                         <%= (() => {
                            const productIdObjectId = new ObjectId(list._id );
                            const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
@@ -113,7 +119,15 @@
                        return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
                        })() %>"></i>
                       </button>
+
+                      <% }else { %>
+                         <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                           OUT OF STOCK
+                        </button>
+                      <% } %>
+
                      </div>
+
                   </div>
                   
                   <% }) %>
@@ -155,18 +169,27 @@
                            <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                         </div>
                      </div>
-                     <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                        <%= (() => {
-                           const productIdObjectId = new ObjectId(list._id );
-                           const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                           return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                        })() %>
-                       <i class="bi <%= (() => {
-                       const productIdObjectId = new ObjectId(list._id );
-                       const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                       return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                       })() %>"></i>
-                      </button>
+                     <div class="bottom">
+                        <% if(list.stock > 0){ %>
+
+                           <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                             <%= (() => {
+                                const productIdObjectId = new ObjectId(list._id );
+                                const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                             })() %>
+                            <i class="bi <%= (() => {
+                            const productIdObjectId = new ObjectId(list._id );
+                            const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                            return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                            })() %>"></i>
+                           </button>
+     
+                           <% }else { %>
+                              <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                                OUT OF STOCK
+                             </button>
+                           <% } %>
                      </div>
                      
                   </div>
@@ -210,18 +233,27 @@
                                       <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                                    </div>
                                 </div>
-                                <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                                 <%= (() => {
-                                    const productIdObjectId = new ObjectId(list._id );
-                                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                    return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                                 })() %>
-                                <i class="bi <%= (() => {
-                                const productIdObjectId = new ObjectId(list._id );
-                                const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                                })() %>"></i>
-                               </button>
+                                <div class="bottom">
+                                 <% if(list.stock > 0){ %>
+
+                                    <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                                      <%= (() => {
+                                         const productIdObjectId = new ObjectId(list._id );
+                                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                         return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                                      })() %>
+                                     <i class="bi <%= (() => {
+                                     const productIdObjectId = new ObjectId(list._id );
+                                     const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                     return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                                     })() %>"></i>
+                                    </button>
+              
+                                    <% }else { %>
+                                       <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                                         OUT OF STOCK
+                                      </button>
+                                    <% } %>
                               </div>           
                                 
                              </div>
@@ -265,18 +297,27 @@
                                       <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                                    </div>
                                 </div>
-                                <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                                 <%= (() => {
-                                    const productIdObjectId = new ObjectId(list._id );
-                                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                    return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                                 })() %>
-                                <i class="bi <%= (() => {
-                                const productIdObjectId = new ObjectId(list._id );
-                                const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                                })() %>"></i>
-                               </button>
+                                <div class="bottom">
+                                 <% if(list.stock > 0){ %>
+
+                                    <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                                      <%= (() => {
+                                         const productIdObjectId = new ObjectId(list._id );
+                                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                         return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                                      })() %>
+                                     <i class="bi <%= (() => {
+                                     const productIdObjectId = new ObjectId(list._id );
+                                     const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                     return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                                     })() %>"></i>
+                                    </button>
+              
+                                    <% }else { %>
+                                       <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                                         OUT OF STOCK
+                                      </button>
+                                    <% } %>
                               </div>           
                                 
                              </div>
@@ -335,18 +376,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -391,18 +441,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -454,18 +513,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -510,18 +578,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -567,18 +644,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -626,18 +712,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -683,18 +778,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -752,18 +856,27 @@
                                    <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                                 </div>
                              </div>
-                             <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                              <%= (() => {
-                                 const productIdObjectId = new ObjectId(list._id );
-                                 const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                 return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                              })() %>
-                             <i class="bi <%= (() => {
-                             const productIdObjectId = new ObjectId(list._id );
-                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                             return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                             })() %>"></i>
-                            </button>
+                             <div class="bottom">
+                              <% if(list.stock > 0){ %>
+
+                                 <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                                   <%= (() => {
+                                      const productIdObjectId = new ObjectId(list._id );
+                                      const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                      return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                                   })() %>
+                                  <i class="bi <%= (() => {
+                                  const productIdObjectId = new ObjectId(list._id );
+                                  const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                  return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                                  })() %>"></i>
+                                 </button>
+           
+                                 <% }else { %>
+                                    <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                                      OUT OF STOCK
+                                   </button>
+                                 <% } %>
                            </div>         
                              
                           </div>
@@ -808,18 +921,27 @@
                                    <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                                 </div>
                              </div>
-                             <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                              <%= (() => {
-                                 const productIdObjectId = new ObjectId(list._id );
-                                 const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                 return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                              })() %>
-                             <i class="bi <%= (() => {
-                             const productIdObjectId = new ObjectId(list._id );
-                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                             return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                             })() %>"></i>
-                            </button>
+                             <div class="bottom">
+                              <% if(list.stock > 0){ %>
+
+                                 <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                                   <%= (() => {
+                                      const productIdObjectId = new ObjectId(list._id );
+                                      const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                      return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                                   })() %>
+                                  <i class="bi <%= (() => {
+                                  const productIdObjectId = new ObjectId(list._id );
+                                  const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                  return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                                  })() %>"></i>
+                                 </button>
+           
+                                 <% }else { %>
+                                    <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                                      OUT OF STOCK
+                                   </button>
+                                 <% } %>
                            </div>         
                              
                           </div>
@@ -866,18 +988,27 @@
                                    <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                                 </div>
                              </div>
-                             <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                              <%= (() => {
-                                 const productIdObjectId = new ObjectId(list._id );
-                                 const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                 return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                              })() %>
-                             <i class="bi <%= (() => {
-                             const productIdObjectId = new ObjectId(list._id );
-                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                             return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                             })() %>"></i>
-                            </button>
+                             <div class="bottom">
+                              <% if(list.stock > 0){ %>
+
+                                 <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                                   <%= (() => {
+                                      const productIdObjectId = new ObjectId(list._id );
+                                      const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                      return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                                   })() %>
+                                  <i class="bi <%= (() => {
+                                  const productIdObjectId = new ObjectId(list._id );
+                                  const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                                  return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                                  })() %>"></i>
+                                 </button>
+           
+                                 <% }else { %>
+                                    <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                                      OUT OF STOCK
+                                   </button>
+                                 <% } %>
                            </div>         
                              
                           </div>
@@ -923,18 +1054,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -977,18 +1117,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -1033,18 +1182,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -1088,18 +1246,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -1142,18 +1309,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>
                     
                  </div>
@@ -1196,18 +1372,27 @@
                           <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
                        </div>
                     </div>
-                    <div class="bottom"><button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                     <%= (() => {
-                        const productIdObjectId = new ObjectId(list._id );
-                        const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                        return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                     })() %>
-                    <i class="bi <%= (() => {
-                    const productIdObjectId = new ObjectId(list._id );
-                    const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                    return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                    })() %>"></i>
-                   </button>
+                    <div class="bottom">
+                     <% if(list.stock > 0){ %>
+
+                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
+                          <%= (() => {
+                             const productIdObjectId = new ObjectId(list._id );
+                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
+                          })() %>
+                         <i class="bi <%= (() => {
+                         const productIdObjectId = new ObjectId(list._id );
+                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
+                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
+                         })() %>"></i>
+                        </button>
+  
+                        <% }else { %>
+                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
+                             OUT OF STOCK
+                          </button>
+                        <% } %>
                   </div>                 </div>
                  
                  <% }) %>

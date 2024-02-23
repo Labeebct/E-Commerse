@@ -85,14 +85,24 @@
 
                      <li>
                         <div style="display: flex; gap: 1rem; align-items: center;">
+                           <% if(product.stock > 0){ %>
+
                            <select  name="quantity" style="outline: none; padding: .3rem;">
-                              <option value="1">Qty:1</option>
-                              <option value="2">Qty:2</option>
-                              <option value="3">Qty:3</option>
-                              <option value="4">Qty:4</option>
-                              <option value="5">Qty:5</option>
+                              <% for (let i = 1; i<=product.stock ; i++) { %>
+                                 <option value="<%= i %>">Qty:<%= i %></option>
+                             <% } %>
                            </select>
+
+                           <% } %>
+
+                           <% if(product.stock > 0){ %>
                            <div class="stock_left">Hurry only <%= product.stock %> LEFT</div>
+                           <% }else{ %>
+                           <div class="stock_left">OUT OF STOCK</div>
+                           <% } %>
+
+                           <% if(product.stock > 0){ %>
+
                            <div class="wish_btn_div"><button class="wish_btn" onclick="addToWish(event,'<%= product._id %>')">
                               <i class="bi wish_white wish_icon<%= product._id %> <%= (() => {
                                  const productIdObjectId = new ObjectId(product._id);
@@ -101,6 +111,8 @@
                               })() %>"></i>
                               </button></div>
                         </div>
+                        <% } %>
+
                      </li>
 
 
@@ -125,6 +137,8 @@
 
                      <!-- =================================================================== -->
 
+                     <% if(product.stock > 0){ %>
+
                      <li class="btn_li" style="display: flex; height: 3rem; justify-content: space-between; width: 90%;">
                         <button onclick="addToCart(event,'<%= product._id %>')" type="button" class="addto_cart_btn addto_cart_btn<%= product._id %>">
                            <%= (() => {
@@ -140,6 +154,14 @@
                         </button>
                         <button onclick="checkoutFromProduct('<%= product._id %>')" type="button">BUY NOW</button>
                      </li>
+
+                  <% }else{ %>
+
+                     <li style="display: flex; align-items: center; justify-content: center;">
+                              <h5 style="color: red; font-family: 'Poppins',sans-serif; font-size: 1.1rem; letter-spacing: .1rem;">OUT OF STOCK</h5>
+                     </li>
+
+                 <% } %>
 
                   </ul>
                </div>

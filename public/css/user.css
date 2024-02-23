@@ -42,10 +42,8 @@ body::-webkit-scrollbar-thumb {
     background-color: transparent;
 }
 .true{
-    color: green !important;
+    color: rgb(0, 170, 0) !important;
 }
-
-
 
 
 /* <<====== TOP BAR =======>> */
@@ -2254,19 +2252,6 @@ word-wrap: break-word;
         letter-spacing: .02rem;
         color: rgba(0, 0, 0, 0.86)
         ;
-    }
-    .pending{
-      color: orange;
-    }
-    .delivered{
-        color: rgb(0, 172, 0);
-
-    }
-    .cancelled{
-      color: Red;
-    }
-    .shipped{
-      color: rgb(238, 244, 56);
     }
 }
 
@@ -5450,6 +5435,7 @@ word-wrap: break-word;
     display: flex;
     height: auto;
     padding: 1.5rem 0;
+    cursor: pointer;
   }
   .product_img_div{
     display: flex;
@@ -5471,7 +5457,6 @@ word-wrap: break-word;
     width: calc(100% - 75rem);
     font-family: 'Poppins',sans-serif;
     font-weight: 600;
-    color: rgb(0, 167, 0);
     font-size: 1rem;
     letter-spacing: .04rem;
   }
