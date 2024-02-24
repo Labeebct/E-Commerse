@@ -31,4 +31,6 @@ const bannerShema = new Schema({
 })
 
 
+bannerShema.index({ enddate: 1 }, { expireAfterSeconds: 0 });
+
 module.exports = new mongoose.model('banner',bannerShema)

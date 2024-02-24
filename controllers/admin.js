@@ -10,6 +10,7 @@ const bannerModel = require('../models/banner')
 const couponModel = require('../models/coupon')
 const messageModel = require('../models/message')
 const orderModel = require('../models/order')
+const  {blockMessage,unblockMsg} = require('../utils/blockmsg')
 
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
@@ -578,7 +579,6 @@ exports.getUsers = async(req, res) => {
 
         ]).skip(skip).limit(pageSize)
 
-        console.log(userList[0]);
 
         if(userList){
 
@@ -623,16 +623,16 @@ exports.deleteUsers = async(req, res) => {
       const findUser = await signupModel.findById(id)
       if(findUser.blocked){
         await signupModel.updateOne({_id:id},{$set:{blocked:false}})
+        unblockMsg(findUser)
         return res.status(200).json({success:true,blocked:false})
     }
     else{
         await signupModel.updateOne({_id:id},{$set:{blocked:true}})
+        blockMessage(findUser)
         return res.status(200).json({success:true,blocked:true})
       }
 
-
-        res.status(200).json({success:true})
-        
+      
     } catch (error) {
         console.log('Error in admin delete users',error.message);
     }

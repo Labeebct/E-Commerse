@@ -29,7 +29,11 @@ exports.getHome = async(req,res) => {
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId})
 
-          const banners = await bannerModel.find()
+
+          const banners = await bannerModel.find({
+               startdate: { $lte: new Date() },
+               enddate: { $gte: new Date() } 
+           })
 
           // subcatagory based cotagorisation and assigning to a variable to pass to user home page while rendeering
 

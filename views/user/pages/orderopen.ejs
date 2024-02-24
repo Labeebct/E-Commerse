@@ -41,15 +41,21 @@
                   </div>
                </div>
                <div class="order_cancel">
-                <button class="cancel_Order_btn" onclick="cancelOrder(event,'<%= userOrder._id %>')">
-                  <%= userOrder.status == 'cancelled' ? 'ORDER CANCELLED' : 'CANCEL ORDER'%>
-               </button>
+               <% if(userOrder.status == 'delivered'){ %>
+                <button class="cancel_Order_btn" style="color: green; border: 1px solid green;">DELIVERED</button>
+               <% }else{ %>
+                  <button class="cancel_Order_btn" onclick="cancelOrder(event,'<%= userOrder._id %>')">
+                    <%= userOrder.status == 'cancelled' ? 'ORDER CANCELLED' : 'CANCEL ORDER'%>
+                 </button>
+                  <% } %>
                </div>
               <!-- <div class="order_status status<%= userOrder._id %>"><%= userOrder.status.toUpperCase() %></div> -->
         </div>
 
 
         <div class="review_exist" style="display: none;"><%- JSON.stringify(reviewExist) %></div>
+
+        <% if(userOrder.status == 'delivered'){ %>
 
         <div class="order_frames review_div">
            <div class="reviewproduct">
@@ -77,6 +83,7 @@
            </div>
         </div>
 
+        <% } %>
 
 
         </div>

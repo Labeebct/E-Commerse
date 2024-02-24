@@ -34,4 +34,6 @@ const couponSchema = new Schema({
     }); 
 
 
+ couponSchema.index({ enddate: 1 }, { expireAfterSeconds: 0 });
+
 module.exports = new mongoose.model('coupons',couponSchema)
