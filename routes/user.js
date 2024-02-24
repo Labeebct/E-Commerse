@@ -160,7 +160,7 @@ router.get('/account/address',accountController.getAdress)
 router.post('/account/add_address',upload.single('profileimg'),accountController.postAddress)
 router.get('/account/editaddress',accountController.getEditaddress)
 router.post('/account/editaddress',upload.single('profileimg'),accountController.posEditAddress)
-
+router.post('/ratind_and_review',accountController.postRatingReview)
 
 
 // UPDATE PASSWORD -----------------
@@ -183,6 +183,7 @@ router.post('/account/contactus',accountController.postContactus)
 
 router.get('/account/orders',accountController.getOrder)
 router.get('/account/order_details',accountController.getOrderOpen)
+router.put('/cancel_order',accountController.putCancelorder)
 router.get('/account/aboutus',accountController.getAboutus)
 
 

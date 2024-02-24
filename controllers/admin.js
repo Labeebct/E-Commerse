@@ -23,8 +23,6 @@ const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z
 
 
 
-
-
 exports.getSignup = (req, res) => {
     res.render('admin/pages/signup')
 }
@@ -113,7 +111,7 @@ exports.postKeyverify = async(req,res) => {
         if(secretKey==password){
           const verifyAdmin = await adminDatas.updateOne({email},
           {$set:{verified:true}}
-          )
+        )
 
           if(verifyAdmin){
             console.log('Admin verified success');
@@ -178,10 +176,10 @@ exports.postLogin = async(req,res) => {
                 req.session.admin = true
                 return res.status(200).json({auth:true})
 
-              }
-              else{
+            }
+            else{
                 return res.status(200).json({auth:false,email})    
-              }
+            }
          }
          else{
               return res.status(402).json({error:'Incorrect Password'})         
@@ -229,7 +227,8 @@ exports.postEmailverify = async(req,res) => {
         if(!userExist){
              req.flash('errMsg',"Accound with email not Exist")
              return res.redirect('/admin/email_verify')
-            }else{
+        }
+        else{
           return res.redirect('/admin/forget_password') 
         }
         
@@ -326,6 +325,7 @@ exports.getProducts = async(req, res) => {
 }
 
 
+
 // -------- ADD ------
 
 
@@ -390,6 +390,7 @@ exports.postAddproduct = async(req,res) => {
    if(!productExist){
        const saveData = await newSchema.save()
        if(saveData){
+        
            console.log('Succesfully product added');
            return res.status(200).json({success:true})
        }
@@ -566,8 +567,18 @@ exports.getUsers = async(req, res) => {
       
         const skip = (page - 1) * pageSize
         
-        const userList = await signupModel.find().skip(skip).limit(pageSize)
+        const userList = await signupModel.aggregate([
+            {
+                $lookup:{
+                from:'orders',
+                localField:'_id',
+                foreignField:'userId',
+                as:'userOrders'
+            }}
 
+        ]).skip(skip).limit(pageSize)
+
+        console.log(userList[0]);
 
         if(userList){
 
@@ -1178,17 +1189,73 @@ exports.getUsermessage = async(req,res) =>{
 exports.getOrders = async(req,res) => {
     try {
 
-        const state = 'orders'
+        let orders=[];
 
-        const fullOrders = await orderModel.find().populate('products.productId')
+        const state = 'orders' 
+        const status = req.query.status
+        console.log(status);
+        if(status=='all'){
+            orders = await orderModel.aggregate([
+                { $unwind: "$products" },
+                {
+                    $lookup: {
+                        from: "products",
+                        let: { productId: { $toObjectId: "$products.productId" } }, 
+                        pipeline: [
+                            {
+                                $match: {
+                                    $expr: {
+                                        $eq: [
+                                            "$_id",
+                                            "$$productId"
+                                        ]
+                                    }
+                                }
+                            }
+                        ],
+                        as: "product"
+                    }
+                }
+            ])
+        }
+        else{
+       
+            orders = await orderModel.aggregate([
+                { $unwind: "$products" },
+                {
+                    $match: {
+                        'products.status': status
+                    }
+                },
+                {
+                    $lookup: {
+                        from: "products",
+                        let: { productId: { $toObjectId: "$products.productId" } }, 
+                        pipeline: [
+                            {
+                                $match: {
+                                    $expr: {
+                                        $eq: [
+                                            "$_id",
+                                            "$$productId"
+                                        ]
+                                    }
+                                }
+                            }
+                        ],
+                        as: "product"
+                    }
+                }
+            ])
+        }     
 
-        res.render('admin/pages/orders', { state , fullOrders})
+        res.render('admin/pages/orders', { state , orders})
     
     } catch (error) {
-        console.log('Error in admin get orders');
+        console.log('Error in admin get orders',error);
     }
 
-}
+}   
 
 exports.getOrderstatus = async(req,res) => {
     try {
@@ -1198,15 +1265,12 @@ exports.getOrderstatus = async(req,res) => {
 
         const status = req.body.status
 
-        console.log(orderId);
-        console.log(productId);
-        console.log(status);
-
        const updateStatus = await orderModel.updateOne(
             {_id:orderId ,'products._id':productId},
             { $set: { "products.$.status": status } }
         )
 
+        res.status(200).json({success:true})
         
     } catch (error) {
         console.log('Error in admin get orders');

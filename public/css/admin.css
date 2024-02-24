@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&family=Roboto:wght@100;200;300;400&display=swap');
+
+
 
 *{
     margin: 0;
@@ -9,6 +11,9 @@
 .wrapper{
     height: 100vh;
     width: 100vw;
+}
+.delivered{
+    color: rgb(0, 148, 0);
 }
 .btn-danger{
     padding: .8rem 1rem;
@@ -49,7 +54,7 @@
     display: flex;
     height: 4.5rem;
     width: 100%;
-    background-color:#040D12;
+    background-color:#050111;
 
     .web_logo{
      flex: 1;
@@ -940,8 +945,8 @@
     justify-content: end;
     height: 100%;
     width: 21rem;
-    border-right: 1px solid rgba(0, 0, 0, 0.338);
-    background-color:#1a061e;
+    border-right: 1px solid rgb(16, 16, 46);
+    background-color:#0b0918;
 }
 .left_bar{
     height: 100%;
@@ -954,7 +959,7 @@
     width: 100%;
     display: flex;
     font-family: 'Poppins',sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     cursor: pointer;
     gap: .8rem;
     padding-left: 1rem;
@@ -1000,14 +1005,14 @@
         align-items: center;
     }
     .home_frame{
-        width: 68rem;
-        height: 40rem;
-        border:  1px solid rgba(0, 0, 0, 0.478);
+        width: 100%;
+        height: 100%;
+        border:  1px solid rgba(0, 0, 0, 0.313);
     }
     .top{
         width: 100%;
         height: 50%;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.465);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.313);
     }
     .bottom{
         display: flex;
@@ -1017,7 +1022,7 @@
     .bt_left{
         width: 50%;
         height: 100%;
-        border-right: 1px solid rgba(0, 0, 0, 0.463);
+        border-right: 1px solid rgba(0, 0, 0, 0.313);
     }
     .bt_right{
         width: 50%;
@@ -1026,9 +1031,10 @@
     h3{
         text-align: center;
         padding: 1rem;
+        font-size: .9rem;
         font-family: 'Poppins',sans-serif;
-        color: rgba(0, 0, 0, 0.707);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.438);
+        color: rgba(0, 0, 0, 0.604);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.313);
     }
 }
 
@@ -1047,9 +1053,10 @@
         flex-wrap: wrap;
     }
     .product_frame{
-        width: 70rem;
+        width: 100%;
         height: 43rem;
         margin-bottom: 1.5rem;
+        padding: 0 1rem;
     }
     .pro_top{
         position: relative;
@@ -1059,7 +1066,7 @@
         height: 10%;
     }
     .pro_top h3{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
         font-size: 1.1rem;
     }
@@ -1084,13 +1091,13 @@
         width: 100%;
     }
     table, th, td {
-        border: 1px solid rgba(88, 88, 88, 0.77);
+        border: 1px solid rgba(0, 0, 0, 0.215);
         border-collapse: collapse;
       }
     th{
         background-color: #1B2430;
         color: white;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 500;
         padding: 1em 0;
@@ -1110,9 +1117,8 @@
     td{
         text-align: center;
         padding: 1.6rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
-        background-color: rgba(250, 235, 215, 0.408);
 
     }
     .bi-pencil-square{
@@ -1150,7 +1156,7 @@
         padding: 0 1rem;
     }
     .product_frame{
-        width: 70rem;
+        width: 100%;
         height: 43rem;
         margin-bottom: 1.5rem;
     }
@@ -1219,15 +1225,14 @@
         table-layout: fixed;
     }
     table, th, td {
-        border: 1px solid rgba(88, 88, 88, 0.59);
+        border: 1px solid rgba(0, 0, 0, 0.215);
         border-collapse: collapse;
         overflow: hidden;
-        background-color: rgba(250, 235, 215, 0.408);
       }
     th{
         background-color: #1B2430;
         color: white;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 500;
         padding: 1em 0;
@@ -1240,10 +1245,9 @@
     td{
         text-align: center;
         padding: 1.5rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         cursor: pointer;
-        background-color: rgba(250, 235, 215, 0.408);
 
     }
     .bi-pencil-square{
@@ -1276,7 +1280,8 @@
         overflow: hidden;
     }
     .product_frame{
-        width: 70rem;
+        width: 100%;
+        padding: 0 1rem;
         height: 42rem;
     }
     .pro_top{
@@ -1287,7 +1292,7 @@
         height: 8%;
     }
     .pro_top h3{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
         font-size: 1.2rem;
     }
@@ -1295,7 +1300,7 @@
     .pro_top button{
         position: absolute;
         right: 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         text-align: end;
         border: none;
@@ -1333,16 +1338,15 @@
    
     Table{
         width: 100%;
-        background-color: rgba(250, 235, 215, 0.408);
     }
     table,td,th{
-        border: 1px solid rgba(88, 88, 88, 0.617);
+        border: 1px solid rgba(0, 0, 0, 0.215);
         border-collapse: collapse;
       }
     th{
         background-color: #1B2430;
         color: white;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 500;
         padding: 1em 0;
@@ -1355,7 +1359,7 @@
     td{
         text-align: center;
         padding: 1.5rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
 
     }
@@ -1399,8 +1403,9 @@
         overflow: hidden;
     }
     .product_frame{
-        width: 70rem;
+        width: 100%;
         height: 43rem;
+        padding: 0 1rem;
         margin-bottom: 1.5rem;
     }
     .pro_top{
@@ -1418,7 +1423,7 @@
     .pro_top button{
         position: absolute;
         right: 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         text-align: end;
         border: none;
@@ -1456,13 +1461,13 @@
         width: 100%;
     }
     table, th, td {
-        border: 1px solid rgba(88, 88, 88, 0.77);
+        border: 1px solid rgba(0, 0, 0, 0.215);
         border-collapse: collapse;
       }
     th{
         background-color: #1B2430;
         color: white;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 500;
         padding: 1em 0;
@@ -1475,9 +1480,8 @@
     td{
         text-align: center;
         padding: 1.5rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
-        background-color: rgba(250, 235, 215, 0.408);
 
     }
     .bi-pencil-square{
@@ -1510,7 +1514,8 @@
         overflow: hidden;
     }
     .product_frame{
-        width: 70rem;
+        width: 100%;
+        padding: 0 1rem;
         height: 43rem;
         margin-bottom: 1.5rem;
     }
@@ -1522,14 +1527,14 @@
         height: 10%;
     }
     .pro_top h3{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
         font-size: 1.2rem;
     }
     .pro_top button{
         position: absolute;
         right: 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         text-align: end;
         border: none;
@@ -1567,13 +1572,13 @@
         width: 100%;
     }
     table, th, td {
-        border: 1px solid rgba(88, 88, 88, 0.77);
+        border: 1px solid rgba(0, 0, 0, 0.215);
         border-collapse: collapse;
       }
     th{
         background-color: #1B2430;
         color: white;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 500;
         padding: 1em 0;
@@ -1586,9 +1591,8 @@
     td{
         text-align: center;
         padding: 1.5rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
-        background-color: rgba(250, 235, 215, 0.408);
 
     }
     .bi-pencil-square{
@@ -1625,7 +1629,7 @@
         width: 11rem;
         cursor: pointer;
         height: 13rem;
-        border: 1px solid rgba(0, 0, 0, 0.476);
+        border: 1px solid rgba(0, 0, 0, 0.239);
     }
     .top{
         display: flex;
@@ -1633,7 +1637,7 @@
         align-items: center;
         width: 100%;
         height: 70%;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.416);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.239);
     }
     .bottom{
         display: flex;
@@ -2217,7 +2221,8 @@
         overflow: hidden;
     }
     .product_frame{
-        width: 72rem;
+        width: 100%;
+        padding: 0 1rem;
         height: 42rem;
         margin-bottom: 1.5rem;
     }
@@ -2236,14 +2241,14 @@
         height: 10%;
     }
     .pro_top h3{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
         font-size: 1.2rem;
     }
     .pro_top button{
         position: absolute;
         right: 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         text-align: end;
         border: none;
@@ -2280,13 +2285,13 @@
         width: 100%;
     }
     table, th, td {
-        border: 1px solid rgba(88, 88, 88, 0.77);
+        border: 1px solid rgba(0, 0, 0, 0.215);
         border-collapse: collapse;
       }
     th{
         background-color: #1B2430;
         color: white;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 500;
         padding: 1em 0;
@@ -2299,9 +2304,8 @@
     td{
         text-align: center;
         padding: 1.5rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
-        background-color: rgba(250, 235, 215, 0.408);
 
     }
     .bi-pencil-square{
@@ -2316,6 +2320,52 @@
     }
     td button:active{
         transform: scale(.9);
+    }
+    .sort_by_div{
+        position: relative;
+        cursor: pointer;
+        display: block;
+        width: 13.5rem;
+        height: 2.4rem;
+        border: 1px solid rgba(0, 0, 0, 0.171);
+    }
+    .sort_recomended{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: sans-serif;
+        font-size: .88rem;
+        gap: .3rem;
+        color: black;
+    }
+    .sort_ul{
+        width: 100%;
+        display: none;
+        position: absolute;
+        z-index: 2;
+        border: 1px solid rgba(0, 0, 0, 0.067);
+        background-color: white;
+    }
+    .sort_ul li{
+        width: 100%;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        text-decoration: none;
+        color: black;
+        font-family: sans-serif;
+        font-size: .87rem;
+        list-style: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.079);
+    }
+    .sort_ul li:hover{
+        background-color: rgb(242, 242, 242);
+    }
+    .sort_by_div:hover .sort_ul{
+        display: block;
     }
 }
 

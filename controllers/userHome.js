@@ -6,6 +6,7 @@ const bannerModel = require('../models/banner')
 const couponModel = require('../models/coupon')
 
 const { ObjectId } = require('mongodb');
+const { Types } = require('mongoose')
 
 
 // <<<<< ============================================== HOME ========================================================= >>>>>
@@ -195,24 +196,71 @@ exports.getSubcategory = async(req,res) => {
 exports.getProductopen = async(req,res) => {
      try {
           const productId = req.query.product
-
+          const productObj = new Types.ObjectId(productId)
           const userId = req.session.userId
 
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId}) 
 
           const product = await productModel.findOne({_id:productId})
+          
+          const ratingAndReview = await productModel.aggregate([
+               {
+                    $match:{_id:productObj}
+               },{
+                    $lookup:{
+                    from:'profiles',
+                    localField:'review.userId',
+                    foreignField:'userId',
+                    as:'userProfile'
+                }},
+               {
+                    $unwind: '$userProfile'
+               },
+               {
+                    $project: {
+                        'review': 1,
+                        'userProfile': 1
+                    }
+                }
 
+          ])
+    
+          let rating = 0;
+          let reviewCount;
+
+      
+          if (ratingAndReview && ratingAndReview.length > 0 && ratingAndReview[0].review) {
+               rating = Number(ratingAndReview[0].review.reduce((accumulator, review) => {
+               return accumulator + review.rating;
+               }, 0))   
+
+               reviewCount = Number(ratingAndReview[0].review.length)
+          }
+             
           // Showing related products by subcategory finding 
 
           const relatedProducts = await productModel.aggregate([
                {$match:{subcategory:product.subcategory}}
           ]) 
 
-          res.render('user/pages/productopen',{state:'', product , relatedProducts ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+          res.render('user/pages/productopen',
+          {
+           state:'',
+           product ,
+           relatedProducts,
+           wishExist:wishExist ? wishExist.products : [],
+           ObjectId ,
+           cartExist:cartExist ? cartExist.products : [],
+           cartCount: cartExist? cartExist.products.length : 0,
+           wishCount: wishExist? wishExist.products.length : 0,
+           ratingAndReview,
+           rating,
+           reviewCount
+          })
           
      }catch (error) {
-          console.log('Error in get product open',error.message);
+          console.log('Error in get product open',error);
      }
 }
 

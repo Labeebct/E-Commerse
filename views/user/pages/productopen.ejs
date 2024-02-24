@@ -47,7 +47,7 @@
 
    
                      <!-- ===================================== -->
-                     <div class="top_rating"><span style="font-size: 1.3rem;">5</span><i class="bi top_star bi-star-fill"></i><span style="font-size: .7rem; font-family: 'Poppins',sans-serif;">Out of <span>4</span> Reviews</span></div>
+                     <div class="top_rating"><span style="font-size: 1.3rem;"><%= rating %></span><i class="bi top_star bi-star-fill"></i><span style="font-size: .7rem; font-family: 'Poppins',sans-serif;">Out of <span><%= reviewCount %></span> Reviews</span></div>
                      
                      <!-- =========================================================== -->
                      <li class="size_li">
@@ -91,6 +91,7 @@
                               <% for (let i = 1; i<=product.stock ; i++) { %>
                                  <option value="<%= i %>">Qty:<%= i %></option>
                              <% } %>
+                             
                            </select>
 
                            <% } %>
@@ -228,22 +229,33 @@
            <div class="product_frame_related">
 
             <div class="product_top">Ratings & Reviews</div>
-            <h4 class="rating_number">4.5</h4>
-            <h6 class="basedon_tex">Based on <span>23</span> Reviews</h6>
+            <h4 class="rating_number"><%= rating %></h4>
+            <h6 class="basedon_tex">Based on <span><%= reviewCount %></span> Reviews</h6>
+
+            <% if(reviewCount > 0) { %>
 
             <div class="product_bottom product_review">
 
+               <% ratingAndReview.forEach((ratings)=>{ %>
+               
+                  <% ratings.review.forEach((reviews)=>{ %>
                <div class="review_frame">
                   <div class="user_img_div">
-                     <img class="user_img" src="/profile-image/14-02-12-47-06-20221225_212223.jpg" alt="">
+                     <img class="user_img" src="<%= ratings.userProfile.photo  %>" alt="">
                      </div>
-                     <div class="user_review">
-                     <span class="star_rating"><span>5</span><i class="bi bi-star-fill"></i></span>
-                     <p class="rating_para">Very worst bad</p>
+                     <div class="user_review">  
+                     <span class="star_rating"><span><%= reviews.rating %></span><i class="bi bi-star-fill"></i></span>
+                     <p class="rating_para"><%= reviews.review %></p>
                   </div>
                </div>
 
-        </div>
+               <% }) %>
+               <% }) %>
+               
+            </div>
+            
+            <% } %>
+            
         </div>
 
               

@@ -34,7 +34,7 @@
                                 <td><%= user.username %></td>
                                 <td><%= user.email %></td>
                                 <td><%= user.mobilenum %></td>
-                                <td>1</td>
+                                <td><%= user.userOrders[0] && user.userOrders[0].products && user.userOrders[0].products.length > 0 ? user.userOrders[0].products.length : 0  %></td>
                                 <td><%= user.regdate %></td>
                                 <td><%= user.verified ? "TRUE" : "FALSE" %></td>
                                 <td class="block_td<%= user._id %>"><%= user.blocked? 'BLOCKED' : 'ACTIVE' %></td>

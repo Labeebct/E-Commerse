@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 
+const productModel = require('../models/products')
 const signupModel = require('../models/signup')
 const messageModel = require('../models/message')
 const wishlistModel = require('../models/wishlist')
@@ -160,7 +161,7 @@ exports.getAdress = async(req,res) => {
         as:'userProfile'
     }}
     ])
-    
+
     const userProfile = userAddress.length > 0 ? userAddress[0].userProfile[0] : null //checking user profile exist
 
 
@@ -350,6 +351,33 @@ exports.posEditAddress = async(req,res) => {
 
 
 
+exports.postRatingReview = async(req,res) =>{
+    try {
+        const userId = new Types.ObjectId(req.session.userId)
+        const productId = new Types.ObjectId(req.query.productId)
+
+        const { rating , review } = req.body
+
+        const ratingObj = {
+            userId, 
+            productId,
+            rating,
+            review,
+        } 
+
+        await productModel.updateOne(
+            {_id:productId},
+            {$push:{review:ratingObj}}
+        )
+
+        res.status(200).json({success:true})
+        
+    } catch (error) {
+        console.log('Error in post rating and review',error);
+    }
+}
+
+
 
 
 
@@ -394,8 +422,8 @@ exports.getOrder = async(req,res) => {
         
     const userId = req.session.userId
     const findOrder = await orderModel.findOne({userId}).populate('products.productId')
-    const userOrders = findOrder? findOrder.products : []  
-   
+    const userOrders = findOrder? findOrder.products : [] 
+
     // Passing wishlist and cart counts
 
     const wishExist = await wishlistModel.findOne({userId})
@@ -422,8 +450,7 @@ exports.getOrder = async(req,res) => {
 exports.getOrderOpen = async(req,res) => {
 
     const userId = req.session.userId
-
-    const orderId = req.query.orderId
+    const orderId = req.query.orderId 
 
     if(!req.session.loggedin){
         return res.redirect('/login')
@@ -434,6 +461,17 @@ exports.getOrderOpen = async(req,res) => {
     const findOrder = await orderModel.findOne({ userId }).populate('products.productId')
 
     const userOrder = findOrder.products.find((order)=> order._id == orderId)
+
+    const reviewExist = await productModel.findOne(
+        {
+            'review.productId': userOrder.productId._id,
+            'review.userId': userId
+        }
+    );
+
+    const userRating = reviewExist? reviewExist.review.find((rating)=>rating.userId = userId) : ''
+
+
     const shippAddress =  profileExist.newadress.find((address) => address._id == userOrder.shipping_adress )
 
     // Passing wishlist and cart counts
@@ -448,7 +486,39 @@ exports.getOrderOpen = async(req,res) => {
      cartCount: cartExist? cartExist.products.length : 0,
      wishCount: wishExist? wishExist.products.length : 0,
      userOrder,
-     shippAddress
+     shippAddress,
+     reviewExist,
+     userRating
     })
 }
 
+
+exports.putCancelorder = async(req,res) => {
+    try {
+
+        const userId = req.session.userId
+
+        const productId = req.body.productId
+
+
+       const updateStatus = await orderModel.updateOne(
+            {userId ,'products._id':productId},
+            { $set: { "products.$.status": 'cancelled' } }
+        )
+        const findOrder = await orderModel.findOne({userId});
+        const findProduct = findOrder.products.find((product)=> product._id == productId)
+        
+        await productModel.updateOne(
+            {_id:productId},
+            {$inc:{stock:+findProduct.quantity}}
+          )
+
+        if(updateStatus){
+            res.status(200).json({success:true})
+        }
+
+        
+    } catch (error) {
+        console.log('Error in admin get orders',error);
+    }
+}

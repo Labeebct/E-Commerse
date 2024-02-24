@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const controller = require('../controllers/admin')
+const chartController = require('../controllers/charts')
 
 
 const upload = require('../middleware/multer')
@@ -147,16 +148,19 @@ router.get('/messages',controller.getMessages)
 router.get('/messages/user_message/:id',controller.getUsermessage)
 
 
-
+// ORDERS -----------------------------
 
 
 router.get('/orders_list',controller.getOrders)
 router.put('/change_order_status',controller.getOrderstatus)
 
-router.get('/customer/order_list/:id')
 
 
+// CHARTS -----------------------------
 
+router.get('/sales_chart',chartController.getSaleschart)
+router.get('/customers_chart',chartController.getCustomerschart)
+router.get('/stocks_chart',chartController.getStockchart)
 
 
 

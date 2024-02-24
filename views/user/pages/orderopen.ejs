@@ -39,18 +39,45 @@
                       <p class="discount"><%= Math.round(100 - (userOrder.productId.newprice / userOrder.productId.oldprice * 100)) %>%</p>
                    </div> 
                   </div>
-              </div>
-              <div class="order_status status<%= userOrder._id %>"><%= userOrder.status.toUpperCase() %></div>
+               </div>
+               <div class="order_cancel">
+                <button class="cancel_Order_btn" onclick="cancelOrder(event,'<%= userOrder._id %>')">
+                  <%= userOrder.status == 'cancelled' ? 'ORDER CANCELLED' : 'CANCEL ORDER'%>
+               </button>
+               </div>
+              <!-- <div class="order_status status<%= userOrder._id %>"><%= userOrder.status.toUpperCase() %></div> -->
         </div>
 
+
+        <div class="review_exist" style="display: none;"><%- JSON.stringify(reviewExist) %></div>
 
         <div class="order_frames review_div">
-           <div class="reviewproduct">Rate your Product</div>
+           <div class="reviewproduct">
+            <p>Rate your Product</p>
+            <div class="rating_stars">
+               <% if(reviewExist){ %>
+                  <% for (let i = 1; i<=userRating.rating ; i++) { %>
+                     <i value="<%= i %>" class="bi bi-star-fill"></i>
+                 <% } %>
+                 <% for (let i = userRating.rating + 1; i <= 5; i++) { %>
+                  <i value="<%= i %>" class="bi bi-star"></i>
+              <% } %>
+               <% }else{ %>
+               <i value="1" class="bi rate_star bi-star"></i>
+               <i value="2" class="bi rate_star bi-star"></i>
+               <i value="3" class="bi rate_star bi-star"></i>
+               <i value="4" class="bi rate_star bi-star"></i>
+               <i value="5" class="bi rate_star bi-star"></i>
+               <% } %>
+            </div>
+           </div>
            <div class="review_frame">
             <textarea class="review_textarea" placeholder="Review your Product here.." spellcheck="false"></textarea>
-            <button class="review_submit_btn" >Submit Review</button>
+            <button type="button" onclick="submitReview('<%= userOrder.productId._id %>')" class="review_submit_btn" >Submit Review</button>
            </div>
         </div>
+
+
 
         </div>
 
@@ -58,15 +85,20 @@
 
         </div>
 
-
-<script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
 
 
 const rateProduct = document.querySelector('.reviewproduct')
 const reviewProduct = document.querySelector('.review_frame')
+const review = document.querySelector('.review_exist').innerHTML
+const reviewExist = JSON.parse(review)
+
+
 rateProduct.addEventListener('click',()=>{
+   if(!reviewExist){
    reviewProduct.style.display = 'block'
-   reviewProduct.style.height = '10rem' 
+   reviewProduct.style.height = '10rem'
+   }
 })
 
 
@@ -92,8 +124,115 @@ document.addEventListener('DOMContentLoaded',()=>{
       }
       
    })
+
+
    
-   </script>
+const cancelOrder = async(event,productId) =>{
+    event.preventDefault()
+    event.stopPropagation()   
+    
+    const orderBtn = document.querySelector('.cancel_Order_btn')
+
+    if(orderBtn.textContent !== 'ORDER CANCELLED'){
+
+       const response = await fetch(`/cancel_order`,{
+            method:'PUT',
+            headers:{
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({productId})
+        })
+    
+        const result = await response.json()
+    
+        if(result.success){
+          orderBtn.textContent = 'ORDER CANCELLED'
+        }
+
+    }
+
+
+
+}
+
+
+let productRating = 0;
+
+const stars = document.querySelectorAll('.rate_star')
+stars.forEach((star,index)=>{
+   star.addEventListener('click',(e)=>{
+     const rating = parseInt(e.target.getAttribute('value'))
+
+      if (star.classList.contains('bi-star')) {
+            star.classList.replace('bi-star', 'bi-star-fill');
+        } else {
+            star.classList.replace('bi-star-fill', 'bi-star');
+        }
+
+        for (let i = 0; i < index+1; i++) {
+           stars[i].classList.replace('bi-star', 'bi-star-fill');
+         }
+         
+         for (let i = index+1; i < stars.length; i++) {
+            stars[i].classList.replace('bi-star-fill', 'bi-star');
+        }
+
+        productRating = Number(rating)
+   })
+})
+
+
+async function submitReview(productId){
+   try {
+
+      const textArea = document.querySelector('.review_textarea')
+      const review =textArea.value
+
+      if(!review){
+         textArea.value = 'Please provide a review about product'
+         textArea.style.color = 'red'
+         setTimeout(() => {
+            textArea.value = ''
+            textArea.style.color = ''
+         }, 2000);
+      }
+      else if(review.length < 5){
+         textArea.value = 'Please share more information'
+         textArea.style.color = 'red'
+         setTimeout(() => {
+            textArea.value = ''
+            textArea.style.color = ''
+         }, 2000);
+      }
+      else{
+          const respose = await fetch(`/ratind_and_review?productId=${productId}`,{
+            method:'POST',
+            headers:{
+               'Content-Type':'application/json'
+            },
+            body:JSON.stringify({review,rating:productRating})
+          })
+          const result = await respose.json()
+          if(result.success){
+            Swal.fire({
+            title: "Thanks!",
+            text: "Thank you for your review",
+            icon: "success"
+            });
+            reviewProduct.style.display = 'none'
+            reviewProduct.style.height = '0rem'
+            reviewExist=true 
+          }
+      }
+
+      
+   } catch (error) {
+      console.log('Error in fetching product rating',error);
+   }
+}
+
+
+</script>
 <script src="/javascript/product-open.js"></script>
 
 <%- include('../../common/end.ejs') %>

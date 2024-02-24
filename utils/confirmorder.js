@@ -87,7 +87,7 @@ const verify = async(postOtp,res,req) => {
             {userId,"products.productId": product.productId._id },
             {$pull:{products:{productId:product.productId._id}}}  // Removing ordered product from cart
           )
-
+          
           await productModel.updateOne(
             {_id:product.productId._id},
             {$inc:{stock:-product.quantity}}
