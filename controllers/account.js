@@ -7,6 +7,7 @@ const wishlistModel = require('../models/wishlist')
 const cartModel = require('../models/cart')
 const profileModel = require('../models/profile')
 const orderModel = require('../models/order')
+const {userIssue} = require('../utils/userIssue')
 const { Types } = require('mongoose')
 const fs = require('fs')
 
@@ -112,6 +113,7 @@ exports.postContactus = async(req,res) => {
        //Storing user message to store message to show for admins
 
        await messageModel.create(req.body)
+       userIssue(req.body)
        res.status(200).json({success:true})
 
         

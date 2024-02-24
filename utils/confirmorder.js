@@ -39,7 +39,27 @@ async function orderConfirm(userMail) {
         from: 'ctlabeebthaliyil@gmail.com', 
         to: userMail,
         subject: "Order Confirmation",
-        text: `Your secret code for the order confirmation in LABIO is ${otp}.Please don't share this code with anyone else. `
+        text: `
+        Subject: Order Confirmation: Your Secret Code for LABIO
+
+        Dear ${userMail},
+
+        We're excited to confirm your recent order with LABIO! As part of our commitment to ensuring the security of your transactions, we've implemented an additional layer of verification.
+
+        Your secret code for order confirmation is: ${otp}
+
+        Please keep this code confidential and refrain from sharing it with anyone else. This code is crucial for confirming your order and ensuring its security.
+
+        If you have any questions or concerns regarding your order or this secret code, please don't hesitate to reach out to our customer support team at [support email].
+
+        Thank you for choosing LABIO!
+
+        Warm regards,
+
+
+        Labeeb ct
+        LABIO Customer Support Team
+        `
 
       });
       

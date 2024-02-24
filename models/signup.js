@@ -28,6 +28,6 @@ const SignupDatas = new Schema({
   regdate:{
     type:String,
   }
-});
+},{ timestamps: true });
 
 module.exports = new mongoose.model('signupDatas',SignupDatas)

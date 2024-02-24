@@ -69,6 +69,6 @@ const productDatas = new Schema({
     required: true
   },
   review:[reviewandrating]
-});
+},{ timestamps: true });
 
 module.exports = new mongoose.model('products', productDatas)

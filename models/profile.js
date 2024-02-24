@@ -85,7 +85,7 @@ const profileSchema = new Schema({
     userId:{
       type: Schema.Types.ObjectId,
       required: true
-   } }); 
+   } },{ timestamps: true }); 
 
 
 module.exports = new mongoose.model('profile',profileSchema)

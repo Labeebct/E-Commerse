@@ -31,7 +31,7 @@ const couponSchema = new Schema({
             type:Date,
             required:true
         }
-    }); 
+    },{ timestamps: true }); 
 
 
  couponSchema.index({ enddate: 1 }, { expireAfterSeconds: 0 });

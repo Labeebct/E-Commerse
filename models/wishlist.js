@@ -17,7 +17,7 @@ const wishSchema = new Schema({
     required:true
    },
    products:[wishElements]
-})
+},{ timestamps: true })
 
 
 

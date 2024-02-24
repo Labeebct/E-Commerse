@@ -28,7 +28,7 @@ const bannerShema = new Schema({
         type:Date,
         required:true
     }
-})
+},{ timestamps: true })
 
 
 bannerShema.index({ enddate: 1 }, { expireAfterSeconds: 0 });

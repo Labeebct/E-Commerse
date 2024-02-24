@@ -51,7 +51,7 @@ const orderSchema = new Schema({
       },
       products: [productObj]
     
-}); 
+},{ timestamps: true }); 
 
 
 
