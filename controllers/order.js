@@ -5,6 +5,17 @@ const profileModel = require('../models/profile')
 const signupModel = require('../models/signup')
 const couponModel = require('../models/coupon')
 const orderModel = require('../models/order')
+
+const crypto = require('crypto');
+const Razorpay = require('razorpay');
+
+
+const razorpay = new Razorpay({
+    key_id: process.env.KEY_ID,
+    key_secret: process.env.KEY_SECRET
+});
+
+
 const { ObjectId } = require('mongodb');
 const { Types } = require('mongoose')
 
@@ -13,7 +24,7 @@ const {orderConfirm , verify} = require('../utils/confirmorder')
 
 const profile = require('../models/profile')
 
-
+  
 
 
 exports.getCheckout = async(req,res) => {
@@ -242,27 +253,67 @@ exports.getSummary = async(req,res) => {
 
 
 
-exports.postProceedtoPay = (req,res) => {
+exports.postProceedtoPay = async(req,res) => {
   try {
     
     const order = req.session.order
     const email = req.session.email
+    const { totalamount} = req.session.order;
 
-    if(order.paymentmethode === 'card'){
-      res.send('cardddddd')
-    }
-    else if(order.paymentmethode === 'upi'){
-      res.send('upiiii')
+    if(order.paymentmethode === 'razorpay'){
+
+      const amount = req.session.order.totalamount
+
+      const amountInPaise = amount * 100; 
+
+      const currency = 'INR';
+      const options = {
+          amount: amountInPaise,
+          currency: currency
+      };
+  
+      const response = await razorpay.orders.create(options);  
+      res.status(200).json({order:response})
+
     }
     else{
-      orderConfirm(email)
-      res.redirect('/confirm_order')
+      orderConfirm(email)   
+      res.status(200).json({cashondelivery:true})
     }
 
   } catch (error) {
     console.log('Error in proceed to pay',error);
   }
 }
+
+       
+       
+exports.postRazorpay = async(req,res) => {
+
+  try {
+    const email = req.session.email
+
+    const {response,order} = req.body
+
+    let hmac = crypto.createHmac('sha256',process.env.KEY_SECRET)
+    hmac.update(response.razorpay_order_id + '|' + response.razorpay_payment_id)
+    hmac = hmac.digest('hex')
+
+    if(hmac==response.razorpay_signature){
+      console.log('Payment success');
+      orderConfirm(email) 
+      res.status(200).json({success:true})
+    }else{ 
+      console.log('Payment Failed');
+      res.status(276).json({success:false})
+    }    
+
+  } catch (error) {
+      console.error('Error creating razorpay order:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
 
 
 

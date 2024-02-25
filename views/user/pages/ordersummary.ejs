@@ -11,6 +11,8 @@
 
                   <% orderProductDetails.forEach((list)=>{ %>
 
+                    <div class="singleproduct" style="display: none;"><%- JSON.stringify(list.productId.newprice) %></div>
+
                     <div class="product" style="pointer-events: none;">
                         <div class="image_sec"><img src="<%= list.productId.productimg[0] %>" style="width: 11rem;" alt=""></div>
                         <div class="discription_sec">
@@ -98,11 +100,11 @@
       <div class="checkouts_frame checkout_total_price">
          <h3>SUMMARY</h3>
          <div class="summary_frame">
-            <p>Subtotal <span><i class="bi bi-currency-rupee"></i><%= cartTotal %></span></p>
+            <p>Subtotal <span><i class="bi bi-currency-rupee"></i><spa class="subTotal"><%= cartTotal %></spa></span></p>
                 <p>Shipping <span style="color: rgb(0, 160, 0);">FREE</span></p>
                 <p>Coupon <span><%= couponDiscount? '-'+ couponDiscount : 'Nill' %></span></p>
                 <p>Order Total <span><i class="bi bi-currency-rupee"></i><%= orderTotal %></span></p>
-                <button class="proceed_btn" onclick="window.location.href = '/proceed_to_pay' ">PROCEED TO PAY</button>
+                <button class="proceed_btn" type="button">PROCEED TO PAY</button>
                     </div>
                 </div>
             </div>
@@ -110,26 +112,112 @@
 
 <%- include('../../common/footer.ejs') %>
     </div>
+   
     
+<button id="rzp-button1">Pay</button>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 <script>
 
+const singleProductPrice = JSON.parse(document.querySelector('.singleproduct').innerHTML)
+const subTotal = document.querySelector('.subTotal')
 
-const dropBtn = document.querySelector('.droup_right_btn')
-const plusIcon = document.querySelector('.plus_btn')
-const dropFrame = document.querySelector('.adrees_add_drop')
-
-dropBtn.addEventListener('click',()=>{
-if(plusIcon.classList.contains('bi-plus')){
-    plusIcon.classList.replace('bi-plus','bi-dash-lg')
-    dropFrame.style.bottom = '3.5rem'
-}
-else{
-    plusIcon.classList.replace('bi-dash-lg','bi-plus')
-    dropFrame.style.bottom = '27rem'
+if(subTotal.innerHTML == 0){
+    subTotal.innerHTML = singleProductPrice
 }
 
+
+const proceed_btn = document.querySelector('.proceed_btn')
+
+proceed_btn.addEventListener('click',async(e)=>{
+
+    e.preventDefault()
+
+    try {
+
+        const response = await fetch('/proceed_to_pay',{
+            method:'POST',
+            headers:{
+                'Content-Type':'application/json'
+            }
+        })
+
+        const result = await response.json()
+        
+        if(result.cashondelivery){  
+          window.location.href = '/confirm_order'
+        }
+        else{
+            const order = result.order
+
+            const amountInRupees = order.amount;
+            const amountInPaise = amountInRupees * 100; 
+
+            const options = {
+            "key": "rzp_test_QkuyEncwGctTLt",
+            "amount": amountInPaise, 
+            "currency": "INR",
+            "name": "LABIO MART",
+            "description": "Test Transaction",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7tFc6iphTkXLeFLe4FyL1mGf_Fx9632ta6w&usqp=CAU",
+            "order_id": order.id,
+            "handler": function (response) {
+                verifyPayment(response,order)
+            },
+            "prefill": {
+                "name": "Labeeb ct",
+                "email": "ctlabeebthaliyil@gmail.com",
+                "contact": "8590471530" 
+            },
+            "notes": {
+                "address": "Labio Mart Office"
+            },
+            "theme": {
+                "color": "#FF0000"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+
+        async function verifyPayment(response,order){
+            try {
+
+                const veryfyResponse = await fetch('/veryfy_payment',{
+                    method:'POST',
+                    headers:{
+                        'Content-Type':'application/json'
+                    },
+                    body:JSON.stringify({response,order})
+                })
+
+                const result = await veryfyResponse.json()
+                if(result.success){
+                    window.location.href = '/confirm_order'
+                }else{
+                    Swal.fire({
+                    title: "Payment Failed",
+                    text: "You clicked the button!",
+                    icon: "error"
+                    });
+                    setTimeout(() => {
+                        window.location.href = '/summary'
+                    }, 1000);
+                }
+                
+            } catch (error) {
+                console.log('Error in verifyPayment',error);
+            }
+        }
+
+
+        }
+
+    } catch (error) {
+        console.log('Erro in procced to pay',error);
+    }
 })
+
 
 
 </script>

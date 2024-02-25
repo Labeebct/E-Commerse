@@ -6,7 +6,6 @@ const sendingEmail = process.env.GMAIL
 const appPassword = process.env.APP_PASSWORD
 
 
-
 const transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -27,12 +26,12 @@ async function userIssue(message) {
         subject: `${message.username} Reported: ${message.subject}`,
         text:`
         An issue reported by one of our users. Details are provided below:
-
         User Name: ${message.username}
         User Email: ${message.email}
         Issue Title: ${message.subject}
         Description: ${message.message}
 
+        Better to Take Necessory action.
       `
 
       });

@@ -130,7 +130,9 @@ router.get('/confirm_order',orderController.getConfirmOtp)
 router.post('/confirm_order_otp',orderController.postConfirmOtp)
 
 
-router.get('/proceed_to_pay',orderController.postProceedtoPay)
+router.post('/proceed_to_pay',orderController.postProceedtoPay)
+router.post('/veryfy_payment',orderController.postRazorpay)
+
 
 router.post('/checkout/add_new_adress',orderController.postAddnewadress)
 

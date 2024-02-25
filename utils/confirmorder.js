@@ -44,8 +44,6 @@ async function orderConfirm(userMail) {
 
         Dear ${userMail},
 
-        We're excited to confirm your recent order with LABIO! As part of our commitment to ensuring the security of your transactions, we've implemented an additional layer of verification.
-
         Your secret code for order confirmation is: ${otp}
 
         Please keep this code confidential and refrain from sharing it with anyone else. This code is crucial for confirming your order and ensuring its security.
