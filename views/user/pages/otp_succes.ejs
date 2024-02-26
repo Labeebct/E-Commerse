@@ -10,9 +10,9 @@
   </div>
 </div>
 
+<% if(success) { %>
 <script>
   
-  <% if(success) { %>
 
 
     setTimeout(() => {
@@ -20,8 +20,8 @@
       window.location.href = '/login'
     }, 1000);
 
-   <% } %>
-
-</script>
+    
+  </script>
+    <% } %>
 
 <%- include('../../common/end.ejs') %>

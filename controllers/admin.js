@@ -11,6 +11,7 @@ const couponModel = require('../models/coupon')
 const messageModel = require('../models/message')
 const orderModel = require('../models/order')
 const  {blockMessage,unblockMsg} = require('../utils/blockmsg')
+const { deliveredMsg , sippedMsg } = require('../utils/orderStatus')
 
 
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
@@ -1194,7 +1195,8 @@ exports.getOrders = async(req,res) => {
 
         const state = 'orders' 
         const status = req.query.status
-        console.log(status);
+
+
         if(status=='all'){
             orders = await orderModel.aggregate([
                 { $unwind: "$products" },
@@ -1248,6 +1250,10 @@ exports.getOrders = async(req,res) => {
                     }
                 }
             ])
+
+
+
+
         }     
 
         res.render('admin/pages/orders', { state , orders})
@@ -1263,13 +1269,22 @@ exports.getOrderstatus = async(req,res) => {
 
         const orderId = req.query.orderId
         const productId = req.query.productId
-
+        const userId = req.query.userId
         const status = req.body.status
+        const findUser = await signupModel.findOne({_id:userId})
+        
 
        const updateStatus = await orderModel.updateOne(
             {_id:orderId ,'products._id':productId},
             { $set: { "products.$.status": status } }
         )
+
+        if(status=='shipped'){
+            sippedMsg(findUser)
+        }
+        else if(status=='delivered'){
+            deliveredMsg(findUser)
+        }
 
         res.status(200).json({success:true})
         

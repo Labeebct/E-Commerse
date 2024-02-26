@@ -68,6 +68,7 @@ exports.postUpdatepassword = async(req,res) => {
         }
         
     } catch (error) {
+        res.status(500).send('Internal Server Error')
         console.log('Error in post update password',error.message);
     }
 }
@@ -118,6 +119,7 @@ exports.postContactus = async(req,res) => {
 
         
     } catch (error) {
+        res.status(500).send('Internal Server Error')
         console.log('Error in post contact us',error.message);
     }
 
@@ -248,6 +250,7 @@ exports.postAddress = async(req,res) => {
 
                  
     } catch (error) {
+        res.status(500).send('Internal Server Error')
         console.log('Error in post address',error.message);
     }
 }         
@@ -343,6 +346,7 @@ exports.posEditAddress = async(req,res) => {
     }
         
     } catch (error) {
+        res.status(500).send('Internal Server Error')
         console.log('Error in post edit address',error);
     }
 
@@ -375,6 +379,7 @@ exports.postRatingReview = async(req,res) =>{
         res.status(200).json({success:true})
         
     } catch (error) {
+        res.status(500).send('Internal Server Error')
         console.log('Error in post rating and review',error);
     }
 }
@@ -441,6 +446,7 @@ exports.getOrder = async(req,res) => {
     })
 
     } catch (error) {
+        res.status(500).send('Internal Server Error')
         console.log('Error in get order page',error);    
     }
 }       
@@ -524,6 +530,7 @@ exports.putCancelorder = async(req,res) => {
 
         
     } catch (error) {
+        res.status(500).send('Internal Server Error')
         console.log('Error in admin get orders',error);
     }
 }

@@ -164,7 +164,7 @@ exports.getIncreaseQuantity = async(req,res) =>{
             
         const cart = await cartModel.find({userId}).populate('products.productId')
 
-        const cartProducts = cart ? cart[0].products : []
+        const cartProducts = cart && cart.length > 0 ? cart[0].products : []   
         
         const findProduct = cartProducts.find((products) => products.productId._id == productIdin)
         const findSingleProduct = await productModel.findOne({_id:productIdin})

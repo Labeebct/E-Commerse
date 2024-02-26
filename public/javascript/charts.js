@@ -1,16 +1,20 @@
-
 fetch('/admin/sales_chart')
-  .then((response) => response.json())
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Failed to fetch data');
+    }
+    return response.json();
+  })
   .then((result) => {
 
-    const ctx = document.getElementById('salesChart').getContext('2d')
+    const ctx = document.getElementById('salesChart').getContext('2d');
     new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['JANUARY', 'MARCH', 'MAY', 'JULY', 'SEPTEMBER', 'DECEMBER'],
+        labels: ['JAN-FEB', 'MAR-APR', 'MAY-JUN', 'JUL-AUG', 'SEP-OCT', 'NOV-DEC'],
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'Number of Orders',
+          data: result.countData,
           borderWidth: 1
         }]
       },
@@ -22,31 +26,36 @@ fetch('/admin/sales_chart')
         }
       }
     });
-
   })
-  .catch((err) => console.log('Error in fetch sales chart', err))
+  .catch((err) => console.log('Error in fetch sales chart', err));
 
+  
 
 
 fetch('/admin/customers_chart')
   .then((response) => response.json())
   .then((result) => {
 
-    const ctxCustomers = document.getElementById('customerChart').getContext('2d')
+    const countData = result.resultData.map(item => item.count);
+
+    const labels = ['JAN-FEB', 'MAR-APR', 'MAY-JUN', 'JUL-AUG', 'SEP-OCT', 'NOV-DEC'];
+    
+    const ctxCustomers = document.getElementById('customerChart').getContext('2d');
+    
     new Chart(ctxCustomers, {
       type: 'bar',
       data: {
-        labels: ['JANUARY', 'MARCH', 'MAY', 'JULY', 'SEPTEMBER', 'DECEMBER'],
+        labels: labels,
         datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
+          label: 'Number of Users',
+          data: countData,
           borderWidth: 1
         }]
       },
       options: {
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true   
           }
         }
       }
@@ -54,6 +63,8 @@ fetch('/admin/customers_chart')
 
   })
   .catch((err) => console.log('Error in fetch sales chart', err))
+
+
 
 
 

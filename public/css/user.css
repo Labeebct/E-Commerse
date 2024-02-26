@@ -4955,7 +4955,7 @@ word-wrap: break-word;
         width: 100%;
         height: 100%;
         font-family: 'Roboto',sans-serif;
-        font-size: .7rem;
+        font-size: .9rem;
     }
     .bi-plus,.bi-dash-lg{
         font-size: 1.8rem;
@@ -5635,6 +5635,88 @@ word-wrap: break-word;
 .bi-star:active{
     transform: scale(.9);
 }
+
+}
+
+.order_success_wrapper{
+    .order_success_content{
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 4.5rem);
+        display: flex ;
+        justify-content: center;
+        align-items: center;
+    }
+    .login_to_view{
+        position: absolute;
+        top: 10%;
+        left: 25%;
+        background-color: rgba(128, 128, 128, 0.143);
+        width: 100%;
+        height: 100%;
+        background-color: white;
+    }
+    .bi-check{
+        color: rgb(0, 142, 0);
+        font-size: 2rem;
+
+    }
+    .bi-x{
+        color: red;
+        font-size: 2rem;
+
+    }
+    .cart_png{
+        width: 12rem;
+    }
+    .log_frame{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.9rem;
+        padding-top: 3rem;
+        width: 50em;
+        height: 37rem;
+        box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.226);
+    }
+    .count_time_p{
+        font-size: .8rem;
+        color: rgba(0, 0, 0, 0.866);
+    }
+    .log_frame h3{
+        font-size: 1.4rem;
+        font-family: 'Roboto',sans-serif;
+        color: rgba(0, 0, 0, 0.821);
+        letter-spacing: .1rem;
+    }
+    .log_frame p{
+        font-size: 1rem;
+        font-family: 'Roboto',sans-serif;
+        color: rgba(0, 0, 0, 0.821);
+    }
+    .login_from_wish_btn{
+        padding: 1rem 1.8rem;
+        font-family: 'Roboto',sans-serif;
+        border: 2px solid orange;
+        cursor: pointer;
+        font-weight: 600;
+        background: none;
+        font-size: 1.02rem;
+        color: #345B63;
+        letter-spacing: .1rem;
+        transition: all .4s;
+    }
+    .go_to_homebtn{
+        color: green;
+        border-color: green;
+    }
+    .go_to_odrerBtn{
+        color: red;
+        border-color: red;
+    }
+    .login_from_wish_btn:active{
+        transform: scale(.95);
+    }
 
 }
 

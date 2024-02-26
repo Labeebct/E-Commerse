@@ -52,7 +52,7 @@
                                 </td>
                                 <td>
 
-                                    <select onchange="changeStatus(event,'<%= order._id %>','<%= order.products._id %>')" class="status" name="status" id="">
+                                    <select onchange="changeStatus(event,'<%= order._id %>','<%= order.products._id %>','<%= order.userId %>')" class="status" name="status" id="">
                                         <option class="<%= order.products.status == 'delivered' ? 'delivered' : '' %>" value="<%= order.products.status %>"><%= order.products.status.toUpperCase() %></option>
                                         <option style="color: orangered;" value="confirmed">CONFIRMED</option>
                                         <option style="color: rgb(0, 0, 122);" value="shipped">SHIPPED</option>
@@ -136,7 +136,7 @@ function next()
 
 
 
-const changeStatus = async(event,orderId,productId) =>{
+const changeStatus = async(event,orderId,productId,userId) =>{
     event.preventDefault()
 
 const swalWithBootstrapButtons = Swal.mixin({
@@ -162,7 +162,7 @@ swalWithBootstrapButtons.fire({
 }).then(async(result) => {
     if (result.isConfirmed) {
 
-    const response = await fetch(`/admin/change_order_status?orderId=${orderId}&productId=${productId}`,{
+    const response = await fetch(`/admin/change_order_status?orderId=${orderId}&productId=${productId}&userId=${userId}`,{
         method:'PUT',
         headers:{
             'Content-Type':'application/json'

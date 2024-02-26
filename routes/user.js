@@ -190,7 +190,7 @@ router.get('/select_address',orderController.selectAddress)
 router.get('/apply_coupon',orderController.applyCoupon)
 
 router.get('/select_coupon',orderController.selectCoupon)
-
+router.get('/order_success',orderController.getOrderSuccess)
   
 
 

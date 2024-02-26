@@ -71,6 +71,8 @@ async function orderConfirm(userMail) {
 
 
 
+
+
 const verify = async(postOtp,res,req) => {
 
   try {
@@ -169,6 +171,7 @@ const verify = async(postOtp,res,req) => {
     console.log('Error in order save',error);
   }
 }
+
 
 
 module.exports = {orderConfirm , verify}

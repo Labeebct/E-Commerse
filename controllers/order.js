@@ -209,7 +209,7 @@ exports.getSummary = async(req,res) => {
     const wishExist = await wishlistModel.findOne({userId})
      
     const cart = await cartModel.find({userId}).populate('products.productId')
-    const cartProducts = cart ? cart[0].products : []
+    const cartProducts = cart && cart.length > 0 ? cart[0].products : []
 
     const address =  profileExist.newadress.find((address) => address._id == order.address )
     const paymentMethode = order.paymentmethode
@@ -246,7 +246,7 @@ exports.getSummary = async(req,res) => {
     })
 
   } catch (error) {
-    console.log('Error in get summary');
+    console.log('Error in get summary',error);
   }
 }
 
@@ -344,6 +344,7 @@ exports.postAddnewadress = async(req,res) =>{
     }
 }
 
+
   
 exports.selectAddress = async (req,res) =>{
     try {
@@ -407,4 +408,28 @@ exports.selectCoupon = async (req,res) =>{
     } catch (error) {
         console.log('Error in select coupon',error);    
     }
+}
+
+
+
+exports.getOrderSuccess = async(req,res) =>{
+  try {
+
+    const state = ''
+    const userId = req.session.userId
+    const findUser = await signupModel.findOne({email:req.session.email})
+
+    const cartExist = await cartModel.findOne({userId})
+    const wishExist = await wishlistModel.findOne({userId})
+
+    res.render('user/pages/order_succes',
+    {
+      state,cartCount: cartExist? cartExist.products.length : 0,
+      wishCount: wishExist? wishExist.products.length : 0,
+      findUser,
+    })
+  
+  } catch (error) {
+    console.log('Error in order success page',error);
+  }
 }
