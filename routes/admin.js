@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const adminSession = require('../middleware/adminsession')
 const controller = require('../controllers/admin')
 const chartController = require('../controllers/charts')
 
@@ -53,6 +54,7 @@ router.post('/forget_password',controller.postForgetpassword)
 
 
 
+router.use(adminSession) // ROUTES BELOW IS ONLY ACCESIBLE IF ADMIN LOGGED IN
 
 
 // <<<<< ================== HOME ====================== >>>>>
@@ -64,8 +66,7 @@ router.post('/forget_password',controller.postForgetpassword)
 // ADMIN HOME ----------------------------
 
 
-router.get('/home',controller.getHome)
-
+router.get('/home',adminSession,controller.getHome)
 
       
    
@@ -73,16 +74,16 @@ router.get('/home',controller.getHome)
 
     
 
-router.get('/products',controller.getProducts)
-router.get('/product/add_product',controller.getAddproducts)
-router.post('/product/add_product',upload.array('productimg', 20), controller.postAddproduct);
+router.get('/products',adminSession,controller.getProducts)
+router.get('/product/add_product',adminSession,controller.getAddproducts)
+router.post('/product/add_product',adminSession,upload.array('productimg', 20), controller.postAddproduct);
 
-router.get('/product/edit_product/:id',controller.getEditproduct)
-router.post('/product/edit_product/:id',upload.array('productimg', 20),controller.postEditproduct)
+router.get('/product/edit_product/:id',adminSession,controller.getEditproduct)
+router.post('/product/edit_product/:id',adminSession,upload.array('productimg', 20),controller.postEditproduct)
 
-router.delete('/product/remove_product',controller.deleteProduct)
+router.delete('/product/remove_product',adminSession,controller.deleteProduct)
 
-router.get('/product/product_deltails',controller.getOpenproduct)
+router.get('/product/product_deltails',adminSession,controller.getOpenproduct)
 
 
 
@@ -90,9 +91,9 @@ router.get('/product/product_deltails',controller.getOpenproduct)
 // USERS MANAGE -----------------------------
 
 
-router.get('/custumers',controller.getUsers)
-router.get('/custumer/:id',controller.getCustomer)
-router.delete('/custumer/remove',controller.deleteUsers)
+router.get('/custumers',adminSession,controller.getUsers)
+router.get('/custumer/:id',adminSession,controller.getCustomer)
+router.delete('/custumer/remove',adminSession,controller.deleteUsers)
 
 
 
@@ -101,27 +102,27 @@ router.delete('/custumer/remove',controller.deleteUsers)
 // CATEGORY -----------------------------
 
 
-router.get('/category',controller.getCategory)
-router.get('/category/add_category',controller.getAddcategory)
-router.post('/category/add_category',controller.postAddcategory)
-router.get('/category/edit_category/:id',controller.getEditcategory)
-router.post('/category/edit_category/:id',controller.postEditcategory)
-router.delete('/category/remove_sub_category/:id/:index',controller.deleteSubcat)
-router.delete('/category/deletecategory',controller.deletCategory)
+router.get('/category',adminSession,controller.getCategory)
+router.get('/category/add_category',adminSession,controller.getAddcategory)
+router.post('/category/add_category',adminSession,controller.postAddcategory)
+router.get('/category/edit_category/:id',adminSession,controller.getEditcategory)
+router.post('/category/edit_category/:id',adminSession,controller.postEditcategory)
+router.delete('/category/remove_sub_category/:id/:index',adminSession,controller.deleteSubcat)
+router.delete('/category/deletecategory',adminSession,controller.deletCategory)
 
 
 
 
 //BANNER -----------------------------
 
-router.get('/banners',controller.getBanners)
-router.get('/banners/add_banners',controller.getAddbanner)
-router.post('/banners/add_banners',upload.single('bannerimg'),controller.postAddbanner)
+router.get('/banners',adminSession,controller.getBanners)
+router.get('/banners/add_banners',adminSession,controller.getAddbanner)
+router.post('/banners/add_banners',adminSession,upload.single('bannerimg'),controller.postAddbanner)
 
-router.get('/banners/edit_banner/:id',controller.getEditbanner)
-router.post('/banners/edit_banner/:id',upload.single('bannerimg'),controller.postEditbanner)
+router.get('/banners/edit_banner/:id',adminSession,controller.getEditbanner)
+router.post('/banners/edit_banner/:id',adminSession,upload.single('bannerimg'),controller.postEditbanner)
 
-router.delete('/banners/remove_banners',controller.deleteBanner)
+router.delete('/banners/remove_banners',adminSession,controller.deleteBanner)
 
 
 
@@ -130,29 +131,29 @@ router.delete('/banners/remove_banners',controller.deleteBanner)
 // COUPONS -----------------------------
 
 
-router.get('/coupons',controller.getCoupons)
-router.get('/coupons/add_coupon',controller.getAddcoupons)
-router.post('/coupons/add_coupon',controller.postAddcoupons)
+router.get('/coupons',adminSession,controller.getCoupons)
+router.get('/coupons/add_coupon',adminSession,controller.getAddcoupons)
+router.post('/coupons/add_coupon',adminSession,controller.postAddcoupons)
 
-router.get('/coupons/edit_coupon/:id',controller.getEditcoupons)
-router.post('/coupons/edit_coupon/:id',controller.postEditcoupons)
+router.get('/coupons/edit_coupon/:id',adminSession,controller.getEditcoupons)
+router.post('/coupons/edit_coupon/:id',adminSession,controller.postEditcoupons)
 
-router.delete('/coupons/remove_coupon',controller.deleteCoupon)
+router.delete('/coupons/remove_coupon',adminSession,controller.deleteCoupon)
 
 
 
 
 // MESSAGES -----------------------------
 
-router.get('/messages',controller.getMessages)
-router.get('/messages/user_message/:id',controller.getUsermessage)
+router.get('/messages',adminSession,controller.getMessages)
+router.get('/messages/user_message/:id',adminSession,controller.getUsermessage)
 
 
 // ORDERS -----------------------------
 
 
-router.get('/orders_list',controller.getOrders)
-router.put('/change_order_status',controller.getOrderstatus)
+router.get('/orders_list',adminSession,controller.getOrders)
+router.put('/change_order_status',adminSession,controller.getOrderstatus)
 
 
 
@@ -162,6 +163,9 @@ router.get('/sales_chart',chartController.getSaleschart)
 router.get('/customers_chart',chartController.getCustomerschart)
 router.get('/stocks_chart',chartController.getStockchart)
 
+
+
+router.get('/logout',controller.getLogout)
 
 
 module.exports = router

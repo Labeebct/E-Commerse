@@ -52,7 +52,7 @@
                         <% } %>
                      </div>
                      <div style="display: flex; gap: .7rem; align-items: center;">
-                        <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee"></i><p class="old_price"><%= list.productId.oldprice.toLocaleString() %></p></span>
+                        <span style="display: flex; align-items: center;"><i style="color: red; font-size: .8rem;" class="bi bi-currency-rupee"></i><p class="old_price"><%= list.productId.oldprice.toLocaleString() %></p></span>
                         <span style="display: flex; align-items: center;"><i class="bi bi-currency-rupee"></i><p class="new_price new_price<%= list.productId._id %>"><%= Number(list.quantity * list.productId.newprice).toLocaleString() %></p></span>
                         <p class="discount"><%= Math.round(100 - (list.productId.newprice / list.productId.oldprice * 100)) %>%</p>
                      </div>

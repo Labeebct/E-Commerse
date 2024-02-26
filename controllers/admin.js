@@ -173,7 +173,7 @@ exports.postLogin = async(req,res) => {
          if(comparePass){
 
               if(userExist.verified){
-
+                
                 req.session.admin = true
                 return res.status(200).json({auth:true})
 
@@ -560,6 +560,7 @@ exports.getOpenproduct = async(req,res) => {
 
 
 exports.getUsers = async(req, res) => {
+    console.log("HEre")
     try {
 
         const state = 'users'
@@ -1277,3 +1278,19 @@ exports.getOrderstatus = async(req,res) => {
     }
        
 }    
+
+
+
+
+exports.getLogout = (req,res) => {
+    try {
+
+         req.session.destroy()
+         res.redirect('/admin/login')
+         
+    } catch (error) {
+         console.log('Error in logout',error);
+    }
+}
+
+

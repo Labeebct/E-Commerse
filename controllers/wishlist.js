@@ -27,7 +27,6 @@ exports.getWishlist = async(req,res) => {
               const productIds = wishExist.products.map((product)=> product.productId)
 
               const wishProducts = await productModel.find({_id:{$in:productIds}}) // Finding products that matches the  product id in wishlist  database
-              const wishCount = wishExist.products.length
 
               
               return res.render('user/pages/wishlist',{state , loggedIn:true , wishExist , wishProducts ,wishCount: wishExist? wishExist.products.length : 0,cartCount: cartExist? cartExist.products.length : 0})

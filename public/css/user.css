@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400&family=Roboto:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400&family=Roboto:wght@100&display=swap');
 
 *{
     margin: 0;
@@ -72,7 +72,7 @@ body::-webkit-scrollbar-thumb {
     .labio_text{
         color: white;
         letter-spacing: .4rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-weight: 700;
         font-size: 1.3rem;
     }
@@ -98,7 +98,7 @@ body::-webkit-scrollbar-thumb {
         outline: none;
         height: 100%;
         width: 100%;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-size: .8rem;
         padding-left: 1rem;
     }
@@ -114,7 +114,7 @@ body::-webkit-scrollbar-thumb {
         background-color:#152D35;
         letter-spacing: .02rem;
         font-weight: 600;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         font-size: .7rem;
         color: white;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.952)
@@ -133,7 +133,7 @@ body::-webkit-scrollbar-thumb {
         justify-content: center;
         align-items: center;
         font-size: .64rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         height: 1.07rem;
         width: 1.07rem;
@@ -154,7 +154,7 @@ body::-webkit-scrollbar-thumb {
         gap:.4rem;
         text-decoration: none;
         color: rgba(255, 255, 255, 0.859);
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         letter-spacing: .08rem;
         font-weight: 500;
         padding: 1rem;
@@ -193,9 +193,9 @@ body::-webkit-scrollbar-thumb {
     justify-content: end;
     height: 100%;
     width: 21rem;
-    background-color: #102127;
+    background-color: #070612;
     .active{
-        background-color: rgba(112, 112, 112, 0.677);
+        background-color: rgba(112, 112, 112, 0.151);
     }
 }
 .left_bar{
@@ -209,8 +209,8 @@ body::-webkit-scrollbar-thumb {
     color: rgba(255, 255, 255, 0.917);
     width: 100%;
     display: flex;
-    font-family: 'Poppins',sans-serif;
-    font-size: 1.1rem;
+    font-family: 'Roboto',sans-serif;
+    font-size: 1.02rem;
     cursor: pointer;
     gap: .8rem;
     padding-left: 1rem;
@@ -220,12 +220,15 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    height: 10em !important;
+    justify-content: center;
+    gap: 3rem;
+    height: 13em !important;
+    padding-right: 4rem;
 }
 .left_profile_li h3{
     font-size: 1rem;
     letter-spacing: 0.1rem;
+    margin-top: 1rem;
 }
 .left_profile_li img{
     width: 5rem;
@@ -286,7 +289,7 @@ body::-webkit-scrollbar-thumb {
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         border-left: 1px solid rgba(63, 63, 63, 0.195);
         font-weight: 700;
@@ -303,7 +306,7 @@ body::-webkit-scrollbar-thumb {
     .num_show{
         width: 80%;
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         margin: 1rem 0;
         line-height: 1.8rem;
@@ -314,7 +317,7 @@ body::-webkit-scrollbar-thumb {
         padding: .8rem 2.3rem;
         border-radius: .2rem;
         cursor: pointer;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: 2rem;
         margin-bottom: .3rem;
         border: none;
@@ -325,7 +328,7 @@ body::-webkit-scrollbar-thumb {
     }
     .err_msg{
         font-size: .9rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: #F80E0E;
     }
     input[type='submit']:active{
@@ -354,7 +357,7 @@ body::-webkit-scrollbar-thumb {
         text-align: center;
         padding: .5rem 0;
         font-size: 1.5rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         color: rgba(0, 0, 0, 0.66);
     }
     .input_frame{
@@ -375,7 +378,7 @@ body::-webkit-scrollbar-thumb {
         mix-blend-mode:darken;
     }
     .accnt_exist{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: .5rem;
         font-size: .8rem;
     }
@@ -391,7 +394,7 @@ body::-webkit-scrollbar-thumb {
         font-size: .7em;
         font-weight: 500;
         letter-spacing: .09rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: none;
         background-color: black;
         outline: none;
@@ -410,12 +413,12 @@ body::-webkit-scrollbar-thumb {
 .footer{
     width: 100%;
     height: 23rem;
-    background-color:#3F4E4F;
+    background-color:#051818;
 }
 .footer h3{
   color: white;
   letter-spacing: .4rem;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 900;
   font-size: 1.3rem;
   padding: 2.5rem 0 2rem 2rem;
@@ -431,7 +434,7 @@ text-align: start;
 letter-spacing: .03rem;
 height: 1.5rem;
 font-size: 1.1rem;
-font-family: "Poppins", sans-serif;
+font-family: "Roboto", sans-serif;
 color: white;
 font-weight: 400;
 word-wrap: break-word;
@@ -439,7 +442,7 @@ word-wrap: break-word;
 .footer table td{
 color: white;
 font-weight: 400;
-font-size: .9rem;
+font-size: .76rem;
 cursor: pointer;
 height: 2rem;
 color: rgba(255, 255, 255, 0.725);
@@ -485,7 +488,7 @@ word-wrap: break-word;
     h3{
         position: absolute;
         background-color: rgba(245,245,245,255);
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.84);
         top: 72%;
         left: 13%;
@@ -519,7 +522,7 @@ word-wrap: break-word;
     }
     .error_msg{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .91rem;
         visibility: hidden;
@@ -542,7 +545,7 @@ word-wrap: break-word;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         background-image: url('/images/signup-bg.png');
         background-position: center;
@@ -559,7 +562,7 @@ word-wrap: break-word;
         text-align: center;
         padding: 1.8rem 0;
         font-size: 1.5rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         letter-spacing: .2rem;
         color: rgba(0, 0, 0, 0.66);
     }
@@ -594,14 +597,14 @@ word-wrap: break-word;
         outline: none;
         font-size: .8rem;
         background: none;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         width: calc(100% - 3rem);
         background-color: rgba(236, 236, 236, 0.708);
     }
     .inputs::placeholder{
         color: rgba(0, 0, 0, 0.531);
         font-size: .75rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .bi-input{
         color: rgb(70, 70, 70);
@@ -613,7 +616,7 @@ word-wrap: break-word;
         font-size: .8em;
         font-weight: 500;
         letter-spacing: .09rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: none;
         background-color: black;
         outline: none;
@@ -625,7 +628,7 @@ word-wrap: break-word;
         transform: scale(.98);
     }
     .accnt_exist{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: .5rem;
         font-size: .75rem;
     }
@@ -688,7 +691,7 @@ word-wrap: break-word;
     }
     .err_msg{
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
     }
     .success{
@@ -705,7 +708,7 @@ word-wrap: break-word;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         background-image: url('/images/signup-bg.png');
         background-position: center;
@@ -722,7 +725,7 @@ word-wrap: break-word;
         text-align: center;
         padding: 1.8rem 0 5rem 0;
         font-size: 1.5rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         letter-spacing: .2rem;
         color: rgba(0, 0, 0, 0.66);
     }
@@ -757,14 +760,14 @@ word-wrap: break-word;
         outline: none;
         background: none;
         font-size: .8rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         width: calc(100% - 3rem);
         background-color: rgba(236, 236, 236, 0.708);
     }
     .inputs::placeholder{
         color: rgba(0, 0, 0, 0.531);
         font-size: .75rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .bi-input{
         color: rgb(70, 70, 70);
@@ -776,7 +779,7 @@ word-wrap: break-word;
         font-size: .7em;
         font-weight: 500;
         letter-spacing: .09rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: none;
         background-color: black;
         outline: none;
@@ -787,7 +790,7 @@ word-wrap: break-word;
         transform: scale(.98);
     }
     .accnt_exist{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: .5rem;
         font-size: .75rem;
     }
@@ -867,7 +870,7 @@ word-wrap: break-word;
     }
     .err_msg{
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
     }
     .success{
@@ -884,7 +887,7 @@ word-wrap: break-word;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         background-image: url('/images/signup-bg.png');
         background-position: center;
@@ -901,7 +904,7 @@ word-wrap: break-word;
         text-align: center;
         padding: 3rem 0 5rem 0;
         font-size: 1.4rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         color: rgba(0, 0, 0, 0.66);
     }
     .input_frame{
@@ -935,14 +938,14 @@ word-wrap: break-word;
         outline: none;
         background: none;
         font-size: .8rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         width: calc(100% - 3rem);
         background-color: rgba(236, 236, 236, 0.708);
     }
     .inputs::placeholder{
         color: rgba(0, 0, 0, 0.531);
         font-size: .75rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .bi-input{
         color: rgb(70, 70, 70);
@@ -954,7 +957,7 @@ word-wrap: break-word;
         font-size: .7em;
         font-weight: 500;
         letter-spacing: .09rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: none;
         background-color: black;
         outline: none;
@@ -966,7 +969,7 @@ word-wrap: break-word;
         transform: scale(.98);
     }
     .accnt_exist{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: .5rem;
         font-size: .75rem;
     }
@@ -982,7 +985,7 @@ word-wrap: break-word;
         
     }
     .forgot_disc{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-bottom: .4rem;
         font-size: .83rem;
         color: rgba(48, 48, 48, 0.955);
@@ -992,7 +995,7 @@ word-wrap: break-word;
         font-size: .9rem;
         padding: 1rem .5rem;
         font-weight: 600;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border-bottom: 3px solid red;
         margin-top: 2rem;
     }
@@ -1040,7 +1043,7 @@ word-wrap: break-word;
     }
     .err_msg{
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
     }
     .success{
@@ -1057,7 +1060,7 @@ word-wrap: break-word;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         background-image: url('/images/signup-bg.png');
         background-position: center;
@@ -1074,7 +1077,7 @@ word-wrap: break-word;
         text-align: center;
         padding: 3rem 0 6rem 0;
         font-size: 1.4rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         color: rgba(0, 0, 0, 0.66);
     }
     .input_frame{
@@ -1087,7 +1090,7 @@ word-wrap: break-word;
     }
     .login_frame label{
         position: absolute;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .76rem;
         left: 2rem;
         color: rgba(0, 0, 0, 0.802);
@@ -1122,14 +1125,14 @@ word-wrap: break-word;
         outline: none;
         background: none;
         font-size: .8rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         width: calc(100% - 3rem);
         background-color: rgba(236, 236, 236, 0.708);
     }
     .inputs::placeholder{
         color: rgba(0, 0, 0, 0.531);
         font-size: .75rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .bi-input{
         color: rgb(70, 70, 70);
@@ -1141,7 +1144,7 @@ word-wrap: break-word;
         font-size: .7em;
         font-weight: 500;
         letter-spacing: .09rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: none;
         background-color: black;
         outline: none;
@@ -1153,7 +1156,7 @@ word-wrap: break-word;
         transform: scale(.98);
     }
     .accnt_exist{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: .5rem;
         font-size: .75rem;
     }
@@ -1169,7 +1172,7 @@ word-wrap: break-word;
         
     }
     .forgot_disc{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-bottom: .4rem;
         font-size: .83rem;
         color: rgba(48, 48, 48, 0.955);
@@ -1179,7 +1182,7 @@ word-wrap: break-word;
         font-size: .9rem;
         padding: 1rem .5rem;
         font-weight: 600;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border-bottom: 3px solid red;
         margin-top: 2rem;
     }
@@ -1236,7 +1239,7 @@ word-wrap: break-word;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         border-left: 1px solid rgba(63, 63, 63, 0.195);
         font-weight: 700;
@@ -1253,7 +1256,7 @@ word-wrap: break-word;
     .num_show{
         width: 80%;
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         margin: 1rem 0;
         line-height: 1.8rem;
@@ -1264,7 +1267,7 @@ word-wrap: break-word;
         padding: .8rem 2.3rem;
         border-radius: .2rem;
         cursor: pointer;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: 2rem;
         margin-bottom: .3rem;
         border: none;
@@ -1275,7 +1278,7 @@ word-wrap: break-word;
     }
     .err_msg{
         font-size: .9rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: #F80E0E;
     }
     input[type='submit']:active{
@@ -1304,7 +1307,7 @@ word-wrap: break-word;
         text-align: center;
         padding: .5rem 0;
         font-size: 1.5rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         color: rgba(0, 0, 0, 0.66);
     }
     .input_frame{
@@ -1325,7 +1328,7 @@ word-wrap: break-word;
         mix-blend-mode:darken;
     }
     .accnt_exist{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: .5rem;
         font-size: .8rem;
     }
@@ -1341,7 +1344,7 @@ word-wrap: break-word;
         font-size: .7em;
         font-weight: 500;
         letter-spacing: .09rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: none;
         background-color: black;
         outline: none;
@@ -1382,7 +1385,7 @@ word-wrap: break-word;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         border-left: 1px solid rgba(63, 63, 63, 0.195);
         font-weight: 700;
@@ -1399,7 +1402,7 @@ word-wrap: break-word;
     .num_show{
         width: 80%;
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         margin: 1rem 0;
         line-height: 1.8rem;
@@ -1410,7 +1413,7 @@ word-wrap: break-word;
         padding: .8rem 2.3rem;
         border-radius: .2rem;
         cursor: pointer;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: 2rem;
         margin-bottom: .3rem;
         border: none;
@@ -1421,7 +1424,7 @@ word-wrap: break-word;
     }
     .err_msg{
         font-size: .9rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: #F80E0E;
     }
     input[type='submit']:active{
@@ -1450,7 +1453,7 @@ word-wrap: break-word;
         text-align: center;
         padding: .5rem 0;
         font-size: 1.5rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         color: rgba(0, 0, 0, 0.66);
     }
     .input_frame{
@@ -1471,7 +1474,7 @@ word-wrap: break-word;
         mix-blend-mode:darken;
     }
     .accnt_exist{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         margin-top: .5rem;
         font-size: .8rem;
     }
@@ -1487,7 +1490,7 @@ word-wrap: break-word;
         font-size: .7em;
         font-weight: 500;
         letter-spacing: .09rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: none;
         background-color: black;
         outline: none;
@@ -1557,18 +1560,18 @@ word-wrap: break-word;
     }
     .log_frame h3{
         font-size: 1.4rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
         letter-spacing: .1rem;
     }
     .log_frame p{
         font-size: 1rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
     }
     .login_from_wish_btn{
         padding: .5rem 1.8rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 2px solid orange;
         cursor: pointer;
         font-weight: 600;
@@ -1608,14 +1611,14 @@ word-wrap: break-word;
     }
     .empty_frame h3{
         font-size: 1.4rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
         letter-spacing: .1rem;
     }
     .empty_frame p{
         text-align: center;
         font-size: .9rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
     }
     .cart_empty_png{
@@ -1681,7 +1684,7 @@ word-wrap: break-word;
         padding: .3rem .4rem;
         font-size: .7rem;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 1px solid rgb(239, 40, 40);
     }
     .product_name{
@@ -1693,12 +1696,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .8rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1rem;
         font-weight: 500;
     }
@@ -1721,7 +1724,7 @@ word-wrap: break-word;
         justify-content: space-between;
         margin: 2.3rem;
         font-weight: 600;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1.1rem;
     }
     .cart_details{
@@ -1729,7 +1732,7 @@ word-wrap: break-word;
         display: flex;
         justify-content: space-between;
         font-weight: 500;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .cart_details p{
         font-size: .9rem;
@@ -1865,18 +1868,18 @@ word-wrap: break-word;
     }
     .log_frame h3{
         font-size: 1.4rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
         letter-spacing: .1rem;
     }
     .log_frame p{
         font-size: 1rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
     }
     .login_from_wish_btn{
         padding: .5rem 1.8rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 2px solid orange;
         cursor: pointer;
         font-weight: 600;
@@ -1908,14 +1911,14 @@ word-wrap: break-word;
     }
     .empty_frame h3{
         font-size: 1.4rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
         letter-spacing: .1rem;
     }
     .empty_frame p{
         text-align: center;
         font-size: .9rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.821);
     }
     .cart_empty_png{
@@ -1924,7 +1927,7 @@ word-wrap: break-word;
     }
     .my_wishlist_text{
         width: 100%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         color: rgba(0, 0, 0, 0.809);
         font-size: 1.1rem;
@@ -1997,7 +2000,7 @@ word-wrap: break-word;
     }
     .product_name{
         font-size: 1rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
         text-align: center;
     }
@@ -2009,12 +2012,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 500;
     }
@@ -2030,7 +2033,7 @@ word-wrap: break-word;
         height: 70%;
         border: none;
         background: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         color: rgba(255, 255, 255, 0.855);
         cursor: pointer;
@@ -2067,12 +2070,12 @@ word-wrap: break-word;
     .right_content h3{
         text-align: center;
         margin: 2rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         letter-spacing: .04rem;
         color: rgba(0, 0, 0, 0.814);
     }
     .right_content p{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         letter-spacing: .04rem;
         color: rgba(0, 0, 0, 0.908);
         font-size: .8rem;
@@ -2106,11 +2109,10 @@ word-wrap: break-word;
         padding: 0 1rem;
         border-radius: .2rem;
         color: rgba(0, 0, 0, 0.739);
-        background-color:#02395031;
-        border: 1px solid rgba(0, 0, 0, 0.084);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.192);
     }
     .user_msg_frame h3{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         text-align: center;
         font-weight: 600;
         color: black;
@@ -2119,7 +2121,7 @@ word-wrap: break-word;
     }
     .error_msg{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .91rem;
         margin-top: .4rem;
@@ -2134,11 +2136,11 @@ word-wrap: break-word;
     }
     .user_msg_frame label{
         font-size: .7rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .user_msg_frame input{
         font-size: .9rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         height: 2.5rem;
         width: 100%;
         padding-left: .9rem;
@@ -2146,7 +2148,7 @@ word-wrap: break-word;
         border: 1px solid;
         font-size: .9rem;
         border-radius: .3rem;
-        border-color: rgba(0, 0, 0, 0.172);
+        border-color: rgba(0, 0, 0, 0.308);
         background-color: rgba(255, 255, 255, 0.907);
     }
     .user_msg_textarea{
@@ -2156,18 +2158,18 @@ word-wrap: break-word;
         resize: none;
         outline: none;
         border-radius: .3rem;
-        border-color: rgba(0, 0, 0, 0.172);
-        font-family: 'Poppins',sans-serif;
+        border-color: rgba(0, 0, 0, 0.308);
+        font-family: 'Roboto',sans-serif;
     }
     .send_msg_btn{
         padding: 1rem;
         border: none;
         margin-top: 1rem;
         background: none;
-        background-color: #345B63;
+        background-color: #051114;
         color: white;
         font-weight: 600;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         letter-spacing: .1rem;
         cursor: pointer;
         transition: all .5s;
@@ -2195,25 +2197,26 @@ word-wrap: break-word;
         width: 100%;
         table-layout: fixed;
         border-collapse: collapse;
-        border: 1px solid rgba(97, 97, 97, 0.514);
+        border: 1px solid rgba(0, 0, 0, 0.255);
         cursor: pointer;
         background-color: white !important;
     }
     table th{
-        font-family: 'Poppins',sans-serif;
-        font-size: .9rem;
-        border-bottom: 1px solid rgba(97, 97, 97, 0.514);
+        font-family: 'Roboto',sans-serif;
+        font-size: .85rem;
+        border-bottom: 1px solid rgba(97, 97, 97, 0.264);
         padding: 1.5rem ;
-        background-color: #152d35e2;
-        color: white !important;
+        background-color: #02021c;
+        color: rgba(255, 255, 255, 0.837) !important;
         letter-spacing: .1rem;
     }
     table td{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         word-wrap: break-word;
         text-align: center;
         height: 13rem;
+        background-color: white !important;
     }
     .product_td{
         display: flex;
@@ -2227,6 +2230,7 @@ word-wrap: break-word;
       justify-content: center;
       height: 100%;
       width: 12rem;
+      height: 12rem;
     }
     .product_details{
         display: flex;
@@ -2238,7 +2242,7 @@ word-wrap: break-word;
         width: calc(100% - 8rem);
     }
     .order_product_name{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         font-size: .9rem;
         text-align: start;
@@ -2247,7 +2251,7 @@ word-wrap: break-word;
         font-family: sans-serif;
     }
     .status{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         letter-spacing: .02rem;
         color: rgba(0, 0, 0, 0.86)
@@ -2279,19 +2283,18 @@ word-wrap: break-word;
         width: 29rem;
         height: 39rem;
         padding: 0 1rem;
-        color: rgba(0, 0, 0, 0.739);
-        background-color:#02395031;
-        border: 1px solid rgba(0, 0, 0, 0.084);
+        color: rgba(0, 0, 0, 0.816);
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.257);
     }
     .error_msg{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .91rem;
         margin-top: .5rem;
     }
     .user_msg_frame h3{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         text-align: center;
         font-weight: 600;
         color:black;
@@ -2310,11 +2313,11 @@ word-wrap: break-word;
     }
     .user_msg_frame label{
         font-size: .7rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .user_msg_frame input{
         font-size: .9rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         height: 2.5rem;
         width: 100%;
         padding-left: .9rem;
@@ -2322,7 +2325,7 @@ word-wrap: break-word;
         border: 1px solid;
         font-size: .9rem;
         border-radius: .3rem;
-        border-color: rgba(0, 0, 0, 0.172);
+        border-color: rgba(0, 0, 0, 0.308);
         background-color: rgba(255, 255, 255, 0.907);
     }
     .user_msg_textarea{
@@ -2332,16 +2335,16 @@ word-wrap: break-word;
         resize: none;
         outline: none;
         border-radius: .3rem;
-        border-color: rgba(0, 0, 0, 0.172);
+        border-color: rgba(0, 0, 0, 0.308);
     }
     .send_msg_btn{
         padding: 1rem;
         border: none;
         background: none;
-        background-color: #345B63;
+        background-color: #051315;
         color: white;
         font-weight: 600;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         letter-spacing: .1rem;
         cursor: pointer;
         margin-top: 1rem;
@@ -2381,14 +2384,14 @@ word-wrap: break-word;
 
     }
     .pro_top h3{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
         font-size: 1.2rem;
     }
     .pro_top button{
         position: absolute;
         right: 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         text-align: end;
         border: none;
@@ -2406,7 +2409,7 @@ word-wrap: break-word;
     }
     .address_frame{
         height: 90%;
-        width: 70%;
+        width: 100%;
        
     }
     .form_frame{
@@ -2414,19 +2417,18 @@ word-wrap: break-word;
         height: 100%;
         padding: 1rem;
         color: rgba(0, 0, 0, 0.739);
-        background-color:#02395031;
-        border: 1px solid rgba(0, 0, 0, 0.084);
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.387);
     }
     .error_msg{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .91rem;
         margin: .4rem 0;
     }
     .success{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgb(0, 203, 0);
         font-size: .91rem;
         margin: .4rem 0;
@@ -2487,11 +2489,11 @@ word-wrap: break-word;
         gap: .2rem;
     }
     .top_left label{
-      font-family: 'Poppins',sans-serif;
+      font-family: 'Roboto',sans-serif;
       font-size: .7rem;
     }
     .top_left input{
-      font-family: 'Poppins',sans-serif;
+      font-family: 'Roboto',sans-serif;
       height: 2.2rem;
       outline: none;
       padding-left: 1rem;
@@ -2501,11 +2503,11 @@ word-wrap: break-word;
         flex-direction: column;
     }
     .bottom label{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
     }
     .bottom input{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         height: 2.3rem;
         outline: none;
         padding-left: 1rem;
@@ -2524,7 +2526,7 @@ word-wrap: break-word;
     }
     .add_btn{
         padding: .6rem 1rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         background: none;
         outline: none;
         border: none;
@@ -2545,14 +2547,14 @@ word-wrap: break-word;
         padding: 1rem 0;
         width: 94%;
         cursor: pointer;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 600;
         color: white;
         background: none;
         border: none;
         transition: all .3s;
-        background-color: #345B63;
+        background-color: #050117 !important;
     }
     .update_profile_btn:active{
         transform: scale(.95);
@@ -2577,13 +2579,13 @@ word-wrap: break-word;
     }
 
     .edit_text{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
         font-size: 1.2rem;
         margin: 1rem;
     }
     .save_btn{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         border: none;
         outline: none;
@@ -2603,16 +2605,15 @@ word-wrap: break-word;
         transform: scale(.95);
     }
     .address_frame{
-        width: 37rem;
-        height: 90%;
+       width: 100%;
+       height: 90%;
     }
     .form_frame{
         width: 100%;
         height: 100%;
         padding: 1rem;
         color: rgba(0, 0, 0, 0.739);
-        background-color:#02395031;
-        border: 1px solid rgba(0, 0, 0, 0.084);
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.387);
     }
     .top{
         display: flex;
@@ -2634,8 +2635,8 @@ word-wrap: break-word;
     .product_img{
         margin-top: 2.3rem;
         margin-right: .4rem;
-        width: 70%;
-        height: 9rem;
+        width: 40%;
+        height: 10rem;
         background-color: white;
     }
     .file_div{
@@ -2662,11 +2663,11 @@ word-wrap: break-word;
         gap: .2rem;
     }
     .top_left label{
-      font-family: 'Poppins',sans-serif;
+      font-family: 'Roboto',sans-serif;
       font-size: .7rem;
     }
     .top_left input{
-      font-family: 'Poppins',sans-serif;
+      font-family: 'Roboto',sans-serif;
       height: 2.2rem;
       outline: none;
       padding-left: 1rem;
@@ -2677,11 +2678,11 @@ word-wrap: break-word;
         gap: .1rem;
     }
     .bottom label{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
     }
     .bottom input{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         height: 2.2rem;
         outline: none;
         padding-left: 1rem;
@@ -2698,7 +2699,7 @@ word-wrap: break-word;
     }
     .add_btn{
         padding: .6rem 1rem;
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Roboto', sans-serif;
         background: none;
         outline: none;
         border: none;
@@ -2716,17 +2717,29 @@ word-wrap: break-word;
     }
     .error_msg{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .91rem;
         margin-top: .4rem;
     }
     .succes{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgb(0, 191, 0);
         font-size: .91rem;
         margin-top: .4rem;
+        
+    }   .update_profile_btn{
+        padding: 1rem 0;
+        width: 94%;
+        cursor: pointer;
+        font-family: 'Roboto',sans-serif;
+        font-size: .9rem;
+        color: white;
+        background: none;
+        border: none;
+        transition: all .3s;
+        background-color: #03000feb !important;
     }
 
 }
@@ -2830,12 +2843,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: rgb(255, 0, 0);
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1.1rem;
         font-weight: 500;
     }
@@ -2864,7 +2877,7 @@ word-wrap: break-word;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         font-weight: 700;
         width: 1.4rem;
@@ -2900,7 +2913,7 @@ word-wrap: break-word;
     .product_top{
     display: flex;
     align-items: center;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     width: 100%;
     font-size: 1.2rem;
     padding: 1.7rem 0;
@@ -2966,7 +2979,7 @@ word-wrap: break-word;
     .product_name{
         font-size: .89rem;
         text-align: center !important;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
     }
     .name_div{
@@ -2987,12 +3000,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .85rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1.18rem;
         font-weight: 500;
     }
@@ -3008,7 +3021,7 @@ word-wrap: break-word;
         height: 70%;
         border: none;
         background: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         color: rgba(255, 255, 255, 0.855);
         cursor: pointer;
@@ -3051,7 +3064,7 @@ word-wrap: break-word;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         font-weight: 700;
         width: 1.4rem;
@@ -3072,14 +3085,14 @@ word-wrap: break-word;
         padding: .3rem .7rem;
         font-size: .7rem;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 1px solid rgb(239, 40, 40);
     }
     .discription_frame{
         padding:  .5rem .8rem;
         width: 90%;
         height: 90%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         border: 1px solid rgba(255, 255, 255, 0.237);
         border-radius: .5rem;
@@ -3110,7 +3123,7 @@ word-wrap: break-word;
     }
     .disc_p{
         padding: .2rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         color: rgba(255, 255, 255, 0.905);
         font-weight: 600;
@@ -3118,7 +3131,7 @@ word-wrap: break-word;
     .btn_li button{
         width: 45%;
         height: 3.5rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .9rem;
         background-color:#0176a82d;
         color: white;
@@ -3206,17 +3219,17 @@ word-wrap: break-word;
     }
     .rating_para{
         padding-top: 1.5rem;
-        font-family: 'poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .rating_number{
         padding-left: 2.7rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 2rem;
         margin-bottom: 1rem;
     }
     .basedon_tex{
         padding-left: .8rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .8rem;
         margin-bottom: 1rem;
         color: rgba(0, 0, 0, 0.778);
@@ -3340,17 +3353,17 @@ word-wrap: break-word;
   }
   .banner_text_frame h2{
    font-size: 3rem;
-   font-family: 'Poppins',sans-serif;
+   font-family: 'Roboto',sans-serif;
    color: rgb(255, 0, 0);
 }
 .banner_text_frame h4{
     font-size: 1.4rem;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     color: rgba(0, 0, 0, 0.803);
   }
   .banner_text_frame h5{
     font-size: 1.3rem;
-   font-family: 'Poppins',sans-serif;
+   font-family: 'Roboto',sans-serif;
    color: green;
   }
    header{
@@ -3448,7 +3461,7 @@ word-wrap: break-word;
     width: 70%;
     display: flex;
     align-items: center;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     padding-left: .4rem;
     height: 100%;
     text-decoration: none;
@@ -3456,7 +3469,7 @@ word-wrap: break-word;
     list-style:decimal;
    }
    .category_div p{
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-weight: 600;
     font-size: .9rem;
     color: rgba(0, 0, 0, 0.932);
@@ -3513,7 +3526,7 @@ word-wrap: break-word;
    .product_top{
     display: flex;
     align-items: center;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     width: 100%;
     font-size: 1.2rem;
     padding: 1.7rem 0;
@@ -3586,7 +3599,7 @@ word-wrap: break-word;
 .product_name{
     font-size: .91rem;
     text-align: center !important;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-weight: 500;
 }
 .name_div{
@@ -3607,12 +3620,12 @@ word-wrap: break-word;
 .old_price{
     text-decoration: line-through;
     color: red;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-size: .85rem;
     font-weight: 400;
 }
 .new_price{
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-size: 1.18rem;
     font-weight: 500;
 }
@@ -3628,7 +3641,7 @@ word-wrap: break-word;
     height: 70%;
     border: none;
     background: none;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-weight: 600;
     color: rgba(255, 255, 255, 0.855);
     cursor: pointer;
@@ -3694,7 +3707,7 @@ word-wrap: break-word;
     height: 5.5rem;
 }
 .promo_sec p{
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-weight: 600;
     color: #003F62;
 }
@@ -3817,7 +3830,7 @@ word-wrap: break-word;
         width: 70%;
         display: flex;
         align-items: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         padding-left: .4rem;
         height: 100%;
         text-decoration: none;
@@ -3880,7 +3893,7 @@ word-wrap: break-word;
     .product_name{
         font-size: .91rem;
         text-align: center !important;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
     }
     .name_div{
@@ -3901,12 +3914,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .85rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1.18rem;
         font-weight: 500;
     }
@@ -3922,7 +3935,7 @@ word-wrap: break-word;
         height: 70%;
         border: none;
         background: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         color: rgba(255, 255, 255, 0.855);
         cursor: pointer;
@@ -4108,7 +4121,7 @@ word-wrap: break-word;
     .product_name{
         font-size: .91rem;
         text-align: center !important;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 500;
     }
     .name_div{
@@ -4129,12 +4142,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .85rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1.18rem;
         font-weight: 500;
     }
@@ -4150,7 +4163,7 @@ word-wrap: break-word;
         height: 70%;
         border: none;
         background: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 600;
         color: rgba(255, 255, 255, 0.855);
         cursor: pointer;
@@ -4176,7 +4189,7 @@ word-wrap: break-word;
         height: 13rem;
     }
     .filter_sec h4{
-       font-family: 'Poppins';
+       font-family: 'Roboto';
        font-size: .95rem;
        color: rgba(0, 0, 0, 0.803);
     }
@@ -4236,7 +4249,7 @@ word-wrap: break-word;
         background-color:#1B2430;
         color: white;
         transition: transform .5s;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border-radius: .2rem;
     }
     .page_btn{
@@ -4250,7 +4263,7 @@ word-wrap: break-word;
         border-radius: .2rem;
         cursor: pointer;
         background-color: white !important;
-        font-family: 'Poppins' , sans-serif;
+        font-family: 'Roboto' , sans-serif;
         color: black !important;
         border: 1px solid rgba(0, 0, 0, 0.391) !important;
     }
@@ -4307,19 +4320,19 @@ word-wrap: break-word;
     }
     .error_msg{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .91rem;
         margin: .5rem 0;
     }
     .er_msg{
         text-align: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .91rem;
     }
     .no_coupon{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: red;
         font-size: .78rem;
         margin: .5rem 0;
@@ -4388,7 +4401,7 @@ word-wrap: break-word;
         color: rgba(0, 0, 0, 0.704);
         width: 100%;
         height: 100%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .85rem;
     }
     .bi-plus,.bi-dash-lg{
@@ -4413,7 +4426,7 @@ word-wrap: break-word;
     }
     .checkouts_frame_bottom_frame h3{
         width: 100%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.705);
         padding: 1rem 1rem;
         letter-spacing: .04rem;
@@ -4422,7 +4435,7 @@ word-wrap: break-word;
     }
     .checkouts_frame h3{
         width: 100%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.705);
         padding: 1rem 1rem;
         letter-spacing: .04rem;
@@ -4477,7 +4490,7 @@ word-wrap: break-word;
         padding: .3rem .4rem;
         font-size: .7rem;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 1px solid rgb(239, 40, 40);
     }
     .product_name{
@@ -4489,12 +4502,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .8rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1rem;
         font-weight: 500;
     }
@@ -4541,7 +4554,7 @@ word-wrap: break-word;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         font-weight: 700;
         width: 1.4rem;
@@ -4582,7 +4595,7 @@ word-wrap: break-word;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         font-weight: 700;
         width: 1.4rem;
@@ -4612,7 +4625,7 @@ word-wrap: break-word;
         border: none;
         background-color: #052e44;
         color: white;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         transition: all .4s;
     }
     .coupon_apply:active{
@@ -4625,7 +4638,7 @@ word-wrap: break-word;
         border: 1px solid rgba(69, 69, 69, 0.112);
         outline: none;
         padding-left: 1rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.164);
     }
     .coupon_check_btn{
@@ -4636,7 +4649,7 @@ word-wrap: break-word;
         font-size: .8rem;
         cursor: pointer;
         transition: all .4s;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .coupon_check_btn:active{
         transform: scale(.95);
@@ -4656,7 +4669,7 @@ word-wrap: break-word;
         align-items: center;
     }
     .no_coupon_p{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(255, 0, 0, 0.886);
         font-size: .85rem;
     }
@@ -4680,7 +4693,7 @@ word-wrap: break-word;
         height: 3.1rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.113);
         list-style: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .summary_frame{
         display: flex;
@@ -4695,7 +4708,7 @@ word-wrap: break-word;
         flex-wrap: wrap;
         padding: 0 1rem;
         font-size: .85rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         justify-content: space-between;
         width: 100%;
         height: 2.2rem;
@@ -4705,7 +4718,7 @@ word-wrap: break-word;
         margin-top: .3rem;
         cursor: pointer;
         border: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(255, 255, 255, 0.864);
         font-size: .9rem;
         border-radius: .2rem;
@@ -4728,11 +4741,11 @@ word-wrap: break-word;
         height: 83%;
     }
     .adress_frame label{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
     }
     .adress_frame input{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .75rem;
         padding-left: .6rem !important;
         outline: none;
@@ -4740,7 +4753,7 @@ word-wrap: break-word;
         border: 1px solid rgba(0, 0, 0, 0.263);
     }
     .adress_text_area{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .75rem;
         height: 4.3rem;
         color: rgba(0, 0, 0, 0.864);
@@ -4761,7 +4774,7 @@ word-wrap: break-word;
         height: 100%;
         display: flex;
         align-items: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 700;
         color: rgba(0, 0, 0, 0.809);
         font-size: .9rem;
@@ -4794,7 +4807,7 @@ word-wrap: break-word;
         color: white;
         transition: all .4s;
         cursor: pointer;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .add_new_btn:active{
         transform: scale(.95);
@@ -4827,7 +4840,7 @@ word-wrap: break-word;
         width:100%;
         height: 100%;
         padding: .5rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 1px solid rgba(0, 0, 0, 0.258);
     }
     .select_adress option{
@@ -4941,7 +4954,7 @@ word-wrap: break-word;
         color: rgba(0, 0, 0, 0.704);
         width: 100%;
         height: 100%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
     }
     .bi-plus,.bi-dash-lg{
@@ -4966,7 +4979,7 @@ word-wrap: break-word;
     }
     .checkouts_frame_bottom_frame h3{
         width: 100%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.705);
         padding: 1rem 1rem;
         letter-spacing: .04rem;
@@ -4975,7 +4988,7 @@ word-wrap: break-word;
     }
     .checkouts_frame h3{
         width: 100%;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(0, 0, 0, 0.705);
         padding: 1rem 1rem;
         letter-spacing: .04rem;
@@ -5030,7 +5043,7 @@ word-wrap: break-word;
         padding: .3rem .4rem;
         font-size: .7rem;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 1px solid rgb(239, 40, 40);
     }
     .product_name{
@@ -5042,12 +5055,12 @@ word-wrap: break-word;
     .old_price{
         text-decoration: line-through;
         color: red;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .8rem;
         font-weight: 400;
     }
     .new_price{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: 1rem;
         font-weight: 500;
     }
@@ -5094,7 +5107,7 @@ word-wrap: break-word;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         font-weight: 700;
         width: 1.4rem;
@@ -5135,7 +5148,7 @@ word-wrap: break-word;
         justify-content: center;
         align-items: center;
         overflow: hidden;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
         font-weight: 700;
         width: 1.4rem;
@@ -5167,7 +5180,7 @@ word-wrap: break-word;
         border: 1px solid rgba(69, 69, 69, 0.112);
         outline: none;
         padding-left: 1rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.164);
     }
     .coupon_check_btn{
@@ -5178,7 +5191,7 @@ word-wrap: break-word;
         font-size: .8rem;
         cursor: pointer;
         transition: all .4s;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .coupon_check_btn:active{
         transform: scale(.95);
@@ -5208,7 +5221,7 @@ word-wrap: break-word;
         height: 3.1rem;
         border-bottom: 1px solid rgba(0, 0, 0, 0.113);
         list-style: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .summary_frame{
         display: flex;
@@ -5223,7 +5236,7 @@ word-wrap: break-word;
         flex-wrap: wrap;
         padding: 0 1rem;
         font-size: .85rem;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         justify-content: space-between;
         width: 100%;
         height: 2.3rem;
@@ -5233,7 +5246,7 @@ word-wrap: break-word;
         margin-top: 1rem;
         cursor: pointer;
         border: none;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         color: rgba(255, 255, 255, 0.864);
         font-size: .9rem;
         border-radius: .1rem;
@@ -5256,11 +5269,11 @@ word-wrap: break-word;
         height: 83%;
     }
     .adress_frame label{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .7rem;
     }
     .adress_frame input{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .8rem;
         padding-left: .6rem !important;
         outline: none;
@@ -5268,7 +5281,7 @@ word-wrap: break-word;
         border: 1px solid rgba(0, 0, 0, 0.263);
     }
     .adress_text_area{
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-size: .8rem;
         height: 3rem;
         color: rgba(0, 0, 0, 0.864);
@@ -5288,7 +5301,7 @@ word-wrap: break-word;
         height: 100%;
         display: flex;
         align-items: center;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         font-weight: 700;
         color: rgba(0, 0, 0, 0.809);
         font-size: .9rem;
@@ -5322,7 +5335,7 @@ word-wrap: break-word;
         color: white;
         transition: all .4s;
         cursor: pointer;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
     }
     .add_new_btn:active{
         transform: scale(.95);
@@ -5335,7 +5348,7 @@ word-wrap: break-word;
         width:100%;
         height: 100%;
         padding: .5rem 0;
-        font-family: 'Poppins',sans-serif;
+        font-family: 'Roboto',sans-serif;
         border: 1px solid rgba(0, 0, 0, 0.258);
     }
     .select_adress option{
@@ -5382,7 +5395,7 @@ word-wrap: break-word;
     cursor: pointer;
     border-radius: .1rem;
     color: white;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     transition: .4s all;
 }
 .order_confirm:active{
@@ -5404,7 +5417,7 @@ word-wrap: break-word;
   .order_id{
     font-size: 1rem;
     color: rgba(3, 3, 3, 0.702);
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
   }
   .order_frames{
     width: 94%;
@@ -5419,7 +5432,7 @@ word-wrap: break-word;
     height: 13%;
     padding: 0 1rem;
     font-size: 1.1rem;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     border-bottom: 1px solid rgba(0, 0, 0, 0.212);
   }
   .adrress_details{
@@ -5430,11 +5443,11 @@ word-wrap: break-word;
     height: 70%;
     padding:1rem;
     font-size: 1.1rem;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
   }
   .user_name{
     font-size: 1rem;
-    font-family: 'poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     color: rgba(0, 0, 0, 0.912);
   }
   .adrress_details{
@@ -5469,7 +5482,7 @@ word-wrap: break-word;
     justify-content: center;
     align-items: center;
     height: 100%;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     font-weight: 600;
     font-size: 1rem;
     letter-spacing: .04rem;
@@ -5546,7 +5559,7 @@ word-wrap: break-word;
     display: flex;
     align-items: center;
     gap: 2rem;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     cursor: pointer;
 }
 .review_frame{
@@ -5575,7 +5588,7 @@ word-wrap: break-word;
     margin-top: .3rem;
     border: none;
     color: white;
-    font-family: 'poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
     background-color: #0b1f2a;
     cursor: pointer;
     transition:  transform .4s;
@@ -5590,7 +5603,7 @@ word-wrap: break-word;
     background-color: white;
     transition: all.5s;
     cursor: pointer;
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Roboto',sans-serif;
 }
 .cancel_Order_btn:active{
     transform: scale(.95);

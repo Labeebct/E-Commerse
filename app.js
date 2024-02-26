@@ -47,8 +47,8 @@ app.set('view engine','ejs')
 app.set('views','views')
 
 
-app.use('/',userRouter)
 app.use('/admin',adminRouter)
+app.use('/',userRouter)
 
 
 

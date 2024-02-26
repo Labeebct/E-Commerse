@@ -265,70 +265,7 @@
                           
                  <!-- --------------------------------------------------------------------------------------------------------- -->
                
-
-                          <!-- ------------------------- WOMENS SAREE --------------------------- -->
-
-
-                          <div class="product_frame">
-
-                           <div class="product_top">WOMENS KURTAS</div>
-                           <div class="product_bottom">
-           
-                              <% womensSaree.forEach((list) => { %>
-                              <div class="product_frame_grid" onclick="productOpen(event,'<%= list._id %>')">
-                                 
-           
-                                <div class="top">
-                                   <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
-                                    <i class="bi wish_icon<%= list._id %> <%= (() => {
-                                       const productIdObjectId = new ObjectId(list._id );
-                                       const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
-                                       return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
-                                   })() %>"></i>
-                                 </button>
-                                   <img src="<%= list.productimg[0] %>" style="width: 84%; height: 94%;" alt="">
-                                 </div>
-                                 <div class="center">
-                                   <div class="name_div">
-                                   <p class="product_name"><%= list.productname %></p>
-                                   </div>
-                                   <div class="price_div">
-                                      <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice.toLocaleString() %></p>
-                                      <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
-                                   </div>
-                                </div>
-                                <div class="bottom">
-                                 <% if(list.stock > 0){ %>
-
-                                    <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                                      <%= (() => {
-                                         const productIdObjectId = new ObjectId(list._id );
-                                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                         return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                                      })() %>
-                                     <i class="bi <%= (() => {
-                                     const productIdObjectId = new ObjectId(list._id );
-                                     const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                                     return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                                     })() %>"></i>
-                                    </button>
-              
-                                    <% }else { %>
-                                       <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
-                                         OUT OF STOCK
-                                      </button>
-                                    <% } %>
-                              </div>           
-                                
-                             </div>
-                             
-                             <% }) %>
-                          </div>
-                       </div>
-           
                           
-                 <!-- --------------------------------------------------------------------------------------------------------- -->
-
 
     
 
@@ -344,7 +281,12 @@
 
             <!-- ---------------------------------------------------------------------------------------------------------------------- -->
 
+
+
+
                      <!-- ------------------------- MENS SHOES --------------------------- -->
+
+
 
 
 
@@ -406,10 +348,14 @@
            </div>
 
 
-            <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+   <!-- ---------------------------------------------------------------------------------------------------------------------- -->
+
+
 
 
                  <!-- ------------------------- WOMENS FOOTWEAR --------------------------- -->
+
+
 
 
 
@@ -481,7 +427,13 @@
             <!-- ------------------------------------------------------------------------------------------------------------------ -->
 
 
+
+
+
                 <!-- ------------------------- MENS PANTS --------------------------- -->
+
+
+
 
 
 
@@ -546,7 +498,11 @@
       
             <!-- ------------------------------------------------------------------------------------------------------------------ -->
 
+
+
                   <!-- ------------------------- WOMENS TOP --------------------------- -->
+
+
 
 
 
@@ -606,78 +562,6 @@
                  <% }) %>
               </div>
            </div>
-
-
-
-            <!-- ---------------------------------------------------------------------------------------------------- -->
-      
-
-                  <!-- ------------------------- KIDS FROCKS --------------------------- -->
-
-
-
-            <div class="product_frame">
-
-               <div class="product_top">KIDS FROCKS</div>
-               <div class="product_bottom">
-
-                  <% kidsFrocks.forEach((list) => { %>
-                  <div class="product_frame_grid" onclick="productOpen(event,'<%= list._id %>')">
-                     
-
-                    <div class="top">
-                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
-                        <i class="bi wish_icon<%= list._id %> <%= (() => {
-                           const productIdObjectId = new ObjectId(list._id );
-                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
-                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
-                       })() %>"></i>
-                     </button>
-                       <img src="<%= list.productimg[0] %>" style="width: 85%; height: 90%;" alt="">
-                     </div>
-                     <div class="center">
-                       <div class="name_div">
-                       <p class="product_name"><%= list.productname %></p>
-                       </div>
-                       <div class="price_div">
-                          <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice.toLocaleString() %></p>
-                          <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
-                       </div>
-                    </div>
-                    <div class="bottom">
-                     <% if(list.stock > 0){ %>
-
-                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                          <%= (() => {
-                             const productIdObjectId = new ObjectId(list._id );
-                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                          })() %>
-                         <i class="bi <%= (() => {
-                         const productIdObjectId = new ObjectId(list._id );
-                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                         })() %>"></i>
-                        </button>
-  
-                        <% }else { %>
-                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
-                             OUT OF STOCK
-                          </button>
-                        <% } %>
-                  </div>
-                    
-                 </div>
-                 
-                 <% }) %>
-              </div>
-           </div>
-
-
-
-
-
-            <!-- ---------------------------------------------------------------------------------------------------- -->
       
 
 
@@ -1022,70 +906,6 @@
 
                <!-- -------------------------------------------------------------------------------------------- -->
 
-               <!-- ------------------------- TOP BEDSHEETS  --------------------------- -->
-
-
-            <div class="product_frame">
-
-               <div class="product_top">KITCHEN ITEMS</div>
-               <div class="product_bottom">
-
-                  <% bedsheet.forEach((list) => { %>
-                  <div class="product_frame_grid" onclick="productOpen(event,'<%= list._id %>')">
-                     
-
-                    <div class="top">
-                       <button class="wish_btn" onclick="addToWish(event,'<%= list._id %>')">
-                        <i class="bi wish_icon<%= list._id %> <%= (() => {
-                           const productIdObjectId = new ObjectId(list._id );
-                           const isProductInWishList = wishExist.find(product => product.productId.equals(productIdObjectId));
-                           return isProductInWishList ? 'bi-heart-fill' : 'bi-heart';
-                       })() %>"></i>                     </button>
-                       <img src="<%= list.productimg[0] %>" style="width: 90%; height: 90%;" alt="">
-                     </div>
-                     <div class="center">
-                       <div class="name_div">
-                       <p class="product_name"><%= list.productname %></p>
-                       </div>
-                       <div class="price_div">
-                          <p class="old_price"><i class="bi bi-currency-rupee"></i><%= list.oldprice.toLocaleString() %></p>
-                          <p class="new_price"><i class="bi bi-currency-rupee"></i><%= list.newprice.toLocaleString() %></p>
-                       </div>
-                    </div>
-                    <div class="bottom">
-                     <% if(list.stock > 0){ %>
-
-                        <button onclick="addToCart(event,'<%= list._id %>')" class="addto_cart_btn addto_cart_btn<%= list._id %>">
-                          <%= (() => {
-                             const productIdObjectId = new ObjectId(list._id );
-                             const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                             return isProductInCart ? 'GO TO CART' : 'ADD TO CART' ;
-                          })() %>
-                         <i class="bi <%= (() => {
-                         const productIdObjectId = new ObjectId(list._id );
-                         const isProductInCart = cartExist.find(product => product.productId.equals(productIdObjectId));
-                         return isProductInCart ? 'bi-arrow-right-short' : 'bi-plus-lg' ;
-                         })() %>"></i>
-                        </button>
-  
-                        <% }else { %>
-                           <button  style="color: red; font-family: 'Poppins',sans-serif;letter-spacing: .06rem;border: none; background-color: white; font-size: 1rem; width: 13rem;height: 70%;">
-                             OUT OF STOCK
-                          </button>
-                        <% } %>
-                  </div>
-                    
-                 </div>
-                 
-                 <% }) %>
-              </div>
-           </div>
-               
-               
-
-               <!-- -------------------------------------------------------------------------------------------- -->
-
-               <!-- -------------------------------------------------------------------------------------------- -->
                 
                
                <%- include('../../common/footer.ejs') %>

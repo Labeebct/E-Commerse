@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const userLoggedSesssion = require('../middleware/usersession')
 const homeController = require('../controllers/userHome')             
 const accountController = require('../controllers/account') 
 const authController = require('../controllers/userAuth')
@@ -102,7 +103,7 @@ router.post('/wishlist/to_cart',wishController.postFromwishToCart)
 router.delete('/wishist/remove',wishController.deleteWishlist)
 
 
-
+   
 
 // CART ----------------------------
 
@@ -111,41 +112,14 @@ router.post('/cart/add',cartController.postAddCart)
 router.delete('/cart/remove',cartController.postRemoveCart)
 router.get('/cart/increase_quantity',cartController.getIncreaseQuantity)
 
+router.use(userLoggedSesssion)  // ROUTES BELOW ONLY WORKS IF USER LOGGED IN
 
 
 
-// <<<<<<<========================= ORDER ==============================>>>>>>>
 
 
 
-// ORDER    
 
-
-router.get('/checkout',orderController.getCheckout)
-router.post('/checkout',orderController.postCheckout)
-
-router.get('/summary',orderController.getSummary)
-
-router.get('/confirm_order',orderController.getConfirmOtp)
-router.post('/confirm_order_otp',orderController.postConfirmOtp)
-
-
-router.post('/proceed_to_pay',orderController.postProceedtoPay)
-router.post('/veryfy_payment',orderController.postRazorpay)
-
-
-router.post('/checkout/add_new_adress',orderController.postAddnewadress)
-
-router.get('/select_address',orderController.selectAddress)
-router.get('/apply_coupon',orderController.applyCoupon)
-
-router.get('/select_coupon',orderController.selectCoupon)
-
-  
-    
-   
-
-    
 
 
 // <<<<<<<========================= ACCOUNT ==============================>>>>>>>
@@ -190,10 +164,40 @@ router.get('/account/aboutus',accountController.getAboutus)
 
 
 
+
+
+// <<<<<<<========================= ORDER ==============================>>>>>>>
+
+
+
+
+router.get('/checkout',orderController.getCheckout)
+router.post('/checkout',orderController.postCheckout)
+
+router.get('/summary',orderController.getSummary)
+
+router.get('/confirm_order',orderController.getConfirmOtp)
+router.post('/confirm_order_otp',orderController.postConfirmOtp)
+
+
+router.post('/proceed_to_pay',orderController.postProceedtoPay)
+router.post('/veryfy_payment',orderController.postRazorpay)
+
+
+router.post('/checkout/add_new_adress',orderController.postAddnewadress)
+
+router.get('/select_address',orderController.selectAddress)
+router.get('/apply_coupon',orderController.applyCoupon)
+
+router.get('/select_coupon',orderController.selectCoupon)
+
+  
+
+
 // LOGOUT ------------------------
 
 
-router.get('/logout')
+router.get('/logout',homeController.getLogout)
 
 
 
