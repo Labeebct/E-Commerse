@@ -3,6 +3,10 @@ const  productOpen = (event,productId) => {
           event.stopPropagation()     
           event.preventDefault()
     }
+    else if(event.target.closest('.review_submit_btn')){
+        event.stopPropagation()     
+        event.preventDefault()
+    }
     window.location.href = `/product?product=${productId}`
 }
 

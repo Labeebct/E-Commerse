@@ -5,7 +5,7 @@
       <%- include('../components/top_nav.ejs') %> 
 
       <div class="content order_open_content">
-
+         <div class="loading_screen"><img src="/images/loading gif.gif" class="loading_gif" alt=""></div>
         <h3 class="order_id">ORDER ID : <span>832802746662321</span></h3>
 
         <div class="order_frames order_adress_frame">
@@ -42,13 +42,83 @@
                </div>
                <div class="order_cancel">
                <% if(userOrder.status == 'delivered'){ %>
-                <button class="cancel_Order_btn" style="color: green; border: 1px solid green;">DELIVERED</button>
+                <button disabled class="cancel_Order_btn" style="color: green; border: 1px solid green;">DELIVERED</button>
                <% }else{ %>
-                  <button class="cancel_Order_btn" onclick="cancelOrder(event,'<%= userOrder._id %>')">
+                  <button type="button" class="cancel_Order_btn" onclick="cancelOrder(event,'<%= userOrder._id %>')">
                     <%= userOrder.status == 'cancelled' ? 'ORDER CANCELLED' : 'CANCEL ORDER'%>
                  </button>
                   <% } %>
                </div>
+               <script>
+                     
+                  const cancelOrder = async(event,productId) =>{
+                     event.preventDefault()
+                     event.stopPropagation()   
+                     
+                     const orderBtn = document.querySelector('.cancel_Order_btn')
+
+                     if(orderBtn.textContent !== 'ORDER CANCELLED'){
+
+                        const swalWithBootstrapButtons = Swal.mixin({
+                        customClass: {
+                           confirmButton: "btn btn-success",
+                           cancelButton: "btn btn-danger",
+                           customClass: {
+                           confirmButton: 'btn btn-danger',
+                           cancelButton: 'btn btn-secondary'
+                           }
+                        },
+                        buttonsStyling: false
+                        });
+                        swalWithBootstrapButtons.fire({
+                        title: "Are you sure?",
+                        text: "You want to cancel the order?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonText: "Yes, cancel it!",
+                        cancelButtonText: "No, cancel!",
+                        reverseButtons: true,
+                        customClass: {
+                        confirmButton: 'btn btn-danger',
+                        cancelButton: 'btn btn-secondary'
+                        }
+                        }).then(async(result) => {
+                        if (result.isConfirmed) {
+                           const response = await fetch(`/cancel_order`,{
+                              method:'PUT',
+                              headers:{
+                                 'Content-Type':'application/json'
+                              },
+                              body:JSON.stringify({productId})
+                        })
+                     
+                        const result = await response.json()
+                     
+                        if(result.success){
+                           swalWithBootstrapButtons.fire({
+                              title: "CANCELLED!",
+                              text: "Your Order has been cancelled.",
+                              icon: "success"
+                           });
+                           orderBtn.textContent = 'ORDER CANCELLED'
+                        }
+                        } else if (
+                           /* Read more about handling dismissals below */
+                           result.dismiss === Swal.DismissReason.cancel
+                        ) {
+                           swalWithBootstrapButtons.fire({
+                              title: "Cancelled",
+                              text: "Your imaginary file is safe :)",
+                              icon: "error"
+                           });
+                        }
+                        });
+                    
+                     }
+
+                  }
+
+               </script>
         </div>
 
 
@@ -91,7 +161,9 @@
 
         </div>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script><script>
+<script src="/javascript/product-open.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
 
 
 const rateProduct = document.querySelector('.reviewproduct')
@@ -108,58 +180,28 @@ rateProduct.addEventListener('click',()=>{
 })
 
 
-document.addEventListener('DOMContentLoaded',()=>{
-   
-      const status = document.querySelector('.status<%= userOrder._id %>')
-      
-      if(status.innerHTML == 'PENDING'){
-        status.style.color = 'rgb(228, 202, 0)'
-      }
-      else if(status.innerHTML == 'CONFIRMED'){
-         status.style.color = 'rgb(255, 115, 0)'
-      }
-      else if(status.innerHTML == 'SHIPPED'){
-         status.style.color = 'rgb(4, 2, 131)'
-      }
-      else if(status.innerHTML == 'DELIVERED'){
-         status.style.color = 'rgb(0, 170, 0)'
-      }
-      else{
-         status.style.color = 'red'
-   
-      }
-      
-   })
 
+   const status = document.querySelector('.status<%= userOrder._id %>')
 
-   
-const cancelOrder = async(event,productId) =>{
-    event.preventDefault()
-    event.stopPropagation()   
-    
-    const orderBtn = document.querySelector('.cancel_Order_btn')
+   if(status.innerHTML == 'PENDING'){
+      status.style.color = 'rgb(228, 202, 0)'
+   }
+   else if(status.innerHTML == 'CONFIRMED'){
+      status.style.color = 'rgb(255, 115, 0)'
+   }
+   else if(status.innerHTML == 'SHIPPED'){
+      status.style.color = 'rgb(4, 2, 131)'
+   }
+   else if(status.innerHTML == 'DELIVERED'){
+      status.style.color = 'rgb(0, 170, 0)'
+   }
+   else{
+      status.style.color = 'red'
 
-    if(orderBtn.textContent !== 'ORDER CANCELLED'){
-
-       const response = await fetch(`/cancel_order`,{
-            method:'PUT',
-            headers:{
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify({productId})
-        })
-    
-        const result = await response.json()
-    
-        if(result.success){
-          orderBtn.textContent = 'ORDER CANCELLED'
-        }
-
-    }
+   }
 
 
 
-}
 
 
 let productRating = 0;
@@ -186,6 +228,7 @@ stars.forEach((star,index)=>{
         productRating = Number(rating)
    })
 })
+
 
 
 async function submitReview(productId){
@@ -239,6 +282,5 @@ async function submitReview(productId){
 
 
 </script>
-<script src="/javascript/product-open.js"></script>
 
 <%- include('../../common/end.ejs') %>

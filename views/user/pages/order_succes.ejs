@@ -2,13 +2,14 @@
 <div class="wrapper order_success_wrapper">
     <%- include('../components/top_nav.ejs') %>
     <div class="content order_success_content">
+        <div class="loading_screen"><img src="/images/loading gif.gif" class="loading_gif" alt=""></div>
         <div class="login_to_view">
             <div class="log_frame">
                 <img src="/images/success.png"  class="cart_png" alt="">
                 <p>Hey <span><%= findUser.username %></span></p>
               <h3>Your Order is Confirmed!</h3>
               <p>We'll send you a shipping confirmation email as soon your order ships</p>
-              <p class="count_time_p">You will redirected to home within <span class="count_time">5</span>s</p>
+              <p class="count_time_p">You will redirected to home within <span class="count_time">3</span>s</p>
               <div style="display: flex; gap: 1.5rem;">
                   <button onclick="location.href = '/home' " class="login_from_wish_btn go_to_homebtn">GO TO HOME</button>
                   <button onclick="location.href = '/account/orders' " class="login_from_wish_btn go_to_odrerBtn">GO TO ORDER</button>
@@ -18,7 +19,7 @@
     </div>
 </div>
 
-
+<script src="/javascript/loading.js"></script>
 <script>
 
 document.addEventListener('DOMContentLoaded', () => {

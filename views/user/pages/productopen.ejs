@@ -3,6 +3,7 @@
     <%- include('../components/top_nav.ejs') %>
     <form action="">
          <div class="content productopen_content">
+            <div class="loading_screen"><img src="/images/loading gif.gif" class="loading_gif" alt=""></div>
             <div class="main_frame">
                <div class="product_frame">
                   <div class="img_frame">
@@ -229,8 +230,8 @@
            <div class="product_frame_related">
 
             <div class="product_top">Ratings & Reviews</div>
-            <h4 class="rating_number"><%= rating/reviewCount %></h4>
-            <h6 class="basedon_tex">Based on <span><%= reviewCount %></span> Reviews</h6>
+            <h4 class="rating_number"><%= rating/reviewCount || 0 %></h4>
+            <h6 class="basedon_tex">Based on <span><%= reviewCount || 0 %></span> Reviews</h6>
 
             <% if(reviewCount > 0) { %>
 
@@ -262,7 +263,7 @@
             <!-- --------------------------------------------------------------------------------------------------------- -->
          <%- include('../../common/footer.ejs') %>
    </div>
-
+<script src="/javascript/loading.js"></script>
 <script src="/javascript/checkout.js"></script>
 <script src="/javascript/product-open.js"></script>
 <script src="/javascript/addtowish.js"></script>
