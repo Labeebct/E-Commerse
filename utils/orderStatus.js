@@ -59,7 +59,7 @@ async function sippedMsg(findUser) {
         to: findUser.email,
         subject: "your order has been SHIPPED",
         text:`
-        Dear [Customer's Name],
+        Dear ${findUser.username},
 
         We're excited to let you know that your order from Labio Mart has been shipped!
       
