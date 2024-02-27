@@ -134,6 +134,7 @@ exports.getHome = async(req,res) => {
           
      } catch (error) {
           console.log('Error in user home get',error);
+          res.status(500).send('Internal server error')
      }
 }
 
@@ -162,6 +163,7 @@ exports.getCategory = async(req,res) => {
           
      } catch (error) {
           console.log('Error in get category',error);
+          res.status(500).send('Internal server error')
      }
 }
 
@@ -190,6 +192,7 @@ exports.getSubcategory = async(req,res) => {
           
      } catch (error) {
           console.log('Error in get category',error);
+          res.status(500).send('Internal server error')
      }
 }
 
@@ -265,6 +268,7 @@ exports.getProductopen = async(req,res) => {
           
      }catch (error) {
           console.log('Error in get product open',error);
+          res.status(500).send('Internal server error')
      }
 }
 
@@ -285,6 +289,7 @@ exports.getAllproducts = async(req,res) => {
           
      }catch (error) {
           console.log('Error in get product open',error.message);
+          res.status(500).send('Internal server error')
      }
 }
 
@@ -392,6 +397,7 @@ exports.getShowAllproducts = async(req,res) => {
           
      }catch (error) {
           console.log('Error in get product open',error.message);
+          res.status(500).send('Internal server error')
      }
 }
 
@@ -405,6 +411,7 @@ exports.getLogout = (req,res) => {
           
      } catch (error) {
           console.log('Error in logout',error);
+          res.status(500).send('Internal server error')
      }
 }
 

@@ -1,5 +1,21 @@
-const cartCount = document.querySelector('.cart_count')
+const carTProducts = document.querySelectorAll('.product');
+const placeOrderBtn = document.querySelector('.btn_div');
 
+document.addEventListener('DOMContentLoaded',() => {
+
+    if (carTProducts.length === 0) {
+        placeOrderBtn.style.display = 'none';
+    } else {
+        placeOrderBtn.style.display = 'block'; 
+    }
+      
+})
+
+
+
+
+
+const cartCount = document.querySelector('.cart_count')
 
 const addToCart = async(event,productId) => {
 
@@ -92,6 +108,7 @@ const addToCart = async(event,productId) => {
 
           if(cartCount.innerHTML == 0 ){
             document.querySelector('.cart_is_empty').style.display = 'block'
+            placeOrderBtn.style.display = 'none';
          }
          else{
             document.querySelector('.cart_is_empty').style.display = 'none'

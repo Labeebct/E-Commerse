@@ -69,7 +69,7 @@ exports.getSaleschart = async (req, res) => {
         res.json({ labels, countData });
     } catch (error) {
         console.error('Error in fetching orders data:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -125,6 +125,7 @@ exports.getCustomerschart = async(req,res) => {
 
     } catch (error) {
         console.log('Error in get customers chart',error);
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -151,5 +152,6 @@ exports.getStockchart = async(req,res) => {
         
     } catch (error) {
         console.log('Error in get product stock chart',chart);
+        res.status(500).send('Internal server error')
     }
 }

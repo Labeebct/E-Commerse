@@ -49,7 +49,7 @@ async function fetchProducts(){
             addToWish(event, list._id)
         })
 
-
+        productSection.scrollTop = 0;
     });
 
 }
@@ -139,6 +139,118 @@ async function filterProducts(filterBase,filter){
     showLoading()
     const response = await fetch(`/all_products/show?f=${filterBase}&filter=${filter}`)
     const result = await response.json()
+    // productSection.innerHTML = ''
+    hideLoading()
+    const products = result.filterProducts
+
+    console.log(products);
+ 
+    products.forEach((list) => {
+        const productDiv = document.createElement('div')
+        productDiv.classList.add('product_frame_grid')
+        productDiv.innerHTML = `
+                <div class="top">
+                <button class="wish_btn wish_btn${list._id}">
+                <i class="bi wish_icon${list._id} ${result.wishExist.some(product => product.productId === list._id) ? 'bi-heart-fill' : 'bi-heart'} "></i>
+                </button>
+                <img src="${list.productimg[0]}" style="width: 85%; height: 90%;" alt="">
+                </div>
+                <div class="center">
+                <div class="name_div">
+                <p class="product_name">${list.productname}</p>
+                </div>
+                <div class="price_div">
+                    <p class="old_price"><i class="bi bi-currency-rupee"></i>${list.oldprice.toLocaleString()}</p>
+                    <p class="new_price"><i class="bi bi-currency-rupee"></i>${list.newprice.toLocaleString()}</p>
+                </div>
+                </div>
+                <div class="bottom"><button class="addto_cart_btn addto_cart_btn${list._id}">
+                ${result.cartExist.some(product => product.productId === list._id) ? 'GO TO CART' : 'ADD TO CART'}
+                <i class="bi  ${result.cartExist.some(product => product.productId === list._id) ? 'bi-arrow-right-short' : 'bi-plus-lg'}"></i>
+                </button>
+                </div>                     
+                ` 
+
+        productSection.appendChild(productDiv)
+
+        productDiv.addEventListener('click',(event)=>{
+            productOpen(event, list._id)
+        })
+
+        document.querySelector(`.addto_cart_btn${list._id}`).addEventListener('click',(event)=>{
+            addToCart(event, list._id)
+        })
+
+        document.querySelector(`.wish_btn${list._id}`).addEventListener('click',(event)=>{
+            addToWish(event, list._id)
+        })
+
+
+    });
+
+}
+
+
+async function filterProductsSort(filterBase,filter){
+    showLoading()
+    const response = await fetch(`/all_products/show?f=${filterBase}&filter=${filter}`)
+    const result = await response.json()
+    productSection.innerHTML = ''
+    hideLoading()
+    const products = result.filterProducts
+
+    console.log(products);
+ 
+    products.forEach((list) => {
+        const productDiv = document.createElement('div')
+        productDiv.classList.add('product_frame_grid')
+        productDiv.innerHTML = `   
+                <div class="top">
+                <button class="wish_btn wish_btn${list._id}">
+                <i class="bi wish_icon${list._id} ${result.wishExist.some(product => product.productId === list._id) ? 'bi-heart-fill' : 'bi-heart'} "></i>
+                </button>
+                <img src="${list.productimg[0]}" style="width: 85%; height: 90%;" alt="">
+                </div>
+                <div class="center">
+                <div class="name_div">
+                <p class="product_name">${list.productname}</p>
+                </div>
+                <div class="price_div">
+                    <p class="old_price"><i class="bi bi-currency-rupee"></i>${list.oldprice.toLocaleString()}</p>
+                    <p class="new_price"><i class="bi bi-currency-rupee"></i>${list.newprice.toLocaleString()}</p>
+                </div>
+                </div>
+                <div class="bottom"><button class="addto_cart_btn addto_cart_btn${list._id}">
+                ${result.cartExist.some(product => product.productId === list._id) ? 'GO TO CART' : 'ADD TO CART'}
+                <i class="bi  ${result.cartExist.some(product => product.productId === list._id) ? 'bi-arrow-right-short' : 'bi-plus-lg'}"></i>
+                </button>
+                </div>                     
+                ` 
+
+        productSection.appendChild(productDiv)
+
+        productDiv.addEventListener('click',(event)=>{
+            productOpen(event, list._id)
+        })
+
+        document.querySelector(`.addto_cart_btn${list._id}`).addEventListener('click',(event)=>{
+            addToCart(event, list._id)
+        })
+
+        document.querySelector(`.wish_btn${list._id}`).addEventListener('click',(event)=>{
+            addToWish(event, list._id)
+        })
+
+
+    });
+
+}
+
+
+async function colorFilter(filterBase,filter){
+    showLoading()
+    const response = await fetch(`/all_products/show?f=${filterBase}&filter=${filter}`)
+    const result = await response.json()
     productSection.innerHTML = ''
     hideLoading()
     const products = result.filterProducts
@@ -197,6 +309,7 @@ async function filterProducts(filterBase,filter){
 
 
 
+
 const catRadio = document.querySelectorAll('.input_cat')
 const priceRadio = document.querySelectorAll('.input_price')
 const colorRadio = document.querySelectorAll('.input_color')
@@ -240,11 +353,11 @@ colorRadio.forEach((button)=>{
            const filterBase = 'COLOR'
            const filter =  e.target.value
            showLoading()
-           filterProducts(filterBase,filter)
+           colorFilter(filterBase,filter)
         
        } catch (error) {
         
        }
 
     })
-})
+})     

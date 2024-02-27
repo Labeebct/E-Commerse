@@ -50,8 +50,8 @@ exports.getCart = async(req,res) => {
         }
 
     } catch (error) {
-
         console.log('Error in get cart',error);
+        res.status(500).send('Internal server error')
     }
 
 } 
@@ -104,6 +104,7 @@ exports.postAddCart = async(req,res) => {
         
     }catch(error){
         console.log('Error in add to cart post',error.message);
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -143,6 +144,7 @@ exports.postRemoveCart = async(req,res) => {
         
     } catch (error) {
         console.log('Error in remove from cart',error.message);
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -195,5 +197,6 @@ exports.getIncreaseQuantity = async(req,res) =>{
 
     } catch (error) {
         console.log('Error in increase cart quantity',error);
+        res.status(500).send('Internal server error')
     }
 }

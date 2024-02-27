@@ -9,8 +9,8 @@
             <div class="sort_by_div">
                 <p class="sort_recomended">Sort By : Recomended<i class="bi bi-chevron-down"></i></p>
                 <ul class="sort_ul">
-                    <li onclick="filterProducts('PRICE','low to high')">Low to High</a></li>
-                    <li onclick="filterProducts('PRICE','high to low')">High to Low</li>
+                    <li onclick="filterProductsSort('PRICE','low to high')">Low to High</a></li>
+                    <li onclick="filterProductsSort('PRICE','high to low')">High to Low</li>
                 </ul>
             </div>
         </section>
@@ -22,21 +22,21 @@
                 <div class="filter_sec cat_sec">
                     <h4>Category</h4>
                       <ul>
-                        <li><input type="radio" class="input_cat" value="MENS" name="category" id="mens"><label for="mens">MENS</label></li>
-                        <li><input type="radio" class="input_cat" value="WOMENS" name="category" id="womens"><label for="womens">WOMENS</label></li>
-                        <li><input type="radio" class="input_cat" value="KIDS" name="category" id="kids"><label for="kids">KIDS</label></li>
-                        <li><input type="radio" class="input_cat" value="ELECTRONICS" name="category" id="electronics"><label for="electronics">ELECTRONICS</label></li>
-                        <li><input type="radio" class="input_cat" value="HOME" name="category" id="home"><label for="home">HOME</label></li>
+                        <li><input type="checkbox" class="input_cat" value="MENS" name="category" id="mens"><label for="mens">MENS</label></li>
+                        <li><input type="checkbox" class="input_cat" value="WOMENS" name="category" id="womens"><label for="womens">WOMENS</label></li>
+                        <li><input type="checkbox" class="input_cat" value="KIDS" name="category" id="kids"><label for="kids">KIDS</label></li>
+                        <li><input type="checkbox" class="input_cat" value="ELECTRONICS" name="category" id="electronics"><label for="electronics">ELECTRONICS</label></li>
+                        <li><input type="checkbox" class="input_cat" value="HOME" name="category" id="home"><label for="home">HOME</label></li>
                       </ul>
                 </div>
                 <div class="filter_sec price_sec">
                     <h4>Price</h4>
                     <ul>
-                        <li><input type="radio" class="input_price" value="500" name="price" id="500" ><label for="500">Under ₹500</label></li>
-                        <li><input type="radio" class="input_price" value="1000" name="price" id="1000" ><label for="1000">₹500 - ₹1000</label></li>
-                        <li><input type="radio" class="input_price" value="1500" name="price" id="1500" ><label for="1500">₹1000 - ₹1500</label></li>
-                        <li><input type="radio" class="input_price" value="2500" name="price" id="2500" ><label for="2500">₹1500 - ₹2500</label></li>
-                        <li><input type="radio" class="input_price" value="3000" name="price" id="3000" ><label for="3000">Over ₹2,500</label></li>
+                        <li><input type="checkbox" class="input_price" value="500" name="price" id="500" ><label for="500">Under ₹500</label></li>
+                        <li><input type="checkbox" class="input_price" value="1000" name="price" id="1000" ><label for="1000">₹500 - ₹1000</label></li>
+                        <li><input type="checkbox" class="input_price" value="1500" name="price" id="1500" ><label for="1500">₹1000 - ₹1500</label></li>
+                        <li><input type="checkbox" class="input_price" value="2500" name="price" id="2500" ><label for="2500">₹1500 - ₹2500</label></li>
+                        <li><input type="checkbox" class="input_price" value="3000" name="price" id="3000" ><label for="3000">Over ₹2,500</label></li>
                       </ul>
                 </div>
                 <div class="filter_sec color_sec">
@@ -47,7 +47,7 @@
                         <li><input type="radio" class="input_color" value="yellow" name="color" id="yellow"><label for="yellow"><span style="background-color: yellow;" class="color_balls"></span>Yellow</label></li>
                         <li><input type="radio" class="input_color" value="blue" name="color" id="blue"><label for="blue"><span style="background-color: blue;" class="color_balls"></span>Blue</label></li>
                         <li><input type="radio" class="input_color" value="olive" name="color" id="olive"><label for="olive"><span style="background-color: olive;" class="color_balls"></span>Olive</label></li>
-                        <li><input type="radio" class="input_color" value="orange" name="color" id="orange"><label for="orange"><span style="background-color: orange;" class="color_balls"></span>Orange</label></li>
+                        <li style="margin-top: .5rem;"><input type="radio" class="input_color" value="olive" name="color" id="olive"><label for="olive"><span style="background-color: olive;" class="color_balls"></span>Olive</label></li>
                       </ul>
                 </div>
 

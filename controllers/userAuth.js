@@ -3,102 +3,75 @@ const moment = require('moment')
 
 const signupModel = require('../models/signup')
 
-
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,15}$/
 
-
 const {sendOtp , verifyOtp} = require('../utils/otp')
 const {emailOtp , verify} = require('../utils/emailotp')
-
-
-
-
-
-
-   
-
-
-
-// <<<< ===================================== SIGNUP ======================================== >>>>>
-
-
-
-
-
 
 exports.getSignup = (req,res) => {
     res.render('user/pages/signup',{state:'',cartCount:0,wishCount:0})    /*  Rendering Signup page */
 }
 
+exports.postSignup = async (req, res) => {
+     try {
+          // Cullect required data from body
+          const {
+               username,
+               email,
+               mobilenum,
+               password
+          } = req.body
 
-exports.postSignup = async(req,res) => {
-try {
+          // Has the password before saving it to DB
+          const salt = await bcrypt.genSalt(10)
+          const hashedPassword = await bcrypt.hash(password , salt)
+          const originalDate = moment().format('DD-MM-YYYY')
 
-   const {username, email , mobilenum , password} = req.body
-   const salt = await bcrypt.genSalt(10)
-   const hashedPassword = await bcrypt.hash(password , salt)    /* Hashing with Salting */
-   const originalDate = moment().format('DD-MM-YYYY')
+          // Make sure thre is no user exists with provided email and phonenumber
+          const userNumExist = await signupModel.findOne({email})
+          const userEmailExist = await signupModel.findOne({mobilenum})
 
+          if(userNumExist || userEmailExist) {
 
-   const userNumExist = await signupModel.findOne({email})
-   const userEmailExist = await signupModel.findOne({mobilenum})
-
-   if(userNumExist || userEmailExist){    /* Checking whether user exist or not */
-
-    const verifyUser = userNumExist.verified
-
-    if(verifyUser){       /* checking whether user verified or not */
-   
-     console.log('user exist');
-     return res.status(403).json({error:'User Already Exist'})
-
-    }
-    else{
-    sendOtp(mobilenum)
-    console.log('OTP has send to the' + mobilenum);
-    res.status(200).json({mobilenum}) /* Passing mobile number for params to get OTP verifypage */
-    }
-   }
-   else{
-    req.session.mobilenum = mobilenum
-    const newSchema = new signupModel({
-         username,
-         email,
-         mobilenum,
-         password:hashedPassword,
-         regdate:originalDate
-      })
-  
-    await newSchema.save()
-    sendOtp(mobilenum)    /* Caling twilio Function */
-    console.log('OTP has send to the' + mobilenum);
-    res.status(200).json({mobilenum})
-    console.log('Data stored in database')
-    
+           const verifyUser = userNumExist.verified
+               if (verifyUser) {
+                    return res.status(403).json({error:'User Already Exist'})
+               } else {
+                    sendOtp(mobilenum)
+                    
+                    /* Passing mobile number for params to get OTP verifypage */
+                    res.status(200).json({mobilenum})
+               }
+          } else {
+               // Go ahead if not user exists with provided data
+               req.session.mobilenum = mobilenum
+               const newSchema = new signupModel({
+                    username,
+                    email,
+                    mobilenum,
+                    password: hashedPassword,
+                    regdate: originalDate,
+               })
+               
+               await newSchema.save()
+               sendOtp(mobilenum)    /* Caling twilio Function */
+               res.status(200).json({mobilenum})     
+          }
+     } catch (error) {
+          console.log('Error in post signup',error.message); 
+          res.status(500).send('Internal server error')
+     }
 }
-} catch (error) {
-    console.log('Error in post signup',error.message); 
-    res.status(500)
-}
-}
-
-
-
-
-// <<<< ================================================= LOGIN ============================================= >>>>>
-
-
-
-
-
-
 
 exports.getLogin = (req,res) => {
-    res.render('user/pages/login',{state:'',cartCount:0,wishCount:0}) 
+    res.render('user/pages/login',
+     {
+          state:'',
+          cartCount: 0,
+          wishCount: 0,
+     }) 
 } 
-
-
 
 exports.postLogin = async(req,res) => {
     
@@ -107,7 +80,7 @@ exports.postLogin = async(req,res) => {
          const userExist = await signupModel.findOne({email})  /* Finding user with email */
          
 
-         if(email == '' || password == ''){  /* Checking whether fields is empty */
+         if(email == '' || password == '') {  /* Checking whether fields is empty */
          
          return res.status(402).json({error:'Please all Fields'})
     }
@@ -153,16 +126,9 @@ exports.postLogin = async(req,res) => {
     
 } catch (error) {
     console.log('Error in post login',error.message);
+    res.status(500).send('Internal server error')
 }
 }
-
-
-
-
-// <<<< ========================================== OTP VERIFICATION =========================================== >>>>>
-
-
-
 
 
 exports.getOtpverification = async(req,res) => { 
@@ -175,7 +141,8 @@ exports.getOtpverification = async(req,res) => {
          const otpNumber = req.flash('number') || ''
          res.render('user/pages/otp',{state:'',number,otpFailed,otpNumber,cartCount:0,wishCount:0}) 
     } catch (error) {
-         console.log(error.message);
+         console.log('Error in get otp verification',error.message);
+         res.status(500).send('Internal server error')
     }
 }
 
@@ -202,6 +169,7 @@ exports.getResendotp = async (req,res) => {
          
     } catch (error) {
          console.log('Error in get resend otp',error.message);
+         res.status(500).send('Internal server error')
     }
 }
 
@@ -256,6 +224,7 @@ exports.postForgetpass = async (req, res) => {
          
     } catch (error) {
          console.log('Error in post forget password',error.message);
+         res.status(500).send('Internal server error')
     }
 }
 
@@ -273,6 +242,7 @@ exports.getEmailOtp = async(req, res) => {
 
     } catch (error) {
          console.log('Error admin getemail',error.message)
+         res.status(500).send('Internal server error')
     }
 }
 
@@ -300,6 +270,7 @@ exports.getResendemailotp = async(req,res) =>{
 
     } catch (error) {
          console.log('Error in get email resend otp',error.message);
+         res.status(500).send('Internal server error')
     }
 }
 
@@ -356,6 +327,7 @@ exports.postChangepass = async(req, res) => {
     
     } catch (error) {
          console.log('Error in getchange pass',error.message);
+         res.status(500).send('Internal server error')
     }
     
 }

@@ -57,38 +57,40 @@ exports.postAddwishlist = async(req,res) => {
 
         const wishExist = await wishlistModel.findOne({userId})
 
-        if(req.session.loggedin){
-        if(!wishExist){  // If wishlist is not exist for users
-           const newSchema = new wishlistModel({
-            userId:userObjId,
-            products:[{productId:productObjId}]
-           })
-          await newSchema.save()
-          console.log('Wishlist succesfully created');
-          return res.status(200).json({wishlistcreated:true})
-        }
-        else{
-           const productExist = wishExist.products.find((products)=> products.productId == productId) 
-           if(!productExist){ // Checking whether product already exist in wishlist
-            await wishlistModel.updateOne({userId},
-                {$push:{products:{productId:productObjId}}}
-                )
-            console.log('Product succesfully added to wishlist'); 
-        }
-        else{
-            console.log('Product already exist in wishlist');
-            return res.status(289)
-           }
-        }
+        if(!req.session.loggedin){
+            console.log('Not logged in');
+            return res.status(287).json({notloggedin:true})
     }else{
-        console.log('Not logged in');
-        res.status(423).json({notloggedin:true})
+        if(!wishExist){  // If wishlist is not exist for users
+            const newSchema = new wishlistModel({
+             userId:userObjId,
+             products:[{productId:productObjId}]
+            })
+           await newSchema.save()
+           console.log('Wishlist succesfully created');
+           return res.status(200).json({success:true,wishlistcreated:true})
+         }
+         else{
+            const productExist = wishExist.products.find((products)=> products.productId == productId) 
+            if(!productExist){ // Checking whether product already exist in wishlist
+             await wishlistModel.updateOne({userId},
+                 {$push:{products:{productId:productObjId}}}
+                 )
+             console.log('Product succesfully added to wishlist'); 
+             return res.status(200).json({success:true,wishlistcreated:true})
+         }
+         else{
+             console.log('Product already exist in wishlist');
+             return res.status(289)
+            }
+         }
     }
     
 
         
     } catch (error) {
         console.log('Error in add to wishlist',error.message);
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -110,7 +112,7 @@ exports.postFromwishToCart = async(req,res) => {
         const cartExist = await cartModel.findOne({userId})
 
         if(req.session.loggedin){
-        if(!cartExist){ //checking whether cart exist for users
+        if(!cartExist){    //checking whether cart exist for users
            const newSchema = new cartModel({
             userId:userObjId,
             products:[{productId:productObjId,quantity:1}]
@@ -151,6 +153,7 @@ exports.postFromwishToCart = async(req,res) => {
         
     }catch(error){
         console.log('Error in add to cart post',error.message);
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -173,6 +176,7 @@ exports.deleteWishlist = async(req,res) => {
         
     } catch (error) {
         console.log('Error in delete in wishlist',error.message);
+        res.status(500).send('Internal server error')
     }
 }
        

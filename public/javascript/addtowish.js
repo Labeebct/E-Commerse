@@ -13,7 +13,6 @@ async function addToWish(event,productId){
     try {
 
         if(wishIcon.classList.contains('bi-heart')){
-           wishIcon.classList.replace('bi-heart','bi-heart-fill')
 
            const response = await fetch('/wishist/add',{
             method:'POST',
@@ -24,12 +23,14 @@ async function addToWish(event,productId){
            })
 
            const result = await response.json()
-
-           if(!response.ok){
-            if(result.notloggedin){
-                window.location.href = '/wishlist'
-            }
+           if(result.notloggedin){
+               window.location.href = '/wishlist'
            }
+           else if(result.success){
+            wishCountTopNav.innerHTML++
+            wishIcon.classList.replace('bi-heart','bi-heart-fill')
+           }
+
         }
         else{
           const response = await fetch('/wishist/remove',{
@@ -42,7 +43,7 @@ async function addToWish(event,productId){
 
            const result = await response.json()
            if(result.success){
-            wishCountTopNav.innerHTML++
+            wishCountTopNav.innerHTML--
             wishIcon.classList.replace('bi-heart-fill','bi-heart')
          }
            else{

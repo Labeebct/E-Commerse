@@ -165,46 +165,22 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
+var productRating = 0;
 
 const rateProduct = document.querySelector('.reviewproduct')
 const reviewProduct = document.querySelector('.review_frame')
 const review = document.querySelector('.review_exist').innerHTML
-const reviewExist = JSON.parse(review)
+let reviewExist = JSON.parse(review)
+
 
 
 rateProduct.addEventListener('click',()=>{
    if(!reviewExist){
-   reviewProduct.style.display = 'block'
-   reviewProduct.style.height = '10rem'
+      reviewProduct.style.display = 'block'
+      reviewProduct.style.height = '10rem'
    }
 })
 
-
-
-   const status = document.querySelector('.status<%= userOrder._id %>')
-
-   if(status.innerHTML == 'PENDING'){
-      status.style.color = 'rgb(228, 202, 0)'
-   }
-   else if(status.innerHTML == 'CONFIRMED'){
-      status.style.color = 'rgb(255, 115, 0)'
-   }
-   else if(status.innerHTML == 'SHIPPED'){
-      status.style.color = 'rgb(4, 2, 131)'
-   }
-   else if(status.innerHTML == 'DELIVERED'){
-      status.style.color = 'rgb(0, 170, 0)'
-   }
-   else{
-      status.style.color = 'red'
-
-   }
-
-
-
-
-
-let productRating = 0;
 
 const stars = document.querySelectorAll('.rate_star')
 stars.forEach((star,index)=>{
@@ -229,6 +205,28 @@ stars.forEach((star,index)=>{
    })
 })
 
+
+
+
+const status = document.querySelector('.status<%= userOrder._id %>')
+
+if(status.innerHTML == 'PENDING'){
+      status.style.color = 'rgb(228, 202, 0)'
+   }
+   else if(status.innerHTML == 'CONFIRMED'){
+      status.style.color = 'rgb(255, 115, 0)'
+   }
+   else if(status.innerHTML == 'SHIPPED'){
+      status.style.color = 'rgb(4, 2, 131)'
+   }
+   else if(status.innerHTML == 'DELIVERED'){
+      status.style.color = 'rgb(0, 170, 0)'
+   }
+   else{
+      status.style.color = 'red'
+      
+   }
+   
 
 
 async function submitReview(productId){
@@ -279,6 +277,8 @@ async function submitReview(productId){
       console.log('Error in fetching product rating',error);
    }
 }
+
+
 
 
 </script>

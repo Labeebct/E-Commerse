@@ -73,8 +73,8 @@ exports.postSignup = async(req, res) => {
         }
     
     } catch (error) {
-         console.log('Error in admin signup',error.message); 
-         res.status(500)
+        console.log('Error in admin signup',error.message); 
+        res.status(500).send('Internal server Error')
     }
 }
 
@@ -127,6 +127,7 @@ exports.postKeyverify = async(req,res) => {
       }
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in admin keyvrification',error.message);
     }
 }
@@ -190,6 +191,7 @@ exports.postLogin = async(req,res) => {
          }
      
     } catch (error) {
+         res.status(500).send('Internal server Error')
          console.log('Error in post Login',error.message);
     }
 }
@@ -235,6 +237,7 @@ exports.postEmailverify = async(req,res) => {
         }
         
    } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post forget password',error.message);
    }
 }
@@ -276,6 +279,7 @@ exports.postForgetpassword = async(req,res) => {
         return res.redirect(`/admin/forget_password`)
      }     
 } catch (error) {
+     res.status(500).send('Internal server Error')
     console.log('Error in admin keyvrification',error.message);
 }
 }
@@ -322,6 +326,7 @@ exports.getProducts = async(req, res) => {
         res.render('admin/pages/products', { state , products , page , pagCount })
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in get products',error.message);
     }
 }
@@ -338,6 +343,7 @@ exports.getAddproducts = async(req,res) =>{
         res.render('admin/pages/addproducts',{state:'' , categories})
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in get add products',error.message);
     }
   
@@ -410,6 +416,7 @@ exports.postAddproduct = async(req,res) => {
  
     
   } catch (error) {
+     res.status(500).send('Internal server Error')
     console.log('Error in post add product',error.message);
   }
 }
@@ -432,6 +439,7 @@ exports.getEditproduct = async(req,res) => {
         res.render('admin/pages/editproduct',{state:'',categories , id , product})
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
 
         console.log('Error in get edit product',error.message);
     }
@@ -488,6 +496,7 @@ exports.postEditproduct = async(req,res) => {
 
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
 
         console.log('Error in post edit product',error.message);
     }
@@ -523,6 +532,7 @@ exports.deleteProduct = async(req,res) =>{
 
         
     } catch (error) {
+        res.status(500).send('Internal server Error')
         console.log('Error in product delete',error.message)
     }
 }
@@ -544,6 +554,7 @@ exports.getOpenproduct = async(req,res) => {
         res.render('admin/pages/productopen',{state:'',product})
         
     } catch (error) {
+        res.status(500).send('Internal server Error')
         console.log('Error in get open product',error.message);
     }
 }
@@ -591,6 +602,7 @@ exports.getUsers = async(req, res) => {
         }
 
     } catch (error) {
+        res.status(500).send('Internal server Error')
         console.log('Error in admin get users',error.message);
     }    
 }
@@ -608,6 +620,7 @@ exports.getCustomer = async(req,res) =>{
         res.render('admin/pages/individualuser',{state:'',user})
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in customer indi get',error.message);
     }
 }
@@ -636,6 +649,7 @@ exports.deleteUsers = async(req, res) => {
 
       
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in admin delete users',error.message);
     }
 }
@@ -662,6 +676,7 @@ exports.getCategory = async(req, res) => {
         res.render('admin/pages/category', { state ,categories })
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in get category',error.message);
     }
 }
@@ -716,6 +731,7 @@ exports.postAddcategory = async(req,res) =>{
 
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post add category',error.message);
     }
 }        
@@ -732,6 +748,7 @@ exports.getEditcategory = async(req,res) => {
     res.render('admin/pages/editcategory',{state:'' ,id , category})
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in get edit category',error.message);
     }
     
@@ -766,6 +783,7 @@ exports.postEditcategory = async(req,res) => {
         }
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post edit category',error.message);
     }
 }
@@ -795,6 +813,7 @@ exports.deletCategory = async(req,res) =>{
         }
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in delete category',error.message);
     }
 
@@ -823,7 +842,8 @@ exports.deleteSubcat = async(req,res) => {
         return res.status(500).json({success:false})
     }
 
-   } catch (error) {      
+   } catch (error) {
+     res.status(500).send('Internal server Error')      
       console.log('Error in delete sub cat',error);
    }
 }
@@ -859,6 +879,7 @@ exports.getBanners = async(req, res) => {
         res.render('admin/pages/banners', { state , bannersList , page , pagCount})
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in get Banners',error.message);
     }
 
@@ -899,6 +920,7 @@ exports.postAddbanner = async(req,res) =>{
         res.status(200).json({success:true})
 
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post add banner',error.message);
     }
     
@@ -926,6 +948,7 @@ exports.deleteBanner = async(req,res) => {
       }
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in delete banner',error.message);
     }
     
@@ -946,6 +969,7 @@ exports.getEditbanner = async(req,res) => {
         res.render('admin/pages/editbanner',{state:'',id,Banner})
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in get edit banner');
     }
 }
@@ -977,6 +1001,7 @@ exports.postEditbanner = async(req,res) => {
 
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
 
         console.log('Error in post edit banner',error.message);
     }
@@ -1020,6 +1045,7 @@ exports.getCoupons = async(req, res) => {
         res.render('admin/pages/coupons', { state , coupons , page , pagCount})
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in get coupons',error.message);
     }
  
@@ -1057,6 +1083,7 @@ exports.postAddcoupons = async(req,res) => {
 
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post add coupons',error.message);
     }
 }
@@ -1080,6 +1107,7 @@ exports.getEditcoupons = async(req,res) => {
 
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post edit coupons',error.message);
     }
 }
@@ -1104,6 +1132,7 @@ exports.postEditcoupons = async(req,res) => {
 
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post edit coupons',error.message);
     }
 }
@@ -1132,6 +1161,7 @@ exports.deleteCoupon = async(req,res) => {
 
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in post edit coupons',error.message);
     }
 }
@@ -1154,6 +1184,7 @@ exports.getMessages = async(req, res) => {
         const state = 'messages'
         res.render('admin/pages/messages', { state , messages})
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in user messages',error.messsage);
     }
 }
@@ -1173,6 +1204,7 @@ exports.getUsermessage = async(req,res) =>{
         res.render('admin/pages/usermessage',{state:'' , message})
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in user message open',error.message);
     }
 }
@@ -1259,6 +1291,7 @@ exports.getOrders = async(req,res) => {
         res.render('admin/pages/orders', { state , orders})
     
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in admin get orders',error);
     }
 
@@ -1289,6 +1322,7 @@ exports.getOrderstatus = async(req,res) => {
         res.status(200).json({success:true})
         
     } catch (error) {
+         res.status(500).send('Internal server Error')
         console.log('Error in admin get orders');
     }
        
@@ -1304,6 +1338,7 @@ exports.getLogout = (req,res) => {
          res.redirect('/admin/login')
          
     } catch (error) {
+         res.status(500).send('Internal server Error')
          console.log('Error in logout',error);
     }
 }

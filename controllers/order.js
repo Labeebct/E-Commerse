@@ -123,6 +123,7 @@ exports.getCheckout = async(req,res) => {
     
     } catch (error) {
         console.log('Error in order Summury get',error);
+        res.status(500).send('Internal server error')
     }
 
 }  
@@ -140,6 +141,7 @@ exports.postCheckout = (req,res) => {
     
   } catch (error) {
     console.log('Error in post checkout',error);
+    res.status(500).send('Internal server error')
   }
 }
 
@@ -170,6 +172,7 @@ exports.getConfirmOtp = async(req,res) => {
     
   } catch (error) {
     console.log('Error in order otp',error);
+    res.status(500).send('Internal server error')
   }
 }
     
@@ -187,6 +190,7 @@ exports.postConfirmOtp = (req,res) => {
     
   } catch (error) {
     console.log('Error in order otp',error);
+    res.status(500).send('Internal server error')
   }
 }
 
@@ -247,6 +251,7 @@ exports.getSummary = async(req,res) => {
 
   } catch (error) {
     console.log('Error in get summary',error);
+    res.status(500).send('Internal server error')
   }
 }
 
@@ -283,6 +288,7 @@ exports.postProceedtoPay = async(req,res) => {
 
   } catch (error) {
     console.log('Error in proceed to pay',error);
+    res.status(500).send('Internal server error')
   }
 }
 
@@ -310,7 +316,7 @@ exports.postRazorpay = async(req,res) => {
 
   } catch (error) {
       console.error('Error creating razorpay order:', error);
-      res.status(500).json({ error: 'Internal server error' });
+      res.status(500).send('Internal server error')
   }
 }
 
@@ -341,6 +347,7 @@ exports.postAddnewadress = async(req,res) =>{
         
     } catch (error) {
         console.log('Error in add new address from checkout',error.message);
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -360,6 +367,7 @@ exports.selectAddress = async (req,res) =>{
             
     } catch (error) {
         console.log('Error in select address',error);    
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -379,7 +387,8 @@ exports.applyCoupon = async (req,res) =>{
     res.status(200).json({success:true,couponDiscountPrice,discount})
             
     } catch (error) {
-        console.log('Error in select coupon');    
+        console.log('Error in select coupon',error);
+        res.status(500).send('Internal server error')   
     }
 }
 
@@ -407,6 +416,7 @@ exports.selectCoupon = async (req,res) =>{
             
     } catch (error) {
         console.log('Error in select coupon',error);    
+        res.status(500).send('Internal server error')
     }
 }
 
@@ -431,5 +441,6 @@ exports.getOrderSuccess = async(req,res) =>{
   
   } catch (error) {
     console.log('Error in order success page',error);
+    res.status(500).send('Internal server error')
   }
 }

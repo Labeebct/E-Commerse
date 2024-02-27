@@ -83,7 +83,7 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
     align-items: center;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     width: 100%;
     height: 100%;
     background-color: white;
@@ -2043,7 +2043,7 @@ word-wrap: break-word;
         align-items: center;
         width: 100%;
         height: 24%;
-        border-bottom:1px solid rgba(151, 151, 151, 0.67);
+        border-bottom:1px solid rgba(151, 151, 151, 0.372);
     }
     .product_name{
         font-size: 1rem;

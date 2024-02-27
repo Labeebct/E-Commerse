@@ -4,16 +4,6 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const nocache = require('nocache')
 require('dotenv').config() /* Loading varibales to the file */
-const Razorpay = require('razorpay');
-
-
-const razorpay = new Razorpay({
-    key_id: process.env.KEY_ID,
-    key_secret: process.env.KEY_SECRET
-});
-
-
-
     
 const app = express()
 const PORT = process.env.PORT || 808

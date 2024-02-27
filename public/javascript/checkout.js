@@ -59,6 +59,7 @@ async function deleteFromcheckout(event,productId,productprice){
 
     const subTotal = document.querySelector('.sub_total')
     const orderTotal = document.querySelector('.order_total')
+    const checkoutProducts = document.querySelectorAll('.product')
 
     const subTotalParse = parseFloat(subTotal.innerHTML)
     const orderTotalParse = parseFloat(orderTotal.innerHTML)
@@ -66,7 +67,11 @@ async function deleteFromcheckout(event,productId,productprice){
     const cartPrice = Number(result.cartPrice)
 
     document.querySelector(`.product${productId}`).remove()
-
+    
+    if(checkoutProducts.length <= 1){
+      window.location.href = '/home'
+    }
+     
 
     const discount = Math.round(cartPrice * .05) //calculating discount for product in cart
     const gst = Math.round(cartPrice * .01 )
@@ -74,7 +79,7 @@ async function deleteFromcheckout(event,productId,productprice){
     subTotal.innerHTML = ((cartPrice - discount) + gst )
     orderTotal.innerHTML = ((cartPrice - discount) + gst )
     }
-     
+
     } catch (error) {
             console.log('Error in remove checkout',error);
     }
@@ -428,10 +433,8 @@ async function proceed(event,addressId){
                 errMsg.innerHTML = ''
             }, 2000);
         }
-        else if(!order.address){
-            order.address = addressId
-        }
         else{
+            order.address = addressId
             
             const response = await fetch('/checkout',{
                 method:'POST',
