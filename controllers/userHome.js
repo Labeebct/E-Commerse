@@ -22,8 +22,7 @@ exports.getHome = async(req,res) => {
                enddate: { $gte: new Date() } 
            })
 
-          // subcatagory based cotagorisation and assigning to a variable to pass to user home page while rendeering
-
+          // subcatagory based cotagorisation and assigning to a variable to pass to user home page while rendering
           const mensShirts = await productModel.aggregate([
                {$match:{subcategory:'MENS SHIRTS'}}
           ])
@@ -168,9 +167,7 @@ exports.getSubcategory = async(req,res) => {
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId})
 
-
           //finding the subcategory that matcheds the user click query
-
           const subcatProducts = await productModel.aggregate([
                { $match: {subcategory:subcat} }
           ])          
@@ -233,7 +230,7 @@ exports.getProductopen = async(req,res) => {
 
                reviewCount = Number(ratingAndReview[0].review.length)
           }
-             
+
           // Showing related products by subcategory finding 
           const relatedProducts = await productModel.aggregate([
                {$match:{subcategory:product.subcategory}}
@@ -265,7 +262,6 @@ exports.getAllproducts = async(req,res) => {
 
           const userId = req.session.userId
 
-            
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId}) 
         
@@ -291,7 +287,6 @@ exports.getShowAllproducts = async(req,res) => {
           const filterValue = req.query.filter
 
           const search = req.query.search
-
           //Pagination
 
           const pageSize = 40
@@ -351,7 +346,7 @@ exports.getShowAllproducts = async(req,res) => {
 
                }
                else if(filterValue === '1500'){
-                    const filterProducts = await productModel.aggregate([
+                         const filterProducts = await productModel.aggregate([
                          {$match:{newprice:{$gte:1000 ,
                                    $lt:1500}}} // finding gretaer than 1000 and less than 1500
                     ])
@@ -421,8 +416,8 @@ exports.getShowAllproducts = async(req,res) => {
                 });
                return res.status(200).json({filterProducts,
                     wishExist:wishExist ? wishExist.products : [],
-                     ObjectId ,
-                     cartExist:cartExist ? cartExist.products : [],
+                    ObjectId ,
+                    cartExist:cartExist ? cartExist.products : [],
                     cartCount: cartExist? cartExist.products.length : 0,
                     wishCount: wishExist? wishExist.products.length : 0})
                }
@@ -432,8 +427,8 @@ exports.getShowAllproducts = async(req,res) => {
 
                res.status(200).json({products,
                     wishExist:wishExist ? wishExist.products : [],
-                     ObjectId ,
-                     cartExist:cartExist ? cartExist.products : [],
+                    ObjectId ,
+                    cartExist:cartExist ? cartExist.products : [],
                     cartCount: cartExist? cartExist.products.length : 0,
                     wishCount: wishExist? wishExist.products.length : 0})
           }

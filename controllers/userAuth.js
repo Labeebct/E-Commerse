@@ -267,7 +267,6 @@ exports.postChangepass = async(req, res) => {
          }else{
               res.status(500)
          }
-
     } 
     } catch (error) {
          console.log('Error in getchange pass',error.message);
