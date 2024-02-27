@@ -1,4 +1,4 @@
- const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt')
 const moment = require('moment')
 const fs = require('fs')
 
@@ -10,33 +10,25 @@ const bannerModel = require('../models/banner')
 const couponModel = require('../models/coupon')
 const messageModel = require('../models/message')
 const orderModel = require('../models/order')
+
+//Nodemailer function to send email
 const  {blockMessage,unblockMsg} = require('../utils/blockmsg')
 const { deliveredMsg , sippedMsg } = require('../utils/orderStatus')
 
-
 const emailRegex = /^[\w-]+(\.[\w-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,})$/
-
-
-
-
-// <<<<< ================================  SIGNUP ==================================== >>>>>>
-
-
-
-
 
 exports.getSignup = (req, res) => {
     res.render('admin/pages/signup')
 }
 
-
-
 exports.postSignup = async(req, res) => {
     try {
 
         const { username , email , mobilenum , password} = req.body
+
+        //Hashing with Salting
         const salt = await bcrypt.genSalt(10)
-        const hashedPassword = await bcrypt.hash(password , salt)    /* Hashing with Salting */
+        const hashedPassword = await bcrypt.hash(password , salt)   
 
         const originalDate = moment().format('DD-MM-YYYY')
     
@@ -48,13 +40,12 @@ exports.postSignup = async(req, res) => {
 
         const verifyUser = userNumExist.verified
    
-        if(verifyUser){       /* checking whether user verified or not */
+        if(verifyUser){      /* checking whether user verified or not */
    
          console.log('user exist');
          return res.status(403).json({error:'User Already Exist'})
    
-        }
-        else{
+        } else {
           return res.status(200).json({email}) /* Passing email for params to get OTP verifypage */
         }
        }
@@ -69,7 +60,6 @@ exports.postSignup = async(req, res) => {
     
         await newSchema.save()
         res.status(200).json({email})
-        console.log('Data stored in database')
         }
     
     } catch (error) {
@@ -78,23 +68,12 @@ exports.postSignup = async(req, res) => {
     }
 }
 
-
-
-
-
-// <<<<< ============================  KEY VERIFICATION =========================== >>>>>>
-
-
-
-
-
 exports.getKeyverify = (req, res) => {
 
     const email = req.params.email
     const errMsg = req.flash('wrongkey')
     res.render('admin/pages/key_verify',{email,errMsg})
 }
-
 
 exports.postKeyverify = async(req,res) => {
 
@@ -107,8 +86,7 @@ exports.postKeyverify = async(req,res) => {
             req.flash('wrongkey',"Please Enter the KEY")
             return res.redirect(`/admin/key_verification/${email}`)
 
-        }else{
-
+        } else {
 
         if(secretKey==password){
           const verifyAdmin = await adminDatas.updateOne({email},
@@ -116,7 +94,6 @@ exports.postKeyverify = async(req,res) => {
         )
 
           if(verifyAdmin){
-            console.log('Admin verified success');
             res.redirect('/admin/login')
           }
         }
@@ -132,22 +109,9 @@ exports.postKeyverify = async(req,res) => {
     }
 }
 
-
-
-
-  
-// <<<<< ================================= LOGIN ==================================== >>>>>>
-
-
-
-
-
-
 exports.getLogin = (req, res) => {
     res.render('admin/pages/login')
 }
-
-
 
 exports.postLogin = async(req,res) => {
      
@@ -174,45 +138,27 @@ exports.postLogin = async(req,res) => {
 
          if(comparePass){
 
-              if(userExist.verified){
-                
-                req.session.admin = true
-                return res.status(200).json({auth:true})
-
-            }
-            else{
+            if(userExist.verified){
+            req.session.admin = true
+            return res.status(200).json({auth:true})
+            } else {
                 return res.status(200).json({auth:false,email})    
             }
          }
          else{
               return res.status(402).json({error:'Incorrect Password'})         
          }
-
          }
-     
     } catch (error) {
          res.status(500).send('Internal server Error')
          console.log('Error in post Login',error.message);
     }
 }
 
-
-
-
-
-// <<<<< ================================== EMAIL VERIFY ================================== >>>>>>
-
-
-
-
-
-
-
 exports.getEmailverify = (req,res) => {
     const errMsg = req.flash('errMsg') 
     res.render('admin/pages/emailverify',{errMsg})
 }
-
 
 exports.postEmailverify = async(req,res) => {
    
@@ -242,15 +188,6 @@ exports.postEmailverify = async(req,res) => {
    }
 }
 
-
-
-
-// <<<<< =================================== FORGET PASSWORD ================================== >>>>>>
-
-
-
-
-
 exports.getForgetpassword = (req, res) => {
     const errMsg = req.flash('wrongkey')
     res.render('admin/pages/forgetpass',{errMsg})
@@ -266,11 +203,8 @@ exports.postForgetpassword = async(req,res) => {
         if(!password){
             req.flash('wrongkey',"Please Enter the Verification KEY")
             return res.redirect(`/admin/forget_password`)
-
         }
-
         if(secretKey==password){
-
             req.session.admin = true
             res.redirect('/admin/home')
 
@@ -284,34 +218,14 @@ exports.postForgetpassword = async(req,res) => {
 }
 }
 
-
-
-
-
-// <<<<< ========================================== HOME =========================================== >>>>>>
-
-
-
-
-
 exports.getHome = (req, res) => {
     const state = 'dashboard'
     res.render('admin/pages/dashboard', { state })
 }
 
-
-
-// <<<<< ======================================= PRODUCTS ======================================== >>>>>>
-
-
-
-
 exports.getProducts = async(req, res) => {
     try {
-
-
         const state = 'products'
-
         const page = parseInt(req.query.page) || 1
 
         const pageSize = 10
@@ -331,11 +245,6 @@ exports.getProducts = async(req, res) => {
     }
 }
 
-
-
-// -------- ADD ------
-
-
 exports.getAddproducts = async(req,res) =>{
     try {
         
@@ -349,18 +258,11 @@ exports.getAddproducts = async(req,res) =>{
   
 }
 
-
-
-
 exports.postAddproduct = async(req,res) => {
-  try {
-    
+  try {  
     if(req.files.length > 10){
-
      return res.status(207).json({success:false,ERR:'Cannot exceed Image more than 5'})
-
     }
-
     const imagePath = req.files.map((file) => '/products-img/' + file.filename)
 
     const {
@@ -395,22 +297,18 @@ exports.postAddproduct = async(req,res) => {
         review:[]
     })
 
-   if(!productExist){
+    if(!productExist){
+
        const saveData = await newSchema.save()
        if(saveData){
-        
-           console.log('Succesfully product added');
-           return res.status(200).json({success:true})
+         return res.status(200).json({success:true})
        }
        else{
-           console.log('Product added Failed');
-           return res.status(206).json({success:false,ERR:'Product Added Failed'})
-    
+         return res.status(206).json({success:false,ERR:'Product Added Failed'})
        }
     }
    else{
-          console.log( 'Product added Failed');
-          return res.status(206).json({success:false,ERR:'Product Already Exist'})
+         return res.status(206).json({success:false,ERR:'Product Already Exist'})
    }
       
  
@@ -421,17 +319,10 @@ exports.postAddproduct = async(req,res) => {
   }
 }
 
-
-
-// -------- EDIT -------
-
-
 exports.getEditproduct = async(req,res) => {
 
     try {
-
         const id = req.params.id
-
         const product = await productModel.findOne({_id:id})
 
         const categories = await categoryModel.find()
@@ -446,14 +337,10 @@ exports.getEditproduct = async(req,res) => {
 
 }
 
-
-    
 exports.postEditproduct = async(req,res) => {
 
     try {
-
         const id = req.params.id
-
         const findProduct = await productModel.findOne({_id:id})
 
         const {productname , oldprice , newprice , category , subcategory , size , color , returns , stock , deliverywithin , description} = req.body
@@ -472,8 +359,7 @@ exports.postEditproduct = async(req,res) => {
             deliverywithin,
             description
         }
-
-        
+ 
         if(req.files.length > 0){
 
             findProduct.productimg.forEach((img)=>{
@@ -487,13 +373,10 @@ exports.postEditproduct = async(req,res) => {
         else{
             update.productimg = findProduct.productimg
         }
-
-           
+      
         await productModel.updateOne({_id:id},update)
         
         res.status(200).redirect('/admin/products')
-
-
 
     } catch (error) {
          res.status(500).send('Internal server Error')
@@ -502,17 +385,9 @@ exports.postEditproduct = async(req,res) => {
     }
 }
 
-
-
-// ------- DELETE ---------
-
-
-
 exports.deleteProduct = async(req,res) =>{
 
     try {
-
-
         const { id } = req.body
 
         const productDelete = await productModel.findByIdAndDelete(id)
@@ -537,18 +412,10 @@ exports.deleteProduct = async(req,res) =>{
     }
 }
 
-
-
-// ------- PRODUCT OPEN ------
-
-
-
 exports.getOpenproduct = async(req,res) => {
 
     try {
-
         const id = req.query.product
-
         const product = await productModel.findOne({_id:id})
 
         res.render('admin/pages/productopen',{state:'',product})
@@ -559,20 +426,8 @@ exports.getOpenproduct = async(req,res) => {
     }
 }
 
-
-
-
-
-
-// <<<<< ================================================== USERS ================================================== >>>>>>
-
-
-
-
-
-
 exports.getUsers = async(req, res) => {
-    console.log("HEre")
+
     try {
 
         const state = 'users'
@@ -591,8 +446,6 @@ exports.getUsers = async(req, res) => {
             }}
 
         ]).skip(skip).limit(pageSize)
-
-
         if(userList){
 
             res.status(200).render('admin/pages/users', { state , userList , page})
@@ -606,13 +459,9 @@ exports.getUsers = async(req, res) => {
         console.log('Error in admin get users',error.message);
     }    
 }
-   
 
-
- 
 exports.getCustomer = async(req,res) =>{
     try {
-
         const id = req.params.id
 
         const user = await signupModel.findOne({_id:id})
@@ -624,13 +473,6 @@ exports.getCustomer = async(req,res) =>{
         console.log('Error in customer indi get',error.message);
     }
 }
-
-  
-
-
-
-// -------- DELETE ------
-
 
 exports.deleteUsers = async(req, res) => {
     try {
@@ -646,26 +488,11 @@ exports.deleteUsers = async(req, res) => {
         blockMessage(findUser)
         return res.status(200).json({success:true,blocked:true})
       }
-
-      
     } catch (error) {
          res.status(500).send('Internal server Error')
         console.log('Error in admin delete users',error.message);
     }
 }
-
-
-
-
-
-// <<<<< =====================================================  CATEGORY =================================================== >>>>>>
-
-
-
-
-
-
-
 
 exports.getCategory = async(req, res) => {
     try {
@@ -681,16 +508,10 @@ exports.getCategory = async(req, res) => {
     }
 }
 
-
-         
 exports.getAddcategory = (req,res) =>{
     const errMsg = req.flash('err')
     res.render('admin/pages/addcategory',{state:'',errMsg})
 }
-
-
-// -------- ADD ------
-
 
 exports.postAddcategory = async(req,res) =>{
     try {
@@ -713,7 +534,6 @@ exports.postAddcategory = async(req,res) =>{
         if(!catExist){
             await newSchema.save()
             res.status(200).json({success:true})
-            console.log('Category added success');
         }
         else{
 
@@ -725,8 +545,6 @@ exports.postAddcategory = async(req,res) =>{
                 }
                 
              res.status(200).json({success:true})
-             console.log('Sub category pushed Success')
-
         }
 
 
@@ -735,10 +553,6 @@ exports.postAddcategory = async(req,res) =>{
         console.log('Error in post add category',error.message);
     }
 }        
-
-
-// EDIT
-
 
 exports.getEditcategory = async(req,res) => {
     try {
@@ -788,28 +602,18 @@ exports.postEditcategory = async(req,res) => {
     }
 }
 
-
-
-
-
-// -------- DELETE ------
-
-
 exports.deletCategory = async(req,res) =>{
 
     try {
 
-        const {id} = req.body
-       
+        const {id} = req.body 
         const findCatAndDelete =  await categoryModel.deleteOne({_id:id})
 
         if(findCatAndDelete){
             res.status(200).json({success:true})
-            console.log('Category delete success');
         }
         else{
             res.status(256).json({success:false})
-            console.log('Category delete failed');
         }
         
     } catch (error) {
@@ -818,8 +622,6 @@ exports.deletCategory = async(req,res) =>{
     }
 
 }   
-
-
 
 exports.deleteSubcat = async(req,res) => {
    try {
@@ -834,11 +636,9 @@ exports.deleteSubcat = async(req,res) => {
         })
 
     if(update.modifiedCount > 0 ){
-        console.log('Sucuss subcat remove');
         return res.status(200).json({success:true})
     }
     else{
-        console.log('failed to remove  subcat');
         return res.status(500).json({success:false})
     }
 
@@ -847,24 +647,12 @@ exports.deleteSubcat = async(req,res) => {
       console.log('Error in delete sub cat',error);
    }
 }
-        
-
-
-// <<<<< ===================================================  BANNERS ===================================================== >>>>>>
-
-
-
-
-
-
 
 exports.getBanners = async(req, res) => {
 
     try {
 
-        
         const state = 'banners'
-
         const page = parseInt(req.query.page) || 1
 
         const pageSize = 7
@@ -885,20 +673,13 @@ exports.getBanners = async(req, res) => {
 
 }
 
-  
-// -------- ADD ------
-
-
 exports.getAddbanner = (req,res) =>{
     res.render('admin/pages/addbanner',{state:''})
 }
 
-
-
 exports.postAddbanner = async(req,res) =>{
 
     try {
-
         const {bannername , bannerhead , banneramount , startdate , enddate } = req.body  
 
         if(!req.file){
@@ -926,9 +707,6 @@ exports.postAddbanner = async(req,res) =>{
     
 }
 
-// -------- DELETE ------
-
-
 exports.deleteBanner = async(req,res) => {
 
     try {
@@ -954,10 +732,6 @@ exports.deleteBanner = async(req,res) => {
     
 }  
 
-
-// -------- EDIT ------
-
-
 exports.getEditbanner = async(req,res) => {
 
     try {
@@ -965,7 +739,6 @@ exports.getEditbanner = async(req,res) => {
     
         const Banner = await bannerModel.findOne({_id:id})
 
-    
         res.render('admin/pages/editbanner',{state:'',id,Banner})
         
     } catch (error) {
@@ -979,8 +752,7 @@ exports.getEditbanner = async(req,res) => {
 exports.postEditbanner = async(req,res) => {
 
     try {
-        const{ bannername , bannerhead , banneramount , startdate , enddate }  = req.body
-        
+        const{ bannername , bannerhead , banneramount , startdate , enddate }  = req.body     
         const id = req.params.id
 
         if(req.file){
@@ -998,7 +770,6 @@ exports.postEditbanner = async(req,res) => {
         })
 
         res.status(200).redirect('/admin/banners')
-
         
     } catch (error) {
          res.status(500).send('Internal server Error')
@@ -1008,27 +779,10 @@ exports.postEditbanner = async(req,res) => {
 
 }
 
-
-
-
-
-
-
-// <<<<< ====================================================  COUPONS ============================================== >>>>>>
-
-
-
-
-
-
-
-
 exports.getCoupons = async(req, res) => {
 
-    try {      
-            
+    try {                
         const state = 'coupons'
-
         const page = parseInt(req.query.page) || 1
 
         const pageSize = 7
@@ -1051,23 +805,14 @@ exports.getCoupons = async(req, res) => {
  
 }
 
-
-
-
-// ---------- ADD ----------
-
-
-
 exports.getAddcoupons = (req,res) =>{
     res.render('admin/pages/addcoupons',{state:''})
 }
-
 
 exports.postAddcoupons = async(req,res) => {
     try {
 
         const {couponnname} = req.body
-        console.log(req.body);
 
         const couponExist = await couponModel.findOne({couponnname})
 
@@ -1076,24 +821,16 @@ exports.postAddcoupons = async(req,res) => {
           return res.status(240).json({success:false})
         }
         else{
-
             await couponModel.create(req.body)
             res.status(200).json({success:true})
         }
 
         
     } catch (error) {
-         res.status(500).send('Internal server Error')
+        res.status(500).send('Internal server Error')
         console.log('Error in post add coupons',error.message);
     }
 }
-
-
-
-// ---------- EDIT ----------
-
-
-
 
 exports.getEditcoupons = async(req,res) => {
     try {
@@ -1102,7 +839,6 @@ exports.getEditcoupons = async(req,res) => {
     
         const coupon = await couponModel.findOne({_id:id})
 
-    
         res.render('admin/pages/editcoupons',{state:'' , id , coupon})
 
         
@@ -1111,8 +847,6 @@ exports.getEditcoupons = async(req,res) => {
         console.log('Error in post edit coupons',error.message);
     }
 }
-
-
 
 exports.postEditcoupons = async(req,res) => {
     try {
@@ -1137,16 +871,8 @@ exports.postEditcoupons = async(req,res) => {
     }
 }
 
-
-
-
-// --------- DELETE ----------
-
-
-
 exports.deleteCoupon = async(req,res) => {
     try {
-
         const { id } = req.body
 
         const couponDelete = await couponModel.deleteOne({_id:id})
@@ -1166,16 +892,6 @@ exports.deleteCoupon = async(req,res) => {
     }
 }
 
-
-
-
-
-// <<<<< ==============================================  USER MESSAGES ================================================= >>>>>>
-
-
-
-
-
 exports.getMessages = async(req, res) => {
     try {
 
@@ -1189,16 +905,11 @@ exports.getMessages = async(req, res) => {
     }
 }
 
-
-
-
-
 exports.getUsermessage = async(req,res) =>{
 
     try {
 
         const id = req.params.id
-
         const message = await messageModel.findOne({_id:id})
 
         res.render('admin/pages/usermessage',{state:'' , message})
@@ -1209,20 +920,8 @@ exports.getUsermessage = async(req,res) =>{
     }
 }
 
-
-
-
-// <<<<< ============================================  ORDERS =================================================== >>>>>>
-
-
-
-
-
-
-
 exports.getOrders = async(req,res) => {
     try {
-
         let orders=[];
 
         const state = 'orders' 
@@ -1282,10 +981,6 @@ exports.getOrders = async(req,res) => {
                     }
                 }
             ])
-
-
-
-
         }     
 
         res.render('admin/pages/orders', { state , orders})
@@ -1327,9 +1022,6 @@ exports.getOrderstatus = async(req,res) => {
     }
        
 }    
-
-
-
 
 exports.getLogout = (req,res) => {
     try {

@@ -1,21 +1,16 @@
 const productModel = require('../models/products')
 const cartModel = require('../models/cart')
 const wishlistModel = require('../models/wishlist')
+
 const { ObjectId } = require('mongodb');
 const { Types } = require('mongoose');
-const products = require('../models/products');
-
-
 
 exports.getCart = async(req,res) => {
-   
     try {  
-
         const state = 'cart'
         const userId = req.session.userId
 
         //Finding the user cart and wishlist
-
         const cartExist = await cartModel.findOne({userId})
         const wishExist = await wishlistModel.findOne({userId})
        
@@ -39,34 +34,72 @@ exports.getCart = async(req,res) => {
             const gst = cartTotal * .01
 
               
-              return res.render('user/pages/cart',{state , loggedIn:true , cartExist , cartQuantity , cartCount , cartProducts , cartTotal , discount ,gst ,ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+              return res.render('user/pages/cart',
+              {
+                state,
+                loggedIn:true,
+                cartExist,
+                cartQuantity,
+                cartCount,
+                cartProducts,
+                cartTotal,
+                discount,
+                gst,
+                ObjectId,
+                cartCount: cartExist? cartExist.products.length : 0,
+                wishCount: wishExist? wishExist.products.length : 0
+            })
             }
             else{
-              return res.render('user/pages/cart',{state , loggedIn:true , cartExist:false, cartQuantity:'' , cartCount:0 ,cartProducts:'' , cartTotal:'' , discount:'' , gst:'' , ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+              return res.render('user/pages/cart',
+              {
+                state,
+                loggedIn:true,
+                cartExist:false,
+                cartQuantity:'' ,
+                cartCount:0,
+                cartProducts:'' ,
+                cartTotal:'',
+                discount:'',
+                gst:'' ,
+                ObjectId,
+                cartCount: cartExist? cartExist.products.length : 0,
+                wishCount: wishExist? wishExist.products.length : 0
+            })
             }
         }
         else{
-            return res.render('user/pages/cart',{state , loggedIn:false , cartExist:false , cartQuantity:'' , cartCount:0 , cartProducts:'' , cartTotal:'',discount:'',gst:'' , ObjectId,cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
-        }
-
+            return res.render('user/pages/cart',
+            {
+              state,
+              loggedIn:false,
+              cartExist:false,
+              cartQuantity:'',
+              cartCount:0,
+              cartProducts:'',
+              cartTotal:'',
+              discount:'',
+              gst:'',
+              ObjectId,
+              cartCount: cartExist? cartExist.products.length : 0,
+              wishCount: wishExist? wishExist.products.length : 0
+            })
+            }
     } catch (error) {
         console.log('Error in get cart',error);
         res.status(500).send('Internal server error')
     }
 
 } 
-   
-   
 
 exports.postAddCart = async(req,res) => {
 
-    try {
-        
+    try {   
         const { productId , cartQuantity } = req.body
 
-        const quantity = parseInt(cartQuantity)  // collectiing quantity while product open and add to cart
+        // Collectiing quantity while product open and add to cart
+        const quantity = parseInt(cartQuantity)
         const userId = req.session.userId
-
 
         const userObjId = new Types.ObjectId(userId)
         const productObjId = new Types.ObjectId(productId)
@@ -74,13 +107,13 @@ exports.postAddCart = async(req,res) => {
         const cartExist = await cartModel.findOne({userId})
 
         if(req.session.loggedin){ 
-        if(!cartExist){ // if cart is not exist for the users
-           const newSchema = new cartModel({
+           if(!cartExist){ // if cart is not exist for the users
+            const newSchema = new cartModel({
             userId:userObjId,
-            products:[{productId:productObjId,quantity}]  // adding quantity and product id in  cart products
+            products:[{productId:productObjId,quantity}]  
            })
-          await newSchema.save() // saving data
-          return res.status(200).json({success:true,cartcreated:true})
+            await newSchema.save()
+            return res.status(200).json({success:true,cartcreated:true})
         }
         else{
            const productExist = cartExist.products.find((products)=> products.productId == productId) // checking whther product already exist in cart
@@ -99,16 +132,12 @@ exports.postAddCart = async(req,res) => {
     }else{
         console.log('Not logged in');
         res.status(423).json({notloggedin:true})
-    }
-    
-        
+    }       
     }catch(error){
         console.log('Error in add to cart post',error.message);
         res.status(500).send('Internal server error')
     }
 }
-
-       
 
 exports.postRemoveCart = async(req,res) => {
     try {
@@ -125,7 +154,6 @@ exports.postRemoveCart = async(req,res) => {
         if(!findProduct){
             return
         }
-
         const deleteProductPrice = findProduct.productId.newprice * findProduct.quantity
 
         const cartPrice = cartProducts.reduce((acc,item)=>{
@@ -135,8 +163,6 @@ exports.postRemoveCart = async(req,res) => {
         const removeProduct = await cartModel.updateOne({userId}, // removing the product from database using mongodb pull methode
           {$pull:{products:{productId}}
         })
-
-
 
        if(removeProduct.modifiedCount > 0){
         return res.status(200).json({success:true,productId,deleteProductPrice,cartPrice})
@@ -148,7 +174,6 @@ exports.postRemoveCart = async(req,res) => {
     }
 }
 
-
 exports.getIncreaseQuantity = async(req,res) =>{
     try {
         
@@ -157,7 +182,6 @@ exports.getIncreaseQuantity = async(req,res) =>{
         let newPrice;
 
         const userId = req.session.userId
-
         const quantity = req.query.quantity
         const productIdin = req.query.productId
 
@@ -177,7 +201,6 @@ exports.getIncreaseQuantity = async(req,res) =>{
             cartPrice = Number(findSingleProduct.newprice)
         }
         else{
-   
         currentPrice = findProduct.productId.newprice * findProduct.quantity
         
         await cartModel.updateOne(
@@ -190,9 +213,7 @@ exports.getIncreaseQuantity = async(req,res) =>{
             cartPrice = cartProducts.reduce((acc,item)=>{
                 return acc + (item.productId.newprice * item.quantity)
              },0)
-
         }
-
         res.status(200).json({success:true,currentPrice,newPrice,cartPrice})
 
     } catch (error) {

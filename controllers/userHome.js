@@ -3,24 +3,12 @@ const categoryModel = require('../models/category')
 const wishlistModel = require('../models/wishlist')
 const cartModel = require('../models/cart')
 const bannerModel = require('../models/banner')
-const couponModel = require('../models/coupon')
 
 const { ObjectId } = require('mongodb');
 const { Types } = require('mongoose')
 
-
-// <<<<< ============================================== HOME ========================================================= >>>>>
-
-
-
-
-
-
 exports.getHome = async(req,res) => {
-
-     try {
-        
-
+   try {
           const state = 'home'
           const categories = await categoryModel.find()
 
@@ -28,7 +16,6 @@ exports.getHome = async(req,res) => {
 
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId})
-
 
           const banners = await bannerModel.find({
                startdate: { $lte: new Date() },
@@ -97,7 +84,6 @@ exports.getHome = async(req,res) => {
           const utensils = await productModel.aggregate([
                {$match:{subcategory:'UTENSILS'}}
           ])
-
           res.render('user/pages/home',
           {
           state,
@@ -128,18 +114,13 @@ exports.getHome = async(req,res) => {
           cartExist:cartExist ? cartExist.products : [],
           ObjectId,
           banners
-          })
-    
-
-          
+          })  
+              
      } catch (error) {
           console.log('Error in user home get',error);
           res.status(500).send('Internal server error')
      }
 }
-
-
-
 
 exports.getCategory = async(req,res) => {
      try {        
@@ -158,9 +139,15 @@ exports.getCategory = async(req,res) => {
                { $match: {category:category} }
           ])          
 
-
-          res.render('user/pages/categoryproducts',{state:category, catProducts , categories, wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
-          
+          res.render('user/pages/categoryproducts',{state:category,
+                catProducts ,
+                categories,
+                wishExist:wishExist ? wishExist.products : [],
+                ObjectId ,
+                cartExist:cartExist ? cartExist.products : [],
+                cartCount: cartExist? cartExist.products.length : 0,
+                wishCount: wishExist? wishExist.products.length : 0
+          })   
      } catch (error) {
           console.log('Error in get category',error);
           res.status(500).send('Internal server error')
@@ -188,17 +175,21 @@ exports.getSubcategory = async(req,res) => {
                { $match: {subcategory:subcat} }
           ])          
 
-          res.render('user/pages/subcatproducts',{state:subcat, subcatProducts , categories ,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+          res.render('user/pages/subcatproducts',{state:subcat,
+               subcatProducts ,
+               categories ,
+               wishExist:wishExist ? wishExist.products : [],
+               ObjectId ,
+               cartExist:cartExist ? cartExist.products : [],
+               cartCount: cartExist? cartExist.products.length : 0,
+               wishCount: wishExist? wishExist.products.length : 0
+          })
           
      } catch (error) {
           console.log('Error in get category',error);
           res.status(500).send('Internal server error')
      }
 }
-
-
-
-
 
 exports.getProductopen = async(req,res) => {
      try {
@@ -230,13 +221,11 @@ exports.getProductopen = async(req,res) => {
                         'userProfile': 1
                     }
                 }
-
           ])
     
           let rating = 0;
           let reviewCount;
 
-      
           if (ratingAndReview && ratingAndReview.length > 0 && ratingAndReview[0].review) {
                rating = Number(ratingAndReview[0].review.reduce((accumulator, review) => {
                return accumulator + review.rating;
@@ -246,7 +235,6 @@ exports.getProductopen = async(req,res) => {
           }
              
           // Showing related products by subcategory finding 
-
           const relatedProducts = await productModel.aggregate([
                {$match:{subcategory:product.subcategory}}
           ]) 
@@ -272,10 +260,6 @@ exports.getProductopen = async(req,res) => {
      }
 }
 
-
-
-
-
 exports.getAllproducts = async(req,res) => {
      try {
 
@@ -285,16 +269,17 @@ exports.getAllproducts = async(req,res) => {
           const wishExist = await wishlistModel.findOne({userId})
           const cartExist = await cartModel.findOne({userId}) 
         
-          res.render('user/pages/allproducts',{state:'',cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+          res.render('user/pages/allproducts',{
+               state:'',
+               cartCount: cartExist? cartExist.products.length : 0,
+               wishCount: wishExist? wishExist.products.length : 0
+          })
           
      }catch (error) {
           console.log('Error in get product open',error.message);
           res.status(500).send('Internal server error')
      }
 }
-
-
-
 
 exports.getShowAllproducts = async(req,res) => {
      try {
@@ -316,8 +301,14 @@ exports.getShowAllproducts = async(req,res) => {
           const cartExist = await cartModel.findOne({userId}) 
         
           if(search){ // Updated search using input event and getting the vaue by query
-             const searchFilter = await productModel.find({productname: { $regex:search, $options: 'i' } })  // Searching regex
-             return res.status(200).json({searchFilter,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+               const searchFilter = await productModel.find({productname: { $regex:search, $options: 'i' } })  // Searching regex
+               return res.status(200).json({searchFilter,
+               wishExist:wishExist ? wishExist.products : [],
+               ObjectId ,
+               cartExist:cartExist ? cartExist.products : [],
+               cartCount: cartExist? cartExist.products.length : 0,
+               wishCount: wishExist? wishExist.products.length : 0
+          })
           }
           else if(filterBase && filterValue){ // Fileteration based on category , price and color
 
@@ -325,54 +316,97 @@ exports.getShowAllproducts = async(req,res) => {
                     const filterProducts = await productModel.aggregate([
                          {$match:{category:filterValue}}
                     ])
-                   return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+                   return res.status(200).json({filterProducts,
+                         wishExist:wishExist ? wishExist.products : [],
+                         ObjectId ,
+                         cartExist:cartExist ? cartExist.products : [],
+                         cartCount: cartExist? cartExist.products.length : 0,
+                         wishCount: wishExist? wishExist.products.length : 0})
                }
                else if(filterBase === 'PRICE'){ // disfferent filteration based on the pricing
 
 
-                    if(filterValue === '500'){
-                         const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$lt:500}}}
-                         ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
-                    }
-                    else if(filterValue === '1000'){
-                         const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$gte:500 , $lt:1000}}}  // finding gretaer than 500 and less than 100
-                         ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+               if(filterValue === '500'){
+                    const filterProducts = await productModel.aggregate([
+                         {$match:{newprice:{$lt:500}}}
+                    ])
+                    return res.status(200).json({filterProducts,
+                         wishExist:wishExist ? wishExist.products : [],
+                         ObjectId ,
+                         cartExist:cartExist ? cartExist.products : [],
+                         cartCount: cartExist? cartExist.products.length : 0,
+                         wishCount: wishExist? wishExist.products.length : 0})
+               }
+               else if(filterValue === '1000'){
+                    const filterProducts = await productModel.aggregate([
+                         {$match:{newprice:{$gte:500 ,
+                              $lt:1000}}}  // finding gretaer than 500 and less than 100
+               ])
+               return res.status(200).json({filterProducts,
+                         wishExist:wishExist ? wishExist.products : [],
+                         ObjectId ,
+                         cartExist:cartExist ? cartExist.products : [],
+                         cartCount: cartExist? cartExist.products.length : 0,
+                         wishCount: wishExist? wishExist.products.length : 0})
 
-                    }
-                    else if(filterValue === '1500'){
-                         const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$gte:1000 , $lt:1500}}} // finding gretaer than 1000 and less than 1500
-                         ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+               }
+               else if(filterValue === '1500'){
+                    const filterProducts = await productModel.aggregate([
+                         {$match:{newprice:{$gte:1000 ,
+                                   $lt:1500}}} // finding gretaer than 1000 and less than 1500
+                    ])
+                    return res.status(200).json({filterProducts,
+                         wishExist:wishExist ? wishExist.products : [],
+                         ObjectId ,
+                         cartExist:cartExist ? cartExist.products : [],
+                         cartCount: cartExist? cartExist.products.length : 0,
+                         wishCount: wishExist? wishExist.products.length : 0})
 
-                    }
+               }
                     else if(filterValue === '2500'){
                          const filterProducts = await productModel.aggregate([
-                              {$match:{newprice:{$gte:1500 , $lt:2500}}}  // finding gretaer than 1500 and less than 2500
+                              {$match:{newprice:{$gte:1500 ,
+                                    $lt:2500}}}  // finding gretaer than 1500 and less than 2500
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+                         return res.status(200).json({filterProducts,
+                              wishExist:wishExist ? wishExist.products : [],
+                              ObjectId ,
+                              cartExist:cartExist ? cartExist.products : [],
+                              cartCount: cartExist? cartExist.products.length : 0,
+                              wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else if(filterValue === 'low to high'){
                          const filterProducts = await productModel.aggregate([
                               {$sort:{newprice:1}}   // Sorting from low to high
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+                         return res.status(200).json({filterProducts,
+                              wishExist:wishExist ? wishExist.products : [],
+                              ObjectId ,
+                              cartExist:cartExist ? cartExist.products : [],
+                              cartCount: cartExist? cartExist.products.length : 0,
+                              wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else if(filterValue === 'high to low'){
                          const filterProducts = await productModel.aggregate([
                               {$sort:{newprice:-1}}  // Sorting from high to low
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+                         return res.status(200).json({filterProducts,
+                              wishExist:wishExist ? wishExist.products : [],
+                               ObjectId ,
+                               cartExist:cartExist ? cartExist.products : [],
+                              cartCount: cartExist? cartExist.products.length : 0,
+                              wishCount: wishExist? wishExist.products.length : 0})
                     }
                     else{
                          const filterProducts = await productModel.aggregate([
                               {$match:{newprice:{$gt:2500}}}  // finding product greater than 2500
                          ])
-                         return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+                         return res.status(200).json({filterProducts,
+                              wishExist:wishExist ? wishExist.products : [],
+                               ObjectId ,
+                               cartExist:cartExist ? cartExist.products : [],
+                              cartCount: cartExist? cartExist.products.length : 0,
+                              wishCount: wishExist? wishExist.products.length : 0})
                     }
                }
                else{
@@ -385,13 +419,23 @@ exports.getShowAllproducts = async(req,res) => {
                         filterProducts.push(product);
                     }
                 });
-               return res.status(200).json({filterProducts,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+               return res.status(200).json({filterProducts,
+                    wishExist:wishExist ? wishExist.products : [],
+                     ObjectId ,
+                     cartExist:cartExist ? cartExist.products : [],
+                    cartCount: cartExist? cartExist.products.length : 0,
+                    wishCount: wishExist? wishExist.products.length : 0})
                }
 
           }else{
                const products = await productModel.find().skip(skip).limit(pageSize)
 
-               res.status(200).json({products,wishExist:wishExist ? wishExist.products : [], ObjectId , cartExist:cartExist ? cartExist.products : [],cartCount: cartExist? cartExist.products.length : 0,wishCount: wishExist? wishExist.products.length : 0})
+               res.status(200).json({products,
+                    wishExist:wishExist ? wishExist.products : [],
+                     ObjectId ,
+                     cartExist:cartExist ? cartExist.products : [],
+                    cartCount: cartExist? cartExist.products.length : 0,
+                    wishCount: wishExist? wishExist.products.length : 0})
           }
 
           
@@ -401,11 +445,8 @@ exports.getShowAllproducts = async(req,res) => {
      }
 }
 
-
-
 exports.getLogout = (req,res) => {
      try {
-
           req.session.destroy()
           res.redirect('/login')
           

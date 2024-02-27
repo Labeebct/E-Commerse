@@ -9,28 +9,19 @@ const orderModel = require('../models/order')
 const crypto = require('crypto');
 const Razorpay = require('razorpay');
 
-
 const razorpay = new Razorpay({
     key_id: process.env.KEY_ID,
     key_secret: process.env.KEY_SECRET
 });
-
 
 const { ObjectId } = require('mongodb');
 const { Types } = require('mongoose')
 
 const {orderConfirm , verify} = require('../utils/confirmorder')
 
-
-const profile = require('../models/profile')
-
-  
-
-
 exports.getCheckout = async(req,res) => {
 
-    try {
-        
+    try {      
         let cartTotal;
         let cartPrice;
 
@@ -95,18 +86,14 @@ exports.getCheckout = async(req,res) => {
         const gst = cartPrice * .01
 
         cartTotal = Math.round(Number(cartPrice - discount + gst))
-    
         }
-
         const coupons = await couponModel.find({
             minamount:{ $lte: cartTotal},
             maxamount:{$gte: cartTotal},
             avalability:"forallusers",
             startdate: { $lte: new Date() },
             enddate: { $gte: new Date() } 
-        });
-
-               
+        });          
         res.render('user/pages/checkout'
         ,{
           state,ObjectId,cartCount: cartExist? cartExist.products.length : 0,
@@ -128,8 +115,6 @@ exports.getCheckout = async(req,res) => {
 
 }  
 
-
-
 exports.postCheckout = (req,res) => {
   try {
 
@@ -144,8 +129,6 @@ exports.postCheckout = (req,res) => {
     res.status(500).send('Internal server error')
   }
 }
-
-
 
 exports.getConfirmOtp = async(req,res) => {
   try {
@@ -175,9 +158,6 @@ exports.getConfirmOtp = async(req,res) => {
     res.status(500).send('Internal server error')
   }
 }
-    
-
-
 
 exports.postConfirmOtp = (req,res) => {
   try {
@@ -186,16 +166,12 @@ exports.postConfirmOtp = (req,res) => {
     const code = D1+D2+D3+D4
 
     verify(code,res,req)
-
     
   } catch (error) {
     console.log('Error in order otp',error);
     res.status(500).send('Internal server error')
   }
 }
-
-
-
 
 exports.getSummary = async(req,res) => {
 
@@ -255,22 +231,18 @@ exports.getSummary = async(req,res) => {
   }
 }
 
-
-
-
 exports.postProceedtoPay = async(req,res) => {
   try {
     
-    const order = req.session.order
-    const email = req.session.email
-    const { totalamount} = req.session.order;
+      const order = req.session.order
+      const email = req.session.email
+      const { totalamount} = req.session.order;
 
     if(order.paymentmethode === 'razorpay'){
 
       const amount = req.session.order.totalamount
 
       const amountInPaise = amount * 100; 
-
       const currency = 'INR';
       const options = {
           amount: amountInPaise,
@@ -292,8 +264,6 @@ exports.postProceedtoPay = async(req,res) => {
   }
 }
 
-       
-       
 exports.postRazorpay = async(req,res) => {
 
   try {
@@ -320,15 +290,10 @@ exports.postRazorpay = async(req,res) => {
   }
 }
 
-
-
-
-
 exports.postAddnewadress = async(req,res) =>{
     try {
 
      const userId = req.session.userId
-
      const newAddress = req.body
     
      const profileExist = await profileModel.findOne({userId})
@@ -351,8 +316,6 @@ exports.postAddnewadress = async(req,res) =>{
     }
 }
 
-
-  
 exports.selectAddress = async (req,res) =>{
     try {
 
@@ -370,7 +333,6 @@ exports.selectAddress = async (req,res) =>{
         res.status(500).send('Internal server error')
     }
 }
-
 
 exports.applyCoupon = async (req,res) =>{
     try {
@@ -419,8 +381,6 @@ exports.selectCoupon = async (req,res) =>{
         res.status(500).send('Internal server error')
     }
 }
-
-
 
 exports.getOrderSuccess = async(req,res) =>{
   try {

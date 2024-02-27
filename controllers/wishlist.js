@@ -2,23 +2,17 @@ const productModel = require('../models/products')
 const wishlistModel = require('../models/wishlist')
 const cartModel = require('../models/cart')
 
-
 const { Types } = require('mongoose')
-
-    
-
 
 exports.getWishlist = async(req,res) => {
     
-    try {  
-        
+    try {      
         const state = 'wishlist'
 
         const userId = req.session.userId
 
         const wishExist = await wishlistModel.findOne({userId})
         const cartExist = await cartModel.findOne({userId})
-
 
         if(req.session.loggedin){ // Checking whether user wishlist or not
 
@@ -28,23 +22,43 @@ exports.getWishlist = async(req,res) => {
 
               const wishProducts = await productModel.find({_id:{$in:productIds}}) // Finding products that matches the  product id in wishlist  database
 
-              
-              return res.render('user/pages/wishlist',{state , loggedIn:true , wishExist , wishProducts ,wishCount: wishExist? wishExist.products.length : 0,cartCount: cartExist? cartExist.products.length : 0})
+              return res.render('user/pages/wishlist',
+              {
+               state ,
+               loggedIn:true ,
+               wishExist ,
+               wishProducts ,
+               wishCount: wishExist? wishExist.products.length : 0,
+               cartCount: cartExist? cartExist.products.length : 0
+            })
             }
             else{
-              return res.render('user/pages/wishlist',{state , loggedIn:true , wishExist:false ,wishProducts:'' , wishCount:0,cartCount: cartExist? cartExist.products.length : 0})
+              return res.render('user/pages/wishlist',
+              {
+                state ,
+                loggedIn:true ,
+                wishExist:false ,
+                wishProducts:'' ,
+                wishCount:0,cartCount: cartExist? cartExist.products.length : 0
+            })
             }
         }
         else{
-             return res.render('user/pages/wishlist',{state , loggedIn:false , wishExist:false ,wishProducts:'' , wishCount:'',cartCount: cartExist? cartExist.products.length : 0})
+             return res.render('user/pages/wishlist',
+             {
+                state ,
+                loggedIn:false ,
+                wishExist:false ,
+                wishProducts:'' ,
+                wishCount:'',cartCount: cartExist? cartExist.products.length : 0
+            })
         }
- 
+
     } catch (error) {
 
         console.log('Error in get wislist',error);
     }
 }
-
 
 exports.postAddwishlist = async(req,res) => {
     try {
@@ -85,8 +99,6 @@ exports.postAddwishlist = async(req,res) => {
             }
          }
     }
-    
-
         
     } catch (error) {
         console.log('Error in add to wishlist',error.message);
@@ -94,15 +106,9 @@ exports.postAddwishlist = async(req,res) => {
     }
 }
 
-
-
-
 exports.postFromwishToCart = async(req,res) => {
 
     try {
-
-        console.log('hii');
-
         const { productId } = req.body
         const userId = req.session.userId
 
@@ -146,19 +152,13 @@ exports.postFromwishToCart = async(req,res) => {
            }
         }
     }else{
-        console.log('Not logged in');
         res.status(423).json({notloggedin:true})
     }
-    
-        
     }catch(error){
         console.log('Error in add to cart post',error.message);
         res.status(500).send('Internal server error')
     }
 }
-
-
-
 
 exports.deleteWishlist = async(req,res) => {
     try {

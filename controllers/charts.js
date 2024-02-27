@@ -1,13 +1,7 @@
 const signupModel = require('../models/signup')
-const adminDatas = require('../models/admin_signup')
 const productModel = require('../models/products')
-const categoryModel = require('../models/category')
-const bannerModel = require('../models/banner')
-const couponModel = require('../models/coupon')
-const messageModel = require('../models/message')
 const orderModel = require('../models/order')
 const moment = require('moment');
-
 
 exports.getSaleschart = async (req, res) => {
     try {
@@ -15,7 +9,6 @@ exports.getSaleschart = async (req, res) => {
         
         const startDate = moment(currentDate).subtract(2, 'months').startOf('month').toDate();
         const endDate = moment(currentDate).endOf('month').toDate();
-        
         
         const resultData = await orderModel.aggregate([
             { 
@@ -73,7 +66,6 @@ exports.getSaleschart = async (req, res) => {
     }
 }
 
-
 exports.getCustomerschart = async(req,res) => {
     try {
 
@@ -128,9 +120,6 @@ exports.getCustomerschart = async(req,res) => {
         res.status(500).send('Internal server error')
     }
 }
-
-
-
 
 exports.getStockchart = async(req,res) => {
     try {

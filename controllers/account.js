@@ -7,17 +7,10 @@ const wishlistModel = require('../models/wishlist')
 const cartModel = require('../models/cart')
 const profileModel = require('../models/profile')
 const orderModel = require('../models/order')
+
 const {userIssue} = require('../utils/userIssue')
 const { Types } = require('mongoose')
 const fs = require('fs')
-
-
-
-
-// <<<< ================================ UPDATE PASSWORD ================================ >>>>
-
-
-
 
 exports.getUpdatepassword = async(req,res) => {
 
@@ -37,32 +30,30 @@ exports.getUpdatepassword = async(req,res) => {
     })
 }
 
-
-
-
 exports.postUpdatepassword = async(req,res) => {
-    try {          
+    try {    
 
-        const {oldpassword , newpassword} = req.body  //Destructuring old and new password
+        //Destructuring old and new password
+        const {oldpassword , newpassword} = req.body
 
         const email = req.session.email
         const user = await signupModel.findOne({email})
-       
-        const oldpassCheck = await bcrypt.compare(oldpassword,user.password) // Checking old password and new one
+
+        // Checking old password and new one
+        const oldpassCheck = await bcrypt.compare(oldpassword,user.password)
 
         if(!oldpassCheck){
             return res.status(402).json({err:'Incorrect Old Password'})  // 
-        }
-        else if(oldpassword === newpassword){
-            return res.status(402).json({err:'Old password and new Password cannot be Same'}) // Passing error for new password and old password cannot same
-        }
-        else{
+        } else if (oldpassword === newpassword){
+
+            // Passing error for new password and old password cannot same
+            return res.status(402).json({err:'Old password and new Password cannot be Same'}) 
+        } else {
+             // hashing new password
             const salt = await bcrypt.genSalt(10)
-            const newPashedPass = await bcrypt.hash(newpassword , salt) // hashing new password
+            const newPashedPass = await bcrypt.hash(newpassword , salt)
 
-            await signupModel.updateOne({email},{$set:{password:newPashedPass}}) //Updating new password
-
-            console.log('Successfully updated password');
+            await signupModel.updateOne({email},{$set:{password:newPashedPass}}) 
 
             res.status(200).json({success:true})
         }
@@ -73,23 +64,11 @@ exports.postUpdatepassword = async(req,res) => {
     }
 }
 
-
-
-
-
-// <<<< ======================================= CONTACT US ================================== >>>>
-
-
-
-
-
-
 exports.getContactus = async(req,res) => {
     
     const userId = req.session.userId
 
     // Passing wishlist and cart counts
-
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
@@ -101,18 +80,12 @@ exports.getContactus = async(req,res) => {
       wishCount: wishExist? wishExist.products.length : 0
     })
 }
-  
-
-
-
-
 
 exports.postContactus = async(req,res) => {
 
     try {
 
        //Storing user message to store message to show for admins
-
        await messageModel.create(req.body)
        userIssue(req.body)
        res.status(200).json({success:true})
@@ -124,19 +97,6 @@ exports.postContactus = async(req,res) => {
     }
 
 }
-
-
-
-
-
-
-// <<<< ==================================== PROFILE ================================== >>>>
-
-
-
-
-
-
 
 exports.getAdress = async(req,res) => {
       
@@ -151,8 +111,9 @@ exports.getAdress = async(req,res) => {
 
     if(req.session.loggedin){ // Checking whether any user logged in
 
+     // Finding users profile to pass to page
     const findUser = await signupModel.findOne({_id:userId})
-    const userAddress = await signupModel.aggregate([  // Finding users profile to pass to page
+    const userAddress = await signupModel.aggregate([ 
     {
         $match:{
         _id:objUserId   
@@ -165,9 +126,8 @@ exports.getAdress = async(req,res) => {
         as:'userProfile'
     }}
     ])
-
-    const userProfile = userAddress.length > 0 ? userAddress[0].userProfile[0] : null //checking user profile exist
-
+     //checking user profile exist
+    const userProfile = userAddress.length > 0 ? userAddress[0].userProfile[0] : null
 
     return res.render('user/pages/address',
     {
@@ -191,16 +151,9 @@ else{
      
 }    
 
-
-
-
-
-
-
 exports.postAddress = async(req,res) => {
    
     try {
-
         if(!req.file){
             return res.status(402).json({err:'Please Provide a Profile'})
         }
@@ -211,7 +164,8 @@ exports.postAddress = async(req,res) => {
 
         const userId = new Types.ObjectId(user._id)
 
-        const imagePath = '/profile-image/' + req.file.filename  // creating full path for the image
+        // creating full path for the image
+        const imagePath = '/profile-image/' + req.file.filename
 
         
         const newSchema = new profileModel({
@@ -226,51 +180,37 @@ exports.postAddress = async(req,res) => {
             landmark,
             zip,
             newadress:[
-                {
-                    firstname,
-                    lastname,
-                    mobilenum:user.mobilenum,
-                    country,
-                    state,
-                    district,
-                    address,
-                    zip,
-                }
+              {
+                firstname,
+                lastname,
+                mobilenum:user.mobilenum,
+                country,
+                state,
+                district,
+                address,
+                zip,
+              }
             ],
             userId,
         })
          
         await newSchema.save() // Saving schema
-
-    
-
-        console.log('Successfully profile updated');
-
         res.status(200).json({success:true})
 
-                 
     } catch (error) {
         res.status(500).send('Internal Server Error')
         console.log('Error in post address',error.message);
     }
 }         
 
-
-              
-
-
-
 exports.getEditaddress = async(req,res) => {
 
     const userId = req.session.userId
     const profileId = req.query.id
 
-
     // Passing wishlist and cart counts
-
     const userProfile = await profileModel.findById(profileId)
     const findUser = await signupModel.findOne({_id:userId})
-
 
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
@@ -283,16 +223,13 @@ exports.getEditaddress = async(req,res) => {
       wishCount: wishExist? wishExist.products.length : 0 ,
       userProfile,
       findUser,
-      profileId
+      profileId,
     })
 }
-
 
 exports.posEditAddress = async(req,res) => {
 
     try {
-
-
         const userId = req.session.userId
         const profileId = req.query.id // getting the profile id to edit 
         
@@ -312,7 +249,8 @@ exports.posEditAddress = async(req,res) => {
         } = req.body
         
         const userProfile = await profileModel.findById(profileId)
-        const  imagePath = req.file? '/profile-image/' + req.file.filename : userProfile.photo  //checking whether new image added if not select old
+         //checking whether new image added if not select old
+        const  imagePath = req.file? '/profile-image/' + req.file.filename : userProfile.photo 
         req.file? fs.unlinkSync('public/' + userProfile.photo ) : '' // Deleting old images from folder
    
 
@@ -331,7 +269,6 @@ exports.posEditAddress = async(req,res) => {
                 zip,
             }
         )   
-
        const updateUserdata =  await signupModel.updateOne(  // Option to update user sigup data in user profile
             {_id:userId},
             {
@@ -341,7 +278,6 @@ exports.posEditAddress = async(req,res) => {
             })
         
     if(updateProfile || updateUserdata ){
-        console.log('Successfully profile updated');
         res.status(200).json({success:true})
     }
         
@@ -349,13 +285,7 @@ exports.posEditAddress = async(req,res) => {
         res.status(500).send('Internal Server Error')
         console.log('Error in post edit address',error);
     }
-
-
-
-
 }
-
-
 
 exports.postRatingReview = async(req,res) =>{
     try {
@@ -384,33 +314,15 @@ exports.postRatingReview = async(req,res) =>{
     }
 }
 
-
-
-
-
-
-
-// <<<< ======================================= ABOUT US ================================== >>>>
-
-
-
-
-
-
-
-
 exports.getAboutus = async(req,res) => {
     
     const userId = req.session.userId
 
-
     // Passing wishlist and cart counts
-
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
     // Rendering about us page
-
     const state = 'aboutus'
     res.render('user/pages/aboutus',
     {
@@ -419,9 +331,6 @@ exports.getAboutus = async(req,res) => {
       wishCount: wishExist? wishExist.products.length : 0
     })
 }
-
-
-
 
 exports.getOrder = async(req,res) => {
 
@@ -432,7 +341,6 @@ exports.getOrder = async(req,res) => {
     const userOrders = findOrder? findOrder.products : [] 
 
     // Passing wishlist and cart counts
-
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
@@ -451,10 +359,6 @@ exports.getOrder = async(req,res) => {
     }
 }       
 
-
-
-
-
 exports.getOrderOpen = async(req,res) => {
 
     const userId = req.session.userId
@@ -463,7 +367,6 @@ exports.getOrderOpen = async(req,res) => {
     if(!req.session.loggedin){
         return res.redirect('/login')
     }     
-
     const profileExist = await profileModel.findOne({userId})
 
     const findOrder = await orderModel.findOne({ userId }).populate('products.productId')
@@ -483,7 +386,6 @@ exports.getOrderOpen = async(req,res) => {
     const shippAddress =  profileExist.newadress.find((address) => address._id == userOrder.shipping_adress )
 
     // Passing wishlist and cart counts
-
     const wishExist = await wishlistModel.findOne({userId})
     const cartExist = await cartModel.findOne({userId})
 
@@ -500,19 +402,13 @@ exports.getOrderOpen = async(req,res) => {
     })
 }
 
-
-
-
-
 exports.putCancelorder = async(req,res) => {
     try {
 
         const userId = req.session.userId
-
         const productId = req.body.productId
 
-
-       const updateStatus = await orderModel.updateOne(
+        const updateStatus = await orderModel.updateOne(
             {userId ,'products._id':productId},
             { $set: { "products.$.status": 'cancelled' } }
         )
@@ -522,13 +418,11 @@ exports.putCancelorder = async(req,res) => {
         await productModel.updateOne(
             {_id:productId},
             {$inc:{stock:+findProduct.quantity}}
-          )
+            )
 
         if(updateStatus){
             res.status(200).json({success:true})
-        }
-
-        
+        }  
     } catch (error) {
         res.status(500).send('Internal Server Error')
         console.log('Error in admin get orders',error);

@@ -12,7 +12,6 @@ const {emailOtp , verify} = require('../utils/emailotp')
 exports.getSignup = (req,res) => {
     res.render('user/pages/signup',{state:'',cartCount:0,wishCount:0})    /*  Rendering Signup page */
 }
-
 exports.postSignup = async (req, res) => {
      try {
           // Cullect required data from body
@@ -87,8 +86,7 @@ exports.postLogin = async(req,res) => {
     else if(!emailRegex.test(email)){  /* Checking email format  */
 
               return res.status(402).json({error:'Invalid Email Format'})
-         }
-         
+         }   
          if(!userExist){
               return res.status(402).json({error:'User not Exist'})         
          }else{
@@ -120,8 +118,7 @@ exports.postLogin = async(req,res) => {
     }
     else{
          return res.status(402).json({error:'Incorrect Password'})     
-         }
-         
+         }    
     }
     
 } catch (error) {
@@ -129,7 +126,6 @@ exports.postLogin = async(req,res) => {
     res.status(500).send('Internal server error')
 }
 }
-
 
 exports.getOtpverification = async(req,res) => { 
     try {      
@@ -146,21 +142,12 @@ exports.getOtpverification = async(req,res) => {
     }
 }
 
-
 exports.postOtpverification = (req,res) => {
     const number = req.params.num 
     const {D1,D2,D3,D4} = req.body  
     const code = D1+D2+D3+D4  /* Making a 4 digit set */
     verifyOtp(number,code,res,req) 
 }   
-
-
-
-
-// <<<< ============================================== RESEND OTP ================================================== >>>>>
-
-
-
 
 exports.getResendotp = async (req,res) => {
  try {
@@ -173,29 +160,14 @@ exports.getResendotp = async (req,res) => {
     }
 }
 
-
-
-
 exports.getOtpsuccess = (req,res) => {
     res.render('user/pages/otp_succes',{state:'',success:true,cartCount:0,wishCount:0})
 }
-
-
-
-
-
-
-// <<<<<============================================== FORGET PASSWORD =========================================== >>>>
-
-
-
 
 exports.getForgetpass = (req, res) => {
     const errMsg = req.flash('errMsg') 
     res.render('user/pages/forgetpass',{state:'',errMsg,cartCount:0,wishCount:0})
 }
-
-
 
 exports.postForgetpass = async (req, res) => {
     
@@ -228,13 +200,6 @@ exports.postForgetpass = async (req, res) => {
     }
 }
 
-
-
-
-// <<<<<========================================== EMAIL OTP ====================================================>>>>
-    
-
-
 exports.getEmailOtp = async(req, res) => {
     try {
          const errMsg =  req.flash('incorrect')
@@ -246,19 +211,11 @@ exports.getEmailOtp = async(req, res) => {
     }
 }
 
-
 exports.postEmailOtp = (req, res) => {
     const {D1,D2,D3,D4} = req.body  
     const code = D1+D2+D3+D4        
     verify(code,res,req)
 }    
-
-
-
-
-// <<<<<< ========================================= RESEND EMAIL OTP ======================================= >>>>>>
-
-
 
 exports.getResendemailotp = async(req,res) =>{
 
@@ -274,24 +231,13 @@ exports.getResendemailotp = async(req,res) =>{
     }
 }
 
-
-
-
-// <<<<<====================================== CHANGE PASSWORD =====================================================>>>>
-
-
-
-
-
 exports.getChangepass = (req, res) => {
     const errMsg =  req.flash('errMsg')
     res.render('user/pages/changepassword',{state:'',errMsg,cartCount:0,wishCount:0})
 }
 
- 
 exports.postChangepass = async(req, res) => {
     try {
-         
 
     const {password , confirmpassword } = req.body
 
@@ -322,9 +268,7 @@ exports.postChangepass = async(req, res) => {
               res.status(500)
          }
 
-    }
-
-    
+    } 
     } catch (error) {
          console.log('Error in getchange pass',error.message);
          res.status(500).send('Internal server error')
