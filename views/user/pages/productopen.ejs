@@ -15,9 +15,7 @@
                   </div>
                   <div class="img_position" style="display: flex; width: 100%; justify-content: space-evenly; margin-bottom: 1rem;">
                      <% product.productimg.forEach((img) => { %>
-
-                        <div style="width: 5rem; border-radius: 0%; cursor: pointer; border: 1px solid rgba(115, 115, 115, 0.277); border-radius: .2rem; overflow: hidden;"><img onmouseover="changeImg('<%= img %>')" class="pro_img_loop" src="<%= img %>" style="width: 100%; height: 100%;" alt=""></div>
-                        
+                        <div style="width: 5rem; border-radius: 0%; cursor: pointer; border: 1px solid rgba(115, 115, 115, 0.277); border-radius: .2rem; overflow: hidden;"><img onmouseover="changeImg('<%= img %>')" class="pro_img_loop" src="<%= img %>" style="width: 100%; height: 100%;" alt=""></div>    
                    <% }) %>
                   </div>
                </div>

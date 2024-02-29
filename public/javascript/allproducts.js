@@ -2,7 +2,6 @@ let currentValue = 0
 
 const productSection = document.querySelector('.product_section')
 
-
 async function fetchProducts(){
     const response = await fetch(`/all_products/show?page=${currentValue}`)
     const result = await response.json()
@@ -36,104 +35,67 @@ async function fetchProducts(){
                 ` 
 
         productSection.appendChild(productDiv)
-
         productDiv.addEventListener('click',(event)=>{
             productOpen(event, list._id)
         })
-
         document.querySelector(`.addto_cart_btn${list._id}`).addEventListener('click',(event)=>{
             addToCart(event, list._id)
         })
-
         document.querySelector(`.wish_btn${list._id}`).addEventListener('click',(event)=>{
             addToWish(event, list._id)
         })
-
         productSection.scrollTop = 0;
     });
 
 }
 
-
-
-
 const pagesBtn = document.getElementsByClassName('page_btn')
-
-
 async function  active(){
     for(l of pagesBtn){
-
         l.classList.remove('active_link')
     }
-
     event.target.classList.add('active_link')
     currentValue = event.target.value
     showLoading()
     fetchProducts()
-
 }
-
-
 
 async function prev(){
     if(currentValue > 1){
         for(l of pagesBtn){
-
      l.classList.remove('active_link')
    }   
-
    currentValue--;
    pagesBtn[currentValue-1].classList.add('active_link')
    showLoading()
    fetchProducts()
-
-
     }
 }
 
 async function next(){
     if(currentValue < 50 ){
         for(l of pagesBtn){
-
    l.classList.remove('active_link')
    }   
-   
    currentValue++;
    pagesBtn[currentValue-1].classList.add('active_link')
    showLoading()
    fetchProducts()
-
   }
 }
 
-
-
 const loadingScreen = document.querySelector('.loading_screen')
-
 const showLoading = ()=> loadingScreen.style.display = 'flex'
 const hideLoading = ()=> loadingScreen.style.display = 'none'
-
-
 
 document.addEventListener('DOMContentLoaded', async()=>{
       try {
         showLoading()
         fetchProducts()        
-
       } catch (error) {
         console.log('Error in all product fetch');
       }
 })
-
-
-
-
-
-// --------------------------------------------------------------------------
-
-
-
-
 
 async function filterProducts(filterBase,filter){
     showLoading()
@@ -143,8 +105,6 @@ async function filterProducts(filterBase,filter){
     hideLoading()
     const products = result.filterProducts
 
-    console.log(products);
- 
     products.forEach((list) => {
         const productDiv = document.createElement('div')
         productDiv.classList.add('product_frame_grid')
@@ -172,7 +132,6 @@ async function filterProducts(filterBase,filter){
                 ` 
 
         productSection.appendChild(productDiv)
-
         productDiv.addEventListener('click',(event)=>{
             productOpen(event, list._id)
         })
@@ -184,12 +143,9 @@ async function filterProducts(filterBase,filter){
         document.querySelector(`.wish_btn${list._id}`).addEventListener('click',(event)=>{
             addToWish(event, list._id)
         })
-
-
     });
 
 }
-
 
 async function filterProductsSort(filterBase,filter){
     showLoading()
@@ -246,7 +202,6 @@ async function filterProductsSort(filterBase,filter){
 
 }
 
-
 async function colorFilter(filterBase,filter){
     showLoading()
     const response = await fetch(`/all_products/show?f=${filterBase}&filter=${filter}`)
@@ -255,8 +210,6 @@ async function colorFilter(filterBase,filter){
     hideLoading()
     const products = result.filterProducts
 
-    console.log(products);
- 
     products.forEach((list) => {
         const productDiv = document.createElement('div')
         productDiv.classList.add('product_frame_grid')
@@ -282,7 +235,6 @@ async function colorFilter(filterBase,filter){
                 </button>
                 </div>                     
                 ` 
-
         productSection.appendChild(productDiv)
 
         productDiv.addEventListener('click',(event)=>{
@@ -302,19 +254,9 @@ async function colorFilter(filterBase,filter){
 
 }
 
-
-
-
-
-
-
-
-
 const catRadio = document.querySelectorAll('.input_cat')
 const priceRadio = document.querySelectorAll('.input_price')
 const colorRadio = document.querySelectorAll('.input_color')
-
-
 
 catRadio.forEach((button)=>{
     button.addEventListener('click',async(e)=>{
@@ -345,7 +287,6 @@ priceRadio.forEach((button)=>{
 
     })
 })
-
 
 colorRadio.forEach((button)=>{
     button.addEventListener('click',async(e)=>{

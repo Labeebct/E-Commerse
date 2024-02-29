@@ -28,10 +28,7 @@ fetch('/admin/sales_chart')
     });
   })
   .catch((err) => console.log('Error in fetch sales chart', err));
-
   
-
-
 fetch('/admin/customers_chart')
   .then((response) => response.json())
   .then((result) => {
@@ -63,10 +60,6 @@ fetch('/admin/customers_chart')
 
   })
   .catch((err) => console.log('Error in fetch sales chart', err))
-
-
-
-
 
 fetch('/admin/stocks_chart')
   .then((response) => response.json())

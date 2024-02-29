@@ -9,21 +9,15 @@ function previewImage(input) {
     }
 }
 
-
 const submitBtn = document.querySelector('.add_btn')
 const errMsg = document.querySelector('.error_msg')
-
-
-
 submitBtn.addEventListener('click',async(e) => {
-
     try {
-        
+     
     e.preventDefault()
 
     const productForm = document.querySelector('.product_form')
     const form = new FormData(productForm)
-
 
     const productName = document.getElementsByName('productname')[0].value.trim()
     const oldPrice = document.getElementsByName('oldprice')[0].value.trim()
@@ -40,29 +34,21 @@ submitBtn.addEventListener('click',async(e) => {
         setTimeout(() => {
             errMsg.innerHTML = ''
         }, 2000);
-    } 
-    else if(!productImg){
+    } else if (!productImg){
         errMsg.innerHTML = 'Images not found'
         setTimeout(() => {
             errMsg.innerHTML = ''
         }, 2000);
-    }
-    else{
-
-        console.log('hii');
+    } else {
         const response = await fetch('/admin/product/add_product',{
             method:'POST',
             body:form
         })
 
         const result = await response.json()
-        
-
         if(!response.ok){
             throw new Error('Error in add product fetch,Product already exist')
-        }
-        else{
-
+        } else {
             if(result.success){
                 errMsg.innerHTML = 'Product succesfully Added'
                 errMsg.classList.add('success')
@@ -73,10 +59,7 @@ submitBtn.addEventListener('click',async(e) => {
             else{
                 errMsg.innerHTML = result.ERR
             }
-
         }
-
-
     }
 } catch (error) {
     console.log('Error in add product ',error.message); 

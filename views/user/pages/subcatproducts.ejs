@@ -4,10 +4,7 @@
          <div class="content catProducts_content">
             <div class="loading_screen"><img src="/images/loading gif.gif" class="loading_gif" alt=""></div>
 
-
-                     
             <!-- =============================================================================================================== -->
-
 
             <header>
                <ul>
@@ -30,8 +27,6 @@
                   <li class="<%= state==='PAINTINGS'? 'selected' : '' %>"><a href="/subcategory/PAINTINGS">PAINTINGS</a></li>
                </ul>
             </header>
-
-
 
             <!-- ========================================================================================================= -->
 
@@ -80,22 +75,17 @@
                                 OUT OF STOCK
                              </button>
                            <% } %>
-                     </div>                     
+                  </div>                     
                   </div>
                   
-                  <% }) %>
-
+                   <% }) %>
                </div>      
-
          </div>
-         <%- include('../../common/footer.ejs') %>
-   </div>
-
+      <%- include('../../common/footer.ejs') %>
+</div>
 <script src="/javascript/loading.js"></script>
 <script src="/javascript/addtowish.js"></script>
 <script src="/javascript/addtocart.js"></script>
 <script src="/javascript/product-open.js"></script>
 <script src="/javascript/btnsearch.js"></script>
-
-
 <%- include('../../common/end.ejs') %>    

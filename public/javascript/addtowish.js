@@ -2,11 +2,9 @@ const wishCountTopNav = document.querySelector('.wish_count_top')
 const wishCount = document.querySelector('.wish_count')
 const cartCounts = document.querySelector('.cart_count')
 
-
 async function addToWish(event,productId){
-    
-    const wishIcon = document.querySelector(`.wish_icon${productId}`)
 
+    const wishIcon = document.querySelector(`.wish_icon${productId}`)
     event.stopPropagation()     
     event.preventDefault()
 
@@ -25,8 +23,7 @@ async function addToWish(event,productId){
            const result = await response.json()
            if(result.notloggedin){
                window.location.href = '/wishlist'
-           }
-           else if(result.success){
+           } else if (result.success){
             wishCountTopNav.innerHTML++
             wishIcon.classList.replace('bi-heart','bi-heart-fill')
            }
@@ -50,16 +47,11 @@ async function addToWish(event,productId){
             console.log('Error in removing from wishlist');
            }
 
-        }
-
-        
+        }     
     } catch (error) {
         console.log('Error in add to wish',error.message);
     }
 }
-
-
-
 
 async function removeFromWish(event,productId){
     
@@ -67,7 +59,6 @@ async function removeFromWish(event,productId){
     event.preventDefault()
     
     const wishIcon = document.querySelector(`.product${productId}`)
-
 
     try {
 
@@ -100,7 +91,6 @@ async function removeFromWish(event,productId){
         console.log('Error in remove from wish');
     }
 }
-
 
 async function wishToCart(event,productId){
 

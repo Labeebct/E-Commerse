@@ -5,7 +5,6 @@ const nextBanner = document.querySelector('.next_banner');
 let currentIndex = 0;
 let intervalId;
 
-
 function autoSlide() {
     currentIndex = (currentIndex + 1) % bannerSubs.length;
     moveBanners();

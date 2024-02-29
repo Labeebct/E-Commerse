@@ -55,7 +55,6 @@ searchInput.addEventListener('input',async(e)=>{
         })
     });
 }
-
 } catch (error) {
       console.log('Error in searching',error);  
 }

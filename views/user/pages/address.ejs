@@ -24,15 +24,14 @@
                                    <label for="firstname" >First Name</label>
                                    <input type="text" value="<%= userProfile? userProfile.firstname : '' %>" name="firstname" style="width: 100%;pointer-events: <%= userProfile? 'none': 'all' %> ;" >
                                </span>
-                               <span style="display: flex; flex-direction: column; gap: .2rem;  width: 50%;">
+                                <span style="display: flex; flex-direction: column; gap: .2rem;  width: 50%;">
                                    <label for="lastname">Last Name</label>
                                    <input  value="<%= userProfile? userProfile.lastname : '' %>" type="text" name="lastname" style="width: 110%; padding-left: 1rem;pointer-events: <%= userProfile? 'none': 'all' %> ; " >
                                </span>
                            </div>
-   
+
                            <label for="email">Email</label>
                            <input style="pointer-events: <%= userProfile? 'none': 'all' %> ;" value="<%= findUser ? findUser.email : '' %>" type="text" >
-   
                        </div>
                        <div class="top_right">
                            <div class="img_div"><img src="<%= userProfile? userProfile.photo : '' %>" id="imagePreview" class="product_img" alt=""></div>
@@ -41,10 +40,7 @@
                        </div>
                    </div>
                    <div class="bottom" style="padding: 0 1rem;">
-
-
                     <div style="display: flex; gap: 1rem; width: 96%; padding: .5rem 0;">
-
 
                      <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem; width: 55%;">
                         <label for="dob">Mobile</label>
@@ -55,7 +51,6 @@
                         <label for="dob">DOB</label>
                         <input  style="pointer-events: <%= userProfile? 'none': 'all' %> ;" value="<%= userProfile? userProfile.DOB.toISOString().substring(0, 10) : '' %>" type="date" name="DOB">
                     </span>
-                    
                     </div>
 
                        <div style="display: flex; gap: 1rem; width: 94%; margin-top: .4rem;">
@@ -68,10 +63,7 @@
                        <label for="state">State</label>
                        <input  value="<%= userProfile? userProfile.state : '' %>" type="text" name="state" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;pointer-events: <%= userProfile? 'none': 'all' %> ;">
                        </span>
-   
-   
-                       
-                       
+       
                        <span style="display: flex; flex-direction: column; gap: .2rem;  width: 25%;">
                            <label for="district">District</label>
                            <input  value="<%= userProfile? userProfile.district : '' %>" type="text" name="district" style="font-family: 'Poppisn',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;pointer-events: <%= userProfile? 'none': 'all' %> ;">
@@ -100,17 +92,16 @@
                            <button style="display: <%= userProfile? 'none': 'block' %> ;" type="button" class="update_profile_btn">SAVE PROFILE</button>
                        </span>
                    </div>
-               </form>
-               </div>
-           </div>
-         </div>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
         <%- include('../../common/footer.ejs') %>
    </div>
 <script src="/javascript/loading.js"></script>
 <script src="/javascript/btnsearch.js"></script>
 <script>
-
 
 function previewImage(input) {   
     var file = input.files[0];
@@ -123,10 +114,7 @@ function previewImage(input) {
     }
 }
 
-
-
 const submitBtn = document.querySelector('.update_profile_btn')
-
 submitBtn.addEventListener('click',async(e) =>{
 
     try {
@@ -150,8 +138,7 @@ submitBtn.addEventListener('click',async(e) =>{
             setTimeout(() => {
                 errMsg.innerHTML = ''
             }, 2000);
-        }
-        else{
+        } else {
 
             const response = await fetch('/account/add_address',{
                 method:'POST',
@@ -174,11 +161,9 @@ submitBtn.addEventListener('click',async(e) =>{
                        window.location.href = '/home'
                     }, 400);
                 }
-            }
+              }
 
-        }
-
-
+         }
 
     } catch (error) {
         console.log('Error in profile address',error.message);

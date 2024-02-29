@@ -279,7 +279,6 @@ else{
     const cartTotaAmount = document.querySelector('.order_total')
     const productNewPrice = document.querySelector(`.new_price${productId}`)
 
-    
     const response = await fetch(`/cart/increase_quantity?quantity=${quantity}&productId=${productId}`)
     const result = await response.json()
 
@@ -288,7 +287,6 @@ else{
     const newPrice = parseInt(result.newPrice)
 
     const priceDiff = cartPriceParse - currentPrice + newPrice
-
     if(result.success){
  
         const discount = Math.round(Number(priceDiff * .05)) //calculating discount for product in cart
@@ -300,16 +298,8 @@ else{
     }   
 }
 
-
-
-
-
-// ===================== CHECKOUT ========================
-
 const productArray = JSON.parse(document.querySelector('.productsArray').innerHTML)
 const defaultAddressId = JSON.parse(document.querySelector('.defaultaddress').innerHTML)
-
-
 
 productArray.forEach((product)=>{
 
@@ -331,8 +321,6 @@ productArray.forEach((product)=>{
     order.products.push(products)
 })
 
-
-
 function selectSize(event, size, index , productId) {
     event.preventDefault()
     event.stopPropagation();
@@ -353,8 +341,6 @@ function selectSize(event, size, index , productId) {
     findProduct.size = size
 }
 
-
-
 function selectQuantity(event,productId) {
     
     event.stopPropagation();  
@@ -366,8 +352,6 @@ function selectQuantity(event,productId) {
 
 }
 
-
-
 const payment = document.querySelectorAll('.payment')
 payment.forEach((item)=>{
 
@@ -378,18 +362,12 @@ payment.forEach((item)=>{
          pro.payment_methode = paymentMethode
     })
     order.paymentmethode = paymentMethode
-
  })
 })        
 
-
-
-
-
 async function selectAddress(addressId){
    
-    try {
-        
+    try {  
         const response = await fetch(`/select_address?addressId=${addressId}`)
         const result = await response.json()
    
@@ -414,10 +392,6 @@ async function selectAddress(addressId){
         console.log('Error in selectAddress',error);
     }
  }
-
-
-
-
 
 async function proceed(event,addressId){
     try {
@@ -451,9 +425,6 @@ async function proceed(event,addressId){
             }
 
         }
-
-        
-        
     } catch (error) {
         console.log('Error in proceed to order summary',error);
     }

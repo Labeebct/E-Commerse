@@ -2,32 +2,22 @@ const carTProducts = document.querySelectorAll('.product');
 const placeOrderBtn = document.querySelector('.btn_div');
 
 document.addEventListener('DOMContentLoaded',() => {
-
     if (carTProducts.length === 0) {
         placeOrderBtn.style.display = 'none';
     } else {
         placeOrderBtn.style.display = 'block'; 
     }
-      
 })
 
-
-
-
-
 const cartCount = document.querySelector('.cart_count')
-
 const addToCart = async(event,productId) => {
 
     event.stopPropagation()     
     event.preventDefault()
 
     try {
-
         const addToCartBtn = document.querySelector(`.addto_cart_btn${productId}`)
-
         const quantity = document.getElementsByName('quantity')[0]
-    
         const cartQuantity = quantity ? quantity.value : 1
 
         if(addToCartBtn.innerText == 'GO TO CART'){
@@ -62,9 +52,6 @@ const addToCart = async(event,productId) => {
 
  }   
 
-
-
-
  const productRemove = async(event,productId) => {
 
     event.stopPropagation()     
@@ -76,8 +63,6 @@ const addToCart = async(event,productId) => {
     const gst = document.querySelector('.gst')
     const cartTotal = parseFloat(cartTotalElement.innerHTML);
 
-
-    
     try {
     
         const response = await fetch('/cart/remove',{
@@ -113,14 +98,12 @@ const addToCart = async(event,productId) => {
          else{
             document.querySelector('.cart_is_empty').style.display = 'none'
          }
-        }
+      }
         
     } catch (error) {
         console.log('Error in add to cart',error.message);
     }
-    
-    }   
-
+}   
 
 async function updateQuantity(event,productId){
     const quantity = event.target.value
@@ -140,9 +123,7 @@ async function updateQuantity(event,productId){
     const newPrice = parseInt(result.newPrice)
 
     if(result.success){
-
         const priceDiff = cartPriceParse - currentPrice + newPrice
-
         cartTotalElement.innerHTML = priceDiff
         productPrice.innerHTML = productPrice.innerHTML - currentPrice + newPrice
 

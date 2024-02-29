@@ -3,11 +3,7 @@ const submitBtn = document.querySelector('.submit_btn')
 const login_form = document.querySelector('.login_form')
 const errMsg = document.querySelector('.err_msg')
 
-
-
 // Password eye close and Open
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const passEye = document.querySelector('.passEye');
     const passInput = document.getElementsByName('password')[0];
@@ -27,12 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-
-
 // Sending login Form data through Fetch
-
-
-
 submitBtn.addEventListener('click',async(e)=>{
     e.preventDefault()
 
@@ -76,6 +67,4 @@ submitBtn.addEventListener('click',async(e)=>{
     } catch (error) {
         console.log(error.message);
     }
-
-
 })  
