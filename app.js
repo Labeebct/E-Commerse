@@ -39,7 +39,7 @@ app.use('/',userRouter)
 
 
 // MongoDB connection & Server Listening
-mongoose.connect(process.env.MONGO_URL)
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@test.vkjl80y.mongodb.net/?retryWrites=true&w=majority&appName=TEST`)
 .then(()=>{
     app.listen(PORT,()=> console.log('Server CONNECTED',PORT))
     console.log('Database Connected Succes')
