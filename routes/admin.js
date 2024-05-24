@@ -4,47 +4,33 @@ const adminSession = require('../middleware/adminsession')
 const controller = require('../controllers/admin')
 const chartController = require('../controllers/charts')
 
-
 const upload = require('../middleware/multer')
-
 
 // SIGNUP -----------------------------
 router.get('/signup',controller.getSignup)
 router.post('/signup',controller.postSignup)   
 
-
 // LOGIN -------------------------------
 router.get('/login',controller.getLogin)
 router.post('/login',controller.postLogin)
-
 
 // KEY VERIFICATION -----------------------------------
 router.get('/key_verification/:email',controller.getKeyverify)
 router.post('/key_verification/:email',controller.postKeyverify)
 
-
-
 // EMAIL VERIFICATION --------------------------------
 router.get('/email_verify',controller.getEmailverify)
 router.post('/email_verify',controller.postEmailverify)
-
-
 
 // FORGET PASSWORD -----------------------------------
 router.get('/forget_password',controller.getForgetpassword)
 router.post('/forget_password',controller.postForgetpassword)
 
-
-
 router.use(adminSession) // ROUTES BELOW IS ONLY ACCESIBLE IF ADMIN LOGGED IN
-
-
 
 // ADMIN HOME ----------------------------
 router.get('/home',adminSession,controller.getHome)
-
-      
-   
+ 
 //  PRODUCT --------------------------
 router.get('/products',adminSession,controller.getProducts)
 router.get('/product/add_product',adminSession,controller.getAddproducts)

@@ -112,7 +112,7 @@ submitBtn.addEventListener('click', async (e) => {
             errorMsg.innerHTML = ''
         }, 3000);
         }
-        
+         
         else{
             setTimeout(() => {
                 window.location.href = `/otp_verification/${result.mobilenum}`

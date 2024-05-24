@@ -76,8 +76,8 @@ router.get('/cart',cartController.getCart)
 router.post('/cart/add',cartController.postAddCart)
 router.delete('/cart/remove',cartController.postRemoveCart)
 router.get('/cart/increase_quantity',cartController.getIncreaseQuantity)
-router.use(userLoggedSesssion)  // ROUTES BELOW ONLY WORKS IF USER LOGGED IN
 
+router.use(userLoggedSesssion)  // ROUTES BELOW ONLY WORKS IF USER LOGGED IN
 
 
 //PROFILE ------------------------
