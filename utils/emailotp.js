@@ -2,7 +2,7 @@ const nodemailer = require("nodemailer");
 
 const otp = Math.round(Math.random() * 10000)
 
-
+ 
 
 const sendingEmail = process.env.GMAIL
 const appPassword = process.env.APP_PASSWORD
